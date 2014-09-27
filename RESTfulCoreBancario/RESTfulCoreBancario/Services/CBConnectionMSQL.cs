@@ -9,9 +9,14 @@ namespace RESTfulCoreBancario.Services
 {
     public class CBConnectionMSQL
     {
-        public void insertUpdateDeleteMSQL(string query)
+        public CBConnectionMSQL()
         {
-            SqlConnection connection = new SqlConnection("user id=daniel;" +
+
+        }
+
+        public static void insertUpdateDeleteMSQL(string query)
+        {
+            SqlConnection connection = new SqlConnection("ata Source=localhost;Network Library=DBMSSOCN; user id=daniel;" +
                                       "password=dcanessa;server=ENVY15-3040NR;" +
                                       "Trusted_Connection=no;" +
                                       "database=Envy; " +
@@ -33,10 +38,10 @@ namespace RESTfulCoreBancario.Services
             }
         }
 
-        public DataTable retrieveMSQL(string query)
+        public static DataTable retrieveMSQL(string query)
         {
             DataTable table = new DataTable();
-            SqlConnection connection = new SqlConnection("user id=daniel;" +
+            SqlConnection connection = new SqlConnection("Data Source=localhost;Network Library=DBMSSOCN; user id=daniel;" +
                                        "password=dcanessa;server=ENVY15-3040NR;" +
                                        "Trusted_Connection=no;" +
                                        "database=Envy; " +
@@ -69,3 +74,5 @@ namespace RESTfulCoreBancario.Services
     System.Diagnostics.Debug.WriteLine(row["Model"].ToString());
  }
 */
+
+//SELECT IDENT_CURRENT('dbo.computer')-IDENT_INCR('dbo.computer')

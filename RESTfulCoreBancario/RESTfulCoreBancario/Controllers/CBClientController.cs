@@ -21,10 +21,10 @@ namespace RESTfulCoreBancario.Controllers
 
         [HttpGet]
         [ActionName("getClient")]
-        public void getClient()
+        public Client[] getClient()
         {
             //http://localhost:62830/api/cbclient/getclient
-            instanceClientAbstract.getClient();
+            return instanceClientAbstract.getClient();
         }
 
 
