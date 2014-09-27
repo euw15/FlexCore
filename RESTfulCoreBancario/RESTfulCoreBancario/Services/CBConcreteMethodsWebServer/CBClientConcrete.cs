@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using RESTfulCoreBancario.Models;
+using System.Data;
 
 namespace RESTfulCoreBancario.Services
 {
@@ -16,25 +17,51 @@ namespace RESTfulCoreBancario.Services
 
         }
 
-        public override  void getClient()
-        {
-            System.Diagnostics.Debug.WriteLine("Entre a client correctamente");
+        public override Client[] getClient()
+        {         
+            DataTable table = CBConnectionMSQL.retrieveMSQL("SELECT [ID] ,[Model] FROM [Envy].[dbo].[computer]");
+            List<Client> clientSelected = getTableGetClient(table);
+            return loadCache(clientSelected);
+            
         }
 
-
-
-        /* 
-         *  GET Method for post in the cache a json array of elements
+        /*        
+         * Auxiliar method that return a dataSet with the data that  is need in the method getClient
          */
-        public Client[] GetClient()
+        public List<Client> getTableGetClient(DataTable table)
         {
+            int CIF = -1;
+            int idTipoCliente = -1;
+
+            List<Client> listClient = new List<Client>();
+
+            foreach (DataRow row in table.Rows)
+            {
+                if (row["ID"] != DBNull.Value) { CIF = Convert.ToInt32(row["ID"]); }
+                if (row["Model"] != DBNull.Value) { idTipoCliente = Convert.ToInt32(row["Model"]); }
+                listClient.Add(new Client
+                {
+                    CIF = CIF,
+                    idTipoCliente = idTipoCliente
+                });           
+            }
+            return listClient;            
+        }
+
+        public Client[] loadCache(List<Client> dataToLoad)
+        {
+            HttpContext.Current.Cache.Remove(CacheKey);
             var ctx = HttpContext.Current;
             if (ctx != null)
             {
-                return (Client[])ctx.Cache[CacheKey];
-            }
+                if (ctx.Cache[CacheKey] == null)
+                {
+                    ctx.Cache[CacheKey] = dataToLoad.ToArray();
+                    return (Client[])ctx.Cache[CacheKey];
+                }
+            }           
             return null;
-        }
+        }      
 
     }
 }

@@ -9,6 +9,6 @@ namespace RESTfulCoreBancario.Services
 {
     public abstract class CBClientAbstract
     {
-        public abstract void getClient();
+        public abstract Client[] getClient();
     }
 }
