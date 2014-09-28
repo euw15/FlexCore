@@ -6,6 +6,7 @@
 package com.flexdesktop.user.GraphicInterface;
 
 
+import java.util.ArrayList;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -14,6 +15,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author Jason
  */
 public class GraphicInterface {
+    
 
     /**
      * @param args the command line arguments
