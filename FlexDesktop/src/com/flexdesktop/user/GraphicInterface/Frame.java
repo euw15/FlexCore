@@ -296,13 +296,15 @@ public class Frame extends javax.swing.JFrame {
 
     private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
         int selection = jTable1.getSelectedRow();
-        getInformation getInfoPanel = new getInformation(null, true);
-        if (selection == OPCION0) { 
+       
+        if (selection == OPCION0) {
+            getInformation getInfoPanel = new getInformation(null, true);
             getInfoPanel.showDialog("RegisterClt");
         } else if (selection == OPCION1) {
+            getInformation getInfoPanel = new getInformation(null, true);
             getInfoPanel.showDialog("ConsultarClt");
         } else if (selection == OPCION4) {
-
+            
         } else if (selection == OPCION5) {
 
         } else if (selection == OPCION3) {
@@ -310,6 +312,8 @@ public class Frame extends javax.swing.JFrame {
         } else if (selection == OPCION5) {
 
         } else if (selection == OPCION2) {
+            showCustomers sC = new showCustomers(null, true);
+            sC.showDialog("VerListadoClt");
 
         }
     }//GEN-LAST:event_jLabel14MouseClicked

@@ -40,7 +40,7 @@ public class tableModelListenerAddres implements TableModelListener {
      * Este metodo detecta un cambio en la tabla y ejecuta varias condiciones.
      */
     public void tableChanged(TableModelEvent e) {
-
+        System.out.println("jnjdxnfvd");
         int row = e.getFirstRow();//row
         int lastRow = e.getLastRow();
         int column = e.getColumn();//column
