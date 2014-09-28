@@ -246,17 +246,25 @@ public class Frame extends javax.swing.JFrame {
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Transaciones Clientes Jurídica"},
-                {"Lista de precio costo"},
-                {"Valor del inventario"},
-                {"Productos agotados"},
-                {"Movimiento de inventario"},
-                {"Productos en inventario"},
-                {"Movimientos por producto"}
+                {"Transaciones Clientes Físico"},
+                {"Cierres Realizados"},
+                {"Lista De Clientes Por Campos"},
+                {"Lista De Cuentas Por Campos"},
+                {"Bitacoras De Errores FlexCore"},
+                {"Lista De Intereses Pagados A Una Cuenta De Ahorro Automático"}
             },
             new String [] {
                 "Reporte"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable4.setGridColor(new java.awt.Color(255, 255, 255));
         jTable4.setRowHeight(41);
         jScrollPane4.setViewportView(jTable4);
@@ -341,7 +349,8 @@ public class Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel16MouseClicked
 
     private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
-        int selection = jTable2.getSelectedRow();
+        int selection = jTable4.getSelectedRow();
+        
         if (selection == OPCION0) {
             System.out.println("transacciones clt juridica");
         } else if (selection == OPCION1) {
