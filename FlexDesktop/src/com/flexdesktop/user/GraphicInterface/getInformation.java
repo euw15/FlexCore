@@ -6,22 +6,17 @@
 package com.flexdesktop.user.GraphicInterface;
 
 import com.flexdesktop.user.Error.InfError;
-import java.awt.Color;
-import java.awt.Font;
+
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.Timer;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -37,11 +32,11 @@ public class getInformation extends javax.swing.JDialog {
      */
     private final Point point = new Point(0, 0);
 
-    DefaultListModel addresList = new DefaultListModel();
-    DefaultListModel phoneList = new DefaultListModel();
 
-    private String[] columnNames = {"Direccio"};
-    public Object[][] data = {{"Dire1"}, {"hola"}, {" "}};
+    private String[] direccion = {"Direcciones"};
+    private String[] telefono = {"Teléfonos"};
+
+    public List<Object[]> data2 = new ArrayList<Object[]>();
 
     public getInformation(java.awt.Frame parent, boolean modal) {
 
@@ -49,6 +44,15 @@ public class getInformation extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(parent);
         configureTableLook();//no hace nada
+
+        this.jTable_Factura.setModel(new tableModelAddres(direccion,
+                data2, true));
+//        this.jTablePhone.setModel(new tableModelPhone(telefono,
+//                data2, true));
+
+        //Agregar una fila por defecto en las tablas
+        addRow(jTablePhone);
+//        addRow(jTable_Factura);
 
         //      DefaultTableModel model = (DefaultTableModel) table.getModel();
 //        try {
@@ -64,7 +68,7 @@ public class getInformation extends javax.swing.JDialog {
 //        } catch (SQLException ex) {
 //            System.out.println("Error al cargar rutas");
 //        }
-        completarTablaFacturacion();
+        //completarTablaFacturacion();
     }
 
     public void showDialog(String panel) {
@@ -113,16 +117,15 @@ public class getInformation extends javax.swing.JDialog {
         jFormattedTextField3 = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        table1 = new javax.swing.JTable();
+        jTable_Factura = new javax.swing.JTable();
+        jButton9 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTablePhone = new javax.swing.JTable();
         ConsultarClt = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -213,10 +216,6 @@ public class getInformation extends javax.swing.JDialog {
 
         jButton7.setText("Cargar Fotografía");
 
-        jLabel6.setText("Dirección:");
-
-        jLabel9.setText("Teléfono:");
-
         jButton8.setText("Agregar");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -245,29 +244,7 @@ public class getInformation extends javax.swing.JDialog {
             }
         });
 
-        table.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Teléfono:"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        table.setGridColor(new java.awt.Color(204, 204, 204));
-        table.setShowHorizontalLines(false);
-        table.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(table);
-
-        table1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_Factura.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -278,7 +255,44 @@ public class getInformation extends javax.swing.JDialog {
 
             }
         ));
-        jScrollPane2.setViewportView(table1);
+        jTable_Factura.setCellSelectionEnabled(true);
+        jTable_Factura.setFillsViewportHeight(true);
+        jTable_Factura.setSurrendersFocusOnKeystroke(true);
+        jTable_Factura.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable_FacturaKeyPressed(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTable_Factura);
+
+        jButton9.setForeground(new java.awt.Color(0, 51, 153));
+        jButton9.setText("Print dirreciones");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
+        jTablePhone.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jTablePhone.setCellSelectionEnabled(true);
+        jTablePhone.setFillsViewportHeight(true);
+        jTablePhone.setSurrendersFocusOnKeystroke(true);
+        jTablePhone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTablePhoneKeyPressed(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jTablePhone);
 
         javax.swing.GroupLayout registerCltLayout = new javax.swing.GroupLayout(registerClt);
         registerClt.setLayout(registerCltLayout);
@@ -298,8 +312,8 @@ public class getInformation extends javax.swing.JDialog {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(registerCltLayout.createSequentialGroup()
                                 .addGap(30, 30, 30)
-                                .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(registerCltLayout.createSequentialGroup()
                                             .addComponent(jLabel4)
                                             .addGap(43, 43, 43)
@@ -308,36 +322,36 @@ public class getInformation extends javax.swing.JDialog {
                                             .addComponent(jLabel1)
                                             .addGap(43, 43, 43)
                                             .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jButton7))
-                                    .addGroup(registerCltLayout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addGap(43, 43, 43)
-                                        .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGroup(registerCltLayout.createSequentialGroup()
+                                            .addComponent(jButton7)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jButton9)))
+                                    .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(registerCltLayout.createSequentialGroup()
+                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(registerCltLayout.createSequentialGroup()
+                                            .addComponent(jLabel5)
+                                            .addGap(43, 43, 43)
+                                            .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(registerCltLayout.createSequentialGroup()
                                 .addGap(15, 15, 15)
                                 .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(registerCltLayout.createSequentialGroup()
-                                        .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(registerCltLayout.createSequentialGroup()
-                                                .addGap(8, 8, 8)
-                                                .addComponent(jButton8)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jButton10))
-                                            .addComponent(jLabel6)
-                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(19, 19, 19)
-                                        .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel9)
-                                            .addGroup(registerCltLayout.createSequentialGroup()
-                                                .addComponent(jButton12)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jButton13))
-                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(registerCltLayout.createSequentialGroup()
                                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(247, 247, 247)
-                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(77, 77, 77)))
+                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(registerCltLayout.createSequentialGroup()
+                                        .addGap(21, 21, 21)
+                                        .addComponent(jButton8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jButton10)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButton12)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton13)))))
+                        .addGap(119, 119, 119)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         registerCltLayout.setVerticalGroup(
@@ -364,22 +378,25 @@ public class getInformation extends javax.swing.JDialog {
                 .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGap(39, 39, 39)
-                .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(47, 47, 47)
                 .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(registerCltLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton10)
+                            .addComponent(jButton8)))
+                    .addGroup(registerCltLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton12)
+                            .addComponent(jButton13))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton12)
-                    .addComponent(jButton13)
-                    .addComponent(jButton10)
-                    .addComponent(jButton8))
-                .addGap(30, 30, 30)
-                .addComponent(jButton7)
+                    .addComponent(jButton7)
+                    .addComponent(jButton9))
                 .addGap(41, 41, 41)
                 .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -586,40 +603,47 @@ public class getInformation extends javax.swing.JDialog {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         try {
-            System.out.println(data[0][table1.getSelectedRow()]);
-            System.out.println(table1.getSelectedRow());
-            System.out.println(table1.getSelectedColumn());
-          //  data[0][table1.getSelectedRow()] = "";
-
+            eliminarFila(jTable_Factura);
         } catch (Exception e) {
         }
-
-        //jList1.setSelectedIndex(jList1.getLastVisibleIndex());
-        completarTablaFacturacion();
-
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-
+        addRow(jTable_Factura);
 //        addresList.addElement("Hola");
 //        this.jList1.setModel(addresList);
 //        jList1.setSelectedIndex(jList1.getLastVisibleIndex());
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-//        try {
-//            phoneList.remove(jList2.getSelectedIndex());
-//        } catch (Exception e) {
-//        }
-//         jList2.setSelectedIndex(jList2.getLastVisibleIndex());
+        eliminarFila(jTablePhone);
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-//        phoneList.addElement("-");
-//        this.jList2.setModel(phoneList);
-//        jList2.setSelectedIndex(jList2.getLastVisibleIndex());
+        addRow(jTablePhone);
 
     }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jTable_FacturaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable_FacturaKeyPressed
+        int tecla = evt.getKeyCode();
+        if (tecla == KeyEvent.VK_F9) {
+            //   this.eliminarFila();
+        } else {
+            // hotKeyPressEvt(evt);
+        }
+    }//GEN-LAST:event_jTable_FacturaKeyPressed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        ArrayList<String> direc = getAddres();
+        for (int i = 0; i < direc.size(); i++) {
+            System.out.println(direc.get(i));
+
+        }
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jTablePhoneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTablePhoneKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTablePhoneKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -635,6 +659,7 @@ public class getInformation extends javax.swing.JDialog {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JFormattedTextField jFormattedTextField3;
@@ -643,15 +668,13 @@ public class getInformation extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTablePhone;
+    private javax.swing.JTable jTable_Factura;
     private javax.swing.JPanel registerClt;
-    private javax.swing.JTable table;
-    private javax.swing.JTable table1;
     // End of variables declaration//GEN-END:variables
 
     private void configureTableLook() {
@@ -708,20 +731,83 @@ public class getInformation extends javax.swing.JDialog {
         remove(ConsultarClt);
     }
 
-    public void completarTablaFacturacion() {
-        //Crea la tabla generica para Facturas
-        List<Object[]> data = new ArrayList<Object[]>();
-        data.add(0, columnNames);
-        MyTableModel_FACT model = new MyTableModel_FACT(columnNames, data, true);
-        this.table1.setModel(
-                model);
+//    public void completarTablaFacturacion() {
+//        //Crea la tabla generica para Facturas
+//
+//        MyTableModel_FACT model = new MyTableModel_FACT(columnNames, data2, true);
 //        this.table1.setModel(
-//                new Modelo_Facturacion(columnNames, data));
-        //Alinea la primer columna de esta tabla hacia el centro
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+//                model);
+////        this.table1.setModel(new Modelo_Facturacion(columnNames, data));
+//        //Alinea la primer columna de esta tabla hacia el centro
+//        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+//      model.removeRow(1);
+//        this.table1.getColumnModel()
+//                .getColumn(0).setCellRenderer(centerRenderer);
+//    }
+    private void eliminarFila(JTable table) {
+        try {
+            tableModelAddres model = (tableModelAddres) table.getModel();
+            int row = table.getSelectedRow();
+            ///Si se esta escribiendo en la celda para el editor y luego elimina la
+            // fila
+            if (!model.data.isEmpty()) {
+                if (table.isEditing()) {
+                    table.getCellEditor().cancelCellEditing();
+                    table.revalidate();
+                    table.repaint();
+                    table.requestFocus();
 
-        this.table1.getColumnModel()
-                .getColumn(0).setCellRenderer(centerRenderer);
+                }
+
+                model.removeRow(row);
+                table.changeSelection(row - 1, 0, false, false);
+                table.revalidate();
+                table.repaint();
+                table.requestFocus();
+            }
+            if (model.data.isEmpty()) {
+                model.addRow(1);
+            }
+        } catch (Exception e) {
+        }
+
     }
 
+    private void addRow(JTable table) {
+        try {
+            tableModelAddres model = (tableModelAddres) table.getModel();
+
+            ///Si se esta escribiendo en la celda para el editor 
+            //y luego elimina la fila
+            if (!model.data.isEmpty()) {
+                if (table.isEditing()) {
+                    table.getCellEditor().cancelCellEditing();
+                    table.revalidate();
+                    table.repaint();
+                    table.requestFocus();
+
+                }
+            }
+            model.addRow(1);
+            table.revalidate();
+            table.repaint();
+            table.requestFocus();
+        } catch (Exception e) {
+        }
+
+    }
+
+    ArrayList<String> getAddres() {
+        ArrayList<String> result = new ArrayList<>();
+        for (int i = 0; i < data2.size(); i++) {
+            for (int j = 0; j < data2.get(i).length; j++) {
+                if (data2.get(i)[j].toString().replace(" ", "") != "") {
+                    result.add(data2.get(i)[j].toString());
+                }
+
+            }
+
+        }
+        return result;
+    }
 }

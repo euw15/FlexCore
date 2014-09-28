@@ -12,13 +12,14 @@ import javax.swing.table.AbstractTableModel;
 
 /**
  *
- * @author Oscar Montes
+ * @author jason
  */
-class MyTableModel_FACT extends AbstractTableModel {
+class tableModelAddres extends AbstractTableModel {
     private String[] columnNames;
     public List<Object[]> data;
+    
     boolean facturas = false;
-    public MyTableModel_FACT(String[] columnNames,List<Object[]> data,boolean facturas){
+    public tableModelAddres(String[] columnNames,List<Object[]> data,boolean facturas){
         this.columnNames=columnNames;
         this.data=data;
         this.facturas=facturas;
@@ -84,15 +85,15 @@ class MyTableModel_FACT extends AbstractTableModel {
         TableModelListener[] mylistener = this.getTableModelListeners();
         try {
 
-            MyTableModelListener_FACT a = (MyTableModelListener_FACT) mylistener[0];
+            tableModelListenerAddres a = (tableModelListenerAddres) mylistener[0];
             if (val != null) {
                 String oldValue = this.getValueAt(row, col).toString();
                 data.get(row)[col] = value;
-                
+                a.setOldValue(oldValue);
                 fireTableCellUpdated(row, col);
                 return;
             }
-            
+            a.setOldValue("");
         } catch (Exception e) {
             data.get(row)[col] = value;
             fireTableCellUpdated(row, col);
