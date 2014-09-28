@@ -91,14 +91,14 @@
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="1" rowCount="7">
-                        <Column editable="true" title="Reporte" type="java.lang.Object">
-                          <Data value="Lista de precio"/>
-                          <Data value="Lista de precio costo"/>
-                          <Data value="Valor del inventario"/>
-                          <Data value="Productos agotados"/>
-                          <Data value="Movimiento de inventario"/>
-                          <Data value="Productos en inventario"/>
-                          <Data value="Movimientos por producto"/>
+                        <Column editable="false" title="Acci&#xf3;n" type="java.lang.Object">
+                          <Data value="   Registrar"/>
+                          <Data value="   Consultar"/>
+                          <Data value="   Ver Listado"/>
+                          <Data value="   Eliminar"/>
+                          <Data value="   Actualizar"/>
+                          <Data value="   Otras"/>
+                          <Data value="   Otras"/>
                         </Column>
                       </Table>
                     </Property>
@@ -199,16 +199,25 @@
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="1" rowCount="7">
-                        <Column editable="false" title="Reporte" type="java.lang.Object">
-                          <Data value="Lista de precio"/>
-                          <Data value="Lista de precio costo"/>
-                          <Data value="Valor del inventario"/>
-                          <Data value="Productos agotados"/>
-                          <Data value="Movimiento de inventario"/>
-                          <Data value="Productos en inventario"/>
-                          <Data value="Movimientos por producto"/>
+                        <Column editable="false" title="Abrir Cuenta" type="java.lang.Object">
+                          <Data value=""/>
+                          <Data value="   Ahorro A La Vista"/>
+                          <Data value=""/>
+                          <Data value="   Por Objetivo"/>
+                          <Data value=""/>
+                          <Data value=""/>
+                          <Data value=""/>
                         </Column>
                       </Table>
+                    </Property>
+                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                      <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                      </TableColumnModel>
                     </Property>
                     <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -298,16 +307,25 @@
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="1" rowCount="7">
-                        <Column editable="false" title="Reporte" type="java.lang.Object">
-                          <Data value="Lista de precio"/>
-                          <Data value="Lista de precio costo"/>
-                          <Data value="Valor del inventario"/>
-                          <Data value="Productos agotados"/>
-                          <Data value="Movimiento de inventario"/>
-                          <Data value="Productos en inventario"/>
-                          <Data value="Movimientos por producto"/>
+                        <Column editable="true" title="" type="java.lang.Object">
+                          <Data value=""/>
+                          <Data value=""/>
+                          <Data value="   Afiliar Un Cliente A Un M&#xf3;dulo De Pago"/>
+                          <Data value=""/>
+                          <Data value=""/>
+                          <Data value=""/>
+                          <Data value=""/>
                         </Column>
                       </Table>
+                    </Property>
+                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                      <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                      </TableColumnModel>
                     </Property>
                     <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -397,14 +415,14 @@
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="1" rowCount="7">
-                        <Column editable="false" title="Reporte" type="java.lang.Object">
-                          <Data value="Transaciones Clientes Jur&#xed;dica"/>
-                          <Data value="Transaciones Clientes F&#xed;sico"/>
-                          <Data value="Cierres Realizados"/>
-                          <Data value="Lista De Clientes Por Campos"/>
-                          <Data value="Lista De Cuentas Por Campos"/>
-                          <Data value="Bitacoras De Errores FlexCore"/>
-                          <Data value="Lista De Intereses Pagados A Una Cuenta De Ahorro Autom&#xe1;tico"/>
+                        <Column editable="true" title="Reporte" type="java.lang.Object">
+                          <Data value="   Transaciones Clientes Jur&#xed;dica"/>
+                          <Data value="   Transaciones Clientes F&#xed;sico"/>
+                          <Data value="   Cierres Realizados"/>
+                          <Data value="   Lista De Clientes Por Campos"/>
+                          <Data value="   Lista De Cuentas Por Campos"/>
+                          <Data value="   Bitacora De Errores FlexCore"/>
+                          <Data value="   Lista De Intereses Pagados A Una Cuenta De Ahorro Autom&#xe1;tico  "/>
                         </Column>
                       </Table>
                     </Property>

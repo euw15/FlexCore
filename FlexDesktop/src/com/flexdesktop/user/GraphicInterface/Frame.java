@@ -61,18 +61,26 @@ public class Frame extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Lista de precio"},
-                {"Lista de precio costo"},
-                {"Valor del inventario"},
-                {"Productos agotados"},
-                {"Movimiento de inventario"},
-                {"Productos en inventario"},
-                {"Movimientos por producto"}
+                {"   Registrar"},
+                {"   Consultar"},
+                {"   Ver Listado"},
+                {"   Eliminar"},
+                {"   Actualizar"},
+                {"   Otras"},
+                {"   Otras"}
             },
             new String [] {
-                "Reporte"
+                "Acción"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable1.setGridColor(new java.awt.Color(255, 255, 255));
         jTable1.setRowHeight(41);
         jScrollPane1.setViewportView(jTable1);
@@ -117,16 +125,16 @@ public class Frame extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Lista de precio"},
-                {"Lista de precio costo"},
-                {"Valor del inventario"},
-                {"Productos agotados"},
-                {"Movimiento de inventario"},
-                {"Productos en inventario"},
-                {"Movimientos por producto"}
+                {""},
+                {"   Ahorro A La Vista"},
+                {""},
+                {"   Por Objetivo"},
+                {""},
+                {""},
+                {""}
             },
             new String [] {
-                "Reporte"
+                "Abrir Cuenta"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -181,26 +189,18 @@ public class Frame extends javax.swing.JFrame {
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Lista de precio"},
-                {"Lista de precio costo"},
-                {"Valor del inventario"},
-                {"Productos agotados"},
-                {"Movimiento de inventario"},
-                {"Productos en inventario"},
-                {"Movimientos por producto"}
+                {""},
+                {""},
+                {"   Afiliar Un Cliente A Un Módulo De Pago"},
+                {""},
+                {""},
+                {""},
+                {""}
             },
             new String [] {
-                "Reporte"
+                ""
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jTable3.setGridColor(new java.awt.Color(255, 255, 255));
         jTable3.setRowHeight(41);
         jScrollPane3.setViewportView(jTable3);
@@ -245,26 +245,18 @@ public class Frame extends javax.swing.JFrame {
 
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Transaciones Clientes Jurídica"},
-                {"Transaciones Clientes Físico"},
-                {"Cierres Realizados"},
-                {"Lista De Clientes Por Campos"},
-                {"Lista De Cuentas Por Campos"},
-                {"Bitacoras De Errores FlexCore"},
-                {"Lista De Intereses Pagados A Una Cuenta De Ahorro Automático"}
+                {"   Transaciones Clientes Jurídica"},
+                {"   Transaciones Clientes Físico"},
+                {"   Cierres Realizados"},
+                {"   Lista De Clientes Por Campos"},
+                {"   Lista De Cuentas Por Campos"},
+                {"   Bitacora De Errores FlexCore"},
+                {"   Lista De Intereses Pagados A Una Cuenta De Ahorro Automático  "}
             },
             new String [] {
                 "Reporte"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jTable4.setGridColor(new java.awt.Color(255, 255, 255));
         jTable4.setRowHeight(41);
         jScrollPane4.setViewportView(jTable4);
@@ -354,17 +346,18 @@ public class Frame extends javax.swing.JFrame {
         if (selection == OPCION0) {
             System.out.println("transacciones clt juridica");
         } else if (selection == OPCION1) {
-
+System.out.println("transaciones clt fisico");
         } else if (selection == OPCION2) {
-
+System.out.println("Cierres Realizados");
         } else if (selection == OPCION3) {
-
+System.out.println("Lista de Clientes x campos");
         } else if (selection == OPCION4) {
-
+System.out.println("Lista de cuentas x campos");
         } else if (selection == OPCION5) {
-
+System.out.println("bitacores erroe flex");
         } else if (selection == OPCION6) {
-
+System.out.println("lista de intereses pagados a una cuenta de ahorro automatic"
+        + "o");
         }
     }//GEN-LAST:event_jLabel17MouseClicked
 
