@@ -37,7 +37,11 @@ public class MyTableModel_Generic extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int row, int col) {
-        return data[row][col];
+        try {
+            return data[row][col];
+        } catch (Exception e) {
+        }
+        return null;
     }
     /**
      *

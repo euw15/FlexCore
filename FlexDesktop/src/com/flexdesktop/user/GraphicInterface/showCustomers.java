@@ -40,7 +40,9 @@ public class showCustomers extends javax.swing.JDialog {
     private final String[] ColumName = {"Cedula", "Nombre", "Apellido"};
     
 
-   Object data2[][] = { {"503890620"}, {"Jason"},{ "Salazar"}};
+   Object data2[][] = { {"503890620","Jason","Salazar"},
+       {"3564874","Daniel","Canessa"},{"2548745","Edwar","Umana"},
+       {"245784","Melvin","Guitierrez"}};
 
     public showCustomers(java.awt.Frame parent, boolean modal) {
 
