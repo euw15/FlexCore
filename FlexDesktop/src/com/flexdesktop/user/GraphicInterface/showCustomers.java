@@ -490,64 +490,76 @@ public class showCustomers extends javax.swing.JDialog {
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
 
         JLabel LbAct = getLabelActual();
+        JLabel nextLabel = getNextLabel();
+
         setPaginalActual(Integer.parseInt(getNextLabel().getText()));
-        //Si se esta en el label5
-        if (!getNextLabel().isFocusable()) {
-            System.out.println(getNextLabel().getText());
-            jLabelPag4.setIcon(new javax.swing.ImageIcon(getClass().
-                    getResource("/com/flexdesktop/user/Images/paginaSelected.png")));
-            jLabelPag4.setOpaque(true);
-            LbAct.setOpaque(false);
-            draw();
-        } else {
-            LbAct.setIcon(new javax.swing.ImageIcon(getClass().
-                    getResource("/com/flexdesktop/user/Images/pagina.png")));
-            getNextLabel().setIcon(new javax.swing.ImageIcon(getClass().
-                    getResource("/com/flexdesktop/user/Images/paginaSelected.png")));
 
-            getNextLabel().setOpaque(true);
+        if (getPaginalActual() <= getNumeroDePaginas()) {
+            System.out.println("actul " + getPaginalActual() + " ,numer " + getNumeroDePaginas());
+            //Si se va para el label5
+            if (!nextLabel.isFocusable() && getPaginalActual() < getNumeroDePaginas()) {
 
-            LbAct.setOpaque(false);
+                jLabelPag4.setIcon(new javax.swing.ImageIcon(getClass().
+                        getResource("/com/flexdesktop/user/Images/paginaSelected.png")));
+                jLabelPag4.setOpaque(true);
+
+                //LbAct.setOpaque(false);
+                draw();
+
+            } else {
+                nextLabel.setIcon(new javax.swing.ImageIcon(getClass().
+                        getResource("/com/flexdesktop/user/Images/paginaSelected.png")));
+                LbAct.setIcon(new javax.swing.ImageIcon(getClass().
+                        getResource("/com/flexdesktop/user/Images/pagina.png")));
+                if (getPaginalActual() != getNumeroDePaginas()) {
+
+                    nextLabel.setOpaque(true);
+
+                    LbAct.setOpaque(false);
+                }
+
+            }
+
+            comprobaciones();
+            //******
+            //Mostrar graficamente la pagina siguiente****************
+            String paginaAnterior = LbAct.getText();//Cosultar la siguiente pag
+            System.out.println("El anterior es: " + paginaAnterior);
+            //******************************************************
         }
-
-        ///***comprobar si necesita puntos suspen
-        if (Integer.parseInt(jLabelPag2.getText()) > 2) {
-            jLabelPuntos1.setVisible(true);
-        }
-        if (Integer.parseInt(jLabelPag2.getText()) == 2) {
-            jLabelPuntos1.setVisible(false);
-        }
-        //***********
-
-        //Mostrar graficamente la pagina siguiente****************
-        String paginaAnterior = LbAct.getText();//Cosultar la siguiente pag
-        System.out.println("El anterior es: " + paginaAnterior);
-        //******************************************************
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         JLabel LbAct = getLabelActual();
-        LbAct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png")));
+
         JLabel antLabel = getAntLabel();
-        antLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/paginaSelected.png")));
-        LbAct.setOpaque(false);
-        antLabel.setOpaque(true);
-        
-        
-        
-        ///***comprobar si necesita puntos suspen
-        if (Integer.parseInt(jLabelPag2.getText()) > 2) {
-            jLabelPuntos1.setVisible(true);
+
+        if (Integer.parseInt(LbAct.getText()) != 1) {
+
+            antLabel.setIcon(new javax.swing.ImageIcon(getClass().
+                    getResource("/com/flexdesktop/user/Images/paginaSelected.png")));
+            antLabel.setOpaque(true);
+            LbAct.setIcon(new javax.swing.ImageIcon(getClass().
+                    getResource("/com/flexdesktop/user/Images/pagina.png")));
+            LbAct.setOpaque(false);
+            draw2();
         }
-        if (Integer.parseInt(jLabelPag2.getText()) == 2) {
-            jLabelPuntos1.setVisible(false);
-        }
-        //***********
-        
+//        else {
+//            LbAct.setIcon(new javax.swing.ImageIcon(getClass().
+//                    getResource("/com/flexdesktop/user/Images/pagina.png")));
+//            antLabel.setIcon(new javax.swing.ImageIcon(getClass().
+//                    getResource("/com/flexdesktop/user/Images/paginaSelected.png")));
+//
+//            LbAct.setOpaque(false);
+//
+//            antLabel.setOpaque(true);
+//        }
+
+        comprobaciones();
 
         //Mostrar graficamente la pagina siguiente****************
         String paginaAnterior = LbAct.getText();//Cosultar la siguiente pag
-        System.out.println("El anterior es: " + paginaAnterior);
+        System.out.println("El actual es: " + paginaAnterior);
         //******************************************************
     }//GEN-LAST:event_jLabel2MouseClicked
 
@@ -885,5 +897,44 @@ public class showCustomers extends javax.swing.JDialog {
         jLabelPag5.setText("" + (paginalActual + 1));
 
     }
+
+    private void draw2() {
+        jLabelPag3.setText("" + paginalActual);
+        jLabelPag2.setText("" + (paginalActual - 1));
+        jLabelPag4.setText("" + (paginalActual + 1));
+        jLabelPag5.setText("" + (paginalActual + 2));
+
+    }
+
+    private void comprobaciones() {
+        ///***comprobar si necesita puntos suspen al inicio
+        if (Integer.parseInt(jLabelPag2.getText()) > 2) {
+            jLabelPuntos1.setVisible(true);
+        }
+        if (Integer.parseInt(jLabelPag2.getText()) == 2) {
+            jLabelPuntos1.setVisible(false);
+        }
+        //***********
+
+        ///***comprobar si necesita puntos suspen al final
+        if (Integer.parseInt(jLabelPag5.getText()) >= getNumeroDePaginas()) {
+
+            jLabelPuntos.setVisible(false);
+            jLabelUltimoPag.setVisible(false);
+        }
+        if (Integer.parseInt(jLabelPag5.getText()) < getNumeroDePaginas()) {
+            jLabelPuntos.setVisible(true);
+            jLabelUltimoPag.setVisible(true);
+        }
+
+    }
+//
+//    private void draw3() {
+//
+//        jLabelPag5.setText("" + paginalActual);
+//        jLabelPag4.setText("" + (paginalActual - 1));
+//        jLabelPag3.setText("" + (paginalActual - 2));
+//
+//    }
 
 }
