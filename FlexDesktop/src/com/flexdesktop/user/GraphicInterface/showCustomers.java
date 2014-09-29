@@ -42,13 +42,13 @@ public class showCustomers extends javax.swing.JDialog {
 
     Object data2[][] = {{"503890620", "Jason", "Salazar"},
     {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
-    {"245784", "Melvin", "Guitierrez"},{"503890620", "Jason", "Salazar"},
+    {"245784", "Melvin", "Guitierrez"}, {"503890620", "Jason", "Salazar"},
     {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
-    {"245784", "Melvin", "Guitierrez"},{"503890620", "Jason", "Salazar"},
+    {"245784", "Melvin", "Guitierrez"}, {"503890620", "Jason", "Salazar"},
     {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
-    {"245784", "Melvin", "Guitierrez"},{"503890620", "Jason", "Salazar"},
+    {"245784", "Melvin", "Guitierrez"}, {"503890620", "Jason", "Salazar"},
     {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
-    {"245784", "Melvin", "Guitierrez"},{"503890620", "Jason", "Salazar"},
+    {"245784", "Melvin", "Guitierrez"}, {"503890620", "Jason", "Salazar"},
     {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"}};
 
     public showCustomers(java.awt.Frame parent, boolean modal) {
@@ -250,18 +250,30 @@ public class showCustomers extends javax.swing.JDialog {
         });
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png"))); // NOI18N
+        jLabel9.setText("3");
+        jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png"))); // NOI18N
+        jLabel10.setText("4");
+        jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png"))); // NOI18N
+        jLabel11.setText("5");
+        jLabel11.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabelPuntos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/PuntosSusp.png"))); // NOI18N
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png"))); // NOI18N
+        jLabel13.setText("6");
+        jLabel13.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png"))); // NOI18N
+        jLabel14.setText("2");
+        jLabel14.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png"))); // NOI18N
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/paginaSelected.png"))); // NOI18N
+        jLabel15.setText("1");
+        jLabel15.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout ListadoCltLayout = new javax.swing.GroupLayout(ListadoClt);
         ListadoClt.setLayout(ListadoCltLayout);
@@ -277,6 +289,14 @@ public class showCustomers extends javax.swing.JDialog {
                 .addGap(115, 115, 115)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(ListadoCltLayout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ListadoCltLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(14, Short.MAX_VALUE))
+            .addGroup(ListadoCltLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jLabel5)
                 .addGap(33, 33, 33)
@@ -284,36 +304,29 @@ public class showCustomers extends javax.swing.JDialog {
                 .addGap(31, 31, 31)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel14)
-                .addGap(12, 12, 12)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelPuntos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel13)
-                .addGap(41, 41, 41)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
-                .addGap(44, 44, 44))
-            .addGroup(ListadoCltLayout.createSequentialGroup()
-                .addGap(13, 13, 13)
                 .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ListadoCltLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ListadoCltLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ListadoCltLayout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel14)
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelPuntos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel13)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7)
+                        .addGap(44, 44, 44))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ListadoCltLayout.createSequentialGroup()
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         ListadoCltLayout.setVerticalGroup(
             ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,33 +348,32 @@ public class showCustomers extends javax.swing.JDialog {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ListadoCltLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(ListadoCltLayout.createSequentialGroup()
                         .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(ListadoCltLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(ListadoCltLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel4)
-                                    .addComponent(jLabel6))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(ListadoCltLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel14)
-                                .addComponent(jLabel15)
-                                .addComponent(jLabel9)
-                                .addComponent(jLabel10)
-                                .addComponent(jLabel11)
-                                .addComponent(jLabelPuntos)
-                                .addComponent(jLabel13))
-                            .addComponent(jLabel2))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(jLabel6)))
+                            .addGroup(ListadoCltLayout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel14)
+                                        .addComponent(jLabel9)
+                                        .addComponent(jLabel10)
+                                        .addComponent(jLabel11)
+                                        .addComponent(jLabelPuntos)
+                                        .addComponent(jLabel13)
+                                        .addComponent(jLabel15)))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -370,7 +382,7 @@ public class showCustomers extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(ListadoClt, javax.swing.GroupLayout.PREFERRED_SIZE, 757, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 3, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -392,8 +404,8 @@ public class showCustomers extends javax.swing.JDialog {
 
         String[] options = {"Aceptar", "Cancelar"};
         int selection = JOptionPane.showOptionDialog(this,
-            "Desea eliminar el Cliente", "¡Atención!", 0, 0,
-            null, options, 0);
+                "Desea eliminar el Cliente", "¡Atención!", 0, 0,
+                null, options, 0);
         if (selection == 0) {
             this.eliminar(this.jTable_Generica);
             this.fillTableCostumer();
@@ -419,12 +431,12 @@ public class showCustomers extends javax.swing.JDialog {
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
 
         String ced = jTable_Generica.getValueAt(
-            jTable_Generica.getSelectedRow(), 0).toString();
+                jTable_Generica.getSelectedRow(), 0).toString();
 
         String name = jTable_Generica.getValueAt(
-            jTable_Generica.getSelectedRow(), 1).toString();
+                jTable_Generica.getSelectedRow(), 1).toString();
         String lastName = jTable_Generica.getValueAt(
-            jTable_Generica.getSelectedRow(), 2).toString();
+                jTable_Generica.getSelectedRow(), 2).toString();
 
         getInformation getInfoPanel = new getInformation(null, true);
         getInfoPanel.setInfoClt(ced, name, lastName);
@@ -450,23 +462,21 @@ public class showCustomers extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jLabel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseEntered
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource
-        ("/com/flexdesktop/user/Images/nextShadow.png")));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/nextShadow.png")));
     }//GEN-LAST:event_jLabel7MouseEntered
 
     private void jLabel7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseExited
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/next.png")));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().
+                getResource("/com/flexdesktop/user/Images/next.png")));
 
     }//GEN-LAST:event_jLabel7MouseExited
 
     private void jLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseEntered
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource
-        ("/com/flexdesktop/user/Images/backShadow.png")));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/backShadow.png")));
     }//GEN-LAST:event_jLabel2MouseEntered
 
     private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
-       jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource
-        ("/com/flexdesktop/user/Images/back.png")));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/back.png")));
     }//GEN-LAST:event_jLabel2MouseExited
 
 
@@ -636,6 +646,7 @@ public class showCustomers extends javax.swing.JDialog {
         this.TextField_Buscador.getDocument().addDocumentListener(new ListenerBuscador(this.TextField_Buscador, ordenador));
 
     }
+
     private void eliminar(JTable table) {
 
         int row = table.getSelectedRow();
@@ -649,25 +660,20 @@ public class showCustomers extends javax.swing.JDialog {
 
         }
         String cedula = table.getValueAt(row, 0).toString();
-       
+
        //Eliminar el cliente con la cedula 'cedula'
-        
     }
-    
+
     public void fillTableCostumer() {
 
         //Realiza la consulta para obtener las los clientes a mostrar
-        
-        
-        /*****///
-        
-        
-        
-       
+        /**
+         * **
+         *///
         this.jTable_Generica.setModel(new tableModelGeneric(ColumName, data2));
         //Alinea la primer columna de esta tabla hacia el centro
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-   
+
         this.jTable_Generica.getColumnModel().getColumn(0).
                 setCellRenderer(centerRenderer);
     }
