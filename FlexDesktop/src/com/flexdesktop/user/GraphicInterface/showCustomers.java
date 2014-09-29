@@ -419,10 +419,11 @@ public class showCustomers extends javax.swing.JDialog {
                                 .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jLabelPag2)
-                                            .addComponent(jLabelPuntos1)
-                                            .addComponent(jLabelPag1))
+                                        .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabelPuntos1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(jLabelPag2)
+                                                .addComponent(jLabelPag1)))
                                         .addComponent(jLabelPag3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabelPag4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabelPag5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -612,7 +613,6 @@ public class showCustomers extends javax.swing.JDialog {
         
         
         //**ConsultarResfult
-        
         data2 = paginaAnterior;
         upDateCostumers();
         //////*****
