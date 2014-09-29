@@ -52,7 +52,6 @@ public class showCustomers extends javax.swing.JDialog {
     {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"}};
     private int numeroDePaginas = 0;
     private int paginalActual = 1;
-    
 
     public showCustomers(java.awt.Frame parent, boolean modal) {
 
@@ -215,6 +214,9 @@ public class showCustomers extends javax.swing.JDialog {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/back.png"))); // NOI18N
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabel2MouseEntered(evt);
             }
@@ -234,6 +236,9 @@ public class showCustomers extends javax.swing.JDialog {
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/next.png"))); // NOI18N
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabel7MouseEntered(evt);
             }
@@ -267,6 +272,7 @@ public class showCustomers extends javax.swing.JDialog {
         jLabelPag1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/paginaSelected.png"))); // NOI18N
         jLabelPag1.setText("1");
         jLabelPag1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabelPag1.setOpaque(true);
 
         javax.swing.GroupLayout ListadoCltLayout = new javax.swing.GroupLayout(ListadoClt);
         ListadoClt.setLayout(ListadoCltLayout);
@@ -471,6 +477,24 @@ public class showCustomers extends javax.swing.JDialog {
     private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/back.png")));
     }//GEN-LAST:event_jLabel2MouseExited
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+
+        JLabel LbAct = getLabelActual();
+        LbAct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png")));
+        getNextLabel().setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/paginaSelected.png")));
+        getNextLabel().setOpaque(true);
+        LbAct.setOpaque(false);
+    }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        JLabel LbAct = getLabelActual();
+        LbAct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png")));
+        JLabel antLabel = getAntLabel();
+        antLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/paginaSelected.png")));
+        LbAct.setOpaque(false);
+        antLabel.setOpaque(true);
+    }//GEN-LAST:event_jLabel2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -677,7 +701,7 @@ public class showCustomers extends javax.swing.JDialog {
      * @param numeroDePaginas
      */
     private void initPaginacion() {
-        if (numeroDePaginas > 6) {
+        if (numeroDePaginas >= 6) {
             jLabelUltimoPag.setText("" + numeroDePaginas);
         } else {
             ocultarPaginas();
@@ -743,5 +767,56 @@ public class showCustomers extends javax.swing.JDialog {
      */
     public void setPaginalActual(int paginalActual) {
         this.paginalActual = paginalActual;
+    }
+
+    public JLabel getLabelActual() {
+        if (jLabelPag1.isOpaque()) {
+            return jLabelPag1;
+        } else if (jLabelPag2.isOpaque()) {
+            return jLabelPag2;
+        } else if (jLabelPag3.isOpaque()) {
+            return jLabelPag3;
+        } else if (jLabelPag4.isOpaque()) {
+            return jLabelPag4;
+        } else if (jLabelPag5.isOpaque()) {
+            return jLabelPag5;
+        }
+
+        return jLabelUltimoPag;
+
+    }
+
+    public JLabel getNextLabel() {
+        if (jLabelPag1.isOpaque()) {
+            return jLabelPag2;
+        } else if (jLabelPag2.isOpaque()) {
+            return jLabelPag3;
+        } else if (jLabelPag3.isOpaque()) {
+            return jLabelPag4;
+        } else if (jLabelPag4.isOpaque()) {
+            return jLabelPag5;
+        } else if (jLabelPag5.isOpaque()) {
+            return jLabelUltimoPag;
+        }
+
+        return jLabelUltimoPag;
+
+    }
+
+    public JLabel getAntLabel() {
+        if (jLabelPag1.isOpaque()) {
+            return jLabelPag1;
+        } else if (jLabelPag2.isOpaque()) {
+            return jLabelPag1;
+        } else if (jLabelPag3.isOpaque()) {
+            return jLabelPag2;
+        } else if (jLabelPag4.isOpaque()) {
+            return jLabelPag3;
+        } else if (jLabelPag5.isOpaque()) {
+            return jLabelPag4;
+        }
+
+        return jLabelPag5;
+
     }
 }
