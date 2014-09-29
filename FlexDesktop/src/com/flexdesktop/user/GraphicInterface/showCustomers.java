@@ -251,15 +251,30 @@ public class showCustomers extends javax.swing.JDialog {
         jLabelPag3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png"))); // NOI18N
         jLabelPag3.setText("3");
         jLabelPag3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabelPag3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelPag3MouseClicked(evt);
+            }
+        });
 
         jLabelPag4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png"))); // NOI18N
         jLabelPag4.setText("4");
         jLabelPag4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabelPag4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelPag4MouseClicked(evt);
+            }
+        });
 
         jLabelPag5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png"))); // NOI18N
         jLabelPag5.setText("5");
         jLabelPag5.setFocusable(false);
         jLabelPag5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabelPag5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelPag5MouseClicked(evt);
+            }
+        });
 
         jLabelPuntos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/PuntosSusp.png"))); // NOI18N
 
@@ -267,15 +282,30 @@ public class showCustomers extends javax.swing.JDialog {
         jLabelUltimoPag.setText("6");
         jLabelUltimoPag.setFocusable(false);
         jLabelUltimoPag.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabelUltimoPag.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelUltimoPagMouseClicked(evt);
+            }
+        });
 
         jLabelPag2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png"))); // NOI18N
         jLabelPag2.setText("2");
         jLabelPag2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabelPag2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelPag2MouseClicked(evt);
+            }
+        });
 
         jLabelPag1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/paginaSelected.png"))); // NOI18N
         jLabelPag1.setText("1");
         jLabelPag1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabelPag1.setOpaque(true);
+        jLabelPag1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelPag1MouseClicked(evt);
+            }
+        });
 
         jLabelPuntos1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelPuntos1.setText("...");
@@ -568,6 +598,43 @@ public class showCustomers extends javax.swing.JDialog {
 //        System.out.println("El actual es: " + paginaAnterior);
         //******************************************************
     }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jLabelPag1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelPag1MouseClicked
+        jLabelUltimoPag.setText("" + getNumeroDePaginas());
+        jLabelPag5.setText("5");
+        jLabelPag4.setText("4");
+        jLabelPag3.setText("3");
+        jLabelPag2.setText("2");
+        setFocusPanel(jLabelPag1);
+        comprobaciones();
+
+
+    }//GEN-LAST:event_jLabelPag1MouseClicked
+
+    private void jLabelPag2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelPag2MouseClicked
+        setFocusPanel(jLabelPag2);
+    }//GEN-LAST:event_jLabelPag2MouseClicked
+
+    private void jLabelPag3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelPag3MouseClicked
+        setFocusPanel(jLabelPag3);
+    }//GEN-LAST:event_jLabelPag3MouseClicked
+
+    private void jLabelPag4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelPag4MouseClicked
+        setFocusPanel(jLabelPag4);
+    }//GEN-LAST:event_jLabelPag4MouseClicked
+
+    private void jLabelPag5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelPag5MouseClicked
+        setFocusPanel(jLabelPag5);
+    }//GEN-LAST:event_jLabelPag5MouseClicked
+
+    private void jLabelUltimoPagMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUltimoPagMouseClicked
+        jLabelPag5.setText(jLabelUltimoPag.getText());
+        jLabelPag4.setText("" + (Integer.parseInt(jLabelUltimoPag.getText()) - 1));
+        jLabelPag3.setText("" + (Integer.parseInt(jLabelUltimoPag.getText()) - 2));
+        jLabelPag2.setText("" + (Integer.parseInt(jLabelUltimoPag.getText()) - 3));
+        setFocusPanel(jLabelPag5);
+        comprobaciones();
+    }//GEN-LAST:event_jLabelUltimoPagMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -942,5 +1009,18 @@ public class showCustomers extends javax.swing.JDialog {
 //        jLabelPag3.setText("" + (paginalActual - 2));
 //
 //    }
+
+    void setFocusPanel(JLabel label) {
+        JLabel LbAct = getLabelActual();
+
+        label.setIcon(new javax.swing.ImageIcon(getClass().
+                getResource("/com/flexdesktop/user/Images/paginaSelected.png")));
+        label.setOpaque(true);
+        LbAct.setIcon(new javax.swing.ImageIcon(getClass().
+                getResource("/com/flexdesktop/user/Images/pagina.png")));
+        LbAct.setOpaque(false);
+        setPaginalActual(Integer.parseInt(label.getText()));
+
+    }
 
 }
