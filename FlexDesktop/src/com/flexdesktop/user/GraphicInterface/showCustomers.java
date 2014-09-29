@@ -16,10 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.Timer;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -39,7 +42,16 @@ public class showCustomers extends javax.swing.JDialog {
 
     Object data2[][] = {{"503890620", "Jason", "Salazar"},
     {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
-    {"245784", "Melvin", "Guitierrez"}};
+    {"245784", "Melvin", "Guitierrez"}, {"503890620", "Jason", "Salazar"},
+    {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
+    {"245784", "Melvin", "Guitierrez"}, {"503890620", "Jason", "Salazar"},
+    {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
+    {"245784", "Melvin", "Guitierrez"}, {"503890620", "Jason", "Salazar"},
+    {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
+    {"245784", "Melvin", "Guitierrez"}, {"503890620", "Jason", "Salazar"},
+    {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"}};
+    private int numeroDePaginas = 0;
+    private int paginalActual = 1;
 
     public showCustomers(java.awt.Frame parent, boolean modal) {
 
@@ -49,21 +61,11 @@ public class showCustomers extends javax.swing.JDialog {
 
         upDateCostumers();
 
-        //      DefaultTableModel model = (DefaultTableModel) table.getModel();
-//        try {
-//            ResultSet resultRoutes = MyDb.getRoutes();
-//
-//            while (resultRoutes.next()) {
-//                String nombre_ruta = resultRoutes.getString("nombre_ruta");
-//                String numero_ruta = resultRoutes.getString("idRuta");
-//                Object[] datos = {nombre_ruta + " " + numero_ruta, false, numero_ruta};
-//                model.addRow(datos);
-//            }
-//
-//        } catch (SQLException ex) {
-//            System.out.println("Error al cargar rutas");
-//        }
-        //completarTablaFacturacion();
+        //****************
+        setNumeroDePaginas(6);
+        initPaginacion();
+        //*****************
+
     }
 
     public void showDialog(String panel) {
@@ -110,12 +112,21 @@ public class showCustomers extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabelPag3 = new javax.swing.JLabel();
+        jLabelPag4 = new javax.swing.JLabel();
+        jLabelPag5 = new javax.swing.JLabel();
+        jLabelPuntos = new javax.swing.JLabel();
+        jLabelUltimoPag = new javax.swing.JLabel();
+        jLabelPag2 = new javax.swing.JLabel();
+        jLabelPag1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(760, 550));
         setMinimumSize(new java.awt.Dimension(760, 550));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(760, 550));
 
         ListadoClt.setBackground(new java.awt.Color(255, 255, 255));
         ListadoClt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -201,6 +212,68 @@ public class showCustomers extends javax.swing.JDialog {
             }
         });
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/back.png"))); // NOI18N
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel2MouseExited(evt);
+            }
+        });
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/trashBtt.png"))); // NOI18N
+        jLabel6.setToolTipText("Borrar factura seleccionada");
+        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/next.png"))); // NOI18N
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel7MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel7MouseExited(evt);
+            }
+        });
+
+        jLabelPag3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png"))); // NOI18N
+        jLabelPag3.setText("3");
+        jLabelPag3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabelPag4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png"))); // NOI18N
+        jLabelPag4.setText("4");
+        jLabelPag4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabelPag5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png"))); // NOI18N
+        jLabelPag5.setText("5");
+        jLabelPag5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabelPuntos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/PuntosSusp.png"))); // NOI18N
+
+        jLabelUltimoPag.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png"))); // NOI18N
+        jLabelUltimoPag.setText("6");
+        jLabelUltimoPag.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabelPag2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png"))); // NOI18N
+        jLabelPag2.setText("2");
+        jLabelPag2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabelPag1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/paginaSelected.png"))); // NOI18N
+        jLabelPag1.setText("1");
+        jLabelPag1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabelPag1.setOpaque(true);
+
         javax.swing.GroupLayout ListadoCltLayout = new javax.swing.GroupLayout(ListadoClt);
         ListadoClt.setLayout(ListadoCltLayout);
         ListadoCltLayout.setHorizontalGroup(
@@ -215,23 +288,44 @@ public class showCustomers extends javax.swing.JDialog {
                 .addGap(115, 115, 115)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(ListadoCltLayout.createSequentialGroup()
+                .addGap(13, 13, 13)
                 .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ListadoCltLayout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(ListadoCltLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 4, Short.MAX_VALUE))
-                    .addGroup(ListadoCltLayout.createSequentialGroup()
-                        .addGap(144, 144, 144)
-                        .addComponent(jLabel5)
+                        .addGap(10, 10, 10)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(14, Short.MAX_VALUE))
+            .addGroup(ListadoCltLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabel5)
+                .addGap(33, 33, 33)
+                .addComponent(jLabel4)
+                .addGap(31, 31, 31)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ListadoCltLayout.createSequentialGroup()
+                        .addComponent(jLabelPag1)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(jLabelPag2)
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabelPag3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelPag4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelPag5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelPuntos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelUltimoPag)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7)
+                        .addGap(44, 44, 44))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ListadoCltLayout.createSequentialGroup()
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         ListadoCltLayout.setVerticalGroup(
             ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,15 +347,32 @@ public class showCustomers extends javax.swing.JDialog {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ListadoCltLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(ListadoCltLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ListadoCltLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel6)))
+                            .addGroup(ListadoCltLayout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabelPag2)
+                                        .addComponent(jLabelPag3)
+                                        .addComponent(jLabelPag4)
+                                        .addComponent(jLabelPag5)
+                                        .addComponent(jLabelPuntos)
+                                        .addComponent(jLabelUltimoPag)
+                                        .addComponent(jLabelPag1)))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -274,54 +385,31 @@ public class showCustomers extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ListadoClt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(ListadoClt, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        dispose();
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        dispose();
-    }//GEN-LAST:event_jButton6ActionPerformed
+    private void ListadoCltMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListadoCltMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ListadoCltMousePressed
 
     private void ListadoCltMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListadoCltMouseDragged
         // TODO add your handling code here:
     }//GEN-LAST:event_ListadoCltMouseDragged
 
-    private void ListadoCltMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListadoCltMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ListadoCltMousePressed
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
 
-    private void jTable_GenericaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_GenericaMouseClicked
-        if (evt.getClickCount() == 2) {
-            //            this.jButton_AceptarBusqueda.doClick();
+        String[] options = {"Aceptar", "Cancelar"};
+        int selection = JOptionPane.showOptionDialog(this,
+                "Desea eliminar el Cliente", "¡Atención!", 0, 0,
+                null, options, 0);
+        if (selection == 0) {
+            this.eliminar(this.jTable_Generica);
+            this.fillTableCostumer();
         }
-    }//GEN-LAST:event_jTable_GenericaMouseClicked
-
-    private void TextField_BuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_BuscadorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TextField_BuscadorActionPerformed
-
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-
-        String ced = jTable_Generica.getValueAt(
-                jTable_Generica.getSelectedRow(), 0).toString();
-
-        String name = jTable_Generica.getValueAt(
-                jTable_Generica.getSelectedRow(), 1).toString();
-        String lastName = jTable_Generica.getValueAt(
-                jTable_Generica.getSelectedRow(), 2).toString();
-
-        getInformation getInfoPanel = new getInformation(null, true);
-        getInfoPanel.setInfoClt(ced, name, lastName);
-        getInfoPanel.showDialog("VerClt");
-
-
-    }//GEN-LAST:event_jLabel4MouseClicked
+    }//GEN-LAST:event_jLabel6MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         //datos de prueba
@@ -337,8 +425,76 @@ public class showCustomers extends javax.swing.JDialog {
         getInformation getInfoPanel = new getInformation(null, true);
         getInfoPanel.setEditableInfoCostumer(name, lastName, ced, dir);
         getInfoPanel.showDialog("RegisterClt");
-
     }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+
+        String ced = jTable_Generica.getValueAt(
+                jTable_Generica.getSelectedRow(), 0).toString();
+
+        String name = jTable_Generica.getValueAt(
+                jTable_Generica.getSelectedRow(), 1).toString();
+        String lastName = jTable_Generica.getValueAt(
+                jTable_Generica.getSelectedRow(), 2).toString();
+
+        getInformation getInfoPanel = new getInformation(null, true);
+        getInfoPanel.setInfoClt(ced, name, lastName);
+        getInfoPanel.showDialog("VerClt");
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void TextField_BuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_BuscadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextField_BuscadorActionPerformed
+
+    private void jTable_GenericaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_GenericaMouseClicked
+        if (evt.getClickCount() == 2) {
+            //            this.jButton_AceptarBusqueda.doClick();
+        }
+    }//GEN-LAST:event_jTable_GenericaMouseClicked
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jLabel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseEntered
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/nextShadow.png")));
+    }//GEN-LAST:event_jLabel7MouseEntered
+
+    private void jLabel7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseExited
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().
+                getResource("/com/flexdesktop/user/Images/next.png")));
+
+    }//GEN-LAST:event_jLabel7MouseExited
+
+    private void jLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseEntered
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/backShadow.png")));
+    }//GEN-LAST:event_jLabel2MouseEntered
+
+    private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/back.png")));
+    }//GEN-LAST:event_jLabel2MouseExited
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+
+        JLabel LbAct = getLabelActual();
+        LbAct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png")));
+        getNextLabel().setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/paginaSelected.png")));
+        getNextLabel().setOpaque(true);
+        LbAct.setOpaque(false);
+    }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        JLabel LbAct = getLabelActual();
+        LbAct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png")));
+        JLabel antLabel = getAntLabel();
+        antLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/paginaSelected.png")));
+        LbAct.setOpaque(false);
+        antLabel.setOpaque(true);
+    }//GEN-LAST:event_jLabel2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -347,10 +503,20 @@ public class showCustomers extends javax.swing.JDialog {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabelPag1;
+    private javax.swing.JLabel jLabelPag2;
+    private javax.swing.JLabel jLabelPag3;
+    private javax.swing.JLabel jLabelPag4;
+    private javax.swing.JLabel jLabelPag5;
+    private javax.swing.JLabel jLabelPuntos;
+    private javax.swing.JLabel jLabelUltimoPag;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable_Generica;
     // End of variables declaration//GEN-END:variables
@@ -495,6 +661,162 @@ public class showCustomers extends javax.swing.JDialog {
          * Agrega el listener al JtextField del buscador *
          */
         this.TextField_Buscador.getDocument().addDocumentListener(new ListenerBuscador(this.TextField_Buscador, ordenador));
+
+    }
+
+    private void eliminar(JTable table) {
+
+        int row = table.getSelectedRow();
+        if (row < 0) {
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    "No ha selecionado un cliente",
+                    "Alert!", JOptionPane.ERROR_MESSAGE);
+            return;
+
+        }
+        String cedula = table.getValueAt(row, 0).toString();
+
+        //Eliminar el cliente con la cedula 'cedula'
+    }
+
+    public void fillTableCostumer() {
+
+        //Realiza la consulta para obtener las los clientes a mostrar
+        /**
+         * **
+         *///
+        this.jTable_Generica.setModel(new tableModelGeneric(ColumName, data2));
+        //Alinea la primer columna de esta tabla hacia el centro
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+
+        this.jTable_Generica.getColumnModel().getColumn(0).
+                setCellRenderer(centerRenderer);
+    }
+
+    /**
+     * Permite mostrar graficamente el numero de paginas que hay
+     *
+     * @param numeroDePaginas
+     */
+    private void initPaginacion() {
+        if (numeroDePaginas >= 6) {
+            jLabelUltimoPag.setText("" + numeroDePaginas);
+        } else {
+            ocultarPaginas();
+            if (numeroDePaginas >= 1) {
+                this.jLabelPag1.setVisible(true);
+                if (numeroDePaginas >= 2) {
+                    this.jLabelPag2.setVisible(true);
+                    if (numeroDePaginas >= 3) {
+                        this.jLabelPag3.setVisible(true);
+
+                        if (numeroDePaginas >= 4) {
+                            this.jLabelPag4.setVisible(true);
+
+                            if (numeroDePaginas >= 5) {
+                                this.jLabelPag5.setVisible(true);
+
+                            }
+
+                        }
+
+                    }
+
+                }
+            }
+
+        }
+
+    }
+
+    private void ocultarPaginas() {
+        this.jLabelUltimoPag.setVisible(false);
+        this.jLabelPag1.setVisible(false);
+        this.jLabelPag2.setVisible(false);
+        this.jLabelPag3.setVisible(false);
+        this.jLabelPag4.setVisible(false);
+        this.jLabelPag5.setVisible(false);
+        this.jLabelPuntos.setVisible(false);
+    }
+
+    /**
+     * @return the numeroDePaginas
+     */
+    public int getNumeroDePaginas() {
+        return numeroDePaginas;
+    }
+
+    /**
+     * @param numeroDePaginas the numeroDePaginas to set
+     */
+    public void setNumeroDePaginas(int numeroDePaginas) {
+        this.numeroDePaginas = numeroDePaginas;
+    }
+
+    /**
+     * @return the paginalActual
+     */
+    public int getPaginalActual() {
+        return paginalActual;
+    }
+
+    /**
+     * @param paginalActual the paginalActual to set
+     */
+    public void setPaginalActual(int paginalActual) {
+        this.paginalActual = paginalActual;
+    }
+
+    public JLabel getLabelActual() {
+        if (jLabelPag1.isOpaque()) {
+            return jLabelPag1;
+        } else if (jLabelPag2.isOpaque()) {
+            return jLabelPag2;
+        } else if (jLabelPag3.isOpaque()) {
+            return jLabelPag3;
+        } else if (jLabelPag4.isOpaque()) {
+            return jLabelPag4;
+        } else if (jLabelPag5.isOpaque()) {
+            return jLabelPag5;
+        }
+
+        return jLabelUltimoPag;
+
+    }
+
+    public JLabel getNextLabel() {
+        if (jLabelPag1.isOpaque()) {
+            return jLabelPag2;
+        } else if (jLabelPag2.isOpaque()) {
+            return jLabelPag3;
+        } else if (jLabelPag3.isOpaque()) {
+            return jLabelPag4;
+        } else if (jLabelPag4.isOpaque()) {
+            return jLabelPag5;
+        } else if (jLabelPag5.isOpaque()) {
+            return jLabelUltimoPag;
+        }
+
+        return jLabelUltimoPag;
+
+    }
+
+    public JLabel getAntLabel() {
+        if (jLabelPag1.isOpaque()) {
+            return jLabelPag1;
+        } else if (jLabelPag2.isOpaque()) {
+            return jLabelPag1;
+        } else if (jLabelPag3.isOpaque()) {
+            return jLabelPag2;
+        } else if (jLabelPag4.isOpaque()) {
+            return jLabelPag3;
+        } else if (jLabelPag5.isOpaque()) {
+            return jLabelPag4;
+        }
+
+        return jLabelPag5;
 
     }
 }
