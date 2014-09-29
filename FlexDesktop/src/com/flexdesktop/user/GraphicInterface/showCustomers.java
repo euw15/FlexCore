@@ -50,6 +50,9 @@ public class showCustomers extends javax.swing.JDialog {
     {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
     {"245784", "Melvin", "Guitierrez"}, {"503890620", "Jason", "Salazar"},
     {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"}};
+    private int numeroDePaginas = 0;
+    private int paginalActual = 1;
+    
 
     public showCustomers(java.awt.Frame parent, boolean modal) {
 
@@ -59,21 +62,11 @@ public class showCustomers extends javax.swing.JDialog {
 
         upDateCostumers();
 
-        //      DefaultTableModel model = (DefaultTableModel) table.getModel();
-//        try {
-//            ResultSet resultRoutes = MyDb.getRoutes();
-//
-//            while (resultRoutes.next()) {
-//                String nombre_ruta = resultRoutes.getString("nombre_ruta");
-//                String numero_ruta = resultRoutes.getString("idRuta");
-//                Object[] datos = {nombre_ruta + " " + numero_ruta, false, numero_ruta};
-//                model.addRow(datos);
-//            }
-//
-//        } catch (SQLException ex) {
-//            System.out.println("Error al cargar rutas");
-//        }
-        //completarTablaFacturacion();
+        //****************
+        setNumeroDePaginas(6);
+        initPaginacion();
+        //*****************
+
     }
 
     public void showDialog(String panel) {
@@ -123,13 +116,13 @@ public class showCustomers extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        jLabelPag3 = new javax.swing.JLabel();
+        jLabelPag4 = new javax.swing.JLabel();
+        jLabelPag5 = new javax.swing.JLabel();
         jLabelPuntos = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        jLabelUltimoPag = new javax.swing.JLabel();
+        jLabelPag2 = new javax.swing.JLabel();
+        jLabelPag1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(760, 550));
@@ -249,31 +242,31 @@ public class showCustomers extends javax.swing.JDialog {
             }
         });
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png"))); // NOI18N
-        jLabel9.setText("3");
-        jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabelPag3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png"))); // NOI18N
+        jLabelPag3.setText("3");
+        jLabelPag3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png"))); // NOI18N
-        jLabel10.setText("4");
-        jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabelPag4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png"))); // NOI18N
+        jLabelPag4.setText("4");
+        jLabelPag4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png"))); // NOI18N
-        jLabel11.setText("5");
-        jLabel11.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabelPag5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png"))); // NOI18N
+        jLabelPag5.setText("5");
+        jLabelPag5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabelPuntos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/PuntosSusp.png"))); // NOI18N
 
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png"))); // NOI18N
-        jLabel13.setText("6");
-        jLabel13.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabelUltimoPag.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png"))); // NOI18N
+        jLabelUltimoPag.setText("6");
+        jLabelUltimoPag.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png"))); // NOI18N
-        jLabel14.setText("2");
-        jLabel14.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabelPag2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png"))); // NOI18N
+        jLabelPag2.setText("2");
+        jLabelPag2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/paginaSelected.png"))); // NOI18N
-        jLabel15.setText("1");
-        jLabel15.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabelPag1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/paginaSelected.png"))); // NOI18N
+        jLabelPag1.setText("1");
+        jLabelPag1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout ListadoCltLayout = new javax.swing.GroupLayout(ListadoClt);
         ListadoClt.setLayout(ListadoCltLayout);
@@ -306,19 +299,19 @@ public class showCustomers extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ListadoCltLayout.createSequentialGroup()
-                        .addComponent(jLabel15)
+                        .addComponent(jLabelPag1)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel14)
+                        .addComponent(jLabelPag2)
                         .addGap(12, 12, 12)
-                        .addComponent(jLabel9)
+                        .addComponent(jLabelPag3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel10)
+                        .addComponent(jLabelPag4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel11)
+                        .addComponent(jLabelPag5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelPuntos)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel13)
+                        .addComponent(jLabelUltimoPag)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -365,13 +358,13 @@ public class showCustomers extends javax.swing.JDialog {
                                 .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel14)
-                                        .addComponent(jLabel9)
-                                        .addComponent(jLabel10)
-                                        .addComponent(jLabel11)
+                                        .addComponent(jLabelPag2)
+                                        .addComponent(jLabelPag3)
+                                        .addComponent(jLabelPag4)
+                                        .addComponent(jLabelPag5)
                                         .addComponent(jLabelPuntos)
-                                        .addComponent(jLabel13)
-                                        .addComponent(jLabel15)))))
+                                        .addComponent(jLabelUltimoPag)
+                                        .addComponent(jLabelPag1)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -486,11 +479,6 @@ public class showCustomers extends javax.swing.JDialog {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -498,8 +486,13 @@ public class showCustomers extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelPag1;
+    private javax.swing.JLabel jLabelPag2;
+    private javax.swing.JLabel jLabelPag3;
+    private javax.swing.JLabel jLabelPag4;
+    private javax.swing.JLabel jLabelPag5;
     private javax.swing.JLabel jLabelPuntos;
+    private javax.swing.JLabel jLabelUltimoPag;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable_Generica;
     // End of variables declaration//GEN-END:variables
@@ -661,7 +654,7 @@ public class showCustomers extends javax.swing.JDialog {
         }
         String cedula = table.getValueAt(row, 0).toString();
 
-       //Eliminar el cliente con la cedula 'cedula'
+        //Eliminar el cliente con la cedula 'cedula'
     }
 
     public void fillTableCostumer() {
@@ -676,5 +669,79 @@ public class showCustomers extends javax.swing.JDialog {
 
         this.jTable_Generica.getColumnModel().getColumn(0).
                 setCellRenderer(centerRenderer);
+    }
+
+    /**
+     * Permite mostrar graficamente el numero de paginas que hay
+     *
+     * @param numeroDePaginas
+     */
+    private void initPaginacion() {
+        if (numeroDePaginas > 6) {
+            jLabelUltimoPag.setText("" + numeroDePaginas);
+        } else {
+            ocultarPaginas();
+            if (numeroDePaginas >= 1) {
+                this.jLabelPag1.setVisible(true);
+                if (numeroDePaginas >= 2) {
+                    this.jLabelPag2.setVisible(true);
+                    if (numeroDePaginas >= 3) {
+                        this.jLabelPag3.setVisible(true);
+
+                        if (numeroDePaginas >= 4) {
+                            this.jLabelPag4.setVisible(true);
+
+                            if (numeroDePaginas >= 5) {
+                                this.jLabelPag5.setVisible(true);
+
+                            }
+
+                        }
+
+                    }
+
+                }
+            }
+
+        }
+
+    }
+
+    private void ocultarPaginas() {
+        this.jLabelUltimoPag.setVisible(false);
+        this.jLabelPag1.setVisible(false);
+        this.jLabelPag2.setVisible(false);
+        this.jLabelPag3.setVisible(false);
+        this.jLabelPag4.setVisible(false);
+        this.jLabelPag5.setVisible(false);
+        this.jLabelPuntos.setVisible(false);
+    }
+
+    /**
+     * @return the numeroDePaginas
+     */
+    public int getNumeroDePaginas() {
+        return numeroDePaginas;
+    }
+
+    /**
+     * @param numeroDePaginas the numeroDePaginas to set
+     */
+    public void setNumeroDePaginas(int numeroDePaginas) {
+        this.numeroDePaginas = numeroDePaginas;
+    }
+
+    /**
+     * @return the paginalActual
+     */
+    public int getPaginalActual() {
+        return paginalActual;
+    }
+
+    /**
+     * @param paginalActual the paginalActual to set
+     */
+    public void setPaginalActual(int paginalActual) {
+        this.paginalActual = paginalActual;
     }
 }
