@@ -108,17 +108,14 @@ public class getInformation extends javax.swing.JDialog {
         jButton6 = new javax.swing.JButton();
         VerClt = new javax.swing.JPanel();
         jButton14 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jButton15 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        jLabelName = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        jLabelApellido = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
+        jLabelCedula = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         registerClt = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
@@ -126,11 +123,11 @@ public class getInformation extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldEnterName = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldEnterApellido = new javax.swing.JFormattedTextField();
         jLabel4 = new javax.swing.JLabel();
-        jFormattedTextField3 = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldEnterCedula = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
@@ -262,14 +259,9 @@ public class getInformation extends javax.swing.JDialog {
             }
         });
 
-        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel6.setFont(new java.awt.Font("Khmer UI", 0, 13)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel6.setText("Datos De Cliente");
-
         jLabel9.setFont(new java.awt.Font("Khmer UI", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel9.setText("Ver Cliente");
+        jLabel9.setText("Datos De Cliente");
 
         jButton15.setBackground(new java.awt.Color(255, 255, 255));
         jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/close2.png"))); // NOI18N
@@ -285,31 +277,24 @@ public class getInformation extends javax.swing.JDialog {
 
         jLabel10.setText("Nombre:");
 
-        jLabel11.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel11.setFont(new java.awt.Font("Khmer UI", 0, 13)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel11.setText("Jason");
+        jLabelName.setBackground(new java.awt.Color(255, 255, 255));
+        jLabelName.setFont(new java.awt.Font("Khmer UI", 0, 13)); // NOI18N
+        jLabelName.setForeground(new java.awt.Color(102, 102, 102));
+        jLabelName.setText("name");
 
-        jLabel12.setText("Nombre:");
+        jLabel12.setText("Apellido:");
 
-        jLabel13.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel13.setFont(new java.awt.Font("Khmer UI", 0, 13)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel13.setText("Jason");
+        jLabelApellido.setBackground(new java.awt.Color(255, 255, 255));
+        jLabelApellido.setFont(new java.awt.Font("Khmer UI", 0, 13)); // NOI18N
+        jLabelApellido.setForeground(new java.awt.Color(102, 102, 102));
+        jLabelApellido.setText("lastName");
 
-        jLabel14.setText("Nombre:");
+        jLabel14.setText("Cédula:");
 
-        jLabel15.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel15.setFont(new java.awt.Font("Khmer UI", 0, 13)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel15.setText("Jason");
-
-        jLabel16.setText("Nombre:");
-
-        jLabel17.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel17.setFont(new java.awt.Font("Khmer UI", 0, 13)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel17.setText("Jason");
+        jLabelCedula.setBackground(new java.awt.Color(255, 255, 255));
+        jLabelCedula.setFont(new java.awt.Font("Khmer UI", 0, 13)); // NOI18N
+        jLabelCedula.setForeground(new java.awt.Color(102, 102, 102));
+        jLabelCedula.setText("id");
 
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/rostro.jpg"))); // NOI18N
 
@@ -322,73 +307,57 @@ public class getInformation extends javax.swing.JDialog {
                 .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(VerCltLayout.createSequentialGroup()
                         .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 253, Short.MAX_VALUE)
                         .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VerCltLayout.createSequentialGroup()
-                        .addGap(0, 9, Short.MAX_VALUE)
+                        .addGap(4, 4, 4)
                         .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VerCltLayout.createSequentialGroup()
                                 .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(19, 19, 19))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VerCltLayout.createSequentialGroup()
-                                .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(VerCltLayout.createSequentialGroup()
-                                        .addComponent(jLabel14)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(VerCltLayout.createSequentialGroup()
                                             .addComponent(jLabel12)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jLabelApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(VerCltLayout.createSequentialGroup()
                                             .addComponent(jLabel10)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(VerCltLayout.createSequentialGroup()
-                                        .addComponent(jLabel16)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabelCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addContainerGap())))))
             .addGroup(VerCltLayout.createSequentialGroup()
-                .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(VerCltLayout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(VerCltLayout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(46, 46, 46)
+                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 242, Short.MAX_VALUE))
         );
         VerCltLayout.setVerticalGroup(
             VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(VerCltLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(VerCltLayout.createSequentialGroup()
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(jLabel6))
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton15))
+                .addGap(54, 54, 54)
+                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jLabel11))
+                    .addComponent(jLabelName))
                 .addGap(27, 27, 27)
                 .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jLabel13))
+                    .addComponent(jLabelApellido))
                 .addGap(29, 29, 29)
                 .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jLabel15))
-                .addGap(18, 18, 18)
-                .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel17))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
+                    .addComponent(jLabelCedula))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
                 .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -444,31 +413,31 @@ public class getInformation extends javax.swing.JDialog {
             }
         });
 
-        jFormattedTextField1.setCaretColor(new java.awt.Color(204, 204, 204));
-        jFormattedTextField1.setDisabledTextColor(new java.awt.Color(204, 204, 204));
-        jFormattedTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jFormattedTextFieldEnterName.setCaretColor(new java.awt.Color(204, 204, 204));
+        jFormattedTextFieldEnterName.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        jFormattedTextFieldEnterName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextField1ActionPerformed(evt);
+                jFormattedTextFieldEnterNameActionPerformed(evt);
             }
         });
 
         jLabel1.setText("Nombre:");
 
-        jFormattedTextField2.setCaretColor(new java.awt.Color(204, 204, 204));
-        jFormattedTextField2.setDisabledTextColor(new java.awt.Color(204, 204, 204));
-        jFormattedTextField2.addActionListener(new java.awt.event.ActionListener() {
+        jFormattedTextFieldEnterApellido.setCaretColor(new java.awt.Color(204, 204, 204));
+        jFormattedTextFieldEnterApellido.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        jFormattedTextFieldEnterApellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextField2ActionPerformed(evt);
+                jFormattedTextFieldEnterApellidoActionPerformed(evt);
             }
         });
 
         jLabel4.setText("Apellido:");
 
-        jFormattedTextField3.setCaretColor(new java.awt.Color(204, 204, 204));
-        jFormattedTextField3.setDisabledTextColor(new java.awt.Color(204, 204, 204));
-        jFormattedTextField3.addActionListener(new java.awt.event.ActionListener() {
+        jFormattedTextFieldEnterCedula.setCaretColor(new java.awt.Color(204, 204, 204));
+        jFormattedTextFieldEnterCedula.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        jFormattedTextFieldEnterCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextField3ActionPerformed(evt);
+                jFormattedTextFieldEnterCedulaActionPerformed(evt);
             }
         });
 
@@ -575,11 +544,11 @@ public class getInformation extends javax.swing.JDialog {
                                 .addGroup(registerCltLayout.createSequentialGroup()
                                     .addComponent(jLabel4)
                                     .addGap(43, 43, 43)
-                                    .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jFormattedTextFieldEnterApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(registerCltLayout.createSequentialGroup()
                                     .addComponent(jLabel1)
                                     .addGap(43, 43, 43)
-                                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jFormattedTextFieldEnterName, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(registerCltLayout.createSequentialGroup()
                                     .addComponent(jButton7)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -592,7 +561,7 @@ public class getInformation extends javax.swing.JDialog {
                                 .addGroup(registerCltLayout.createSequentialGroup()
                                     .addComponent(jLabel5)
                                     .addGap(43, 43, 43)
-                                    .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(jFormattedTextFieldEnterCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(registerCltLayout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jButton8)
@@ -624,15 +593,15 @@ public class getInformation extends javax.swing.JDialog {
                         .addComponent(jLabel2)
                         .addGap(48, 48, 48)
                         .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jFormattedTextFieldEnterName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
                         .addGap(27, 27, 27)))
                 .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextFieldEnterApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(30, 30, 30)
                 .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextFieldEnterCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(47, 47, 47)
                 .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -757,17 +726,17 @@ public class getInformation extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_ConsultarCltMousePressed
 
-    private void jFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField1ActionPerformed
+    private void jFormattedTextFieldEnterNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldEnterNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextField1ActionPerformed
+    }//GEN-LAST:event_jFormattedTextFieldEnterNameActionPerformed
 
-    private void jFormattedTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField2ActionPerformed
+    private void jFormattedTextFieldEnterApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldEnterApellidoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextField2ActionPerformed
+    }//GEN-LAST:event_jFormattedTextFieldEnterApellidoActionPerformed
 
-    private void jFormattedTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField3ActionPerformed
+    private void jFormattedTextFieldEnterCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldEnterCedulaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextField3ActionPerformed
+    }//GEN-LAST:event_jFormattedTextFieldEnterCedulaActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         try {
@@ -847,27 +816,24 @@ public class getInformation extends javax.swing.JDialog {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
-    private javax.swing.JFormattedTextField jFormattedTextField3;
+    private javax.swing.JFormattedTextField jFormattedTextFieldEnterApellido;
+    private javax.swing.JFormattedTextField jFormattedTextFieldEnterCedula;
+    private javax.swing.JFormattedTextField jFormattedTextFieldEnterName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelApellido;
+    private javax.swing.JLabel jLabelCedula;
+    private javax.swing.JLabel jLabelName;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTablePhone;
@@ -1014,5 +980,23 @@ public class getInformation extends javax.swing.JDialog {
 
         }
         return result;
+    }
+
+    void setInfoClt(String ced, String name, String lastName) {
+        this.jLabelName.setText(name);
+        this.jLabelApellido.setText(lastName);
+        this.jLabelCedula.setText(ced);
+
+    }
+
+    void setEditableInfoCostumer(String name, String lastName, String ced,
+            List<Object[]> direciones) {
+        this.jTable_Factura.setModel(new tableModelAddres(direccion,
+                direciones, true));
+        this.jFormattedTextFieldEnterName.setText(name);
+        this.jFormattedTextFieldEnterApellido.setText(lastName);
+        this.jFormattedTextFieldEnterCedula.setText(ced);
+       
+
     }
 }

@@ -307,17 +307,36 @@ public class showCustomers extends javax.swing.JDialog {
     }//GEN-LAST:event_TextField_BuscadorActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+
+        String ced = jTable_Generica.getValueAt(
+                jTable_Generica.getSelectedRow(), 0).toString();
+
+        String name = jTable_Generica.getValueAt(
+                jTable_Generica.getSelectedRow(), 1).toString();
+        String lastName = jTable_Generica.getValueAt(
+                jTable_Generica.getSelectedRow(), 2).toString();
+
         getInformation getInfoPanel = new getInformation(null, true);
-        
+        getInfoPanel.setInfoClt(ced, name, lastName);
         getInfoPanel.showDialog("VerClt");
-        
+
 
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-//        llenarEditarInformacionClteVend();
-//
-//        showPanelOnDialog(jPanel_ModifCliente);
+        //datos de prueba
+        String name = "name";
+        String lastName = "latsName";
+        String ced = "ced";
+        List<Object[]> dir = new ArrayList<Object[]>();
+        Object dire[] = {"Por ahi"};
+        Object dire2[] = {"CuatroFilosDeCuchilloMocho"};
+        dir.add(dire);
+        dir.add(dire2);
+        ////--------------------------------------
+        getInformation getInfoPanel = new getInformation(null, true);
+        getInfoPanel.setEditableInfoCostumer(name, lastName, ced, dir);
+        getInfoPanel.showDialog("RegisterClt");
 
     }//GEN-LAST:event_jLabel5MouseClicked
 
