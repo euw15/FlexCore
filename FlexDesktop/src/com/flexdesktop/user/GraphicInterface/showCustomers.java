@@ -62,7 +62,7 @@ public class showCustomers extends javax.swing.JDialog {
         upDateCostumers();
 
         //****************
-        setNumeroDePaginas(15);
+        setNumeroDePaginas(25);
         initPaginacion();
         //*****************
 
@@ -495,15 +495,15 @@ public class showCustomers extends javax.swing.JDialog {
         setPaginalActual(Integer.parseInt(getNextLabel().getText()));
 
         if (getPaginalActual() <= getNumeroDePaginas()) {
-            System.out.println("actul " + getPaginalActual() + " ,numer " + getNumeroDePaginas());
+            System.out.println("actul " + getPaginalActual() + " ,anter " + LbAct.getText());
+
             //Si se va para el label5
             if (!nextLabel.isFocusable() && getPaginalActual() < getNumeroDePaginas()) {
-
+                System.out.println("voy pal 5");
                 jLabelPag4.setIcon(new javax.swing.ImageIcon(getClass().
                         getResource("/com/flexdesktop/user/Images/paginaSelected.png")));
                 jLabelPag4.setOpaque(true);
 
-                //LbAct.setOpaque(false);
                 draw();
 
             } else {
@@ -511,12 +511,10 @@ public class showCustomers extends javax.swing.JDialog {
                         getResource("/com/flexdesktop/user/Images/paginaSelected.png")));
                 LbAct.setIcon(new javax.swing.ImageIcon(getClass().
                         getResource("/com/flexdesktop/user/Images/pagina.png")));
-                if (getPaginalActual() != getNumeroDePaginas()) {
 
-                    nextLabel.setOpaque(true);
+                nextLabel.setOpaque(true);
 
-                    LbAct.setOpaque(false);
-                }
+                LbAct.setOpaque(false);
 
             }
 
@@ -524,7 +522,7 @@ public class showCustomers extends javax.swing.JDialog {
             //******
             //Mostrar graficamente la pagina siguiente****************
             String paginaAnterior = LbAct.getText();//Cosultar la siguiente pag
-            System.out.println("El anterior es: " + paginaAnterior);
+            // System.out.println("El anterior es: " + paginaAnterior);
             //******************************************************
         }
     }//GEN-LAST:event_jLabel7MouseClicked
@@ -536,14 +534,23 @@ public class showCustomers extends javax.swing.JDialog {
 
         if (Integer.parseInt(LbAct.getText()) != 1) {
 
-            antLabel.setIcon(new javax.swing.ImageIcon(getClass().
-                    getResource("/com/flexdesktop/user/Images/paginaSelected.png")));
-            antLabel.setOpaque(true);
-            LbAct.setIcon(new javax.swing.ImageIcon(getClass().
-                    getResource("/com/flexdesktop/user/Images/pagina.png")));
-            LbAct.setOpaque(false);
-            draw2();
+            if ("1".equals(antLabel.getText()) && jLabelPuntos1.isVisible()) {
+                draw2();
+                setPaginalActual(paginalActual - 1);
+            } else {
+                System.out.println("anterior " + antLabel.getText());
+                System.out.println("actual " + LbAct.getText());
+                setPaginalActual(paginalActual - 1);
+                antLabel.setIcon(new javax.swing.ImageIcon(getClass().
+                        getResource("/com/flexdesktop/user/Images/paginaSelected.png")));
+                antLabel.setOpaque(true);
+                LbAct.setIcon(new javax.swing.ImageIcon(getClass().
+                        getResource("/com/flexdesktop/user/Images/pagina.png")));
+                LbAct.setOpaque(false);
+
+            }
         }
+
 //        else {
 //            LbAct.setIcon(new javax.swing.ImageIcon(getClass().
 //                    getResource("/com/flexdesktop/user/Images/pagina.png")));
@@ -554,12 +561,11 @@ public class showCustomers extends javax.swing.JDialog {
 //
 //            antLabel.setOpaque(true);
 //        }
-
         comprobaciones();
-
+        //System.out.println("actual pa : " + paginalActual);
         //Mostrar graficamente la pagina siguiente****************
-        String paginaAnterior = LbAct.getText();//Cosultar la siguiente pag
-        System.out.println("El actual es: " + paginaAnterior);
+//        String paginaAnterior = LbAct.getText();//Cosultar la siguiente pag
+//        System.out.println("El actual es: " + paginaAnterior);
         //******************************************************
     }//GEN-LAST:event_jLabel2MouseClicked
 
@@ -770,7 +776,6 @@ public class showCustomers extends javax.swing.JDialog {
 
         this.jLabelPuntos1.setVisible(false);
         if (numeroDePaginas >= 6) {
-
             jLabelUltimoPag.setText("" + numeroDePaginas);
         } else {
             ocultarPaginas();
@@ -807,6 +812,7 @@ public class showCustomers extends javax.swing.JDialog {
         this.jLabelPag3.setVisible(false);
         this.jLabelPag4.setVisible(false);
         this.jLabelPag5.setVisible(false);
+        this.jLabelUltimoPag.setVisible(false);
         this.jLabelPuntos.setVisible(false);
 
     }
@@ -899,8 +905,8 @@ public class showCustomers extends javax.swing.JDialog {
     }
 
     private void draw2() {
-        jLabelPag3.setText("" + paginalActual);
         jLabelPag2.setText("" + (paginalActual - 1));
+        jLabelPag3.setText("" + (paginalActual));
         jLabelPag4.setText("" + (paginalActual + 1));
         jLabelPag5.setText("" + (paginalActual + 2));
 
