@@ -62,7 +62,7 @@ public class showCustomers extends javax.swing.JDialog {
         upDateCostumers();
 
         //****************
-        setNumeroDePaginas(6);
+        setNumeroDePaginas(15);
         initPaginacion();
         //*****************
 
@@ -122,6 +122,7 @@ public class showCustomers extends javax.swing.JDialog {
         jLabelUltimoPag = new javax.swing.JLabel();
         jLabelPag2 = new javax.swing.JLabel();
         jLabelPag1 = new javax.swing.JLabel();
+        jLabelPuntos1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(760, 550));
@@ -257,12 +258,14 @@ public class showCustomers extends javax.swing.JDialog {
 
         jLabelPag5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png"))); // NOI18N
         jLabelPag5.setText("5");
+        jLabelPag5.setFocusable(false);
         jLabelPag5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabelPuntos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/PuntosSusp.png"))); // NOI18N
 
         jLabelUltimoPag.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png"))); // NOI18N
         jLabelUltimoPag.setText("6");
+        jLabelUltimoPag.setFocusable(false);
         jLabelUltimoPag.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabelPag2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png"))); // NOI18N
@@ -273,6 +276,9 @@ public class showCustomers extends javax.swing.JDialog {
         jLabelPag1.setText("1");
         jLabelPag1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabelPag1.setOpaque(true);
+
+        jLabelPuntos1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelPuntos1.setText("...");
 
         javax.swing.GroupLayout ListadoCltLayout = new javax.swing.GroupLayout(ListadoClt);
         ListadoClt.setLayout(ListadoCltLayout);
@@ -303,10 +309,15 @@ public class showCustomers extends javax.swing.JDialog {
                 .addGap(31, 31, 31)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ListadoCltLayout.createSequentialGroup()
+                .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(ListadoCltLayout.createSequentialGroup()
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(ListadoCltLayout.createSequentialGroup()
                         .addComponent(jLabelPag1)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelPuntos1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelPag2)
                         .addGap(12, 12, 12)
                         .addComponent(jLabelPag3)
@@ -322,10 +333,7 @@ public class showCustomers extends javax.swing.JDialog {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel7)
-                        .addGap(44, 44, 44))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ListadoCltLayout.createSequentialGroup()
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addGap(44, 44, 44))))
         );
         ListadoCltLayout.setVerticalGroup(
             ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -361,14 +369,16 @@ public class showCustomers extends javax.swing.JDialog {
                                 .addGap(25, 25, 25)
                                 .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
-                                    .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabelPag2)
-                                        .addComponent(jLabelPag3)
-                                        .addComponent(jLabelPag4)
-                                        .addComponent(jLabelPag5)
-                                        .addComponent(jLabelPuntos)
-                                        .addComponent(jLabelUltimoPag)
-                                        .addComponent(jLabelPag1))
+                                    .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabelPag2)
+                                            .addComponent(jLabelPuntos1)
+                                            .addComponent(jLabelPag1))
+                                        .addComponent(jLabelPag3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabelPag4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabelPag5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabelPuntos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabelUltimoPag, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -480,10 +490,39 @@ public class showCustomers extends javax.swing.JDialog {
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
 
         JLabel LbAct = getLabelActual();
-        LbAct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/pagina.png")));
-        getNextLabel().setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/paginaSelected.png")));
-        getNextLabel().setOpaque(true);
-        LbAct.setOpaque(false);
+        setPaginalActual(Integer.parseInt(getNextLabel().getText()));
+        //Si se esta en el label5
+        if (!getNextLabel().isFocusable()) {
+            System.out.println(getNextLabel().getText());
+            jLabelPag4.setIcon(new javax.swing.ImageIcon(getClass().
+                    getResource("/com/flexdesktop/user/Images/paginaSelected.png")));
+            jLabelPag4.setOpaque(true);
+            LbAct.setOpaque(false);
+            draw();
+        } else {
+            LbAct.setIcon(new javax.swing.ImageIcon(getClass().
+                    getResource("/com/flexdesktop/user/Images/pagina.png")));
+            getNextLabel().setIcon(new javax.swing.ImageIcon(getClass().
+                    getResource("/com/flexdesktop/user/Images/paginaSelected.png")));
+
+            getNextLabel().setOpaque(true);
+
+            LbAct.setOpaque(false);
+        }
+
+        ///***comprobar si necesita puntos suspen
+        if (Integer.parseInt(jLabelPag2.getText()) > 2) {
+            jLabelPuntos1.setVisible(true);
+        }
+        if (Integer.parseInt(jLabelPag2.getText()) == 2) {
+            jLabelPuntos1.setVisible(false);
+        }
+        //***********
+
+        //Mostrar graficamente la pagina siguiente****************
+        String paginaAnterior = LbAct.getText();//Cosultar la siguiente pag
+        System.out.println("El anterior es: " + paginaAnterior);
+        //******************************************************
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
@@ -493,6 +532,23 @@ public class showCustomers extends javax.swing.JDialog {
         antLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/paginaSelected.png")));
         LbAct.setOpaque(false);
         antLabel.setOpaque(true);
+        
+        
+        
+        ///***comprobar si necesita puntos suspen
+        if (Integer.parseInt(jLabelPag2.getText()) > 2) {
+            jLabelPuntos1.setVisible(true);
+        }
+        if (Integer.parseInt(jLabelPag2.getText()) == 2) {
+            jLabelPuntos1.setVisible(false);
+        }
+        //***********
+        
+
+        //Mostrar graficamente la pagina siguiente****************
+        String paginaAnterior = LbAct.getText();//Cosultar la siguiente pag
+        System.out.println("El anterior es: " + paginaAnterior);
+        //******************************************************
     }//GEN-LAST:event_jLabel2MouseClicked
 
 
@@ -515,6 +571,7 @@ public class showCustomers extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelPag4;
     private javax.swing.JLabel jLabelPag5;
     private javax.swing.JLabel jLabelPuntos;
+    private javax.swing.JLabel jLabelPuntos1;
     private javax.swing.JLabel jLabelUltimoPag;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable_Generica;
@@ -696,11 +753,12 @@ public class showCustomers extends javax.swing.JDialog {
 
     /**
      * Permite mostrar graficamente el numero de paginas que hay
-     *
-     * @param numeroDePaginas
      */
     private void initPaginacion() {
+
+        this.jLabelPuntos1.setVisible(false);
         if (numeroDePaginas >= 6) {
+
             jLabelUltimoPag.setText("" + numeroDePaginas);
         } else {
             ocultarPaginas();
@@ -731,13 +789,14 @@ public class showCustomers extends javax.swing.JDialog {
     }
 
     private void ocultarPaginas() {
-        this.jLabelUltimoPag.setVisible(false);
+
         this.jLabelPag1.setVisible(false);
         this.jLabelPag2.setVisible(false);
         this.jLabelPag3.setVisible(false);
         this.jLabelPag4.setVisible(false);
         this.jLabelPag5.setVisible(false);
         this.jLabelPuntos.setVisible(false);
+
     }
 
     /**
@@ -818,4 +877,13 @@ public class showCustomers extends javax.swing.JDialog {
         return jLabelPag5;
 
     }
+
+    private void draw() {
+        jLabelPag4.setText("" + paginalActual);
+        jLabelPag3.setText("" + (paginalActual - 1));
+        jLabelPag2.setText("" + (paginalActual - 2));
+        jLabelPag5.setText("" + (paginalActual + 1));
+
+    }
+
 }
