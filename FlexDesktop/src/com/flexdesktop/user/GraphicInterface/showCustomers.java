@@ -35,14 +35,11 @@ public class showCustomers extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-
-
     private final String[] ColumName = {"Cedula", "Nombre", "Apellido"};
-    
 
-   Object data2[][] = { {"503890620","Jason","Salazar"},
-       {"3564874","Daniel","Canessa"},{"2548745","Edwar","Umana"},
-       {"245784","Melvin","Guitierrez"}};
+    Object data2[][] = {{"503890620", "Jason", "Salazar"},
+    {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
+    {"245784", "Melvin", "Guitierrez"}};
 
     public showCustomers(java.awt.Frame parent, boolean modal) {
 
@@ -50,8 +47,7 @@ public class showCustomers extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(parent);
 
-        
-       upDateCostumers();
+        upDateCostumers();
 
         //      DefaultTableModel model = (DefaultTableModel) table.getModel();
 //        try {
@@ -103,7 +99,7 @@ public class showCustomers extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ConsultarClt = new javax.swing.JPanel();
+        ListadoClt = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -112,6 +108,8 @@ public class showCustomers extends javax.swing.JDialog {
         jTable_Generica = new javax.swing.JTable();
         TextField_Buscador = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(760, 550));
@@ -119,19 +117,19 @@ public class showCustomers extends javax.swing.JDialog {
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(760, 550));
 
-        ConsultarClt.setBackground(new java.awt.Color(255, 255, 255));
-        ConsultarClt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ConsultarClt.setMaximumSize(new java.awt.Dimension(700, 500));
-        ConsultarClt.setMinimumSize(new java.awt.Dimension(700, 500));
-        ConsultarClt.setPreferredSize(new java.awt.Dimension(700, 500));
-        ConsultarClt.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        ListadoClt.setBackground(new java.awt.Color(255, 255, 255));
+        ListadoClt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ListadoClt.setMaximumSize(new java.awt.Dimension(700, 500));
+        ListadoClt.setMinimumSize(new java.awt.Dimension(700, 500));
+        ListadoClt.setPreferredSize(new java.awt.Dimension(700, 500));
+        ListadoClt.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
-                ConsultarCltMouseDragged(evt);
+                ListadoCltMouseDragged(evt);
             }
         });
-        ConsultarClt.addMouseListener(new java.awt.event.MouseAdapter() {
+        ListadoClt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                ConsultarCltMousePressed(evt);
+                ListadoCltMousePressed(evt);
             }
         });
 
@@ -187,11 +185,27 @@ public class showCustomers extends javax.swing.JDialog {
 
         jLabel1.setText("Buscar:");
 
-        javax.swing.GroupLayout ConsultarCltLayout = new javax.swing.GroupLayout(ConsultarClt);
-        ConsultarClt.setLayout(ConsultarCltLayout);
-        ConsultarCltLayout.setHorizontalGroup(
-            ConsultarCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ConsultarCltLayout.createSequentialGroup()
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/watchBtt.png"))); // NOI18N
+        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/editBtt.png"))); // NOI18N
+        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ListadoCltLayout = new javax.swing.GroupLayout(ListadoClt);
+        ListadoClt.setLayout(ListadoCltLayout);
+        ListadoCltLayout.setHorizontalGroup(
+            ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ListadoCltLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -200,42 +214,54 @@ public class showCustomers extends javax.swing.JDialog {
                 .addComponent(TextField_Buscador, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(115, 115, 115)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(ConsultarCltLayout.createSequentialGroup()
-                .addGroup(ConsultarCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ConsultarCltLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(ConsultarCltLayout.createSequentialGroup()
+            .addGroup(ListadoCltLayout.createSequentialGroup()
+                .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ListadoCltLayout.createSequentialGroup()
                         .addGap(13, 13, 13)
-                        .addGroup(ConsultarCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(ConsultarCltLayout.createSequentialGroup()
+                        .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ListadoCltLayout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 4, Short.MAX_VALUE)))
+                        .addGap(0, 4, Short.MAX_VALUE))
+                    .addGroup(ListadoCltLayout.createSequentialGroup()
+                        .addGap(144, 144, 144)
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        ConsultarCltLayout.setVerticalGroup(
-            ConsultarCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ConsultarCltLayout.createSequentialGroup()
+        ListadoCltLayout.setVerticalGroup(
+            ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ListadoCltLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(ConsultarCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton6)
-                    .addGroup(ConsultarCltLayout.createSequentialGroup()
-                        .addGroup(ConsultarCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ListadoCltLayout.createSequentialGroup()
+                        .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(ConsultarCltLayout.createSequentialGroup()
+                            .addGroup(ListadoCltLayout.createSequentialGroup()
                                 .addGap(24, 24, 24)
-                                .addGroup(ConsultarCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(TextField_Buscador, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel1))))
                         .addGap(13, 13, 13)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ListadoCltLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(ListadoCltLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -243,12 +269,12 @@ public class showCustomers extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(ConsultarClt, javax.swing.GroupLayout.PREFERRED_SIZE, 757, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ListadoClt, javax.swing.GroupLayout.PREFERRED_SIZE, 757, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ConsultarClt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(ListadoClt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -262,13 +288,13 @@ public class showCustomers extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void ConsultarCltMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ConsultarCltMouseDragged
+    private void ListadoCltMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListadoCltMouseDragged
         // TODO add your handling code here:
-    }//GEN-LAST:event_ConsultarCltMouseDragged
+    }//GEN-LAST:event_ListadoCltMouseDragged
 
-    private void ConsultarCltMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ConsultarCltMousePressed
+    private void ListadoCltMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListadoCltMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ConsultarCltMousePressed
+    }//GEN-LAST:event_ListadoCltMousePressed
 
     private void jTable_GenericaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_GenericaMouseClicked
         if (evt.getClickCount() == 2) {
@@ -280,14 +306,31 @@ public class showCustomers extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_TextField_BuscadorActionPerformed
 
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        getInformation getInfoPanel = new getInformation(null, true);
+        
+        getInfoPanel.showDialog("VerClt");
+        
+
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+//        llenarEditarInformacionClteVend();
+//
+//        showPanelOnDialog(jPanel_ModifCliente);
+
+    }//GEN-LAST:event_jLabel5MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel ConsultarClt;
+    private javax.swing.JPanel ListadoClt;
     private javax.swing.JTextField TextField_Buscador;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable_Generica;
@@ -344,7 +387,7 @@ public class showCustomers extends javax.swing.JDialog {
 
     public void removePanels() {
         //registerClt.setVisible(false);
-        ConsultarClt.setVisible(false);
+        ListadoClt.setVisible(false);
 //        remove(registerClt);
 //
 //        remove(ConsultarClt);
@@ -415,14 +458,12 @@ public class showCustomers extends javax.swing.JDialog {
 
     }
 
-   
-
     public void upDateCostumers() {
 //        AdminBD.consultarClientes();
 //        data = AdminBD.getData();
 //        String[] columnNames = AdminBD.getColumnNames();
 
-        this.jTable_Generica.setModel(new MyTableModel_Generic(ColumName, data2));
+        this.jTable_Generica.setModel(new tableModelGeneric(ColumName, data2));
         //Crea el ordenador para la tabla generica
         TableRowSorter<TableModel> ordenador = new TableRowSorter<TableModel>(this.jTable_Generica.getModel());
         this.jTable_Generica.setRowSorter(ordenador);
@@ -434,7 +475,7 @@ public class showCustomers extends javax.swing.JDialog {
         /**
          * Agrega el listener al JtextField del buscador *
          */
-       this.TextField_Buscador.getDocument().addDocumentListener(new ListenerBuscador(this.TextField_Buscador, ordenador));
+        this.TextField_Buscador.getDocument().addDocumentListener(new ListenerBuscador(this.TextField_Buscador, ordenador));
 
     }
 }
