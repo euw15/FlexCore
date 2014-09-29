@@ -16,10 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.Timer;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -111,6 +114,7 @@ public class showCustomers extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(760, 550));
@@ -204,6 +208,15 @@ public class showCustomers extends javax.swing.JDialog {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/back.png"))); // NOI18N
 
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/trashBtt.png"))); // NOI18N
+        jLabel6.setToolTipText("Borrar factura seleccionada");
+        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout ListadoCltLayout = new javax.swing.GroupLayout(ListadoClt);
         ListadoClt.setLayout(ListadoCltLayout);
         ListadoCltLayout.setHorizontalGroup(
@@ -230,14 +243,16 @@ public class showCustomers extends javax.swing.JDialog {
                     .addGroup(ListadoCltLayout.createSequentialGroup()
                         .addGap(144, 144, 144)
                         .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4)
                         .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(ListadoCltLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 501, Short.MAX_VALUE)
                                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(ListadoCltLayout.createSequentialGroup()
-                                .addGap(94, 94, 94)
+                                .addGap(33, 33, 33)
+                                .addComponent(jLabel4)
+                                .addGap(31, 31, 31)
+                                .addComponent(jLabel6)
+                                .addGap(139, 139, 139)
                                 .addComponent(jLabel2)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
@@ -262,7 +277,7 @@ public class showCustomers extends javax.swing.JDialog {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ListadoCltLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(6, 6, 6)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -271,7 +286,8 @@ public class showCustomers extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -351,6 +367,22 @@ public class showCustomers extends javax.swing.JDialog {
 
     }//GEN-LAST:event_jLabel5MouseClicked
 
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+       
+
+            String[] options = {"Aceptar", "Cancelar"};
+            int selection = JOptionPane.showOptionDialog(this,
+                    "Desea eliminar el Cliente", "¡Atención!", 0, 0,
+                    null, options, 0);
+            if (selection == 0) {
+                this.eliminar(this.jTable_Generica);
+                this.fillTableCostumer();
+            }
+            
+
+         
+    }//GEN-LAST:event_jLabel6MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ListadoClt;
@@ -362,6 +394,7 @@ public class showCustomers extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable_Generica;
@@ -508,5 +541,40 @@ public class showCustomers extends javax.swing.JDialog {
          */
         this.TextField_Buscador.getDocument().addDocumentListener(new ListenerBuscador(this.TextField_Buscador, ordenador));
 
+    }
+    private void eliminar(JTable table) {
+
+        int row = table.getSelectedRow();
+        if (row < 0) {
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    "No ha selecionado un cliente",
+                    "Alert!", JOptionPane.ERROR_MESSAGE);
+            return;
+
+        }
+        String cedula = table.getValueAt(row, 0).toString();
+       
+       //Eliminar el cliente con la cedula 'cedula'
+        
+    }
+    
+    public void fillTableCostumer() {
+
+        //Realiza la consulta para obtener las los clientes a mostrar
+        
+        
+        /*****///
+        
+        
+        
+       
+        this.jTable_Generica.setModel(new tableModelGeneric(ColumName, data2));
+        //Alinea la primer columna de esta tabla hacia el centro
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+   
+        this.jTable_Generica.getColumnModel().getColumn(0).
+                setCellRenderer(centerRenderer);
     }
 }
