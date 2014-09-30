@@ -7,8 +7,9 @@
 
 USE FlexCoreDataBase;
 
-
-
+/****************Crea funcion para numeroCuentas *******************/
+/* Verifica el tipo de moneda en la insercion y le agrega el digito correspondiente */
+go
 create function GeneradorNumeroCuenta (@id int, @tipoMoneda int) 
 returns int
 	as begin 
@@ -19,4 +20,44 @@ returns int
 	return 0;
 	end
 
-alter table CuentaDebito add CIF as dbo.GeneradorNumeroCuenta(idCuentaDebito,idTipoMoneda) 
+/* Agrega la funcion a numeroCuenta */
+go
+alter table CuentaDebito add numeroCuenta as dbo.GeneradorNumeroCuenta(idCuentaDebito,idTipoMoneda) 
+
+/*Agrega la funcion a numeroCuenta */
+go
+alter table CuentaAhorro add numeroCuenta as dbo.GeneradorNumeroCuenta(idCuentaAhorro,idTipoMoneda) 
+
+
+/********************Llaves Foraneas y demas ***********************/
+
+/****Para Telefonos x Cliente *********/
+GO
+ALTER TABLE TelefonoxCliente 
+ADD CONSTRAINT FK_TelefonoXCliente_idTelefono FOREIGN KEY (idTelefono) 
+    REFERENCES Telefono (idTelefono) 
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+
+ ALTER TABLE TelefonoxCliente 
+ADD CONSTRAINT FK_TelefonoXCLiente_CIF FOREIGN KEY (CIF) 
+    REFERENCES Cliente (CIF) 
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+;
+
+
+/******Para CLientes Juridicos y Fisicos ***************************/
+GO
+ALTER TABLE ClienteJuridico 
+ADD CONSTRAINT FK_ClienteJuridico_CIF FOREIGN KEY (CIF) 
+    REFERENCES Cliente (CIF) 
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+
+ ALTER TABLE ClienteFisico 
+ADD CONSTRAINT FK_ClienteFisico_CIF FOREIGN KEY (CIF) 
+    REFERENCES Cliente (CIF) 
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+;

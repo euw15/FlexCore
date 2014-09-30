@@ -10,39 +10,36 @@ USE FlexCoreDataBase;
 GO
 
 CREATE TABLE [Cliente](
-	[CIF] [int] Identity(1000000000,1),
+	[CIF] [int] Identity(1000000000,1) constraint pk_CIF_Cliente primary key,
 	[idTipoCliente] [int] NOT NULL
 )
 
 /*******************************************************************/
 GO
 CREATE TABLE [Telefono](
-	[idTelefono] [int] NOT NULL,
+	[idTelefono] [int] Identity(1,1) constraint pk_idTelefono_Telefono primary key,
 	[Telefono] [nvarchar](15) NOT NULL,
- CONSTRAINT [PK_Telefono] PRIMARY KEY CLUSTERED 
-(
-	[idTelefono] ASC
-)
 )
 
 /*******************************************************************/
 GO
 CREATE TABLE [TipoCliente](
-	[idTipoCliente] [int] Identity(1,1),	
+	[idTipoCliente] [int] Identity(1,1) constraint pk_idTipoCliente_TipoCliente primary key,	
 	[Nombre] [nvarchar](200)
 )
 
 /*******************************************************************/
 GO
 CREATE TABLE [TelefonoxCliente](
-	[CIF] [int] NOT NULL,
-	[idTelefono] [int] NOT NULL
+	[CIF] [int] not null,
+	[idTelefono] [int] not null,
+	CONSTRAINT pk_TelefonoXCliente PRIMARY KEY (CIF,idTelefono)
 	)
 
 /********************************************************************/
 GO
 CREATE TABLE [ClienteFisico](
-	[idCLienteFisico] [int] Identity(1,2),
+	[idCLienteFisico] [int] Identity(1,2) constraint pk_idCliente_ClienteFisico primary key,
 	[CIF] [int] NOT NULL,
 	[Nombre] [nvarchar](30) NOT NULL,
 	[Apellido] [nvarchar](30) NOT NULL,
@@ -53,7 +50,7 @@ CREATE TABLE [ClienteFisico](
 /********************************************************************/
 GO
 CREATE TABLE [ClienteJuridico](
-	[idCLienteJuridico] [int] Identity(0,2),
+	[idCLienteJuridico] [int] Identity(0,2) constraint pk_idCliente_ClienteJuridico primary key,
 	[CIF] [int] NOT NULL,
 	[Nombre] [nvarchar](30) NOT NULL,
 	[Cedula] [int] NOT NULL
@@ -63,23 +60,25 @@ CREATE TABLE [ClienteJuridico](
 /*******************************************************************/
 GO
 CREATE TABLE [Direccion](
-	[idDireccion] [int] Identity(1,1),
+	[idDireccion] [int] Identity(1,1) constraint pk_idDireccion_Direccion primary key,
 	[Direccion] [nvarchar] (400) 
 	)
 
 /*******************************************************************/
 GO
 CREATE TABLE [DireccionXCliente](
-	[idDireccion] [int] NOT NULL,
-	[CIF] [int] NOT NULL 
+	[idDireccion] [int] not null,
+	[CIF] [int] not null,
+	CONSTRAINT pk_DireccionXCliente PRIMARY KEY (idDireccion,CIF)
 	)
 
 
 /********************************************************************/
 GO
 CREATE TABLE [DocumentoxCliente](
-	[CIF] [int] NOT NULL,
-	[idDocumento] [int] NOT NULL
+	[CIF] [int] not null,
+	[idDocumento] [int] not null,
+	CONSTRAINT pk_DocumentosxCliente PRIMARY KEY (CIF,idDocumento)
 	)
 
 /*FALTA POR HACER!!!!
@@ -93,14 +92,14 @@ CREATE TABLE [Documentos](
 /********************************************************************/
 GO
 CREATE TABLE [TipoMoneda](
-	[idTipoMoneda] [int] Identity(1,1),
+	[idTipoMoneda] [int] Identity(1,1) constraint pk_idTipoMoneda_TipoMoneda primary key,
 	[Moneda] [nvarchar](30) NOT NULL
 	)
 
 /********************************************************************/
 GO
 CREATE TABLE [CuentaDebito](
-	[idCuentaDebito] [int] Identity(100000000,1),
+	[idCuentaDebito] [int] Identity(100000000,1) constraint pk_idCuentaDebito_CuentaDebito primary key,
 	[idCliente] [int] NOT NULL,
 	[Desripcion] [nvarchar](300) NOT NULL,
 	[idTipoMoneda] [int] NOT NULL,
@@ -112,13 +111,15 @@ CREATE TABLE [CuentaDebito](
 /********************************************************************/
 GO
 CREATE TABLE [Beneficiarios](
-	[idCliente] [int] NOT NULL,
-	[NumeroCuentaDebito] [int] NOT NULL
+	[idCliente] [int] not null,
+	[NumeroCuentaDebito] [int] NOT NULL,
+	CONSTRAINT pk_Beneficiarios PRIMARY KEY (idCliente,NumeroCuentaDebito)
 	)
 
 /********************************************************************/
 GO
 CREATE TABLE [MetodoPago](
+	[idMetodoPago] [int] Identity(1,1) constraint pk_PKMetogoPago_MetodoPago primary key,
 	[NumeroCuentaDebito] [int] NOT NULL,
 	[idDispositivo] [int] NOT NULL,
 	[estado] [bit] NOT NULL
@@ -127,7 +128,7 @@ CREATE TABLE [MetodoPago](
 /********************************************************************/
 GO
 CREATE TABLE [Proposito](
-	[idProposito] [int] NOT NULL,
+	[idProposito] [int] Identity(1,1) constraint pk_idProposito_Proposito primary key,
 	[Proposito] [nvarchar](200) NOT NULL,
 	[TasaInteres] [int]
 	)
@@ -135,21 +136,22 @@ CREATE TABLE [Proposito](
 /********************************************************************/
 GO
 CREATE TABLE [CuentaAhorro](
-	[idCuentaAhorro] [bigint] NOT NULL,
-	[CIF] [nvarchar](200) NOT NULL,
+	[idCuentaAhorro] [int] Identity(1,1) constraint pk_idCuentaAhorro_CuentaAhorro primary key,
+	[CIF] [int] NOT NULL,
 	[NumeroCuentaDebito] [int] NOT NULL,
 	[idProposito] [int] NOT NULL,
 	[Periodicidad] [int] NOT NULL,
 	[FechaInicio] [date] NOT NULL,
 	[DuracionAhorro] [int] NOT NULL,
 	[FechaFinal] [date] NOT NULL,
-	[MontoAhorro] [int] NOT NULL
+	[MontoAhorro] [int] NOT NULL,
+	[idTipoMoneda] [int] NOT NULL
 	)
 
 /********************************************************************/
 GO
 CREATE TABLE [TranssacionesVuelo](
-	[idTranssacion] [int] NOT NULL,
+	[idTranssacion] [int] Identity(1,1) constraint pk_idTranssacion_TranssacionesVuelo primary key,
 	[NumeroCuenta] [int] NOT NULL,
 	[TipoTranssacion] [nvarchar](100) NOT NULL,
 	[MontoTransferido] [int]
@@ -158,7 +160,7 @@ CREATE TABLE [TranssacionesVuelo](
 /********************************************************************/
 GO
 CREATE TABLE [Historico](
-	[idTranssacion] [int] NOT NULL,
+	[idTranssacion] [int] Identity(1,1) constraint pk_idTranssacion_Historico primary key,
 	[NumeroCuenta] [int] NOT NULL,
 	[TipoTranssacion] [nvarchar](100) NOT NULL,
 	[MontoTransferido] [int]
@@ -167,7 +169,7 @@ CREATE TABLE [Historico](
 /********************************************************************/
 GO
 CREATE TABLE [Cierres](
-	[idCierre] [int] NOT NULL,
+	[idCierre] [int] Identity(1,1) constraint pk_idCierre_Cierres primary key,
 	[FechaFinal] [datetime] NOT NULL
 	)
 
