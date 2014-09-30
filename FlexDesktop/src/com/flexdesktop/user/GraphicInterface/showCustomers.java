@@ -202,7 +202,7 @@ public class showCustomers extends javax.swing.JDialog {
 
             }
         ));
-        jTable_Generica.setFillsViewportHeight(true);
+        jTable_Generica.setGridColor(new java.awt.Color(255, 255, 255));
         jTable_Generica.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable_GenericaMouseClicked(evt);

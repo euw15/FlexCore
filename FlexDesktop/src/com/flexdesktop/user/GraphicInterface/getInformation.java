@@ -50,11 +50,11 @@ public class getInformation extends javax.swing.JDialog {
         setLocationRelativeTo(parent);
         configureTableLook();//no hace nada
 
-        this.jTable_Factura.setModel(new tableModelAddres(direccion,
+        this.jTable_Dirreciones.setModel(new tableModelAddres(direccion,
                 data2, true));
 
         //Agregar una fila por defecto en las tablas
-        addRow(jTable_Factura);
+        addRow(jTable_Dirreciones);
 
         //      DefaultTableModel model = (DefaultTableModel) table.getModel();
 //        try {
@@ -150,7 +150,7 @@ public class getInformation extends javax.swing.JDialog {
         jButton12 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable_Factura = new javax.swing.JTable();
+        jTable_Dirreciones = new javax.swing.JTable();
         jButton9 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTablePhone = new javax.swing.JTable();
@@ -581,7 +581,7 @@ public class getInformation extends javax.swing.JDialog {
             }
         });
 
-        jTable_Factura.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_Dirreciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -592,15 +592,16 @@ public class getInformation extends javax.swing.JDialog {
 
             }
         ));
-        jTable_Factura.setCellSelectionEnabled(true);
-        jTable_Factura.setFillsViewportHeight(true);
-        jTable_Factura.setSurrendersFocusOnKeystroke(true);
-        jTable_Factura.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTable_Dirreciones.setCellSelectionEnabled(true);
+        jTable_Dirreciones.setFillsViewportHeight(true);
+        jTable_Dirreciones.setSurrendersFocusOnKeystroke(true);
+        jTable_Dirreciones.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTable_FacturaKeyPressed(evt);
+                jTable_DirrecionesKeyPressed(evt);
             }
         });
-        jScrollPane2.setViewportView(jTable_Factura);
+        jScrollPane2.setViewportView(jTable_Dirreciones);
+        jTable_Dirreciones.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         jButton9.setForeground(new java.awt.Color(0, 51, 153));
         jButton9.setText("Print dirreciones");
@@ -848,13 +849,13 @@ public class getInformation extends javax.swing.JDialog {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         try {
-            eliminarFila(jTable_Factura);
+            eliminarFila(jTable_Dirreciones);
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        addRow(jTable_Factura);
+        addRow(jTable_Dirreciones);
 //        addresList.addElement("Hola");
 //        this.jList1.setModel(addresList);
 //        jList1.setSelectedIndex(jList1.getLastVisibleIndex());
@@ -869,14 +870,14 @@ public class getInformation extends javax.swing.JDialog {
 
     }//GEN-LAST:event_jButton12ActionPerformed
 
-    private void jTable_FacturaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable_FacturaKeyPressed
+    private void jTable_DirrecionesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable_DirrecionesKeyPressed
         int tecla = evt.getKeyCode();
         if (tecla == KeyEvent.VK_F9) {
             //   this.eliminarFila();
         } else {
             // hotKeyPressEvt(evt);
         }
-    }//GEN-LAST:event_jTable_FacturaKeyPressed
+    }//GEN-LAST:event_jTable_DirrecionesKeyPressed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         ArrayList<String> direc = getAddres();
@@ -1051,7 +1052,7 @@ public class getInformation extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTablePhone;
-    private javax.swing.JTable jTable_Factura;
+    private javax.swing.JTable jTable_Dirreciones;
     private javax.swing.JPanel registerClt;
     // End of variables declaration//GEN-END:variables
 
@@ -1205,7 +1206,7 @@ public class getInformation extends javax.swing.JDialog {
 
     void setEditableInfoCostumer(String name, String lastName, String ced,
             List<Object[]> direciones) {
-        this.jTable_Factura.setModel(new tableModelAddres(direccion,
+        this.jTable_Dirreciones.setModel(new tableModelAddres(direccion,
                 direciones, true));
         this.jFormattedTextFieldEnterName.setText(name);
         this.jFormattedTextFieldEnterApellido.setText(lastName);

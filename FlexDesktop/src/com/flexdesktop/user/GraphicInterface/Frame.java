@@ -296,7 +296,7 @@ public class Frame extends javax.swing.JFrame {
 
     private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
         int selection = jTable1.getSelectedRow();
-
+        System.out.println(jTabbedPane1.getSelectedIndex());
         if (selection == OPCION0) {
             getInformation getInfoPanel = new getInformation(null, true);
             getInfoPanel.showDialog("RegisterClt");
