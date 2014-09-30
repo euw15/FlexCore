@@ -33,9 +33,9 @@ public class CreateAccount extends javax.swing.JDialog {
      */
     private final Point point = new Point(0, 0);
 
-    private String[] direccion = {"Beneficiarios"};
+    private String[] columName = {"Beneficiarios"};
 
-    public List<Object[]> data2 = new ArrayList<Object[]>();
+    public List<Object[]> beneciarios = new ArrayList<Object[]>();
 
     private int accion = 0;
     private final int BORRAR = 1;
@@ -49,11 +49,10 @@ public class CreateAccount extends javax.swing.JDialog {
         setLocationRelativeTo(parent);
         configureTableLook();//no hace nada
 
-        this.jTable_Dirreciones.setModel(new tableModelAddres(direccion,
-                data2, true));
+        this.jTable_Dirreciones.setModel(new tableModelAddres(columName,
+                beneciarios, true));
 
-        //Agregar una fila por defecto en las tablas
-        addRow(jTable_Dirreciones);
+        
 
         //      DefaultTableModel model = (DefaultTableModel) table.getModel();
 //        try {
@@ -114,7 +113,6 @@ public class CreateAccount extends javax.swing.JDialog {
         jButton3 = new javax.swing.JButton();
         jFormattedTextFieldEnterName = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
-        jFormattedTextFieldEnterApellido = new javax.swing.JFormattedTextField();
         jLabel4 = new javax.swing.JLabel();
         jFormattedTextFieldEnterCedula = new javax.swing.JFormattedTextField();
         jLabelDescrip = new javax.swing.JLabel();
@@ -123,6 +121,9 @@ public class CreateAccount extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable_Dirreciones = new javax.swing.JTable();
         jLabelBuscaridCliente = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(418, 578));
@@ -191,15 +192,7 @@ public class CreateAccount extends javax.swing.JDialog {
 
         jLabel1.setText("IdCliente:");
 
-        jFormattedTextFieldEnterApellido.setCaretColor(new java.awt.Color(204, 204, 204));
-        jFormattedTextFieldEnterApellido.setDisabledTextColor(new java.awt.Color(204, 204, 204));
-        jFormattedTextFieldEnterApellido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextFieldEnterApellidoActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setText("Apellido:");
+        jLabel4.setText("Moneda:");
 
         jFormattedTextFieldEnterCedula.setCaretColor(new java.awt.Color(204, 204, 204));
         jFormattedTextFieldEnterCedula.setDisabledTextColor(new java.awt.Color(204, 204, 204));
@@ -249,6 +242,9 @@ public class CreateAccount extends javax.swing.JDialog {
 
         jLabelBuscaridCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/searchLttBlckBtt.png"))); // NOI18N
         jLabelBuscaridCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelBuscaridClienteMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabelBuscaridClienteMouseEntered(evt);
             }
@@ -256,6 +252,12 @@ public class CreateAccount extends javax.swing.JDialog {
                 jLabelBuscaridClienteMouseExited(evt);
             }
         });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "$", "₡" }));
+
+        jLabel3.setText("Estado:");
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Activa", "Inactiva" }));
 
         javax.swing.GroupLayout jPanelCreateAccLayout = new javax.swing.GroupLayout(jPanelCreateAcc);
         jPanelCreateAcc.setLayout(jPanelCreateAccLayout);
@@ -277,11 +279,16 @@ public class CreateAccount extends javax.swing.JDialog {
                                 .addGap(30, 30, 30)
                                 .addGroup(jPanelCreateAccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanelCreateAccLayout.createSequentialGroup()
-                                        .addComponent(jLabel1)
+                                        .addGroup(jPanelCreateAccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel1)
+                                            .addComponent(jLabel4))
                                         .addGap(18, 18, 18)
-                                        .addComponent(jFormattedTextFieldEnterName, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabelBuscaridCliente))
+                                        .addGroup(jPanelCreateAccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanelCreateAccLayout.createSequentialGroup()
+                                                .addComponent(jFormattedTextFieldEnterName, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jLabelBuscaridCliente))
+                                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(jPanelCreateAccLayout.createSequentialGroup()
                                         .addComponent(jLabelDescrip)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -292,9 +299,9 @@ public class CreateAccount extends javax.swing.JDialog {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jButton10))
                                     .addGroup(jPanelCreateAccLayout.createSequentialGroup()
-                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel3)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jFormattedTextFieldEnterApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(35, Short.MAX_VALUE))
             .addGroup(jPanelCreateAccLayout.createSequentialGroup()
@@ -316,16 +323,21 @@ public class CreateAccount extends javax.swing.JDialog {
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
                         .addComponent(jLabel2)
-                        .addGap(48, 48, 48)
-                        .addGroup(jPanelCreateAccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jFormattedTextFieldEnterName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabelBuscaridCliente))
+                        .addGap(45, 45, 45)
+                        .addGroup(jPanelCreateAccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelBuscaridCliente, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanelCreateAccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jFormattedTextFieldEnterName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1)))
                         .addGap(27, 27, 27)))
                 .addGroup(jPanelCreateAccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jFormattedTextFieldEnterApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(33, 33, 33)
+                    .addComponent(jLabel4)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(jPanelCreateAccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanelCreateAccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelCreateAccLayout.createSequentialGroup()
                         .addComponent(jLabelDescrip)
@@ -337,7 +349,7 @@ public class CreateAccount extends javax.swing.JDialog {
                 .addGroup(jPanelCreateAccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton10)
                     .addComponent(jButton8))
-                .addGap(64, 64, 64)
+                .addGap(37, 37, 37)
                 .addGroup(jPanelCreateAccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -409,10 +421,6 @@ public class CreateAccount extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextFieldEnterNameActionPerformed
 
-    private void jFormattedTextFieldEnterApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldEnterApellidoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextFieldEnterApellidoActionPerformed
-
     private void jFormattedTextFieldEnterCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldEnterCedulaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextFieldEnterCedulaActionPerformed
@@ -425,10 +433,19 @@ public class CreateAccount extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        addRow(jTable_Dirreciones);
-//        addresList.addElement("Hola");
-//        this.jList1.setModel(addresList);
-//        jList1.setSelectedIndex(jList1.getLastVisibleIndex());
+        
+
+        getInformation getInfoPanel = new getInformation(null, true);
+        getInfoPanel.setActionIcon(8);
+        getInfoPanel.SetTittle("Consultar Beneficiario");
+        getInfoPanel.showDialog("CreateBneficiario");
+        String ced = getInfoPanel.getCed();
+        String[] benefi = {ced};
+        beneciarios.add(benefi);
+        this.jTable_Dirreciones.setModel(new tableModelAddres(columName,
+                beneciarios, true));
+
+
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jTable_DirrecionesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable_DirrecionesKeyPressed
@@ -448,6 +465,18 @@ public class CreateAccount extends javax.swing.JDialog {
         jLabelBuscaridCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/searchLttBlckBtt.png")));
     }//GEN-LAST:event_jLabelBuscaridClienteMouseExited
 
+    private void jLabelBuscaridClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBuscaridClienteMouseClicked
+        getInformation getInfoPanel = new getInformation(null, true);
+        getInfoPanel.setActionIcon(8);
+        getInfoPanel.SetTittle("Consultar Cliente");
+        getInfoPanel.showDialog("ConsultarClt");
+        String ced = getInfoPanel.getCed();
+        if (ced != "") {
+            jFormattedTextFieldEnterName.setText(ced);
+        }
+
+    }//GEN-LAST:event_jLabelBuscaridClienteMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -456,11 +485,13 @@ public class CreateAccount extends javax.swing.JDialog {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton8;
-    private javax.swing.JFormattedTextField jFormattedTextFieldEnterApellido;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JFormattedTextField jFormattedTextFieldEnterCedula;
     private javax.swing.JFormattedTextField jFormattedTextFieldEnterName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabelBuscaridCliente;
@@ -507,26 +538,21 @@ public class CreateAccount extends javax.swing.JDialog {
     }
 
     private void setVisiblePanel(String panel) {
-//        removePanels();
-//        switch (panel) {
-//            case "RegisterClt":
-//                add(registerClt);
-//                registerClt.setVisible(true);
-//            case "ConsultarClt":
-//                add(ConsultarClt);
-//                ConsultarClt.setVisible(true);
-//            case "VerClt":
-//                add(VerClt);
-//                VerClt.setVisible(true);
-//        }
+        removePanels();
+        switch (panel) {
+            case "newAccount":
+                add(jPanelCreateAcc);
+                jPanelCreateAcc.setVisible(true);
+
+        }
 
     }
 
     public void removePanels() {
-//        registerClt.setVisible(false);
+        jPanelCreateAcc.setVisible(false);
 ////        ConsultarClt.setVisible(false);
 ////        VerClt.setVisible(false);
-//        remove(registerClt);
+        remove(jPanelCreateAcc);
 ////        remove(VerClt);
 ////        remove(ConsultarClt);
     }
@@ -552,9 +578,7 @@ public class CreateAccount extends javax.swing.JDialog {
                 table.repaint();
                 table.requestFocus();
             }
-            if (model.data.isEmpty()) {
-                model.addRow(1);
-            }
+            
         } catch (Exception e) {
         }
 
@@ -586,10 +610,10 @@ public class CreateAccount extends javax.swing.JDialog {
 
     ArrayList<String> getAddres() {
         ArrayList<String> result = new ArrayList<>();
-        for (int i = 0; i < data2.size(); i++) {
-            for (int j = 0; j < data2.get(i).length; j++) {
-                if (data2.get(i)[j].toString().replace(" ", "") != "") {
-                    result.add(data2.get(i)[j].toString());
+        for (int i = 0; i < beneciarios.size(); i++) {
+            for (int j = 0; j < beneciarios.get(i).length; j++) {
+                if (beneciarios.get(i)[j].toString().replace(" ", "") != "") {
+                    result.add(beneciarios.get(i)[j].toString());
                 }
 
             }
@@ -598,15 +622,15 @@ public class CreateAccount extends javax.swing.JDialog {
         return result;
     }
 
-    void setEditableInfoCostumer(String name, String lastName, String ced,
-            List<Object[]> direciones) {
-        this.jTable_Dirreciones.setModel(new tableModelAddres(direccion,
-                direciones, true));
-        this.jFormattedTextFieldEnterName.setText(name);
-        this.jFormattedTextFieldEnterApellido.setText(lastName);
-        this.jFormattedTextFieldEnterCedula.setText(ced);
-
-    }
+//    void setEditableInfoCostumer(String name, String lastName, String ced,
+//            List<Object[]> direciones) {
+//        this.jTable_Dirreciones.setModel(new tableModelAddres(columName,
+//                direciones, true));
+//        this.jFormattedTextFieldEnterName.setText(name);
+//        
+//        this.jFormattedTextFieldEnterCedula.setText(ced);
+//
+//    }
 
     void setActionIcon(int action) {
 
