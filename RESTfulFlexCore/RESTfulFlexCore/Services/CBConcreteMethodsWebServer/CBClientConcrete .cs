@@ -18,8 +18,7 @@ namespace RESTfulFlexCore.Services
         }
 
         public override Client[] getClient()
-        {
-            System.Diagnostics.Debug.WriteLine("Data base");
+        {            
             DataTable table = CBConnectionMSQL.retrieveMSQL("SELECT [ID] ,[Model] FROM [Envy].[dbo].[computer]");
             List<Client> clientSelected = getTableGetClient(table);
             return loadCache(clientSelected);
