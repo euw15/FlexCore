@@ -71,6 +71,7 @@ public class showCustomers extends javax.swing.JDialog {
     {"7575757", "Luis", "Guillermo"}};
     private int numeroDePaginas = 0;
     private int paginalActual = 1;
+    private String idSelect = "";
 
     public showCustomers(java.awt.Frame parent, boolean modal) {
 
@@ -129,10 +130,10 @@ public class showCustomers extends javax.swing.JDialog {
         jTable_Generica = new javax.swing.JTable();
         TextField_Buscador = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jLabelVer = new javax.swing.JLabel();
+        jLabelModificar = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jLabelBorrar = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabelPag3 = new javax.swing.JLabel();
         jLabelPag4 = new javax.swing.JLabel();
@@ -142,6 +143,7 @@ public class showCustomers extends javax.swing.JDialog {
         jLabelPag2 = new javax.swing.JLabel();
         jLabelPag1 = new javax.swing.JLabel();
         jLabelPuntos1 = new javax.swing.JLabel();
+        jLabelSelect = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(760, 550));
@@ -216,19 +218,19 @@ public class showCustomers extends javax.swing.JDialog {
 
         jLabel1.setText("Buscar:");
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/watchBtt.png"))); // NOI18N
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelVer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/watchBtt.png"))); // NOI18N
+        jLabelVer.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelVer.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
+                jLabelVerMouseClicked(evt);
             }
         });
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/editBtt.png"))); // NOI18N
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/editBtt.png"))); // NOI18N
+        jLabelModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelModificar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
+                jLabelModificarMouseClicked(evt);
             }
         });
 
@@ -245,12 +247,12 @@ public class showCustomers extends javax.swing.JDialog {
             }
         });
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/trashBtt.png"))); // NOI18N
-        jLabel6.setToolTipText("Borrar factura seleccionada");
-        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/trashBtt.png"))); // NOI18N
+        jLabelBorrar.setToolTipText("Borrar factura seleccionada");
+        jLabelBorrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabelBorrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel6MouseClicked(evt);
+                jLabelBorrarMouseClicked(evt);
             }
         });
 
@@ -329,6 +331,13 @@ public class showCustomers extends javax.swing.JDialog {
         jLabelPuntos1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelPuntos1.setText("...");
 
+        jLabelSelect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/select.png"))); // NOI18N
+        jLabelSelect.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelSelectMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout ListadoCltLayout = new javax.swing.GroupLayout(ListadoClt);
         ListadoClt.setLayout(ListadoCltLayout);
         ListadoCltLayout.setHorizontalGroup(
@@ -352,17 +361,19 @@ public class showCustomers extends javax.swing.JDialog {
                 .addContainerGap(14, Short.MAX_VALUE))
             .addGroup(ListadoCltLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addComponent(jLabel5)
+                .addComponent(jLabelModificar)
                 .addGap(33, 33, 33)
-                .addComponent(jLabel4)
+                .addComponent(jLabelVer)
                 .addGap(31, 31, 31)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelBorrar)
+                .addGap(10, 10, 10)
                 .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(ListadoCltLayout.createSequentialGroup()
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(ListadoCltLayout.createSequentialGroup()
+                        .addComponent(jLabelSelect)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabelPag1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelPuntos1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -411,9 +422,10 @@ public class showCustomers extends javax.swing.JDialog {
                             .addGroup(ListadoCltLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel6)))
+                                    .addComponent(jLabelModificar)
+                                    .addComponent(jLabelVer)
+                                    .addComponent(jLabelBorrar)
+                                    .addComponent(jLabelSelect)))
                             .addGroup(ListadoCltLayout.createSequentialGroup()
                                 .addGap(25, 25, 25)
                                 .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -430,7 +442,7 @@ public class showCustomers extends javax.swing.JDialog {
                                         .addComponent(jLabelPuntos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabelUltimoPag, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 7, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -458,7 +470,7 @@ public class showCustomers extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_ListadoCltMouseDragged
 
-    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+    private void jLabelBorrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBorrarMouseClicked
 
         String[] options = {"Aceptar", "Cancelar"};
         int selection = JOptionPane.showOptionDialog(this,
@@ -468,9 +480,9 @@ public class showCustomers extends javax.swing.JDialog {
             this.eliminar(this.jTable_Generica);
             this.fillTableCostumer();
         }
-    }//GEN-LAST:event_jLabel6MouseClicked
+    }//GEN-LAST:event_jLabelBorrarMouseClicked
 
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+    private void jLabelModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelModificarMouseClicked
         //datos de prueba
         String name = "name";
         String lastName = "latsName";
@@ -484,9 +496,9 @@ public class showCustomers extends javax.swing.JDialog {
         getInformation getInfoPanel = new getInformation(null, true);
         getInfoPanel.setEditableInfoCostumer(name, lastName, ced, dir);
         getInfoPanel.showDialog("RegisterClt");
-    }//GEN-LAST:event_jLabel5MouseClicked
+    }//GEN-LAST:event_jLabelModificarMouseClicked
 
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+    private void jLabelVerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelVerMouseClicked
 
         String ced = jTable_Generica.getValueAt(
                 jTable_Generica.getSelectedRow(), 0).toString();
@@ -498,8 +510,10 @@ public class showCustomers extends javax.swing.JDialog {
 
         getInformation getInfoPanel = new getInformation(null, true);
         getInfoPanel.setInfoClt(ced, name, lastName);
+        getInfoPanel.setActionIcon(0);
+        getInfoPanel.setInVisibleDeleteIcon();
         getInfoPanel.showDialog("VerClt");
-    }//GEN-LAST:event_jLabel4MouseClicked
+    }//GEN-LAST:event_jLabelVerMouseClicked
 
     private void TextField_BuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_BuscadorActionPerformed
         // TODO add your handling code here:
@@ -610,8 +624,7 @@ public class showCustomers extends javax.swing.JDialog {
 //        String paginaAnterior = LbAct.getText();//Cosultar la siguiente pag
 //        System.out.println("El actual es: " + paginaAnterior);
         //******************************************************
-        
-        
+
         //**ConsultarResfult
         data2 = paginaAnterior;
         upDateCostumers();
@@ -655,6 +668,12 @@ public class showCustomers extends javax.swing.JDialog {
         comprobaciones();
     }//GEN-LAST:event_jLabelUltimoPagMouseClicked
 
+    private void jLabelSelectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSelectMouseClicked
+        setIdSelect(jTable_Generica.getValueAt(
+                jTable_Generica.getSelectedRow(), 0).toString());
+        dispose();
+    }//GEN-LAST:event_jLabelSelectMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ListadoClt;
@@ -664,11 +683,10 @@ public class showCustomers extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabelBorrar;
+    private javax.swing.JLabel jLabelModificar;
     private javax.swing.JLabel jLabelPag1;
     private javax.swing.JLabel jLabelPag2;
     private javax.swing.JLabel jLabelPag3;
@@ -676,7 +694,9 @@ public class showCustomers extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelPag5;
     private javax.swing.JLabel jLabelPuntos;
     private javax.swing.JLabel jLabelPuntos1;
+    private javax.swing.JLabel jLabelSelect;
     private javax.swing.JLabel jLabelUltimoPag;
+    private javax.swing.JLabel jLabelVer;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable_Generica;
     // End of variables declaration//GEN-END:variables
@@ -1020,14 +1040,6 @@ public class showCustomers extends javax.swing.JDialog {
         }
 
     }
-//
-//    private void draw3() {
-//
-//        jLabelPag5.setText("" + paginalActual);
-//        jLabelPag4.setText("" + (paginalActual - 1));
-//        jLabelPag3.setText("" + (paginalActual - 2));
-//
-//    }
 
     void setFocusPanel(JLabel label) {
         JLabel LbAct = getLabelActual();
@@ -1042,4 +1054,37 @@ public class showCustomers extends javax.swing.JDialog {
 
     }
 
+    void setData(Object[][] dataNew) {
+        data2 = dataNew;
+        upDateCostumers();
+    }
+
+    void setReturnMode() {
+        this.jLabelSelect.setVisible(true);
+        this.jLabelModificar.setVisible(false);
+        this.jLabelVer.setVisible(false);
+        this.jLabelBorrar.setVisible(false);
+    }
+
+    void setNotReturnMode() {
+        this.jLabelSelect.setVisible(false);
+        this.jLabelModificar.setVisible(true);
+        this.jLabelVer.setVisible(true);
+        this.jLabelBorrar.setVisible(true);
+
+    }
+
+    /**
+     * @return the idSelect
+     */
+    public String getIdSelect() {
+        return idSelect;
+    }
+
+    /**
+     * @param idSelect the idSelect to set
+     */
+    public void setIdSelect(String idSelect) {
+        this.idSelect = idSelect;
+    }
 }

@@ -15,6 +15,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.Timer;
 
@@ -36,6 +37,11 @@ public class getInformation extends javax.swing.JDialog {
     private String[] phone = {"Phone"};
 
     public List<Object[]> data2 = new ArrayList<Object[]>();
+
+    private int accion = 0;
+    private final int BORRAR = 1;
+    private final int Ver = 0;
+    private final int Actualizar = 2;
 
     public getInformation(java.awt.Frame parent, boolean modal) {
 
@@ -107,11 +113,11 @@ public class getInformation extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jRadioButtonBuscarCed = new javax.swing.JRadioButton();
+        jRadioButtonBuscarCuenta = new javax.swing.JRadioButton();
+        jRadioButtonNombre = new javax.swing.JRadioButton();
+        jRadioButtonApellido = new javax.swing.JRadioButton();
+        jFormattedTextFieldBuscarPor = new javax.swing.JFormattedTextField();
         jLabelBusquedaPor = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         VerClt = new javax.swing.JPanel();
@@ -125,6 +131,7 @@ public class getInformation extends javax.swing.JDialog {
         jLabel14 = new javax.swing.JLabel();
         jLabelCedula = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
+        jLabelBorrarClt = new javax.swing.JLabel();
         registerClt = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -152,7 +159,6 @@ public class getInformation extends javax.swing.JDialog {
         setMaximumSize(new java.awt.Dimension(418, 578));
         setMinimumSize(new java.awt.Dimension(418, 578));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(418, 578));
 
         ConsultarClt.setBackground(new java.awt.Color(255, 255, 255));
         ConsultarClt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -187,11 +193,11 @@ public class getInformation extends javax.swing.JDialog {
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Khmer UI", 0, 13)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel3.setText("Cosultar Por:");
+        jLabel3.setText("Buscar Por:");
 
         jLabel8.setFont(new java.awt.Font("Khmer UI", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel8.setText("Consultar Cliente");
+        jLabel8.setText("Seleccionar Cliente");
 
         jButton6.setBackground(new java.awt.Color(255, 255, 255));
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/close2.png"))); // NOI18N
@@ -205,36 +211,36 @@ public class getInformation extends javax.swing.JDialog {
             }
         });
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText("Número de Cédula");
-        jRadioButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        buttonGroup1.add(jRadioButtonBuscarCed);
+        jRadioButtonBuscarCed.setSelected(true);
+        jRadioButtonBuscarCed.setText("Número de Cédula");
+        jRadioButtonBuscarCed.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jRadioButton1MouseClicked(evt);
+                jRadioButtonBuscarCedMouseClicked(evt);
             }
         });
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Número de Cuenta");
-        jRadioButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        buttonGroup1.add(jRadioButtonBuscarCuenta);
+        jRadioButtonBuscarCuenta.setText("Número de Cuenta");
+        jRadioButtonBuscarCuenta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jRadioButton2MouseClicked(evt);
+                jRadioButtonBuscarCuentaMouseClicked(evt);
             }
         });
 
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setText("Nombre");
-        jRadioButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+        buttonGroup1.add(jRadioButtonNombre);
+        jRadioButtonNombre.setText("Nombre");
+        jRadioButtonNombre.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jRadioButton3MouseClicked(evt);
+                jRadioButtonNombreMouseClicked(evt);
             }
         });
 
-        buttonGroup1.add(jRadioButton4);
-        jRadioButton4.setText("Apellido");
-        jRadioButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+        buttonGroup1.add(jRadioButtonApellido);
+        jRadioButtonApellido.setText("Apellido");
+        jRadioButtonApellido.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jRadioButton4MouseClicked(evt);
+                jRadioButtonApellidoMouseClicked(evt);
             }
         });
 
@@ -261,7 +267,7 @@ public class getInformation extends javax.swing.JDialog {
                 .addGroup(ConsultarCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(ConsultarCltLayout.createSequentialGroup()
                         .addGroup(ConsultarCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jFormattedTextFieldBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelBusquedaPor, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(23, 23, 23)
                         .addComponent(jLabel11))
@@ -274,10 +280,10 @@ public class getInformation extends javax.swing.JDialog {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ConsultarCltLayout.createSequentialGroup()
                                 .addGap(60, 60, 60)
                                 .addGroup(ConsultarCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jRadioButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jRadioButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jRadioButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jRadioButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jRadioButtonBuscarCed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jRadioButtonBuscarCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jRadioButtonNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jRadioButtonApellido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(95, 95, 95))
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 37, Short.MAX_VALUE))
@@ -295,19 +301,19 @@ public class getInformation extends javax.swing.JDialog {
                         .addGap(66, 66, 66)))
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addComponent(jRadioButton1)
+                .addComponent(jRadioButtonBuscarCed)
                 .addGap(33, 33, 33)
-                .addComponent(jRadioButton2)
+                .addComponent(jRadioButtonBuscarCuenta)
                 .addGap(18, 18, 18)
-                .addComponent(jRadioButton3)
+                .addComponent(jRadioButtonNombre)
                 .addGap(30, 30, 30)
-                .addComponent(jRadioButton4)
+                .addComponent(jRadioButtonApellido)
                 .addGroup(ConsultarCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ConsultarCltLayout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(jLabelBusquedaPor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jFormattedTextFieldBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ConsultarCltLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
@@ -381,6 +387,19 @@ public class getInformation extends javax.swing.JDialog {
 
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/rostro.jpg"))); // NOI18N
 
+        jLabelBorrarClt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/trashBtt.png"))); // NOI18N
+        jLabelBorrarClt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelBorrarCltMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabelBorrarCltMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabelBorrarCltMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout VerCltLayout = new javax.swing.GroupLayout(VerClt);
         VerClt.setLayout(VerCltLayout);
         VerCltLayout.setHorizontalGroup(
@@ -394,26 +413,27 @@ public class getInformation extends javax.swing.JDialog {
                         .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VerCltLayout.createSequentialGroup()
                         .addGap(4, 4, 4)
-                        .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VerCltLayout.createSequentialGroup()
-                                .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(19, 19, 19))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VerCltLayout.createSequentialGroup()
-                                .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(VerCltLayout.createSequentialGroup()
-                                            .addComponent(jLabel12)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jLabelApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(VerCltLayout.createSequentialGroup()
-                                            .addComponent(jLabel10)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(VerCltLayout.createSequentialGroup()
+                                    .addComponent(jLabel12)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabelApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(VerCltLayout.createSequentialGroup()
+                                    .addComponent(jLabel10)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(VerCltLayout.createSequentialGroup()
+                                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(VerCltLayout.createSequentialGroup()
-                                        .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabelCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap())))))
+                                        .addComponent(jLabelBorrarClt, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(9, 9, 9))
+                                    .addComponent(jLabelCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap())))
             .addGroup(VerCltLayout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -421,7 +441,7 @@ public class getInformation extends javax.swing.JDialog {
         );
         VerCltLayout.setVerticalGroup(
             VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(VerCltLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VerCltLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -440,9 +460,14 @@ public class getInformation extends javax.swing.JDialog {
                 .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(jLabelCedula))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
-                .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
+                .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VerCltLayout.createSequentialGroup()
+                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VerCltLayout.createSequentialGroup()
+                        .addComponent(jLabelBorrarClt)
+                        .addGap(44, 44, 44))))
         );
 
         registerClt.setBackground(new java.awt.Color(255, 255, 255));
@@ -790,7 +815,7 @@ public class getInformation extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-         dispose();
+        dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -881,27 +906,102 @@ public class getInformation extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_VerCltMousePressed
 
-    private void jRadioButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton1MouseClicked
+    private void jRadioButtonBuscarCedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonBuscarCedMouseClicked
         jLabelBusquedaPor.setText("Cédula");
-    }//GEN-LAST:event_jRadioButton1MouseClicked
+    }//GEN-LAST:event_jRadioButtonBuscarCedMouseClicked
 
-    private void jRadioButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton2MouseClicked
-      jLabelBusquedaPor.setText("Número de Cuenta");
-    }//GEN-LAST:event_jRadioButton2MouseClicked
+    private void jRadioButtonBuscarCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonBuscarCuentaMouseClicked
+        jLabelBusquedaPor.setText("Número de Cuenta");
+    }//GEN-LAST:event_jRadioButtonBuscarCuentaMouseClicked
 
-    private void jRadioButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton3MouseClicked
+    private void jRadioButtonNombreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonNombreMouseClicked
         jLabelBusquedaPor.setText("Nombre");
-    }//GEN-LAST:event_jRadioButton3MouseClicked
+    }//GEN-LAST:event_jRadioButtonNombreMouseClicked
 
-    private void jRadioButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton4MouseClicked
+    private void jRadioButtonApellidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonApellidoMouseClicked
         jLabelBusquedaPor.setText("Appelido");
-    }//GEN-LAST:event_jRadioButton4MouseClicked
+    }//GEN-LAST:event_jRadioButtonApellidoMouseClicked
 
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
-        getInformation getInfoPanel = new getInformation(null, true);
-        getInfoPanel.setInfoClt("Cedula", "Nombre", "Apellido");
-        getInfoPanel.showDialog("VerClt");
+        showCustomers sC = new showCustomers(null, true);
+            sC.setReturnMode();
+        if (jRadioButtonBuscarCed.isSelected()) {
+            //To do
+            //Obtener los clientes para esa cedulaSeleccionada
+            
+            Object cliente[][] = {{jFormattedTextFieldBuscarPor.getText(),
+                "Jason", "Salazar"}};
+            sC.setData(cliente);
+            sC.showDialog("VerListadoClt");
+            String cedulaSeleccionada = sC.getIdSelect();
+            System.out.println(cedulaSeleccionada);
+            if(cedulaSeleccionada!=""){
+                 dispose();
+                  executeAction();
+            }
+           
+//****Hacer los mismo para cualquier otra pero cambiar la consulta a resfult
+        } else if (jRadioButtonBuscarCuenta.isSelected()) {
+            //To do
+            //Obtener los clientes para esa cedulaSeleccionada
+            
+            Object cliente[][] = {{jFormattedTextFieldBuscarPor.getText(),
+                "Jason", "Salazar"}};
+            sC.setData(cliente);
+            sC.showDialog("VerListadoClt");
+            String cedulaSeleccionada = sC.getIdSelect();
+            System.out.println(cedulaSeleccionada);
+            if(cedulaSeleccionada!=""){
+                 dispose();
+                  executeAction();
+            }
+            
+        } else if (jRadioButtonNombre.isSelected()) {
+             Object cliente[][] = {{jFormattedTextFieldBuscarPor.getText(),
+                "Jason", "Salazar"}};
+            sC.setData(cliente);
+            sC.showDialog("VerListadoClt");
+            String cedulaSeleccionada = sC.getIdSelect();
+            System.out.println(cedulaSeleccionada);
+            if(cedulaSeleccionada!=""){
+                 dispose();
+                  executeAction();
+            }
+        } else if (jRadioButtonApellido.isSelected()) {
+             Object cliente[][] = {{jFormattedTextFieldBuscarPor.getText(),
+                "Jason", "Salazar"}};
+            sC.setData(cliente);
+            sC.showDialog("VerListadoClt");
+            String cedulaSeleccionada = sC.getIdSelect();
+            System.out.println(cedulaSeleccionada);
+            if(cedulaSeleccionada!=""){
+                 dispose();
+                  executeAction();
+            }
+        }
+
+       
+
     }//GEN-LAST:event_jLabel11MouseClicked
+
+    private void jLabelBorrarCltMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBorrarCltMouseClicked
+        String[] options = {"Aceptar", "Cancelar"};
+        int selection = JOptionPane.showOptionDialog(this,
+                "Desea eliminar el Cliente", "¡Atención!", 0, 0,
+                null, options, 0);
+        if (selection == 0) {
+            //Eliminar
+        }
+    }//GEN-LAST:event_jLabelBorrarCltMouseClicked
+
+    private void jLabelBorrarCltMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBorrarCltMouseEntered
+        jLabelBorrarClt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/trashBttOvr.png")));
+
+    }//GEN-LAST:event_jLabelBorrarCltMouseEntered
+
+    private void jLabelBorrarCltMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBorrarCltMouseExited
+        jLabelBorrarClt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/trashBtt.png")));
+    }//GEN-LAST:event_jLabelBorrarCltMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -922,7 +1022,7 @@ public class getInformation extends javax.swing.JDialog {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JFormattedTextField jFormattedTextFieldBuscarPor;
     private javax.swing.JFormattedTextField jFormattedTextFieldEnterApellido;
     private javax.swing.JFormattedTextField jFormattedTextFieldEnterCedula;
     private javax.swing.JFormattedTextField jFormattedTextFieldEnterName;
@@ -940,13 +1040,14 @@ public class getInformation extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelApellido;
+    private javax.swing.JLabel jLabelBorrarClt;
     private javax.swing.JLabel jLabelBusquedaPor;
     private javax.swing.JLabel jLabelCedula;
     private javax.swing.JLabel jLabelName;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JRadioButton jRadioButtonApellido;
+    private javax.swing.JRadioButton jRadioButtonBuscarCed;
+    private javax.swing.JRadioButton jRadioButtonBuscarCuenta;
+    private javax.swing.JRadioButton jRadioButtonNombre;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTablePhone;
@@ -1109,7 +1210,58 @@ public class getInformation extends javax.swing.JDialog {
         this.jFormattedTextFieldEnterName.setText(name);
         this.jFormattedTextFieldEnterApellido.setText(lastName);
         this.jFormattedTextFieldEnterCedula.setText(ced);
-       
+
+    }
+
+    void setActionIcon(int action) {
+
+        accion = action;
+
+    }
+
+    void SetTittle(String tittle) {
+
+        jLabel8.setText(tittle);
+    }
+
+    private void executeAction() {
+
+        getInformation getInfoPanel = new getInformation(null, true);
+        if (accion == Ver) {
+            System.out.println("bshfdbhv");
+            getInfoPanel.SetTittle("Consultar Cliente");
+            getInfoPanel.setInVisibleDeleteIcon();
+            getInfoPanel.setInfoClt("Cedula", "Nombre", "Apellido");
+            getInfoPanel.showDialog("VerClt");
+        }
+        if (accion == BORRAR) {
+            getInfoPanel.SetTittle("Eliminar Cliente");
+            getInfoPanel.jLabelBorrarClt.setVisible(true);
+            getInfoPanel.setInfoClt("Cedula", "Nombre", "Apellido");
+            getInfoPanel.showDialog("VerClt");
+        }
+        if (accion == Actualizar) {
+            getInfoPanel.SetTittle("Actualizar Cliente");
+            setInVisibleDeleteIcon();
+
+            //datos de prueba
+            String name = "name";
+            String lastName = "latsName";
+            String ced = "ced";
+            List<Object[]> dir = new ArrayList<Object[]>();
+            Object dire[] = {"Por ahi"};
+            Object dire2[] = {"CuatroFilosDeCuchilloMocho"};
+            dir.add(dire);
+            dir.add(dire2);
+            ////--------------------------------------
+
+            getInfoPanel.setEditableInfoCostumer(name, lastName, ced, dir);
+            getInfoPanel.showDialog("RegisterClt");
+        }
+    }
+
+    void setInVisibleDeleteIcon() {
+        jLabelBorrarClt.setVisible(false);
 
     }
 }

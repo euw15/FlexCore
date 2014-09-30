@@ -65,8 +65,8 @@ public class Frame extends javax.swing.JFrame {
                 {"   Ver Listado"},
                 {"   Eliminar"},
                 {"   Actualizar"},
-                {"   Otras"},
-                {"   Otras"}
+                {null},
+                {null}
             },
             new String [] {
                 "Acción"
@@ -296,24 +296,35 @@ public class Frame extends javax.swing.JFrame {
 
     private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
         int selection = jTable1.getSelectedRow();
-       
+
         if (selection == OPCION0) {
             getInformation getInfoPanel = new getInformation(null, true);
             getInfoPanel.showDialog("RegisterClt");
+
         } else if (selection == OPCION1) {
             getInformation getInfoPanel = new getInformation(null, true);
             getInfoPanel.showDialog("ConsultarClt");
-        } else if (selection == OPCION4) {
-            
-        } else if (selection == OPCION5) {
-
-        } else if (selection == OPCION3) {
-
-        } else if (selection == OPCION5) {
+            getInfoPanel.setActionIcon(0);
+            getInfoPanel.SetTittle("Consultar Cliente");
 
         } else if (selection == OPCION2) {
             showCustomers sC = new showCustomers(null, true);
+            sC.setNotReturnMode();
             sC.showDialog("VerListadoClt");
+
+        } else if (selection == OPCION3) {
+            getInformation getInfoPanel = new getInformation(null, true);
+            getInfoPanel.setActionIcon(1);
+            //borrar cliente
+            getInfoPanel.SetTittle("Eliminar Cliente");
+            getInfoPanel.showDialog("ConsultarClt");
+
+        } else if (selection == OPCION4) {
+
+            getInformation getInfoPanel = new getInformation(null, true);
+            getInfoPanel.SetTittle("Actualizar Cliente");
+            getInfoPanel.setActionIcon(2);
+            getInfoPanel.showDialog("ConsultarClt");
 
         }
     }//GEN-LAST:event_jLabel14MouseClicked

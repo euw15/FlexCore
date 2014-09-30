@@ -93,8 +93,8 @@
                           <Data value="   Ver Listado"/>
                           <Data value="   Eliminar"/>
                           <Data value="   Actualizar"/>
-                          <Data value="   Otras"/>
-                          <Data value="   Otras"/>
+                          <Data value="null"/>
+                          <Data value="null"/>
                         </Column>
                       </Table>
                     </Property>
