@@ -8,5 +8,7 @@ namespace RESTfulFlexCore.Services
     public abstract class CBAbstractFactoryWebServer
     {
         public abstract CBClientAbstract CreateCBClientAbstract();
+
+        public abstract CBImageAbstract CreateCBImageAbstract();
     }
 }

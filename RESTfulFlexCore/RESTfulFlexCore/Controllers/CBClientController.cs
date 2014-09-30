@@ -23,8 +23,7 @@ namespace RESTfulFlexCore.Controllers
         [ActionName("getClient")]
         public Client[] getClient()
         {
-            //http://localhost:62830/api/cbclient/getclient
-            System.Diagnostics.Debug.WriteLine("controller");
+            //http://localhost:62830/api/cbclient/getclient            
             return instanceClientAbstract.getClient();
         }
     }

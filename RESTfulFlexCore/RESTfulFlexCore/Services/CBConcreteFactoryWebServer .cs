@@ -29,6 +29,11 @@ namespace RESTfulFlexCore.Services
             return new CBClientConcrete();
         }
 
+        public override CBImageAbstract CreateCBImageAbstract()
+        {
+            return new CBImageConcrete();
+        }
+
 
     }
 }

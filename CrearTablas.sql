@@ -1,18 +1,21 @@
 /*******************************************************************/
 /*******************************************************************/
-/**********************  Crear Tablas ******************************/
+/**********************  Crear Tablas y PK**************************/
 /*******************************************************************/
 /*******************************************************************/
+/* Crear la base primero con el mismo nombre                        */
+/*******************************************************************/
+USE FlexCoreDataBase;
 
-/*******************************************************************/
 GO
 
 CREATE TABLE [Cliente](
-	[CIF] [int] NOT NULL,
+	[CIF] [int] Identity(1000000000,1),
 	[idTipoCliente] [int] NOT NULL
 )
 
 /*******************************************************************/
+GO
 CREATE TABLE [Telefono](
 	[idTelefono] [int] NOT NULL,
 	[Telefono] [nvarchar](15) NOT NULL,
@@ -24,31 +27,53 @@ CREATE TABLE [Telefono](
 
 /*******************************************************************/
 GO
+CREATE TABLE [TipoCliente](
+	[idTipoCliente] [int] Identity(1,1),	
+	[Nombre] [nvarchar](200)
+)
+
+/*******************************************************************/
+GO
 CREATE TABLE [TelefonoxCliente](
 	[CIF] [int] NOT NULL,
 	[idTelefono] [int] NOT NULL
 	)
 
-
-
 /********************************************************************/
 GO
 CREATE TABLE [ClienteFisico](
+	[idCLienteFisico] [int] Identity(1,2),
 	[CIF] [int] NOT NULL,
 	[Nombre] [nvarchar](30) NOT NULL,
 	[Apellido] [nvarchar](30) NOT NULL,
 	[idImagenCliente] [int],
-	[Direccion] [nvarchar](300) NOT NULL
+	[Cedula] [int] NOT NULL
 	)
-
 
 /********************************************************************/
 GO
 CREATE TABLE [ClienteJuridico](
+	[idCLienteJuridico] [int] Identity(0,2),
 	[CIF] [int] NOT NULL,
 	[Nombre] [nvarchar](30) NOT NULL,
-	[Direccion] [nvarchar](300) NOT NULL
+	[Cedula] [int] NOT NULL
 	)
+
+
+/*******************************************************************/
+GO
+CREATE TABLE [Direccion](
+	[idDireccion] [int] Identity(1,1),
+	[Direccion] [nvarchar] (400) 
+	)
+
+/*******************************************************************/
+GO
+CREATE TABLE [DireccionXCliente](
+	[idDireccion] [int] NOT NULL,
+	[CIF] [int] NOT NULL 
+	)
+
 
 /********************************************************************/
 GO
@@ -57,25 +82,25 @@ CREATE TABLE [DocumentoxCliente](
 	[idDocumento] [int] NOT NULL
 	)
 
-//FALTA POR HACER!!!!
+/*FALTA POR HACER!!!!
 /********************************************************************/
-GO
+/*GO
 CREATE TABLE [Documentos](
-	[idDocumento] [int] NOT NULL,
+	[idDocumento] [int] Identity(1,1),
 	[Documento] VARBINARY(MAX) FILESTREAM NULL
 	)
 
 /********************************************************************/
 GO
 CREATE TABLE [TipoMoneda](
-	[idTipoMoneda] [int] NOT NULL,
+	[idTipoMoneda] [int] Identity(1,1),
 	[Moneda] [nvarchar](30) NOT NULL
 	)
 
 /********************************************************************/
 GO
 CREATE TABLE [CuentaDebito](
-	[NumeroCuentaDebito] [int] NOT NULL,
+	[idCuentaDebito] [int] Identity(100000000,1),
 	[idCliente] [int] NOT NULL,
 	[Desripcion] [nvarchar](300) NOT NULL,
 	[idTipoMoneda] [int] NOT NULL,
@@ -110,7 +135,7 @@ CREATE TABLE [Proposito](
 /********************************************************************/
 GO
 CREATE TABLE [CuentaAhorro](
-	[idCuentaAhorro] [int] NOT NULL,
+	[idCuentaAhorro] [bigint] NOT NULL,
 	[CIF] [nvarchar](200) NOT NULL,
 	[NumeroCuentaDebito] [int] NOT NULL,
 	[idProposito] [int] NOT NULL,

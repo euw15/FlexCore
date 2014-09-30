@@ -16,7 +16,7 @@ namespace RESTfulFlexCore.Services
 
         public static void insertUpdateDeleteMSQL(string query)
         {
-            SqlConnection connection = new SqlConnection("ata Source=localhost;Network Library=DBMSSOCN; user id=daniel;" +
+            SqlConnection connection = new SqlConnection("Data Source=localhost;Network Library=DBMSSOCN; user id=daniel;" +
                                       "password=dcanessa;server=ENVY15-3040NR;" +
                                       "Trusted_Connection=no;" +
                                       "database=Envy; " +
