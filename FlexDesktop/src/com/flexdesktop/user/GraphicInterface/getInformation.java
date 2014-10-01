@@ -299,7 +299,7 @@ public class getInformation extends javax.swing.JDialog {
                         .addComponent(jLabelCreateBeneficiario)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabelCreateClt)))
-                .addGap(0, 38, Short.MAX_VALUE))
+                .addGap(0, 39, Short.MAX_VALUE))
             .addGroup(ConsultarCltLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(ConsultarCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

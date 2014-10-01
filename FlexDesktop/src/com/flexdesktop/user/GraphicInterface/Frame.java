@@ -121,7 +121,7 @@ public class Frame extends javax.swing.JFrame {
                 {""},
                 {"   Ahorro A La Vista"},
                 {""},
-                {"   Por Objetivo"},
+                {"   Por Objetivo/ Ahorro Automático"},
                 {""},
                 {""},
                 {""}
@@ -332,14 +332,15 @@ public class Frame extends javax.swing.JFrame {
 
     private void jLabelSelectRowCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSelectRowCuentaMouseClicked
         int selection = jTable2.getSelectedRow();
-        System.out.println(selection);
+        CreateAccount CreateNewAccount = new CreateAccount(null, true);
         if (selection == 1) {//Abrir cuenta ahorro a la vista
-            CreateAccount CreateNewAccount = new CreateAccount(null, true);
-            CreateNewAccount.showDialog("newAccount");
+
+            CreateNewAccount.showDialog("CuentaAhorro");
 
         }
         if (selection == 3) {//Abrir cuenta por objetivo
 
+            CreateNewAccount.showDialog("CuentaPorObjetivo");
         }
     }//GEN-LAST:event_jLabelSelectRowCuentaMouseClicked
 
