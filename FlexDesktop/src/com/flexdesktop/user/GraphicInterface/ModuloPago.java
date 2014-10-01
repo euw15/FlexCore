@@ -323,14 +323,14 @@ public class ModuloPago extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabelBuscaridClienteMouseExited
 
     private void jLabelBuscaridClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBuscaridClienteMouseClicked
-        getInformation getInfoPanel = new getInformation(null, true);
-        getInfoPanel.setActionIcon(8);
-        getInfoPanel.SetTittle("Consultar Cliente");
-        getInfoPanel.showDialog("ConsultarClt");
-        String ced = getInfoPanel.getCed();
-        if (ced != "") {
-            jFormattedTextFieldEnterName.setText(ced);
-        }
+//        getInformation getInfoPanel = new getInformation(null, true);
+//        getInfoPanel.setActionIcon(8);
+//        getInfoPanel.SetTittle("Consultar Cliente");
+//        getInfoPanel.showDialog("ConsultarClt");
+//        String ced = getInfoPanel.getCed();
+//        if (ced != "") {
+//            jFormattedTextFieldEnterName.setText(ced);
+//        }
 
     }//GEN-LAST:event_jLabelBuscaridClienteMouseClicked
 

@@ -187,7 +187,15 @@ public class Frame extends javax.swing.JFrame {
             new String [] {
                 ""
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable3.setGridColor(new java.awt.Color(255, 255, 255));
         jTable3.setRowHeight(41);
         jScrollPane3.setViewportView(jTable3);
@@ -237,7 +245,15 @@ public class Frame extends javax.swing.JFrame {
             new String [] {
                 "Reporte"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable4.setGridColor(new java.awt.Color(255, 255, 255));
         jTable4.setRowHeight(41);
         jScrollPane4.setViewportView(jTable4);

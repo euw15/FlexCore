@@ -44,7 +44,7 @@ public class getInformation extends javax.swing.JDialog {
     private final int Actualizar = 2;
     private final int Beneficiario = 7;
     private final int getIdCliente = 8;
-    private String ced;
+    private String ced = "";
 
     public getInformation(java.awt.Frame parent, boolean modal) {
 
@@ -59,11 +59,12 @@ public class getInformation extends javax.swing.JDialog {
         addRow(jTable_Dirreciones);
 
     }
-    static getInformation getSelf(){
-    if(self ==null){
-        return new getInformation(null, true);
-    }
-    return self;
+
+    static getInformation getSelf() {
+        if (self == null) {
+            return new getInformation(null, true);
+        }
+        return self;
     }
 
     public void showDialog(String panel) {
@@ -1329,6 +1330,7 @@ public class getInformation extends javax.swing.JDialog {
             System.out.println("Obtner bediciario");
         }
         if (accion == getIdCliente) {
+            System.out.println("retun idcostumer");
 
         }
 

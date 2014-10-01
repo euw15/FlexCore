@@ -279,7 +279,7 @@
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="1" rowCount="7">
-                        <Column editable="true" title="" type="java.lang.Object">
+                        <Column editable="false" title="" type="java.lang.Object">
                           <Data value=""/>
                           <Data value=""/>
                           <Data value="   Afiliar Un Cliente A Un M&#xf3;dulo De Pago"/>
@@ -379,7 +379,7 @@
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="1" rowCount="7">
-                        <Column editable="true" title="Reporte" type="java.lang.Object">
+                        <Column editable="false" title="Reporte" type="java.lang.Object">
                           <Data value="   Transaciones Clientes Jur&#xed;dica"/>
                           <Data value="   Transaciones Clientes F&#xed;sico"/>
                           <Data value="   Cierres Realizados"/>

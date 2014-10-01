@@ -701,24 +701,7 @@ public class showCustomers extends javax.swing.JDialog {
     private javax.swing.JTable jTable_Generica;
     // End of variables declaration//GEN-END:variables
 
-    private void configureTableLook() {
-//        DefaultTableCellRenderer centerRender = new DefaultTableCellRenderer();
-//        centerRender.setHorizontalAlignment(JLabel.LEFT);
-//
-//        table.setRowHeight(25);
-//        table.getColumnModel().getColumn(0).setPreferredWidth(60);
-//
-//        table.getColumnModel().getColumn(1).setPreferredWidth(10);
-//        table.getColumnModel().getColumn(0).setCellRenderer(centerRender);
-//        //  table.getColumnModel().getColumn(1).setCellRenderer(centerRender);
-//
-//        TableCellRenderer rendererFromHeader = table.getTableHeader().getDefaultRenderer();
-//        JLabel headerLabel = (JLabel) rendererFromHeader;
-//        headerLabel.setHorizontalAlignment(JLabel.LEFT);
-//
-//        table.getTableHeader().setFont(new Font("Khmer UI", Font.PLAIN, 14));
-//        table.getTableHeader().setForeground(new Color(102, 102, 102));
-    }
+
 
     private boolean validateUI() {
 
@@ -973,19 +956,6 @@ public class showCustomers extends javax.swing.JDialog {
         upDateCostumers();
     }
 
-//    void setReturnMode() {
-//        this.jLabelSelect.setVisible(true);
-//        this.jLabelModificar.setVisible(false);
-//        this.jLabelVer.setVisible(false);
-//        this.jLabelBorrar.setVisible(false);
-//    }
-//    void setNotReturnMode() {
-//        this.jLabelSelect.setVisible(false);
-//        this.jLabelModificar.setVisible(true);
-//        this.jLabelVer.setVisible(true);
-//        this.jLabelBorrar.setVisible(true);
-//
-//    }
     void ocultarBotones(String caso) {
 
         if ("VerListadoAcciones".equals(caso)) {

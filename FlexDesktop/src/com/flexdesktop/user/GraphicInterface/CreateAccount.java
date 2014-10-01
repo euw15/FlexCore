@@ -143,7 +143,7 @@ public class CreateAccount extends javax.swing.JDialog {
         jLabel13 = new javax.swing.JLabel();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jLabel14 = new javax.swing.JLabel();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(418, 578));
@@ -554,8 +554,6 @@ jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFa
 
 jLabel14.setText("Cuenta Debito: ");
 
-jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
-
 javax.swing.GroupLayout jPanelCrearCuentaObjetivoLayout = new javax.swing.GroupLayout(jPanelCrearCuentaObjetivo);
 jPanelCrearCuentaObjetivo.setLayout(jPanelCrearCuentaObjetivoLayout);
 jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
@@ -597,7 +595,7 @@ jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jFormattedTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                            .addComponent(jFormattedTextField2))))))
+                            .addComponent(jTextField1))))))
         .addGap(35, 35, 35))
     .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
         .addContainerGap()
@@ -666,8 +664,8 @@ jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
             .addGap(23, 23, 23)
             .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel14)
-                .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
             .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -768,9 +766,12 @@ jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
         getInfoPanel.showDialog("CreateBneficiario");
         String ced = getInfoPanel.getCed();
         String[] benefi = {ced};
+
         beneciarios.add(benefi);
-        this.jTable_Dirreciones.setModel(new tableModelAddres(columName,
-                beneciarios, true));
+        if (!"".equals(ced)) {
+            this.jTable_Dirreciones.setModel(new tableModelAddres(columName,
+                    beneciarios, true));
+        }
 
 
     }//GEN-LAST:event_jButton8ActionPerformed
@@ -856,7 +857,6 @@ jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JFormattedTextField jFormattedTextFieldEnterCedula;
     private javax.swing.JFormattedTextField jFormattedTextFieldEnterName;
     private javax.swing.JFormattedTextField jFormattedTextFieldEnterName1;
@@ -883,6 +883,7 @@ jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
     private javax.swing.JPanel jPanelCrearCuentaObjetivo;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable_Dirreciones;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
     private void configureTableLook() {
