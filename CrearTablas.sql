@@ -44,7 +44,9 @@ CREATE TABLE [ClienteFisico](
 	[Nombre] [nvarchar](30) NOT NULL,
 	[Apellido] [nvarchar](30) NOT NULL,
 	[idImagenCliente] [int],
-	[Cedula] [int] NOT NULL
+	[Cedula] [int] NOT NULL,
+	[idDireccionPrincipal] [int] NOT NULL,
+	[idTelefonoPrincipal]  [int] NOT NULL
 	)
 
 /********************************************************************/
@@ -53,7 +55,9 @@ CREATE TABLE [ClienteJuridico](
 	[idCLienteJuridico] [int] Identity(0,2) constraint pk_idCliente_ClienteJuridico primary key,
 	[CIF] [int] NOT NULL,
 	[Nombre] [nvarchar](30) NOT NULL,
-	[Cedula] [int] NOT NULL
+	[Cedula] [int] NOT NULL,
+	[idDireccionPrincipal] [int] NOT NULL,
+	[idTelefonoPrincipal]  [int] NOT NULL
 	)
 
 

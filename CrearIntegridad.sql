@@ -36,31 +36,42 @@ GO
 ALTER TABLE TelefonoxCliente 
 ADD CONSTRAINT FK_TelefonoXCliente_idTelefono FOREIGN KEY (idTelefono) 
     REFERENCES Telefono (idTelefono) 
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
 
  ALTER TABLE TelefonoxCliente 
 ADD CONSTRAINT FK_TelefonoXCLiente_CIF FOREIGN KEY (CIF) 
     REFERENCES Cliente (CIF) 
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
-;
 
 
-/******Para CLientes Juridicos y Fisicos ***************************/
+/******Para CLientes Juridicos ********************************/
 GO
 ALTER TABLE ClienteJuridico 
 ADD CONSTRAINT FK_ClienteJuridico_CIF FOREIGN KEY (CIF) 
     REFERENCES Cliente (CIF) 
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
+
+ALTER TABLE ClienteJuridico 
+ADD CONSTRAINT FK_ClienteJuridico_DireccionPrincipal FOREIGN KEY (idDireccionPrincipal) 
+    REFERENCES Direccion (idDireccion) 
+
+ALTER TABLE ClienteJuridico 
+ADD CONSTRAINT FK_ClienteJuridico_TelefonoPrincipal FOREIGN KEY (idTelefonoPrincipal) 
+    REFERENCES Telefono (idTelefono) 
+
+
+/******Para CLientes Fisico ********************************/
+ALTER TABLE ClienteFisico 
+ADD CONSTRAINT FK_ClienteFisico_DireccionPrincipal FOREIGN KEY (idDireccionPrincipal) 
+    REFERENCES Direccion (idDireccion) 
+
+ALTER TABLE ClienteFisico 
+ADD CONSTRAINT FK_ClienteFisico_TelefonoPrincipal FOREIGN KEY (idTelefonoPrincipal) 
+    REFERENCES Telefono (idTelefono) 
 
  ALTER TABLE ClienteFisico 
 ADD CONSTRAINT FK_ClienteFisico_CIF FOREIGN KEY (CIF) 
     REFERENCES Cliente (CIF) 
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
-;
+
+
+
 
 /*******FK Para Cuenta de Debito ***********************************/
 
@@ -68,14 +79,11 @@ GO
 ALTER TABLE CuentaDebito
 ADD CONSTRAINT FK_CuentaDebito_idTipoMoneda FOREIGN KEY (idTipoMoneda) 
     REFERENCES TipoMoneda (idTipoMoneda) 
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
+
 
 ALTER TABLE CuentaDebito
 ADD CONSTRAINT FK_CuentaDebito_idCliente FOREIGN KEY (idCliente) 
     REFERENCES Cliente (CIF) 
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
 
 /*******FK Beneficiarios ********************************************/
 
@@ -83,8 +91,7 @@ GO
 ALTER TABLE Beneficiarios
 ADD CONSTRAINT FK_Beneficiarios_idCliente FOREIGN KEY (idCliente) 
     REFERENCES Cliente (CIF) 
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
+
 
 ALTER TABLE Beneficiarios
 ADD CONSTRAINT FK_Beneficiarios_NumeroCuentaDebito FOREIGN KEY (NumeroCuentaDebito) 
@@ -96,8 +103,7 @@ GO
 ALTER TABLE MetodoPago
 ADD CONSTRAINT FK_MetodoPago_NumeroCuenta FOREIGN KEY (NumeroCuentaDebito)
 	REFERENCES CuentaDebito (idCuentaDebito)
-	ON DELETE CASCADE
-	ON UPDATE CASCADE
+
 
 /***********************Cuenta de Ahorro *******************************/
 
@@ -105,14 +111,12 @@ GO
 ALTER TABLE CuentaAhorro
 ADD CONSTRAINT FK_CuentaAhorro_Proposito FOREIGN KEY (idProposito)
 	REFERENCES Proposito (idProposito)
-	ON DELETE CASCADE
-	ON UPDATE CASCADE
+
 
 ALTER TABLE CuentaAhorro
 ADD CONSTRAINT FK_CuentaAhorro_idCliente FOREIGN KEY (CIF)
 	REFERENCES Cliente (CIF)
-	ON DELETE CASCADE
-	ON UPDATE CASCADE
+
 
 ALTER TABLE CuentaAhorro
 ADD CONSTRAINT FK_CuentaAhorro_NumeroCuentaDebito FOREIGN KEY (NumeroCuentaDebito)
