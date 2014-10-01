@@ -310,8 +310,8 @@ public class Frame extends javax.swing.JFrame {
 
         } else if (selection == OPCION2) {
             showCustomers sC = new showCustomers(null, true);
-            sC.setNotReturnMode();
-            sC.showDialog("VerListadoClt");
+            sC.ocultarBotones("VerListadoAcciones");
+            sC.showDialog();
 
         } else if (selection == OPCION3) {
             getInformation getInfoPanel = new getInformation(null, true);
@@ -345,14 +345,14 @@ public class Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelSelectRowCuentaMouseClicked
 
     private void jLabel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseClicked
-int selection = jTable3.getSelectedRow();
+        int selection = jTable3.getSelectedRow();
         ModuloPago ModuloPagoD = new ModuloPago(null, true);
         if (selection == 2) {//Abrir cuenta ahorro a la vista
 
             ModuloPagoD.showDialog("CuentaAhorro");
 
         }
-               
+
     }//GEN-LAST:event_jLabel16MouseClicked
 
     private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
@@ -360,10 +360,31 @@ int selection = jTable3.getSelectedRow();
 
         if (selection == OPCION0) {
             System.out.println("transacciones clt juridica");
+            getInformation getInfoPanel = getInformation.getSelf();
+            getInfoPanel.setActionIcon(7);
+            getInfoPanel.showDialog("ConsultarClt");
+            getInfoPanel.SetTittle("Indicar Cliente");
+
         } else if (selection == OPCION1) {
             System.out.println("transaciones clt fisico");
+            getInformation getInfoPanel = getInformation.getSelf();
+            getInfoPanel.setActionIcon(7);
+            getInfoPanel.showDialog("ConsultarClt");
+            getInfoPanel.SetTittle("Indicar Cliente");
         } else if (selection == OPCION2) {
             System.out.println("Cierres Realizados");
+            showCustomers sC = new showCustomers(null, true);
+            
+
+            //To do
+            //Obtener los clientes para esa cedulaSeleccionada
+            Object cliente[][] = {{"1", "2011/25/04"}, {"2", "2014/05/08"}};
+            String[] colums = {"Número de cierre", "Fecha"};
+            sC.setColumName(colums);
+            sC.setData(cliente);
+            sC.ocultarBotones("VerCierres");
+            sC.showDialog();
+
         } else if (selection == OPCION3) {
             System.out.println("Lista de Clientes x campos");
         } else if (selection == OPCION4) {

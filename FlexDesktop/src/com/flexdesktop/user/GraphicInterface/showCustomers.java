@@ -38,7 +38,7 @@ public class showCustomers extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    private final String[] ColumName = {"Cedula", "Nombre", "Apellido"};
+    private String[] ColumName = {"Cedula", "Nombre", "Apellido"};
 
     Object data2[][] = {{"503890620", "Jason", "Salazar"},
     {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
@@ -88,7 +88,7 @@ public class showCustomers extends javax.swing.JDialog {
 
     }
 
-    public void showDialog(String panel) {
+    public void showDialog() {
 
         final Timer timer = new Timer(30, null);
         timer.setRepeats(true);
@@ -107,7 +107,7 @@ public class showCustomers extends javax.swing.JDialog {
         setOpacity(0);
         timer.start();
 
-        // setVisiblePanel(panel);
+        //setVisiblePanel(panel);
         setVisible(true);
 
     }
@@ -737,92 +737,6 @@ public class showCustomers extends javax.swing.JDialog {
         pDialog.setVisible(true);
     }
 
-    private void setVisiblePanel(String panel) {
-        removePanels();
-        switch (panel) {
-//            case "RegisterClt":
-//                add(registerClt);
-//                registerClt.setVisible(true);
-//            case "ConsultarClt":
-//                add(ConsultarClt);
-//                ConsultarClt.setVisible(true);
-        }
-
-    }
-
-    public void removePanels() {
-        //registerClt.setVisible(false);
-        ListadoClt.setVisible(false);
-//        remove(registerClt);
-//
-//        remove(ConsultarClt);
-    }
-
-//    public void completarTablaFacturacion() {
-//        //Crea la tabla generica para Facturas
-//
-//        MyTableModel_FACT model = new MyTableModel_FACT(columnNames, data2, true);
-//        this.table1.setModel(
-//                model);
-////        this.table1.setModel(new Modelo_Facturacion(columnNames, data));
-//        //Alinea la primer columna de esta tabla hacia el centro
-//        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-//      model.removeRow(1);
-//        this.table1.getColumnModel()
-//                .getColumn(0).setCellRenderer(centerRenderer);
-//    }
-//    private void eliminarFila(JTable table) {
-//        try {
-//            tableModelAddres model = (tableModelAddres) table.getModel();
-//            int row = table.getSelectedRow();
-//            ///Si se esta escribiendo en la celda para el editor y luego elimina la
-//            // fila
-//            if (!model.data.isEmpty()) {
-//                if (table.isEditing()) {
-//                    table.getCellEditor().cancelCellEditing();
-//                    table.revalidate();
-//                    table.repaint();
-//                    table.requestFocus();
-//
-//                }
-//
-//                model.removeRow(row);
-//                table.changeSelection(row - 1, 0, false, false);
-//                table.revalidate();
-//                table.repaint();
-//                table.requestFocus();
-//            }
-//            if (model.data.isEmpty()) {
-//                model.addRow(1);
-//            }
-//        } catch (Exception e) {
-//        }
-//
-//    }
-    private void addRow(JTable table) {
-        try {
-            tableModelAddres model = (tableModelAddres) table.getModel();
-
-            ///Si se esta escribiendo en la celda para el editor 
-            //y luego elimina la fila
-            if (!model.data.isEmpty()) {
-                if (table.isEditing()) {
-                    table.getCellEditor().cancelCellEditing();
-                    table.revalidate();
-                    table.repaint();
-                    table.requestFocus();
-
-                }
-            }
-            model.addRow(1);
-            table.revalidate();
-            table.repaint();
-            table.requestFocus();
-        } catch (Exception e) {
-        }
-
-    }
-
     public void upDateCostumers() {
 //        AdminBD.consultarClientes();
 //        data = AdminBD.getData();
@@ -1059,18 +973,43 @@ public class showCustomers extends javax.swing.JDialog {
         upDateCostumers();
     }
 
-    void setReturnMode() {
-        this.jLabelSelect.setVisible(true);
-        this.jLabelModificar.setVisible(false);
-        this.jLabelVer.setVisible(false);
-        this.jLabelBorrar.setVisible(false);
-    }
+//    void setReturnMode() {
+//        this.jLabelSelect.setVisible(true);
+//        this.jLabelModificar.setVisible(false);
+//        this.jLabelVer.setVisible(false);
+//        this.jLabelBorrar.setVisible(false);
+//    }
+//    void setNotReturnMode() {
+//        this.jLabelSelect.setVisible(false);
+//        this.jLabelModificar.setVisible(true);
+//        this.jLabelVer.setVisible(true);
+//        this.jLabelBorrar.setVisible(true);
+//
+//    }
+    void ocultarBotones(String caso) {
 
-    void setNotReturnMode() {
-        this.jLabelSelect.setVisible(false);
-        this.jLabelModificar.setVisible(true);
-        this.jLabelVer.setVisible(true);
-        this.jLabelBorrar.setVisible(true);
+        if ("VerListadoAcciones".equals(caso)) {
+            this.jLabelSelect.setVisible(false);
+            this.jLabelModificar.setVisible(true);
+            this.jLabelVer.setVisible(true);
+            this.jLabelBorrar.setVisible(true);
+
+        }
+        if ("VerListado".equals(caso)) {
+            this.jLabelSelect.setVisible(true);
+            this.jLabelModificar.setVisible(false);
+            this.jLabelVer.setVisible(false);
+            this.jLabelBorrar.setVisible(false);
+
+        }
+        if ("VerCierres".equals(caso)) {
+            this.jLabelSelect.setVisible(false);
+            this.jLabelModificar.setVisible(false);
+            this.jLabelVer.setVisible(false);
+            this.jLabelBorrar.setVisible(false);
+            this.jLabel3.setVisible(false);
+            this.jLabel8.setText("Lista de Cierres");
+        }
 
     }
 
@@ -1086,5 +1025,12 @@ public class showCustomers extends javax.swing.JDialog {
      */
     public void setIdSelect(String idSelect) {
         this.idSelect = idSelect;
+    }
+
+    /**
+     * @param ColumName the ColumName to set
+     */
+    public void setColumName(String[] ColumName) {
+        this.ColumName = ColumName;
     }
 }

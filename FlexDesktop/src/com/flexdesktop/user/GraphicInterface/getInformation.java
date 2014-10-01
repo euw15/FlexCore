@@ -37,7 +37,7 @@ public class getInformation extends javax.swing.JDialog {
     private String[] phone = {"Phone"};
 
     public List<Object[]> data2 = new ArrayList<Object[]>();
-
+    static private getInformation self;
     private int accion = 0;
     private final int BORRAR = 1;
     private final int Ver = 0;
@@ -58,6 +58,12 @@ public class getInformation extends javax.swing.JDialog {
         //Agregar una fila por defecto en las tablas
         addRow(jTable_Dirreciones);
 
+    }
+    static getInformation getSelf(){
+    if(self ==null){
+        return new getInformation(null, true);
+    }
+    return self;
     }
 
     public void showDialog(String panel) {
@@ -950,7 +956,7 @@ public class getInformation extends javax.swing.JDialog {
     private void jLabelCreateCltMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCreateCltMouseClicked
 
         showCustomers sC = new showCustomers(null, true);
-        sC.setReturnMode();
+        sC.ocultarBotones("VerListado");
         if (jRadioButtonBuscarCed.isSelected()) {
             //To do
             //Obtener los clientes para esa cedulaSeleccionada
@@ -958,7 +964,7 @@ public class getInformation extends javax.swing.JDialog {
             Object cliente[][] = {{jFormattedTextFieldBuscarPor.getText(),
                 "Jason", "Salazar"}};
             sC.setData(cliente);
-            sC.showDialog("VerListadoClt");
+            sC.showDialog();
             String cedulaSeleccionada = sC.getIdSelect();
             setCed(cedulaSeleccionada);
             if (cedulaSeleccionada != "") {
@@ -974,7 +980,7 @@ public class getInformation extends javax.swing.JDialog {
             Object cliente[][] = {{jFormattedTextFieldBuscarPor.getText(),
                 "Jason", "Salazar"}};
             sC.setData(cliente);
-            sC.showDialog("VerListadoClt");
+            sC.showDialog();
             String cedulaSeleccionada = sC.getIdSelect();
             System.out.println(cedulaSeleccionada);
             if (cedulaSeleccionada != "") {
@@ -986,7 +992,7 @@ public class getInformation extends javax.swing.JDialog {
             Object cliente[][] = {{jFormattedTextFieldBuscarPor.getText(),
                 "Jason", "Salazar"}};
             sC.setData(cliente);
-            sC.showDialog("VerListadoClt");
+            sC.showDialog();
             String cedulaSeleccionada = sC.getIdSelect();
             System.out.println(cedulaSeleccionada);
             if (cedulaSeleccionada != "") {
@@ -997,7 +1003,7 @@ public class getInformation extends javax.swing.JDialog {
             Object cliente[][] = {{jFormattedTextFieldBuscarPor.getText(),
                 "Jason", "Salazar"}};
             sC.setData(cliente);
-            sC.showDialog("VerListadoClt");
+            sC.showDialog();
             String cedulaSeleccionada = sC.getIdSelect();
             System.out.println(cedulaSeleccionada);
             if (cedulaSeleccionada != "") {
@@ -1319,10 +1325,11 @@ public class getInformation extends javax.swing.JDialog {
             getInfoPanel.showDialog("RegisterClt");
         }
         if (accion == Beneficiario) {
+            //establer id obtenido
             System.out.println("Obtner bediciario");
         }
         if (accion == getIdCliente) {
-           
+
         }
 
     }
@@ -1342,5 +1349,4 @@ public class getInformation extends javax.swing.JDialog {
 
     }
 
-    
 }
