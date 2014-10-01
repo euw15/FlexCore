@@ -345,7 +345,14 @@ public class Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelSelectRowCuentaMouseClicked
 
     private void jLabel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseClicked
-        // TODO add your handling code here:
+int selection = jTable3.getSelectedRow();
+        ModuloPago ModuloPagoD = new ModuloPago(null, true);
+        if (selection == 2) {//Abrir cuenta ahorro a la vista
+
+            ModuloPagoD.showDialog("CuentaAhorro");
+
+        }
+               
     }//GEN-LAST:event_jLabel16MouseClicked
 
     private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
