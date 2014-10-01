@@ -61,3 +61,71 @@ ADD CONSTRAINT FK_ClienteFisico_CIF FOREIGN KEY (CIF)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 ;
+
+/*******FK Para Cuenta de Debito ***********************************/
+
+GO
+ALTER TABLE CuentaDebito
+ADD CONSTRAINT FK_CuentaDebito_idTipoMoneda FOREIGN KEY (idTipoMoneda) 
+    REFERENCES TipoMoneda (idTipoMoneda) 
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+
+ALTER TABLE CuentaDebito
+ADD CONSTRAINT FK_CuentaDebito_idCliente FOREIGN KEY (idCliente) 
+    REFERENCES Cliente (CIF) 
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+
+/*******FK Beneficiarios ********************************************/
+
+GO
+ALTER TABLE Beneficiarios
+ADD CONSTRAINT FK_Beneficiarios_idCliente FOREIGN KEY (idCliente) 
+    REFERENCES Cliente (CIF) 
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+
+ALTER TABLE Beneficiarios
+ADD CONSTRAINT FK_Beneficiarios_NumeroCuentaDebito FOREIGN KEY (NumeroCuentaDebito) 
+    REFERENCES CuentaDebito (idCuentaDebito) 
+
+/***********************FK Metodo de Pago *******************************/
+
+GO
+ALTER TABLE MetodoPago
+ADD CONSTRAINT FK_MetodoPago_NumeroCuenta FOREIGN KEY (NumeroCuentaDebito)
+	REFERENCES CuentaDebito (idCuentaDebito)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE
+
+/***********************Cuenta de Ahorro *******************************/
+
+GO
+ALTER TABLE CuentaAhorro
+ADD CONSTRAINT FK_CuentaAhorro_Proposito FOREIGN KEY (idProposito)
+	REFERENCES Proposito (idProposito)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE
+
+ALTER TABLE CuentaAhorro
+ADD CONSTRAINT FK_CuentaAhorro_idCliente FOREIGN KEY (CIF)
+	REFERENCES Cliente (CIF)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE
+
+ALTER TABLE CuentaAhorro
+ADD CONSTRAINT FK_CuentaAhorro_NumeroCuentaDebito FOREIGN KEY (NumeroCuentaDebito)
+	REFERENCES CuentaDebito (idCuentaDebito)
+
+/***********************Direccion por Cliente ******************************/
+
+GO
+ALTER TABLE DireccionXCliente
+ADD CONSTRAINT FK_DireccionXCliente_CIF FOREIGN KEY (CIF)
+	REFERENCES Cliente (CIF)
+
+ALTER TABLE DireccionXCliente
+ADD CONSTRAINT FK_DireccionXCliente_idDireccion FOREIGN KEY (idDireccion)
+	REFERENCES Direccion (idDireccion)
+
