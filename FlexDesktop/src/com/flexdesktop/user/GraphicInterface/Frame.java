@@ -58,6 +58,7 @@ public class Frame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jTable1.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"   Registrar"},
@@ -85,7 +86,7 @@ public class Frame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jLabelVerSelected.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/listBtt.png"))); // NOI18N
-        jLabelVerSelected.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelVerSelected.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabelVerSelected.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelVerSelectedMouseClicked(evt);
@@ -96,26 +97,28 @@ public class Frame extends javax.swing.JFrame {
         jPanelCliente.setLayout(jPanelClienteLayout);
         jPanelClienteLayout.setHorizontalGroup(
             jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelClienteLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelVerSelected)
-                .addGap(69, 69, 69))
             .addGroup(jPanelClienteLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelClienteLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelVerSelected)
+                .addGap(24, 24, 24))
         );
         jPanelClienteLayout.setVerticalGroup(
             jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelClienteLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
+                .addGap(40, 40, 40)
                 .addComponent(jLabelVerSelected)
-                .addContainerGap())
+                .addGap(32, 32, 32))
         );
 
         jTabbedPane1.addTab("    Clientes    ", jPanelCliente);
 
+        jTable2.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {""},
@@ -143,7 +146,7 @@ public class Frame extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTable2);
 
         jLabelSelectRowCuenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/listBtt.png"))); // NOI18N
-        jLabelSelectRowCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelSelectRowCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabelSelectRowCuenta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelSelectRowCuentaMouseClicked(evt);
@@ -154,34 +157,33 @@ public class Frame extends javax.swing.JFrame {
         jPanelCuentas.setLayout(jPanelCuentasLayout);
         jPanelCuentasLayout.setHorizontalGroup(
             jPanelCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCuentasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelSelectRowCuenta)
-                .addGap(69, 69, 69))
             .addGroup(jPanelCuentasLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61))
+                .addContainerGap()
+                .addGroup(jPanelCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCuentasLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabelSelectRowCuenta)
+                        .addGap(15, 15, 15)))
+                .addContainerGap())
         );
         jPanelCuentasLayout.setVerticalGroup(
             jPanelCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCuentasLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56)
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
                 .addComponent(jLabelSelectRowCuenta)
-                .addContainerGap())
+                .addGap(23, 23, 23))
         );
 
         jTabbedPane1.addTab("     Cuentas     ", jPanelCuentas);
 
+        jTable3.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {""},
-                {""},
                 {"   Afiliar Un Cliente A Un Módulo De Pago"},
-                {""},
-                {""},
-                {""},
                 {""}
             },
             new String [] {
@@ -201,7 +203,7 @@ public class Frame extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jTable3);
 
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/listBtt.png"))); // NOI18N
-        jLabel16.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel16.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel16.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel16MouseClicked(evt);
@@ -212,26 +214,28 @@ public class Frame extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel16)
-                .addGap(69, 69, 69))
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61))
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel16)
+                .addGap(22, 22, 22))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE)
+                .addGap(37, 37, 37)
                 .addComponent(jLabel16)
-                .addContainerGap())
+                .addGap(30, 30, 30))
         );
 
         jTabbedPane1.addTab("     Pago     ", jPanel4);
 
+        jTable4.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"   Transaciones Clientes Jurídica"},
@@ -259,7 +263,7 @@ public class Frame extends javax.swing.JFrame {
         jScrollPane4.setViewportView(jTable4);
 
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/listBtt.png"))); // NOI18N
-        jLabel17.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel17.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel17MouseClicked(evt);
@@ -273,25 +277,30 @@ public class Frame extends javax.swing.JFrame {
         jPanelReportes.setLayout(jPanelReportesLayout);
         jPanelReportesLayout.setHorizontalGroup(
             jPanelReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelReportesLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel17)
+                .addGap(22, 22, 22))
             .addGroup(jPanelReportesLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanelReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelReportesLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel17)
-                        .addGap(8, 8, 8)))
-                .addGap(61, 61, 61))
+                    .addGroup(jPanelReportesLayout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanelReportesLayout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanelReportesLayout.setVerticalGroup(
             jPanelReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelReportesLayout.createSequentialGroup()
+                .addGap(4, 4, 4)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel17)
-                .addContainerGap())
+                .addGap(29, 29, 29))
         );
 
         jTabbedPane1.addTab("     Reportes     ", jPanelReportes);
@@ -304,7 +313,7 @@ public class Frame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
 
         pack();

@@ -120,14 +120,14 @@ public class getInformation extends javax.swing.JDialog {
         jButton14 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jButton15 = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
         jLabelName = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         jLabelApellido = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabelCedula = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabelBorrarClt = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         registerClt = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -135,24 +135,23 @@ public class getInformation extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jFormattedTextFieldEnterName = new javax.swing.JFormattedTextField();
-        jLabel1 = new javax.swing.JLabel();
         jFormattedTextFieldEnterApellido = new javax.swing.JFormattedTextField();
-        jLabel4 = new javax.swing.JLabel();
         jFormattedTextFieldEnterCedula = new javax.swing.JFormattedTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable_Dirreciones = new javax.swing.JTable();
-        jButton9 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTablePhone = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jButton7 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(418, 578));
         setMinimumSize(new java.awt.Dimension(418, 578));
         setUndecorated(true);
 
@@ -187,7 +186,7 @@ public class getInformation extends javax.swing.JDialog {
         });
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel3.setFont(new java.awt.Font("Khmer UI", 0, 13)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Khmer UI", 0, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("Buscar Por:");
 
@@ -207,7 +206,9 @@ public class getInformation extends javax.swing.JDialog {
             }
         });
 
+        jRadioButtonBuscarCed.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(jRadioButtonBuscarCed);
+        jRadioButtonBuscarCed.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jRadioButtonBuscarCed.setSelected(true);
         jRadioButtonBuscarCed.setText("Número de Cédula");
         jRadioButtonBuscarCed.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -216,7 +217,9 @@ public class getInformation extends javax.swing.JDialog {
             }
         });
 
+        jRadioButtonBuscarCuenta.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(jRadioButtonBuscarCuenta);
+        jRadioButtonBuscarCuenta.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jRadioButtonBuscarCuenta.setText("Número de Cuenta");
         jRadioButtonBuscarCuenta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -224,7 +227,9 @@ public class getInformation extends javax.swing.JDialog {
             }
         });
 
+        jRadioButtonNombre.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(jRadioButtonNombre);
+        jRadioButtonNombre.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jRadioButtonNombre.setText("Nombre");
         jRadioButtonNombre.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -232,7 +237,9 @@ public class getInformation extends javax.swing.JDialog {
             }
         });
 
+        jRadioButtonApellido.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(jRadioButtonApellido);
+        jRadioButtonApellido.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jRadioButtonApellido.setText("Apellido");
         jRadioButtonApellido.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -240,6 +247,7 @@ public class getInformation extends javax.swing.JDialog {
             }
         });
 
+        jLabelBusquedaPor.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabelBusquedaPor.setText("Cédula:");
 
         jLabelCreateClt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/searchBtt.png"))); // NOI18N
@@ -269,7 +277,7 @@ public class getInformation extends javax.swing.JDialog {
         });
 
         jLabelCrear.setBackground(new java.awt.Color(255, 255, 255));
-        jLabelCrear.setFont(new java.awt.Font("Khmer UI", 0, 13)); // NOI18N
+        jLabelCrear.setFont(new java.awt.Font("Khmer UI", 0, 14)); // NOI18N
         jLabelCrear.setForeground(new java.awt.Color(102, 102, 102));
         jLabelCrear.setText("Crear:");
 
@@ -278,82 +286,71 @@ public class getInformation extends javax.swing.JDialog {
         ConsultarCltLayout.setHorizontalGroup(
             ConsultarCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ConsultarCltLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
                 .addGroup(ConsultarCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(ConsultarCltLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(ConsultarCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(ConsultarCltLayout.createSequentialGroup()
-                                .addGroup(ConsultarCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jFormattedTextFieldBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelBusquedaPor, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(63, 63, 63))
-                            .addGroup(ConsultarCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(ConsultarCltLayout.createSequentialGroup()
-                                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(247, 247, 247)
-                                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(ConsultarCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ConsultarCltLayout.createSequentialGroup()
-                                        .addGap(60, 60, 60)
-                                        .addGroup(ConsultarCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jRadioButtonBuscarCed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jRadioButtonBuscarCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jRadioButtonNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jRadioButtonApellido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
-                    .addGroup(ConsultarCltLayout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(jLabelCreateBeneficiario)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ConsultarCltLayout.createSequentialGroup()
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelCreateClt)))
-                .addGap(0, 39, Short.MAX_VALUE))
-            .addGroup(ConsultarCltLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(ConsultarCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ConsultarCltLayout.createSequentialGroup()
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ConsultarCltLayout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(ConsultarCltLayout.createSequentialGroup()
-                        .addComponent(jLabelCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ConsultarCltLayout.createSequentialGroup()
+                        .addGroup(ConsultarCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(ConsultarCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabelBusquedaPor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jRadioButtonApellido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jRadioButtonNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jRadioButtonBuscarCuenta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                                .addComponent(jRadioButtonBuscarCed, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabelCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(ConsultarCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(ConsultarCltLayout.createSequentialGroup()
+                                    .addComponent(jLabelCreateBeneficiario)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabelCreateClt))
+                                .addComponent(jFormattedTextFieldBuscarPor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 85, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         ConsultarCltLayout.setVerticalGroup(
             ConsultarCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ConsultarCltLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(ConsultarCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ConsultarCltLayout.createSequentialGroup()
-                        .addComponent(jButton6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ConsultarCltLayout.createSequentialGroup()
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(66, 66, 66)))
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(jRadioButtonBuscarCed)
-                .addGap(33, 33, 33)
-                .addComponent(jRadioButtonBuscarCuenta)
-                .addGap(18, 18, 18)
-                .addComponent(jRadioButtonNombre)
+                    .addComponent(jButton6)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
+                .addComponent(jLabel3)
+                .addGap(44, 44, 44)
+                .addComponent(jRadioButtonBuscarCed)
+                .addGap(35, 35, 35)
+                .addComponent(jRadioButtonBuscarCuenta)
+                .addGap(35, 35, 35)
+                .addComponent(jRadioButtonNombre)
+                .addGap(35, 35, 35)
                 .addComponent(jRadioButtonApellido)
-                .addGap(37, 37, 37)
+                .addGap(36, 36, 36)
                 .addComponent(jLabelBusquedaPor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFormattedTextFieldBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addGroup(ConsultarCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelCreateClt)
-                    .addGroup(ConsultarCltLayout.createSequentialGroup()
-                        .addComponent(jLabelCrear)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelCreateBeneficiario)))
-                .addGap(60, 60, 60)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(ConsultarCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26))
+                    .addGroup(ConsultarCltLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(ConsultarCltLayout.createSequentialGroup()
+                        .addComponent(jFormattedTextFieldBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                        .addGroup(ConsultarCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelCreateClt, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ConsultarCltLayout.createSequentialGroup()
+                                .addComponent(jLabelCrear)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelCreateBeneficiario)))
+                        .addGap(51, 51, 51)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         VerClt.setBackground(new java.awt.Color(255, 255, 255));
@@ -395,27 +392,25 @@ public class getInformation extends javax.swing.JDialog {
             }
         });
 
-        jLabel10.setText("Nombre:");
-
         jLabelName.setBackground(new java.awt.Color(255, 255, 255));
-        jLabelName.setFont(new java.awt.Font("Khmer UI", 0, 13)); // NOI18N
+        jLabelName.setFont(new java.awt.Font("Khmer UI", 0, 16)); // NOI18N
         jLabelName.setForeground(new java.awt.Color(102, 102, 102));
         jLabelName.setText("name");
 
-        jLabel12.setText("Apellido:");
-
         jLabelApellido.setBackground(new java.awt.Color(255, 255, 255));
-        jLabelApellido.setFont(new java.awt.Font("Khmer UI", 0, 13)); // NOI18N
+        jLabelApellido.setFont(new java.awt.Font("Khmer UI", 0, 16)); // NOI18N
         jLabelApellido.setForeground(new java.awt.Color(102, 102, 102));
         jLabelApellido.setText("lastName");
 
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel14.setText("Cédula:");
 
         jLabelCedula.setBackground(new java.awt.Color(255, 255, 255));
-        jLabelCedula.setFont(new java.awt.Font("Khmer UI", 0, 13)); // NOI18N
+        jLabelCedula.setFont(new java.awt.Font("Khmer UI", 0, 16)); // NOI18N
         jLabelCedula.setForeground(new java.awt.Color(102, 102, 102));
         jLabelCedula.setText("id");
 
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/rostro.jpg"))); // NOI18N
 
         jLabelBorrarClt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/trashBtt.png"))); // NOI18N
@@ -431,44 +426,46 @@ public class getInformation extends javax.swing.JDialog {
             }
         });
 
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel10.setText("Nombre:");
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel12.setText("Apellido:");
+
         javax.swing.GroupLayout VerCltLayout = new javax.swing.GroupLayout(VerClt);
         VerClt.setLayout(VerCltLayout);
         VerCltLayout.setHorizontalGroup(
             VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(VerCltLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(14, 14, 14)
                 .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(VerCltLayout.createSequentialGroup()
                         .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 253, Short.MAX_VALUE)
-                        .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VerCltLayout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(VerCltLayout.createSequentialGroup()
-                                    .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4))
+                    .addGroup(VerCltLayout.createSequentialGroup()
+                        .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel18)
+                            .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, VerCltLayout.createSequentialGroup()
+                                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabelApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(VerCltLayout.createSequentialGroup()
-                                    .addComponent(jLabel10)
+                                    .addComponent(jLabelCedula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, VerCltLayout.createSequentialGroup()
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(VerCltLayout.createSequentialGroup()
-                                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(VerCltLayout.createSequentialGroup()
-                                        .addComponent(jLabelBorrarClt, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(9, 9, 9))
-                                    .addComponent(jLabelCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap())))
-            .addGroup(VerCltLayout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 242, Short.MAX_VALUE))
+                                    .addComponent(jLabelApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, VerCltLayout.createSequentialGroup()
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 44, Short.MAX_VALUE))
+                    .addGroup(VerCltLayout.createSequentialGroup()
+                        .addComponent(jLabelBorrarClt, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         VerCltLayout.setVerticalGroup(
             VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -477,28 +474,25 @@ public class getInformation extends javax.swing.JDialog {
                 .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton15))
-                .addGap(54, 54, 54)
-                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabelName))
-                .addGap(27, 27, 27)
+                    .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jLabelApellido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
                 .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabelApellido))
-                .addGap(29, 29, 29)
-                .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabelCedula))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 241, Short.MAX_VALUE)
                 .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VerCltLayout.createSequentialGroup()
-                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VerCltLayout.createSequentialGroup()
-                        .addComponent(jLabelBorrarClt)
-                        .addGap(44, 44, 44))))
+                    .addComponent(jButton14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelBorrarClt, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
 
         registerClt.setBackground(new java.awt.Color(255, 255, 255));
@@ -532,7 +526,7 @@ public class getInformation extends javax.swing.JDialog {
         });
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setFont(new java.awt.Font("Khmer UI", 0, 13)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Khmer UI", 0, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Ingresar Datos Del Cliente");
 
@@ -554,36 +548,32 @@ public class getInformation extends javax.swing.JDialog {
 
         jFormattedTextFieldEnterName.setCaretColor(new java.awt.Color(204, 204, 204));
         jFormattedTextFieldEnterName.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        jFormattedTextFieldEnterName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jFormattedTextFieldEnterName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFormattedTextFieldEnterNameActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Nombre:");
-
         jFormattedTextFieldEnterApellido.setCaretColor(new java.awt.Color(204, 204, 204));
         jFormattedTextFieldEnterApellido.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        jFormattedTextFieldEnterApellido.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jFormattedTextFieldEnterApellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFormattedTextFieldEnterApellidoActionPerformed(evt);
             }
         });
 
-        jLabel4.setText("Apellido:");
-
         jFormattedTextFieldEnterCedula.setCaretColor(new java.awt.Color(204, 204, 204));
         jFormattedTextFieldEnterCedula.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        jFormattedTextFieldEnterCedula.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jFormattedTextFieldEnterCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFormattedTextFieldEnterCedulaActionPerformed(evt);
             }
         });
 
-        jLabel5.setText("Cédula:");
-
-        jButton7.setText("Cargar Fotografía");
-
+        jButton8.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButton8.setText("Agregar");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -591,6 +581,7 @@ public class getInformation extends javax.swing.JDialog {
             }
         });
 
+        jButton10.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButton10.setText("Borrar");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -598,6 +589,7 @@ public class getInformation extends javax.swing.JDialog {
             }
         });
 
+        jButton12.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButton12.setText("Agregar");
         jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -605,6 +597,7 @@ public class getInformation extends javax.swing.JDialog {
             }
         });
 
+        jButton13.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButton13.setText("Borrar");
         jButton13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -612,6 +605,7 @@ public class getInformation extends javax.swing.JDialog {
             }
         });
 
+        jTable_Dirreciones.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTable_Dirreciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -634,14 +628,7 @@ public class getInformation extends javax.swing.JDialog {
         jScrollPane2.setViewportView(jTable_Dirreciones);
         jTable_Dirreciones.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
-        jButton9.setForeground(new java.awt.Color(0, 51, 153));
-        jButton9.setText("Print dirreciones");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
-            }
-        });
-
+        jTablePhone.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTablePhone.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -663,61 +650,83 @@ public class getInformation extends javax.swing.JDialog {
         });
         jScrollPane3.setViewportView(jTablePhone);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Nombre:");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setText("Apellido:");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setText("Cédula:");
+
+        jButton7.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jButton7.setText("Cargar Fotografía");
+
+        jButton9.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jButton9.setForeground(new java.awt.Color(0, 51, 153));
+        jButton9.setText("Print Dirreciones");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout registerCltLayout = new javax.swing.GroupLayout(registerClt);
         registerClt.setLayout(registerCltLayout);
         registerCltLayout.setHorizontalGroup(
             registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(registerCltLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
                 .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(registerCltLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(registerCltLayout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(registerCltLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(registerCltLayout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jFormattedTextFieldEnterCedula))
+                            .addGroup(registerCltLayout.createSequentialGroup()
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jFormattedTextFieldEnterApellido))
                             .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jButton7)
                                 .addGroup(registerCltLayout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addGap(43, 43, 43)
-                                    .addComponent(jFormattedTextFieldEnterApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(registerCltLayout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addGap(43, 43, 43)
-                                    .addComponent(jFormattedTextFieldEnterName, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(registerCltLayout.createSequentialGroup()
-                                    .addComponent(jButton7)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton9)))
-                            .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(registerCltLayout.createSequentialGroup()
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(registerCltLayout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addGap(43, 43, 43)
-                                    .addComponent(jFormattedTextFieldEnterCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(registerCltLayout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jButton8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton10)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton13)))
-                .addContainerGap(21, Short.MAX_VALUE))
-            .addGroup(registerCltLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(250, 250, 250)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jFormattedTextFieldEnterName, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 18, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registerCltLayout.createSequentialGroup()
+                        .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(registerCltLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(registerCltLayout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(registerCltLayout.createSequentialGroup()
+                                        .addComponent(jButton12)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton13))
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(22, 22, 22))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registerCltLayout.createSequentialGroup()
+                        .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(registerCltLayout.createSequentialGroup()
+                                .addComponent(jButton8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton10)
+                                .addGap(4, 4, 4))
+                            .addGroup(registerCltLayout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addComponent(jLabel7))
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         registerCltLayout.setVerticalGroup(
             registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -726,46 +735,44 @@ public class getInformation extends javax.swing.JDialog {
                 .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(registerCltLayout.createSequentialGroup()
                         .addComponent(jButton3)
-                        .addGap(145, 145, 145))
+                        .addGap(98, 98, 98))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registerCltLayout.createSequentialGroup()
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
                         .addComponent(jLabel2)
-                        .addGap(48, 48, 48)
-                        .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jFormattedTextFieldEnterName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(27, 27, 27)))
+                        .addGap(44, 44, 44)))
                 .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jFormattedTextFieldEnterApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(30, 30, 30)
+                    .addComponent(jFormattedTextFieldEnterName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(registerCltLayout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21))
+                    .addGroup(registerCltLayout.createSequentialGroup()
+                        .addComponent(jFormattedTextFieldEnterApellido)
+                        .addGap(18, 18, 18)))
                 .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jFormattedTextFieldEnterCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextFieldEnterCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(47, 47, 47)
-                .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(registerCltLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton10)
-                            .addComponent(jButton8)))
-                    .addGroup(registerCltLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton12)
-                            .addComponent(jButton13))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton7)
-                    .addComponent(jButton9))
-                .addGap(30, 30, 30)
+                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -773,33 +780,18 @@ public class getInformation extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ConsultarClt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(VerClt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(registerClt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(VerClt, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(registerClt, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ConsultarClt, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(ConsultarClt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(VerClt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(registerClt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(VerClt, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(registerClt, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(ConsultarClt, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -1148,27 +1140,33 @@ public class getInformation extends javax.swing.JDialog {
     }
 
     private void setVisiblePanel(String panel) {
-        removePanels();
 
+        this.setSize(448, 665);
+
+        removePanels();
         switch (panel) {
             case "RegisterClt":
                 add(registerClt);
                 registerClt.setVisible(true);
+                registerClt.setLocation(0, 0);
             case "ConsultarClt":
 
                 add(ConsultarClt);
                 ConsultarClt.setVisible(true);
+                ConsultarClt.setLocation(0, 0);
             case "VerClt":
                 add(VerClt);
                 VerClt.setVisible(true);
+                VerClt.setLocation(0, 0);
 
         }
-        if ("CreateBneficiario" == panel) {
+        if ("CreateBneficiario".equals(panel)) {
 
             add(ConsultarClt);
             jLabelCreateBeneficiario.setVisible(true);
             jLabelCrear.setVisible(true);
             ConsultarClt.setVisible(true);
+            ConsultarClt.setLocation(0, 0);
         }
     }
 
