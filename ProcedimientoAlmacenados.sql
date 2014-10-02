@@ -213,30 +213,19 @@ AS
 			@SaldoActualCuentaDestino money
 
 		/*Pregunta por el estado de las cuentas */
-		SELECT @EstadoCuentaDebito=Estado from CuentaDebito WITH (UPDLOCK) where numeroCuenta= @NumeroCuentaDebito;
-		SELECT @EstadoCuentaDestino=Estado from CuentaDebito WITH (UPDLOCK) where numeroCuenta= @EstadoCuentaDestino;
+		SELECT @EstadoCuentaDebito=Estado from CuentaDebito  where numeroCuenta= @NumeroCuentaDebito;
+		SELECT @EstadoCuentaDestino=Estado from CuentaDebito  where numeroCuenta= @EstadoCuentaDestino;
 
 		/*Si ambas cuentas estan activas realiza la operacion */
 		IF (@EstadoCuentaDestino=1)
-			BEGIN
-				select  @SaldoActualCuentaDebito=SaldoFlotante from CuentaDebito WITH (UPDLOCK) where numeroCuenta=@NumeroCuentaDebito
+				select  @SaldoActualCuentaDebito=SaldoFlotante from CuentaDebito where numeroCuenta=@NumeroCuentaDebito
 
 				/*Si tiene fondos suficientes realiza el pago*/
 				IF @SaldoActualCuentaDebito >= @MontoPago
-					BEGIN
-						BEGIN TRAN
-							select  @SaldoActualCuentaDestino=SaldoFlotante from CuentaDebito WITH (UPDLOCK) where numeroCuenta=@SaldoActualCuentaDestino
+							select  @SaldoActualCuentaDestino=SaldoFlotante from CuentaDebito where numeroCuenta=@SaldoActualCuentaDestino
 							update SaldoFlotante set SaldoFlotante=@SaldoActualCuentaDebito-@MontoPago from CuentaDebito where numeroCuenta=@NumeroCuentaDebito
 							update SaldoFlotante set SaldoFlotante=@SaldoActualCuentaDestino+@MontoPago from CuentaDebito where numeroCuenta=@SaldoActualCuentaDestino
 							return 1;
-						ROLLBACK
-					END
-				ELSE
-					return 0;
-			END
-		/*Alguna de las cuentas esta inectiva */
-		ELSE 
-			return 0;
 
 	ROLLBACK
 
