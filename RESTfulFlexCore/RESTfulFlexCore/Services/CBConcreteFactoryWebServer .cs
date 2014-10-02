@@ -34,6 +34,30 @@ namespace RESTfulFlexCore.Services
             return new CBImageConcrete();
         }
 
-
+        public override CBBeneficiarioAbstract CreateCBBeneficiarioAbstract()
+        {
+            return new CBBeneficiarioConcrete();
+        }
+        public override CBCuentaAbstract CreateCBCuentaAbstract()
+        {
+            return new CBCuentaConcrete();
+        }
+        public override CBDireccionAbstract CreateCBDireccionAbstract()
+        {
+            return new CBDireccionConcrete();
+        }
+        public override CBDocumentosAbstract CreateCBDocumentosAbstract()
+        {
+            return new CBDocumentosConcrete();
+        }
+        public override CBMetodoPagoAbstract CreateCBMetodoPagoAbstract()
+        {
+            return new CBMetodoPagoConcrete();
+        }
+        public override CBTelefonoAbstract CreateCBTelefonoAbstract()
+        {
+            return new CBTelefonoConcrete();
+        }
+        
     }
 }

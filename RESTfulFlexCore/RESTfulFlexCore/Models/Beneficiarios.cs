@@ -5,8 +5,8 @@ using System.Web;
 
 namespace RESTfulFlexCore.Models
 {
-    public class Image
+    public class Beneficiarios
     {
-        public string string64Image { get; set; }
+        public int NumeroCuentaDebito { get; set; }
     }
 }

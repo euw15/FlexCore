@@ -10,5 +10,14 @@ namespace RESTfulFlexCore.Models
         public int CIF { get; set; }
 
         public int idTipoCliente { get; set; }
+
+        public String tipoCliente { get; set; }
+
+        public String Nombre { get; set; }
+
+        public String Apellido { get; set; }
+        
+        public String Cedula { get; set; }
+       
     }
 }

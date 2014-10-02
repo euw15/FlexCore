@@ -5,8 +5,10 @@ using System.Web;
 
 namespace RESTfulFlexCore.Models
 {
-    public class Image
+    public class Documentos
     {
-        public string string64Image { get; set; }
+        public String name { get; set; }
+
+        public String string64 { get; set; }
     }
 }

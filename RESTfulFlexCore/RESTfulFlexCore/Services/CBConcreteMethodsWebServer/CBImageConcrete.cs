@@ -42,19 +42,16 @@ namespace RESTfulFlexCore.Services
          * Auxiliar method that return a dataSet with the data that  is need in the method getImage
          */
         public List<Image> getTableGetImage(DataTable table)
-        {
-            int ID = -1;
+        {           
             String string64Image = "";
 
             List<Image> listImage = new List<Image>();
 
             foreach (DataRow row in table.Rows)
-            {
-                if (row["ID"] != DBNull.Value) { ID = Convert.ToInt32(row["ID"]); }
+            {               
                 if (row["byteArray"] != DBNull.Value) { string64Image = row["byteArray"].ToString(); }
                 listImage.Add(new Image
-                {
-                    ID = ID,
+                {                    
                     string64Image = string64Image
                 });
             }
