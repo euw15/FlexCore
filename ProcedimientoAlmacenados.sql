@@ -159,9 +159,34 @@ AS
 	 ) a WHERE a.row > @Inicio and a.row <= @Inicio+@Cantidad
 
 	
+/********************* Crear Cuenta Debito ****************************************/
+go
+CREATE PROCEDURE crearCuentaDebito
+	/****Parametros de entrada *****/
+	@ClienteCIF nvarchar(11),
+	@Descripcion nvarchar(200),
+	@Moneda nvarchar(10)
+AS
+	INSERT INTO CuentaDebito (idCliente,Desripcion,idTipoMoneda,Estado,SaldoReal,SaldoFlotante) values (@ClienteCIF,@Descripcion,@Moneda,1,0,0)
 
+/********************* Crear Cuenta Ahorro ****************************************/
 
-
+go
+CREATE PROCEDURE crearCuentaAhorro
+	/****Parametros de entrada **********/
+	@ClienteCIF nvarchar(11),
+	@idProposito int,
+	@Periodicidad int,
+	@FechaInicio nvarchar(11),
+	@FechaFinal nvarchar(11),
+	@TiempoAhorro int,
+	@MontoAhorro int,
+	@NumeroCuentaOrigen int,
+	@Moneda nvarchar(10),
+	@DuracionAhorro int
+AS
+	insert into CuentaAhorro (CIF, NumeroCuentaDebito,idProposito,Periodicidad,FechaInicio,FechaFinal,DuracionAhorro,FechaFinal,MontoAhorro,idTipoMoneda)
+		values (@ClienteCIF,@NumeroCuentaOrigen,@idProposito,@Periodicidad,@FechaInicio,@FechaFinal,@DuracionAhorro,@FechaFinal,@MontoAhorro,@idTipoMoneda)
 
 
 
