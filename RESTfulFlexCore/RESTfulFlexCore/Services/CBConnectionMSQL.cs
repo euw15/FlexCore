@@ -19,7 +19,7 @@ namespace RESTfulFlexCore.Services
             SqlConnection connection = new SqlConnection("Data Source=localhost;Network Library=DBMSSOCN; user id=daniel;" +
                                       "password=dcanessa;server=ENVY15-3040NR;" +
                                       "Trusted_Connection=no;" +
-                                      "database=Envy; " +
+                                      "database=FlexCoreDataBase; " +
                                       "connection timeout=30");
             try
             {
@@ -44,7 +44,7 @@ namespace RESTfulFlexCore.Services
             SqlConnection connection = new SqlConnection("Data Source=localhost;Network Library=DBMSSOCN; user id=daniel;" +
                                        "password=dcanessa;server=ENVY15-3040NR;" +
                                        "Trusted_Connection=no;" +
-                                       "database=Envy; " +
+                                       "database=FlexCoreDataBase; " +
                                        "connection timeout=30");
             try
             {

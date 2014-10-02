@@ -23,8 +23,25 @@ namespace RESTfulFlexCore.Controllers
         [ActionName("getClient")]
         public Client[] getClient()
         {
-            //http://localhost:62830/api/cbclient/getclient            
+            //api/cbclient/getclient            
             return instanceClientAbstract.getClient();
         }
+
+        [HttpPost]
+        [ActionName("crearClienteJuridico")]
+        public String crearClienteJuridico(String nombre, String cedula, String telefono, String direccion)
+        {
+            //api/cbclient/crearClienteJuridico?nombre=Daniel&cedula=304720959&telefono=83416438&direccion=Paraiso
+            return instanceClientAbstract.crearClienteJuridico(nombre, cedula, telefono, direccion);
+        }
+
+        [HttpPost]
+        [ActionName("crearClienteFisico")]
+        public String crearClienteFisico(String nombre, String apellidos, String cedula, String telefono, String direccion)
+        {
+            //api/cbclient/crearClienteFisico?nombre=Daniel&apellidos=Canessa&cedula=3044720959&telefono=83416438&direccion=Paraiso
+            return instanceClientAbstract.crearClienteFisico(nombre,apellidos, cedula, telefono, direccion);
+        }
     }
+   
 }

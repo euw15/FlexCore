@@ -17,8 +17,7 @@ namespace RESTfulFlexCore.Services
             HttpContext.Current.Cache.Remove(CacheKey);
             var conecction = HttpContext.Current;
             var inputStream = new StreamReader(conecction.Request.InputStream);
-            string postData = inputStream.ReadToEnd();
-            System.Diagnostics.Debug.WriteLine(postData);
+            string postData = inputStream.ReadToEnd();           
             if (!postData.Equals(""))
             {
                 CBConnectionMSQL.insertUpdateDeleteMSQL("INSERT INTO dbo.image(byteArray) VALUES ('" + postData + "');");

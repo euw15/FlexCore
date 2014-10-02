@@ -17,12 +17,39 @@ namespace RESTfulFlexCore.Services
 
         }
 
+        public override String crearClienteJuridico(String nombre, String cedula, String telefono,String direccion )
+        {
+            try
+            {
+                CBConnectionMSQL.insertUpdateDeleteMSQL("EXEC crearEmpleadoJuridico @Nombre = '"+nombre+"',@Cedula ='"+cedula+"',@Telefono='"+telefono+"',@Direccion='"+direccion+"';");
+                return "sucess";
+            }
+            catch { 
+                return "fail";
+            }
+        }
+
+        public override String crearClienteFisico(String nombre,String apellidos, String cedula, String telefono, String direccion)
+        {
+            try
+            {                
+                CBConnectionMSQL.insertUpdateDeleteMSQL("EXEC crearEmpleadoFisico @Nombre = '"+nombre+"',@Apellidos='"+apellidos+"' ,@Cedula ='"+cedula+"' ,@Telefono = '"+telefono+"' ,@Direccion = '"+direccion+"';");
+                return "sucess";
+            }
+            catch
+            {
+                return "fail";
+            }
+        }
+       
+
+
         public override Client[] getClient()
-        {            
+        {
             DataTable table = CBConnectionMSQL.retrieveMSQL("SELECT [ID] ,[Model] FROM [Envy].[dbo].[computer]");
             List<Client> clientSelected = getTableGetClient(table);
             return loadCache(clientSelected);
-            
+
         }
 
         /*        
@@ -43,9 +70,9 @@ namespace RESTfulFlexCore.Services
                 {
                     CIF = CIF,
                     idTipoCliente = idTipoCliente
-                });           
+                });
             }
-            return listClient;            
+            return listClient;
         }
 
         public Client[] loadCache(List<Client> dataToLoad)
@@ -59,9 +86,9 @@ namespace RESTfulFlexCore.Services
                     ctx.Cache[CacheKey] = dataToLoad.ToArray();
                     return (Client[])ctx.Cache[CacheKey];
                 }
-            }           
+            }
             return null;
-        }      
+        }
 
     }
 }
