@@ -11,7 +11,7 @@ GO
 CREATE PROCEDURE crearEmpleadoJuridico
 	/*Parametros de entrada */
     @Nombre nvarchar(30), 
-    @Cedula [int],
+    @Cedula nvarchar(30),
     @Telefono nvarchar(30),
     @Direccion nvarchar(300)
 AS 
@@ -47,7 +47,7 @@ GO
 CREATE PROCEDURE crearEmpleadoFisico
 	/*Parametros de entrada */
     @Nombre nvarchar(30), 
-    @Cedula [int],
+    @Cedula nvarchar(30),
     @Telefono nvarchar(30),
     @Direccion nvarchar(300),
     @Apellidos nvarchar(200)
@@ -75,11 +75,11 @@ AS
 	INSERT INTO TelefonoxCliente (idTelefono,CIF) values (@idTelefonoGenerado,@CIFGenerado)
 
 	/*inserta en cliente juridico */
-	INSERT INTO ClienteFisico (CIF, Nombre,Apellidos,Cedula,idDireccionPrincipal,idTelefonoPrincipal) values (@CIFGenerado,@Nombre,@Apellidos,@Cedula,@idDireccionGenerado,@idTelefonoGenerado);
+	INSERT INTO ClienteFisico (CIF, Nombre,Apellido,Cedula,idDireccionPrincipal,idTelefonoPrincipal) values (@CIFGenerado,@Nombre,@Apellidos,@Cedula,@idDireccionGenerado,@idTelefonoGenerado);
 
 
 /*******************Consultar CLientes Juridicos por concepto******************************/
-
+go
 CREATE PROCEDURE consultarClienteJuridicoPorConcepto
 	/*Paramatros de entrada*/
 	@Concepto nvarchar(200),
@@ -108,6 +108,7 @@ AS
 
 /*******************Consultar CLientes Fisicos por concepto******************************/
 
+Go
 CREATE PROCEDURE consultarClienteFisicosPorConcepto
 	/*Paramatros de entrada*/
 	@Concepto nvarchar(200),
@@ -185,9 +186,11 @@ CREATE PROCEDURE crearCuentaAhorro
 	@Moneda nvarchar(10),
 	@DuracionAhorro int
 AS
-	insert into CuentaAhorro (CIF, NumeroCuentaDebito,idProposito,Periodicidad,FechaInicio,FechaFinal,DuracionAhorro,FechaFinal,MontoAhorro,idTipoMoneda)
-		values (@ClienteCIF,@NumeroCuentaOrigen,@idProposito,@Periodicidad,@FechaInicio,@FechaFinal,@DuracionAhorro,@FechaFinal,@MontoAhorro,@idTipoMoneda)
+	insert into CuentaAhorro (CIF, NumeroCuentaDebito,idProposito,Periodicidad,FechaInicio,FechaFinal,DuracionAhorro,MontoAhorro,idTipoMoneda)
+		values (@ClienteCIF,@NumeroCuentaOrigen,@idProposito,@Periodicidad,@FechaInicio,@FechaFinal,@DuracionAhorro,@MontoAhorro,@Moneda)
 
 
+
+/********************* Realizar Pago ****************************************/
 
 
