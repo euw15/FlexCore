@@ -218,6 +218,7 @@ AS
 
 		/*Si ambas cuentas estan activas realiza la operacion */
 		IF (@EstadoCuentaDestino=1)
+			begin
 				select  @SaldoActualCuentaDebito=SaldoFlotante from CuentaDebito where numeroCuenta=@NumeroCuentaDebito
 
 				/*Si tiene fondos suficientes realiza el pago*/
@@ -226,6 +227,7 @@ AS
 							update SaldoFlotante set SaldoFlotante=@SaldoActualCuentaDebito-@MontoPago from CuentaDebito where numeroCuenta=@NumeroCuentaDebito
 							update SaldoFlotante set SaldoFlotante=@SaldoActualCuentaDestino+@MontoPago from CuentaDebito where numeroCuenta=@SaldoActualCuentaDestino
 							return 1;
+			end
 
 	ROLLBACK
 
