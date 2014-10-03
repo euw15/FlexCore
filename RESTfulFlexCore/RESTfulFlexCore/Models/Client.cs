@@ -7,17 +7,20 @@ namespace RESTfulFlexCore.Models
 {
     public class Client
     {
-        public int CIF { get; set; }
-
-        public int idTipoCliente { get; set; }
+        public int CIF { get; set; }      
 
         public String tipoCliente { get; set; }
 
-        public String Nombre { get; set; }
+        public String nombre { get; set; }
 
-        public String Apellido { get; set; }
+        public String apellido { get; set; }
         
-        public String Cedula { get; set; }
+        public String cedula { get; set; }
+
+        public String telefono { get; set; }
+
+        public String direccion { get; set; }
+
        
     }
 }

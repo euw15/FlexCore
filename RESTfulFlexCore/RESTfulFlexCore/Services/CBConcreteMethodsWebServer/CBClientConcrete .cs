@@ -12,28 +12,18 @@ namespace RESTfulFlexCore.Services
 
         public const string CacheKey = "CBClient";
 
+        //Constructor
         public CBClientConcrete()
         {
 
         }
 
-        public override String crearClienteJuridico(String nombre, String cedula, String telefono,String direccion )
+        //POST
+        public override String crearClienteJuridico(String nombre, String cedula, String telefono, String direccion)
         {
             try
             {
-                CBConnectionMSQL.insertUpdateDeleteMSQL("EXEC crearEmpleadoJuridico @Nombre = '"+nombre+"',@Cedula ='"+cedula+"',@Telefono='"+telefono+"',@Direccion='"+direccion+"';");
-                return "sucess";
-            }
-            catch { 
-                return "fail";
-            }
-        }
-
-        public override String crearClienteFisico(String nombre,String apellidos, String cedula, String telefono, String direccion)
-        {
-            try
-            {                
-                CBConnectionMSQL.insertUpdateDeleteMSQL("EXEC crearEmpleadoFisico @Nombre = '"+nombre+"',@Apellidos='"+apellidos+"' ,@Cedula ='"+cedula+"' ,@Telefono = '"+telefono+"' ,@Direccion = '"+direccion+"';");
+                CBConnectionMSQL.insertUpdateDeleteMSQL("EXEC crearEmpleadoJuridico @Nombre = '" + nombre + "',@Cedula ='" + cedula + "',@Telefono='" + telefono + "',@Direccion='" + direccion + "';");
                 return "sucess";
             }
             catch
@@ -41,39 +31,145 @@ namespace RESTfulFlexCore.Services
                 return "fail";
             }
         }
-       
 
-
-        public override Client[] getClient()
+        //POST
+        public override String crearClienteFisico(String nombre, String apellidos, String cedula, String telefono, String direccion)
         {
-            DataTable table = CBConnectionMSQL.retrieveMSQL("SELECT [ID] ,[Model] FROM [Envy].[dbo].[computer]");
-            List<Client> clientSelected = getTableGetClient(table);
-            return loadCache(clientSelected);
-
+            try
+            {
+                CBConnectionMSQL.insertUpdateDeleteMSQL("EXEC crearEmpleadoFisico @Nombre = '" + nombre + "',@Apellidos='" + apellidos + "' ,@Cedula ='" + cedula + "' ,@Telefono = '" + telefono + "' ,@Direccion = '" + direccion + "';");
+                return "sucess";
+            }
+            catch
+            {
+                return "fail";
+            }
         }
 
-        /*        
-         * Auxiliar method that return a dataSet with the data that  is need in the method getClient
-         */
-        public List<Client> getTableGetClient(DataTable table)
+        //POST
+        public override String eliminarClienteFisico(int CIF)
         {
-            int CIF = -1;
-            int idTipoCliente = -1;
+            try
+            {
+                CBConnectionMSQL.insertUpdateDeleteMSQL("");
+                return "sucess";
+            }
+            catch
+            {
+                return "fail";
+            }
+        }
+
+        //POST
+        public override String eliminarClienteJuridico(int CIF)
+        {
+            try
+            {
+                CBConnectionMSQL.insertUpdateDeleteMSQL("");
+                return "sucess";
+            }
+            catch
+            {
+                return "fail";
+            }
+        }
+
+        //POST
+        public override String actualizarClienteJuridico(int CIF)
+        {
+            try
+            {
+                CBConnectionMSQL.insertUpdateDeleteMSQL("");
+                return "sucess";
+            }
+            catch
+            {
+                return "fail";
+            }
+        }
+
+        //POST
+        public override String actualizarClienteFisico(int CIF)
+        {
+            try
+            {
+                CBConnectionMSQL.insertUpdateDeleteMSQL("");
+                return "sucess";
+            }
+            catch
+            {
+                return "fail";
+            }
+        }
+
+        //GET
+        public override Client[] getClienteJuridicoPorConcepto(String concepto, String dato)
+        {
+            DataTable table = CBConnectionMSQL.retrieveMSQL("EXEC consultarClienteJuridicoPorConcepto @Concepto = '" + concepto + "', @Dato = '" + dato + "'");
+            List<Client> clientSelected = getTableGetCliente(table);
+            return loadCache(clientSelected);
+        }
+
+        //GET
+        public override Client[] getClientesFisicosPorPaginacion(String cantidad, String inicio)
+        {
+            DataTable table = CBConnectionMSQL.retrieveMSQL("EXEC consultarClientesFisicos @Cantidad = '" + cantidad + "', @Inicio = '" + inicio + "'");
+            List<Client> clientSelected = getTableGetCliente(table);
+            return loadCache(clientSelected);
+        }
+
+        //GET
+        public override Client[] getClientesJuridicosPorPaginacion(String cantidad, String inicio)
+        {
+            DataTable table = CBConnectionMSQL.retrieveMSQL("EXEC consultarClientesJuridicos  @Cantidad = '" + cantidad + "', @Inicio = '" + inicio + "'");
+            List<Client> clientSelected = getTableGetCliente(table);
+            return loadCache(clientSelected);
+        }
+
+        //GET
+        public override Client[] getClienteFisicoPorConcepto(String concepto, String dato)
+        {
+            DataTable table = CBConnectionMSQL.retrieveMSQL("EXEC consultarClienteFisicosPorConcepto @Concepto = '" + concepto + "', @Dato = '" + dato + "'");
+            List<Client> clientSelected = getTableGetCliente(table);
+            return loadCache(clientSelected);
+        }
+
+
+
+        public List<Client> getTableGetCliente(DataTable table)
+        {
 
             List<Client> listClient = new List<Client>();
-
             foreach (DataRow row in table.Rows)
             {
-                if (row["ID"] != DBNull.Value) { CIF = Convert.ToInt32(row["ID"]); }
-                if (row["Model"] != DBNull.Value) { idTipoCliente = Convert.ToInt32(row["Model"]); }
+                int CIF = -1;
+                String nombre = "";
+                String apellido = "";
+                String cedula = "";
+                String telefono = "";
+                String direccion = "";
+
+                if (row["CIF"] != DBNull.Value) { CIF = Convert.ToInt32(row["CIF"]); }
+                if (row["Nombre"] != DBNull.Value) { nombre = row["Nombre"].ToString(); }
+                if (row["Cedula"] != DBNull.Value) { cedula = row["Cedula"].ToString(); }
+                if (row["Telefono"] != DBNull.Value) { telefono = row["Telefono"].ToString(); }
+                if (row["Direccion"] != DBNull.Value) { direccion = row["Direccion"].ToString(); }
+                // if (row["Model"] != DBNull.Value) { apellido = row["Model"].ToString(); }
                 listClient.Add(new Client
                 {
                     CIF = CIF,
-                    idTipoCliente = idTipoCliente
+                    nombre = nombre,
+                    apellido = apellido,
+                    cedula = cedula,
+                    telefono = telefono,
+                    direccion = direccion
                 });
             }
             return listClient;
         }
+
+
+
 
         public Client[] loadCache(List<Client> dataToLoad)
         {

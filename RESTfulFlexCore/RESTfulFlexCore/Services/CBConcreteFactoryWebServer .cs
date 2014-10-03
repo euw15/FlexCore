@@ -41,11 +41,7 @@ namespace RESTfulFlexCore.Services
         public override CBCuentaAbstract CreateCBCuentaAbstract()
         {
             return new CBCuentaConcrete();
-        }
-        public override CBDireccionAbstract CreateCBDireccionAbstract()
-        {
-            return new CBDireccionConcrete();
-        }
+        }      
         public override CBDocumentosAbstract CreateCBDocumentosAbstract()
         {
             return new CBDocumentosConcrete();
@@ -54,10 +50,7 @@ namespace RESTfulFlexCore.Services
         {
             return new CBMetodoPagoConcrete();
         }
-        public override CBTelefonoAbstract CreateCBTelefonoAbstract()
-        {
-            return new CBTelefonoConcrete();
-        }
+     
         
     }
 }
