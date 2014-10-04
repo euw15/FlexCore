@@ -23,24 +23,35 @@ namespace RESTfulFlexCore.Services
         {
             try
             {
-                CBConnectionMSQL.insertUpdateDeleteMSQL("EXEC crearEmpleadoJuridico @Nombre = '" + nombre + "',@Cedula ='" + cedula + "',@Telefono='" + telefono + "',@Direccion='" + direccion + "';");
-                return CBConnectionMSQL.getAutoIncrement("ClienteJuridico", "CIF");
+                String flag= CBConnectionMSQL.insertUpdateDeleteMSQL("EXEC crearEmpleadoJuridico @Nombre = '" + nombre + "',@Cedula ='" + cedula + "',@Telefono='" + telefono + "',@Direccion='" + direccion + "';");
+                if(flag=="sucess"){
+                    return CBConnectionMSQL.getAutoIncrement("ClienteJuridico", "CIF");
+                }else
+                {
+                    return"fail";
+                }
             }
             catch
             {
                 return "fail";
             }
-        }        
+        }
 
-       
 
         //POST
         public override String crearClienteFisico(String nombre, String apellidos, String cedula, String telefono, String direccion)
         {
             try
             {
-                CBConnectionMSQL.insertUpdateDeleteMSQL("EXEC crearEmpleadoFisico @Nombre = '" + nombre + "',@Apellidos='" + apellidos + "' ,@Cedula ='" + cedula + "' ,@Telefono = '" + telefono + "' ,@Direccion = '" + direccion + "';");
-                return CBConnectionMSQL.getAutoIncrement("ClienteFisico", "CIF");
+
+                String flag = CBConnectionMSQL.insertUpdateDeleteMSQL("EXEC crearEmpleadoFisico @Nombre = '" + nombre + "',@Apellidos='" + apellidos + "' ,@Cedula ='" + cedula + "' ,@Telefono = '" + telefono + "' ,@Direccion = '" + direccion + "';");
+                 if(flag=="sucess"){
+                     return CBConnectionMSQL.getAutoIncrement("ClienteFisico", "CIF");
+                 }
+                 else
+                 {
+                     return "fail";
+                 }
             }
             catch
             {
@@ -136,8 +147,6 @@ namespace RESTfulFlexCore.Services
             return loadCache(clientSelected);
         }
 
-
-
         public List<Client> getTableGetCliente(DataTable table)
         {
 
@@ -169,9 +178,6 @@ namespace RESTfulFlexCore.Services
             }
             return listClient;
         }
-
-
-
 
         public Client[] loadCache(List<Client> dataToLoad)
         {

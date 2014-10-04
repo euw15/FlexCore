@@ -13,17 +13,49 @@ namespace RESTfulFlexCore.Services
         }
 
         //POST
-      /*  public override String crearCuentaDebito(String nombre, String cedula, String telefono, String direccion)
+        public override String crearCuentaDebito(int CIF, String descripcion, int moneda)
         {
             try
             {
-                CBConnectionMSQL.insertUpdateDeleteMSQL("EXEC crearEmpleadoJuridico @Nombre = '" + nombre + "',@Cedula ='" + cedula + "',@Telefono='" + telefono + "',@Direccion='" + direccion + "';");
-                return "sucess";
+                String flag = CBConnectionMSQL.insertUpdateDeleteMSQL("EXEC crearCuentaDebito @ClienteCIF = '" + CIF + "', @Descripcion = '" + descripcion + "', @Moneda = '" + moneda + "'");
+                if (flag == "sucess")
+                {
+                    return CBConnectionMSQL.getAutoIncrement("CuentaDebito", "idCuentaDebito");
+                }
+                else
+                {
+                    return "fail";
+                }
             }
             catch
             {
                 return "fail";
             }
-        }*/
+        }
+
+        //POST
+        public override String crearCuentaAhorro(String ClienteCIF, String idProposito, String Periodicidad, String FechaInicio, String FechaFinal,
+            String TiempoAhorro, String MontoAhorro, String NumeroCuentaOrigen, String Moneda, String DuracionAhorro)
+        {
+            try
+            {
+                String flag = CBConnectionMSQL.insertUpdateDeleteMSQL("@ClienteCIF = '" + ClienteCIF + "',	@idProposito = '" + idProposito + "',	@Periodicidad = '" + Periodicidad + "',	@FechaInicio = '" + FechaInicio + "',	" +
+                    "@FechaFinal = '" + FechaFinal + "',	@TiempoAhorro = '" + TiempoAhorro + "',	@MontoAhorro = '" + MontoAhorro + "',	@NumeroCuentaOrigen = '" + NumeroCuentaOrigen + "',	" +
+                    "@Moneda = '" + Moneda + "',	@DuracionAhorro = '" + DuracionAhorro + "'");
+                if (flag == "sucess")
+                { 
+                    return CBConnectionMSQL.getAutoIncrement("CuentaAhorro", "idCuentaAhorro"); 
+                }
+                else
+                {
+                    return "fail";
+                }
+            }
+            catch
+            {
+                return "fail";
+            }
+        }
+
     }
 }

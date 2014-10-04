@@ -14,7 +14,7 @@ namespace RESTfulFlexCore.Services
 
         }
 
-        public static void insertUpdateDeleteMSQL(string query)
+        public static String insertUpdateDeleteMSQL(string query)
         {
             /*   SqlConnection connection = new SqlConnection("Data Source=localhost;Network Library=DBMSSOCN; user id=json;" +
                                          "password=123456;server=JASON04;" +
@@ -34,15 +34,19 @@ namespace RESTfulFlexCore.Services
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
                 command.ExecuteNonQuery();
+                return "sucess";
 
             }
             catch (Exception e)
             {
+                
                 System.Diagnostics.Debug.WriteLine(e.ToString());
+                return "fail";
             }
             finally
             {
                 connection.Close();
+                
             }
         }
 
