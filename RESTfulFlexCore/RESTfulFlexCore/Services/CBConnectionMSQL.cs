@@ -16,8 +16,8 @@ namespace RESTfulFlexCore.Services
 
         public static void insertUpdateDeleteMSQL(string query)
         {
-            SqlConnection connection = new SqlConnection("Data Source=localhost;Network Library=DBMSSOCN; user id=daniel;" +
-                                      "password=dcanessa;server=ENVY15-3040NR;" +
+            SqlConnection connection = new SqlConnection("Data Source=localhost;Network Library=DBMSSOCN; user id=json;" +
+                                      "password=123456;server=JASON04;" +
                                       "Trusted_Connection=no;" +
                                       "database=FlexCoreDataBase; " +
                                       "connection timeout=30");
@@ -41,8 +41,8 @@ namespace RESTfulFlexCore.Services
         public static DataTable retrieveMSQL(string query)
         {
             DataTable table = new DataTable();
-            SqlConnection connection = new SqlConnection("Data Source=localhost;Network Library=DBMSSOCN; user id=daniel;" +
-                                       "password=dcanessa;server=ENVY15-3040NR;" +
+            SqlConnection connection = new SqlConnection("Data Source=localhost;Network Library=DBMSSOCN; user id=json;" +
+                                       "password=123456;server=JASON04;" +
                                        "Trusted_Connection=no;" +
                                        "database=FlexCoreDataBase; " +
                                        "connection timeout=30");

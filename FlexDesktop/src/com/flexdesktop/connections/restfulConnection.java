@@ -24,9 +24,9 @@ import org.json.JSONObject;
  *
  * @author Daniel
  */
-public class restfulConnection {
+public  class restfulConnection {
 
-    public ArrayList<ArrayList<String>> getRESTful(String RESTfull_URL, ArrayList<String> columnasTabla) {
+    public static ArrayList<ArrayList<String>> getRESTful(String RESTfull_URL, ArrayList<String> columnasTabla) {
         try {
             URL url;
             URLConnection urlConnection;
@@ -53,7 +53,7 @@ public class restfulConnection {
         return null;
     }
 
-    public ArrayList<ArrayList<String>> completeArray(String getRequest, ArrayList<String> columnasTabla) {
+    public static ArrayList<ArrayList<String>> completeArray(String getRequest, ArrayList<String> columnasTabla) {
         ArrayList<ArrayList<String>> outJson = new ArrayList<>();
         try {
             getRequest = "{data:" + getRequest + "}";            
@@ -78,7 +78,7 @@ public class restfulConnection {
         return outJson;
     }
 
-    public void soutMatrix(ArrayList<ArrayList<String>> outJson) {
+    public static void soutMatrix(ArrayList<ArrayList<String>> outJson) {
         for (ArrayList<String> outJson1 : outJson) {
             for (int j = 0; j < outJson1.size(); j++) {
                 System.out.println(outJson1.get(j));
