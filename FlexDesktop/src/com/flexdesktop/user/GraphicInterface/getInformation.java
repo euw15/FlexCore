@@ -5,6 +5,7 @@
  */
 package com.flexdesktop.user.GraphicInterface;
 
+import com.flexdesktop.connections.restfulConnection;
 import com.flexdesktop.user.Error.InfError;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -73,12 +74,10 @@ public class getInformation extends javax.swing.JDialog {
         //Agregar una fila por defecto en las tablas
         addRow(jTable_Dirreciones);
 
-
         ////////////////////////////////////
 //        java.awt.Image a = Toolkit.getDefaultToolkit().getImage("C:/Users/Jason/Documents/GitHub/FlexCore/FlexDesktop/src/com/flexdesktop/user/Images/hecho.png");
 //
         jLabelShowImage.setIcon(new ImageIcon(com.flexdesktop.user.GraphicInterface.Image.generateImage(com.flexdesktop.user.GraphicInterface.Image.getStringBytesImage(""))));
-        
 
     }
 
@@ -1003,12 +1002,27 @@ public class getInformation extends javax.swing.JDialog {
             }
 
         } else if (jRadioButtonNombre.isSelected()) {
-            Object cliente[][] = {{jFormattedTextFieldBuscarPor.getText(),
-                "Jason", "Salazar"}};
+//            Object cliente[][] = {{jFormattedTextFieldBuscarPor.getText(),
+//                "Jason", "Salazar"}};
+
+            ArrayList<String> columnas_tabla = new ArrayList<>();
+            columnas_tabla.add("CIF");
+            columnas_tabla.add("cedula");
+            columnas_tabla.add("nombre");
+            columnas_tabla.add("apellido");
+            columnas_tabla.add("direccion");
+            columnas_tabla.add("telefono");
+            ArrayList<ArrayList<String>> result = restfulConnection.getRESTful("http://localhost:52003/api/cbclient/getClienteJuridicoPorConcepto?concepto=Nombre&dato=Jason",
+                    columnas_tabla);
+
+            Object cliente[][] = convertToObject(result);
+            String []colums = {"CIF","Cédula","Nombre","Apellido",
+                "Teléfono","DirreciónPrincipal"};
+            sC.setColumName(colums);
             sC.setData(cliente);
             sC.showDialog();
             String cedulaSeleccionada = sC.getIdSelect();
-            System.out.println(cedulaSeleccionada);
+
             if (cedulaSeleccionada != "") {
                 dispose();
                 executeAction();
@@ -1367,6 +1381,21 @@ public class getInformation extends javax.swing.JDialog {
 
     void setCed(String cedNew) {
         ced = cedNew;
+
+    }
+
+    private Object[][] convertToObject(ArrayList<ArrayList<String>> result) {
+        Object[][] data = new Object[result.size()][result.get(0).size()];
+        int count = 0;
+        for (ArrayList<String> outJson1 : result) {
+            for (int j = 0; j < outJson1.size(); j++) {
+                data[count][j] = outJson1.get(j);
+                System.out.println(outJson1.get(j));
+
+            }
+            count += 1;
+        }
+        return data;
 
     }
 

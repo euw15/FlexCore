@@ -31,15 +31,20 @@ public class GraphicInterface {
 
         Frame a = new Frame();
         a.setLocationRelativeTo(null);
-        a.setVisible(true);   
+        a.setVisible(true); 
+        
+        
+        
 //        ArrayList<String> columnas_tabla = new ArrayList<>();
 //        columnas_tabla.add("CIF");
 //        columnas_tabla.add("cedula");
-       // "CIF","apellido","cedula","direccion","nombre","telefono"
-
-//        URL b = new URL("/api/cbclient/getClienteJuridicoPorConcepto?concepto=Nombre&dato=Jason");
-        //restfulConnection.soutMatrix(restfulConnection.getRESTful("http://localhost:52003/api/cbclient/getClienteJuridicoPorConcepto?concepto=Nombre&dato=Jason", columnas_tabla));
-//        restfulConnection.postRESTful("http://localhost:52003/api/cbclient/getClienteFisicoPorConcepto?concepto=Nombre&dato=Daniel", "");
+//        columnas_tabla.add("nombre");
+//        columnas_tabla.add("direccion");
+//        columnas_tabla.add("telefono");
+//     
+//
+//        restfulConnection.soutMatrix(restfulConnection.getRESTful("http://localhost:52003/api/cbclient/getClienteJuridicoPorConcepto?concepto=Nombre&dato=Jason",
+//                columnas_tabla));
         
 
     }

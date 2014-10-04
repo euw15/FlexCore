@@ -30,7 +30,10 @@ public class Image {
     public static String getStringBytesImage(String path) {
         String base64String = "";
         try {
-            File file = new File("C:\\Users\\Jason\\Pictures\\Fondos2\\Image3.jpg");
+
+            File file = new File("C:\\Users\\Jason\\Documents\\GitHub\\FlexCore\\FlexDesktop\\src\\com\\flexdesktop\\user\\Images\\rostro.jpg");
+           
+//            File file = new File("C:\\Users\\Jason\\Pictures\\Fondos2\\Image3.jpg");
             // File file = new File(path);            
             FileInputStream fis = new FileInputStream(file);
             ByteArrayOutputStream byteOuputStream = new ByteArrayOutputStream();
@@ -65,8 +68,17 @@ public class Image {
             BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_RGB);
             Graphics2D g2 = bufferedImage.createGraphics();
             g2.drawImage(image, null, null);
-            //g2.drawImage(image, 25, 25,null); 
-            image = image.getScaledInstance(160, 135, 10);
+            int newHeight = image.getHeight(null);
+            if (newHeight > 135) {
+                newHeight = 135;
+
+            }
+            int newWidth = image.getWidth(null);
+            if (newWidth > 160) {
+                newWidth = 160;
+            }
+            image = image.getScaledInstance(newWidth, newHeight, 10);
+
             return image;
         } catch (Exception ex) {
             Logger.getLogger(com.flexdesktop.user.GraphicInterface.Image.class.getName()).log(Level.SEVERE, null, ex);
