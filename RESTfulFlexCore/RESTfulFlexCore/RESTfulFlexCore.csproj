@@ -125,11 +125,9 @@
     <Compile Include="Controllers\CBBeneficiarioController.cs" />
     <Compile Include="Controllers\CBClientController.cs" />
     <Compile Include="Controllers\CBCuentaController.cs" />
-    <Compile Include="Controllers\CBDireccionController.cs" />
     <Compile Include="Controllers\CBDocumentosController.cs" />
     <Compile Include="Controllers\CBImageController.cs" />
     <Compile Include="Controllers\CBMetodoPagoController.cs" />
-    <Compile Include="Controllers\CBTelefonoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -137,30 +135,24 @@
     <Compile Include="Models\Beneficiarios.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Cuenta.cs" />
-    <Compile Include="Models\Direccion.cs" />
     <Compile Include="Models\Documentos.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\MetodoPago.cs" />
-    <Compile Include="Models\Telefono.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CBAbstractFactoryWebServer.cs" />
     <Compile Include="Services\CBAbstractMethodsWebServer\CBBeneficiarioAbstract.cs" />
     <Compile Include="Services\CBAbstractMethodsWebServer\CBClientAbstract.cs" />
     <Compile Include="Services\CBAbstractMethodsWebServer\CBCuentaAbstract.cs" />
-    <Compile Include="Services\CBAbstractMethodsWebServer\CBDireccionAbstract.cs" />
     <Compile Include="Services\CBAbstractMethodsWebServer\CBDocumentosAbstract.cs" />
     <Compile Include="Services\CBAbstractMethodsWebServer\CBImageAbstract.cs" />
     <Compile Include="Services\CBAbstractMethodsWebServer\CBMetodoPagoAbstract.cs" />
-    <Compile Include="Services\CBAbstractMethodsWebServer\CBTelefonoAbstract.cs" />
     <Compile Include="Services\CBConcreteFactoryWebServer .cs" />
     <Compile Include="Services\CBConcreteMethodsWebServer\CBBeneficiarioConcrete.cs" />
     <Compile Include="Services\CBConcreteMethodsWebServer\CBClientConcrete .cs" />
     <Compile Include="Services\CBConcreteMethodsWebServer\CBCuentaConcrete.cs" />
-    <Compile Include="Services\CBConcreteMethodsWebServer\CBDireccionConcrete.cs" />
     <Compile Include="Services\CBConcreteMethodsWebServer\CBDocumentosConcrete.cs" />
     <Compile Include="Services\CBConcreteMethodsWebServer\CBImageConcrete.cs" />
     <Compile Include="Services\CBConcreteMethodsWebServer\CBMetodoPagoConcrete.cs" />
-    <Compile Include="Services\CBConcreteMethodsWebServer\CBTelefonoConcrete.cs" />
     <Compile Include="Services\CBConnectionMSQL.cs" />
     <Compile Include="Services\CBTransaccionesVueloAbstract.cs" />
   </ItemGroup>

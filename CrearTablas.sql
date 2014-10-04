@@ -108,8 +108,8 @@ CREATE TABLE [CuentaDebito](
 	[Desripcion] [nvarchar](300) NOT NULL,
 	[idTipoMoneda] [int] NOT NULL,
 	[Estado] [bit] NOT NULL,
-	[SaldoReal] [int] NOT NULL,
-	[SaldoFlotante] [int] NOT NULL
+	[SaldoReal] [money] NOT NULL,
+	[SaldoFlotante] [money] NOT NULL
 	)
 
 /********************************************************************/
@@ -148,8 +148,9 @@ CREATE TABLE [CuentaAhorro](
 	[FechaInicio] [date] NOT NULL,
 	[DuracionAhorro] [int] NOT NULL,
 	[FechaFinal] [date] NOT NULL,
-	[MontoAhorro] [int] NOT NULL,
-	[idTipoMoneda] [int] NOT NULL
+	[MontoAhorro] [money] NOT NULL,
+	[idTipoMoneda] [int] NOT NULL,
+	[MontoAhorroActual] [money] NOT NULL
 	)
 
 /********************************************************************/

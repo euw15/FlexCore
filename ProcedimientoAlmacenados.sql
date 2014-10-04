@@ -85,6 +85,7 @@ CREATE PROCEDURE consultarClienteJuridicoPorConcepto
 	@Concepto nvarchar(200),
 	@Dato 	  nvarchar(200)
 AS
+	/*Dependiendo del Concepto por el cual se quiera realizar la consulta se busca */
 	IF @Concepto = 'Nombre'
 		select CIF,Nombre,Cedula, Telefono, Direccion
 		from ClientesJuridicos 
@@ -114,6 +115,7 @@ CREATE PROCEDURE consultarClienteFisicosPorConcepto
 	@Concepto nvarchar(200),
 	@Dato 	  nvarchar(200)
 AS
+	/*Dependiendo del Concepto por el cual se quiera realizar la consulta se busca */
 	IF @Concepto = 'Nombre'
 		select CIF,Nombre,Cedula, Telefono, Direccion
 		from ClientesFisicos 
@@ -143,6 +145,7 @@ CREATE PROCEDURE consultarClientesFisicos
 	@Cantidad nvarchar(200),
 	@Inicio nvarchar(200)
 AS
+	/*Consulta los clientes fisico en el rago deseado */
 	SELECT CIF,Nombre,Cedula, Telefono, Direccion FROM ( 
 	  SELECT *, ROW_NUMBER() OVER (ORDER BY CIF) as row FROM ClientesFisico
 	 ) a WHERE a.row > @Inicio and a.row <= @Inicio+@Cantidad
@@ -155,6 +158,7 @@ CREATE PROCEDURE consultarClientesJuridicos
 	@Cantidad nvarchar(200),
 	@Inicio nvarchar(200)
 AS
+	/*Consulta los clientes fisico en el rago deseado */
 	SELECT CIF,Nombre,Cedula, Telefono, Direccion FROM ( 
 	  SELECT *, ROW_NUMBER() OVER (ORDER BY CIF) as row FROM ClientesJuridicosView
 	 ) a WHERE a.row > @Inicio and a.row <= @Inicio+@Cantidad
@@ -168,6 +172,7 @@ CREATE PROCEDURE crearCuentaDebito
 	@Descripcion nvarchar(200),
 	@Moneda nvarchar(10)
 AS
+	/*Inserta la nueva cuenta de debito*/
 	INSERT INTO CuentaDebito (idCliente,Desripcion,idTipoMoneda,Estado,SaldoReal,SaldoFlotante) values (@ClienteCIF,@Descripcion,@Moneda,1,0,0)
 
 /********************* Crear Cuenta Ahorro ****************************************/
@@ -186,11 +191,44 @@ CREATE PROCEDURE crearCuentaAhorro
 	@Moneda nvarchar(10),
 	@DuracionAhorro int
 AS
+	/*Inserta la informacion de la cuenta de Ahorro */
 	insert into CuentaAhorro (CIF, NumeroCuentaDebito,idProposito,Periodicidad,FechaInicio,FechaFinal,DuracionAhorro,MontoAhorro,idTipoMoneda)
 		values (@ClienteCIF,@NumeroCuentaOrigen,@idProposito,@Periodicidad,@FechaInicio,@FechaFinal,@DuracionAhorro,@MontoAhorro,@Moneda)
 
 
 
 /********************* Realizar Pago ****************************************/
+GO
+CREATE PROCEDURE realizarPago
+	/*Parametros de entrada *******/
+	@NumeroCuentaDebito int,
+	@NumeroCuentaDestino int,
+	@MontoPago money
+AS
+	BEGIN TRAN 
+		declare 
+			@EstadoCuentaDebito bit,
+			@EstadoCuentaDestino bit,
+			@SaldoActualCuentaDebito money,
+			@SaldoActualCuentaDestino money
+
+		/*Pregunta por el estado de las cuentas */
+		SELECT @EstadoCuentaDebito=Estado from CuentaDebito  where numeroCuenta= @NumeroCuentaDebito;
+		SELECT @EstadoCuentaDestino=Estado from CuentaDebito  where numeroCuenta= @EstadoCuentaDestino;
+
+		/*Si ambas cuentas estan activas realiza la operacion */
+		IF (@EstadoCuentaDestino=1)
+			begin
+				select  @SaldoActualCuentaDebito=SaldoFlotante from CuentaDebito where numeroCuenta=@NumeroCuentaDebito
+
+				/*Si tiene fondos suficientes realiza el pago*/
+				IF @SaldoActualCuentaDebito >= @MontoPago
+							select  @SaldoActualCuentaDestino=SaldoFlotante from CuentaDebito where numeroCuenta=@SaldoActualCuentaDestino
+							update SaldoFlotante set SaldoFlotante=@SaldoActualCuentaDebito-@MontoPago from CuentaDebito where numeroCuenta=@NumeroCuentaDebito
+							update SaldoFlotante set SaldoFlotante=@SaldoActualCuentaDestino+@MontoPago from CuentaDebito where numeroCuenta=@SaldoActualCuentaDestino
+							return 1;
+			end
+
+	ROLLBACK
 
 

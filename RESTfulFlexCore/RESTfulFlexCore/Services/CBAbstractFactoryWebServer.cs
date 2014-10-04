@@ -13,15 +13,12 @@ namespace RESTfulFlexCore.Services
 
         public abstract CBBeneficiarioAbstract CreateCBBeneficiarioAbstract();
 
-        public abstract CBCuentaAbstract CreateCBCuentaAbstract();
-
-        public abstract CBDireccionAbstract CreateCBDireccionAbstract();
+        public abstract CBCuentaAbstract CreateCBCuentaAbstract();       
 
         public abstract CBDocumentosAbstract CreateCBDocumentosAbstract();
 
         public abstract CBMetodoPagoAbstract CreateCBMetodoPagoAbstract();
-
-        public abstract CBTelefonoAbstract CreateCBTelefonoAbstract();
+      
 
     }
 }
