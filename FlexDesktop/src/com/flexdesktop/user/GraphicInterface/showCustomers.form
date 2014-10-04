@@ -283,10 +283,10 @@
         <Component class="javax.swing.JLabel" name="jLabelModificar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/System/Images/Buttons/editBtt.png"/>
+              <Image iconType="3" name="/com/flexdesktop/Images/Buttons/editBtt.png"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor Por defecto"/>
             </Property>
           </Properties>
           <Events>
@@ -308,11 +308,11 @@
         <Component class="javax.swing.JLabel" name="jLabelBorrar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/System/Images/Buttons/trashBtt.png"/>
+              <Image iconType="3" name="/com/flexdesktop/Images/Buttons/trashBtt.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Borrar factura seleccionada"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor Por defecto"/>
             </Property>
           </Properties>
           <Events>
@@ -424,7 +424,7 @@
         <Component class="javax.swing.JLabel" name="jLabelSelect">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/System/Images/Buttons/select.png"/>
+              <Image iconType="3" name="/com/flexdesktop/Images/Buttons/select.png"/>
             </Property>
           </Properties>
           <Events>
@@ -434,10 +434,10 @@
         <Component class="javax.swing.JLabel" name="jLabelVer">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/System/Images/Buttons/watchBtt.png"/>
+              <Image iconType="3" name="/com/flexdesktop/Images/Buttons/watchBtt.png"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor Por defecto"/>
             </Property>
           </Properties>
           <Events>

@@ -29,7 +29,11 @@ import javax.swing.table.TableRowSorter;
 /**
  *
  * @author Melvin
+ * 
  */
+
+
+
 public class showCustomers extends javax.swing.JDialog {
 
     /**
@@ -219,7 +223,7 @@ public class showCustomers extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Buscar:");
 
-        jLabelModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/editBtt.png"))); // NOI18N
+        jLabelModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/Images/Buttons/editBtt.png"))); // NOI18N
         jLabelModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabelModificar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -240,7 +244,7 @@ public class showCustomers extends javax.swing.JDialog {
             }
         });
 
-        jLabelBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/trashBtt.png"))); // NOI18N
+        jLabelBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/Images/Buttons/trashBtt.png"))); // NOI18N
         jLabelBorrar.setToolTipText("Borrar factura seleccionada");
         jLabelBorrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabelBorrar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -324,14 +328,14 @@ public class showCustomers extends javax.swing.JDialog {
         jLabelPuntos1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelPuntos1.setText("...");
 
-        jLabelSelect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/select.png"))); // NOI18N
+        jLabelSelect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/Images/Buttons/select.png"))); // NOI18N
         jLabelSelect.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelSelectMouseClicked(evt);
             }
         });
 
-        jLabelVer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/watchBtt.png"))); // NOI18N
+        jLabelVer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/Images/Buttons/watchBtt.png"))); // NOI18N
         jLabelVer.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabelVer.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

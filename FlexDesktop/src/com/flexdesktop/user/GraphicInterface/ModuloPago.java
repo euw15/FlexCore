@@ -151,7 +151,7 @@ public class ModuloPago extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel4.setText("idDispositivo:");
 
-        jLabelBuscaridCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/searchLttBlckBtt.png"))); // NOI18N
+        jLabelBuscaridCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/Images/Buttons/searchLttBlckBtt.png"))); // NOI18N
         jLabelBuscaridCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelBuscaridClienteMouseClicked(evt);

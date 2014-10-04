@@ -249,7 +249,7 @@ public class CreateAccount extends javax.swing.JDialog {
         jTable_Dirreciones.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         jLabelBuscaridCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelBuscaridCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/searchLttBlckBtt.png"))); // NOI18N
+        jLabelBuscaridCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/Images/Buttons/searchLttBlckBtt.png"))); // NOI18N
         jLabelBuscaridCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelBuscaridClienteMouseClicked(evt);
@@ -373,9 +373,7 @@ public class CreateAccount extends javax.swing.JDialog {
                             .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelCearCuentaAhorroVistaLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -490,7 +488,7 @@ public class CreateAccount extends javax.swing.JDialog {
     jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/1390186347_tests.png"))); // NOI18N
 
     jLabelBuscaridCliente2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-    jLabelBuscaridCliente2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/searchLttBlckBtt.png"))); // NOI18N
+    jLabelBuscaridCliente2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/Images/Buttons/searchLttBlckBtt.png"))); // NOI18N
 
     jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/atras.png"))); // NOI18N
     jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -779,11 +777,11 @@ jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
     }//GEN-LAST:event_jTable_DirrecionesKeyPressed
 
     private void jLabelBuscaridClienteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBuscaridClienteMouseEntered
-        jLabelBuscaridCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/searchLttBtt.png")));
+        jLabelBuscaridCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/Images/Buttons/searchLttBtt.png")));
     }//GEN-LAST:event_jLabelBuscaridClienteMouseEntered
 
     private void jLabelBuscaridClienteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBuscaridClienteMouseExited
-        jLabelBuscaridCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/searchLttBlckBtt.png")));
+        jLabelBuscaridCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/Images/Buttons/searchLttBlckBtt.png")));
     }//GEN-LAST:event_jLabelBuscaridClienteMouseExited
 
     private void jLabelBuscaridClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBuscaridClienteMouseClicked

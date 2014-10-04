@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.flexdesktop.user.GraphicInterface;
 
 import java.awt.Graphics2D;
@@ -27,7 +26,8 @@ import javax.imageio.stream.ImageInputStream;
  * @author Daniel
  */
 public class Image {
-        public static String getStringBytesImage(String path) {
+
+    public static String getStringBytesImage(String path) {
         String base64String = "";
         try {
             File file = new File("C:\\Users\\Daniel\\Pictures\\Minimal.jpg");
@@ -63,26 +63,27 @@ public class Image {
             ImageReadParam param = reader.getDefaultReadParam();
             java.awt.Image image = reader.read(0, param);
             BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_RGB);
-            Graphics2D g2 = bufferedImage.createGraphics();   
-            g2.drawImage(image, null, null);  
-            return image;          
+            Graphics2D g2 = bufferedImage.createGraphics();
+            g2.drawImage(image, null, null);
+            //g2.drawImage(image, 25, 25,null);  
+            return image;
         } catch (Exception ex) {
             Logger.getLogger(com.flexdesktop.user.GraphicInterface.Image.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-    }    
+    }
 }
 
  // File imageFile = new File("C:\\Users\\Daniel\\Desktop\\image.jpg");
-            //  ImageIO.write(bufferedImage, "jpg", imageFile);
-          //  System.out.println(imageFile.getPath());
+//  ImageIO.write(bufferedImage, "jpg", imageFile);
+//  System.out.println(imageFile.getPath());
 
 /*
  ArrayList<String> columnas_tabla = new ArrayList<>();       
-        columnas_tabla.add("string64Image");
+ columnas_tabla.add("string64Image");
        
-       ImageIcon icon = new ImageIcon( ConnectionJavaRESTful.generateImage(ConnectionJavaRESTful.
-                getRESTful("http://localhost:52003/api/cbimage/getImage?ID=21", columnas_tabla).get(0).get(0)));
-       label.setIcon(icon);
-      label.setSize(100, 100);
-*/
+ ImageIcon icon = new ImageIcon( ConnectionJavaRESTful.generateImage(ConnectionJavaRESTful.
+ getRESTful("http://localhost:52003/api/cbimage/getImage?ID=21", columnas_tabla).get(0).get(0)));
+ label.setIcon(icon);
+ label.setSize(100, 100);
+ */

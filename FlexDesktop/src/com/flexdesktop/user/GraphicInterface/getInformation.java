@@ -6,15 +6,30 @@
 package com.flexdesktop.user.GraphicInterface;
 
 import com.flexdesktop.user.Error.InfError;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
 
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 
 import java.util.ArrayList;
+import java.util.Base64;
+import java.util.Iterator;
 import java.util.List;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReadParam;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.ImageInputStream;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.Timer;
@@ -57,6 +72,13 @@ public class getInformation extends javax.swing.JDialog {
 
         //Agregar una fila por defecto en las tablas
         addRow(jTable_Dirreciones);
+
+
+        ////////////////////////////////////
+//        java.awt.Image a = Toolkit.getDefaultToolkit().getImage("C:/Users/Jason/Documents/GitHub/FlexCore/FlexDesktop/src/com/flexdesktop/user/Images/hecho.png");
+//
+//        jLabelShowImage.setIcon(new ImageIcon(a));
+        
 
     }
 
@@ -124,10 +146,11 @@ public class getInformation extends javax.swing.JDialog {
         jLabelApellido = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabelCedula = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
+        jLabelShowImage = new javax.swing.JLabel();
         jLabelBorrarClt = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         registerClt = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -250,7 +273,7 @@ public class getInformation extends javax.swing.JDialog {
         jLabelBusquedaPor.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabelBusquedaPor.setText("Cédula:");
 
-        jLabelCreateClt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/searchBtt.png"))); // NOI18N
+        jLabelCreateClt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/Images/Buttons/searchBtt.png"))); // NOI18N
         jLabelCreateClt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelCreateCltMouseClicked(evt);
@@ -263,7 +286,7 @@ public class getInformation extends javax.swing.JDialog {
             }
         });
 
-        jLabelCreateBeneficiario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/addBtt.png"))); // NOI18N
+        jLabelCreateBeneficiario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/Images/Buttons/addBtt.png"))); // NOI18N
         jLabelCreateBeneficiario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelCreateBeneficiarioMouseClicked(evt);
@@ -410,10 +433,9 @@ public class getInformation extends javax.swing.JDialog {
         jLabelCedula.setForeground(new java.awt.Color(102, 102, 102));
         jLabelCedula.setText("id");
 
-        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/rostro.jpg"))); // NOI18N
+        jLabelShowImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        jLabelBorrarClt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/trashBtt.png"))); // NOI18N
+        jLabelBorrarClt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/Images/Buttons/trashBtt.png"))); // NOI18N
         jLabelBorrarClt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelBorrarCltMouseClicked(evt);
@@ -432,6 +454,17 @@ public class getInformation extends javax.swing.JDialog {
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel12.setText("Apellido:");
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout VerCltLayout = new javax.swing.GroupLayout(VerClt);
         VerClt.setLayout(VerCltLayout);
         VerCltLayout.setHorizontalGroup(
@@ -445,8 +478,11 @@ public class getInformation extends javax.swing.JDialog {
                         .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4))
                     .addGroup(VerCltLayout.createSequentialGroup()
+                        .addComponent(jLabelBorrarClt, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(VerCltLayout.createSequentialGroup()
                         .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel18)
                             .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, VerCltLayout.createSequentialGroup()
                                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -459,12 +495,12 @@ public class getInformation extends javax.swing.JDialog {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, VerCltLayout.createSequentialGroup()
                                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 44, Short.MAX_VALUE))
-                    .addGroup(VerCltLayout.createSequentialGroup()
-                        .addComponent(jLabelBorrarClt, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(VerCltLayout.createSequentialGroup()
+                                .addComponent(jLabelShowImage, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(54, 54, 54)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 44, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         VerCltLayout.setVerticalGroup(
@@ -474,25 +510,31 @@ public class getInformation extends javax.swing.JDialog {
                 .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton15))
-                .addGap(40, 40, 40)
-                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(jLabelApellido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(28, 28, 28)
-                .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 241, Short.MAX_VALUE)
                 .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelBorrarClt, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
+                    .addGroup(VerCltLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabelShowImage, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                            .addComponent(jLabelApellido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(28, 28, 28)
+                        .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 241, Short.MAX_VALUE)
+                        .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelBorrarClt, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addContainerGap())
+                    .addGroup(VerCltLayout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         registerClt.setBackground(new java.awt.Color(255, 255, 255));
@@ -1019,12 +1061,12 @@ public class getInformation extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabelBorrarCltMouseClicked
 
     private void jLabelBorrarCltMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBorrarCltMouseEntered
-        jLabelBorrarClt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/trashBttOvr.png")));
+        jLabelBorrarClt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/Images/Buttons/trashBttOvr.png")));
 
     }//GEN-LAST:event_jLabelBorrarCltMouseEntered
 
     private void jLabelBorrarCltMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBorrarCltMouseExited
-        jLabelBorrarClt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/trashBtt.png")));
+        jLabelBorrarClt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/Images/Buttons/trashBtt.png")));
     }//GEN-LAST:event_jLabelBorrarCltMouseExited
 
     private void jLabelCreateBeneficiarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCreateBeneficiarioMouseClicked
@@ -1033,20 +1075,20 @@ public class getInformation extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabelCreateBeneficiarioMouseClicked
 
     private void jLabelCreateCltMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCreateCltMouseEntered
-        jLabelCreateClt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/searchBttOvr.png")));
+        jLabelCreateClt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/Images/Buttons/searchBttOvr.png")));
     }//GEN-LAST:event_jLabelCreateCltMouseEntered
 
     private void jLabelCreateCltMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCreateCltMouseExited
-        jLabelCreateClt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/searchBtt.png")));
+        jLabelCreateClt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/Images/Buttons/searchBtt.png")));
 
     }//GEN-LAST:event_jLabelCreateCltMouseExited
 
     private void jLabelCreateBeneficiarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCreateBeneficiarioMouseEntered
-        jLabelCreateBeneficiario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/addBttOvr.png")));
+        jLabelCreateBeneficiario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/Images/Buttons/addBttOvr.png")));
     }//GEN-LAST:event_jLabelCreateBeneficiarioMouseEntered
 
     private void jLabelCreateBeneficiarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCreateBeneficiarioMouseExited
-        jLabelCreateBeneficiario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/addBtt.png")));
+        jLabelCreateBeneficiario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/Images/Buttons/addBtt.png")));
     }//GEN-LAST:event_jLabelCreateBeneficiarioMouseExited
 
 
@@ -1076,7 +1118,6 @@ public class getInformation extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1092,6 +1133,8 @@ public class getInformation extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelCreateBeneficiario;
     private javax.swing.JLabel jLabelCreateClt;
     private javax.swing.JLabel jLabelName;
+    private javax.swing.JLabel jLabelShowImage;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRadioButtonApellido;
     private javax.swing.JRadioButton jRadioButtonBuscarCed;
     private javax.swing.JRadioButton jRadioButtonBuscarCuenta;
