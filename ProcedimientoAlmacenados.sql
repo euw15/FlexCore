@@ -142,8 +142,8 @@ AS
 go
 CREATE PROCEDURE consultarClientesFisicos
 	/*Paramatros de entrada*/
-	@Cantidad nvarchar(200),
-	@Inicio nvarchar(200)
+	@Cantidad int,
+	@Inicio int
 AS
 	/*Consulta los clientes fisico en el rago deseado */
 	SELECT CIF,Nombre,Cedula, Telefono, Direccion FROM ( 
@@ -155,8 +155,8 @@ AS
 go
 CREATE PROCEDURE consultarClientesJuridicos
 	/*Paramatros de entrada*/
-	@Cantidad nvarchar(200),
-	@Inicio nvarchar(200)
+	@Cantidad int,
+	@Inicio int
 AS
 	/*Consulta los clientes fisico en el rago deseado */
 	SELECT CIF,Nombre,Cedula, Telefono, Direccion FROM ( 
@@ -205,7 +205,6 @@ CREATE PROCEDURE realizarPago
 	@NumeroCuentaDestino int,
 	@MontoPago money
 AS
-	BEGIN TRAN 
 		declare 
 			@EstadoCuentaDebito bit,
 			@EstadoCuentaDestino bit,
@@ -214,21 +213,31 @@ AS
 
 		/*Pregunta por el estado de las cuentas */
 		SELECT @EstadoCuentaDebito=Estado from CuentaDebito  where numeroCuenta= @NumeroCuentaDebito;
-		SELECT @EstadoCuentaDestino=Estado from CuentaDebito  where numeroCuenta= @EstadoCuentaDestino;
+		SELECT @EstadoCuentaDestino=Estado from CuentaDebito  where numeroCuenta= @NumeroCuentaDestino;
 
 		/*Si ambas cuentas estan activas realiza la operacion */
-		IF (@EstadoCuentaDestino=1)
+		IF (@EstadoCuentaDebito=1 and @EstadoCuentaDestino=1)
 			begin
 				select  @SaldoActualCuentaDebito=SaldoFlotante from CuentaDebito where numeroCuenta=@NumeroCuentaDebito
-
+				select  @SaldoActualCuentaDestino=SaldoFlotante from CuentaDebito where numeroCuenta=@NumeroCuentaDestino
 				/*Si tiene fondos suficientes realiza el pago*/
-				IF @SaldoActualCuentaDebito >= @MontoPago
-							select  @SaldoActualCuentaDestino=SaldoFlotante from CuentaDebito where numeroCuenta=@SaldoActualCuentaDestino
-							update SaldoFlotante set SaldoFlotante=@SaldoActualCuentaDebito-@MontoPago from CuentaDebito where numeroCuenta=@NumeroCuentaDebito
-							update SaldoFlotante set SaldoFlotante=@SaldoActualCuentaDestino+@MontoPago from CuentaDebito where numeroCuenta=@SaldoActualCuentaDestino
+				IF(@SaldoActualCuentaDebito >= @MontoPago)
+					begin
+							update CuentaDebito set SaldoFlotante=@SaldoActualCuentaDebito-@MontoPago from CuentaDebito where numeroCuenta=@NumeroCuentaDebito
+							update CuentaDebito set SaldoFlotante=@SaldoActualCuentaDestino+@MontoPago from CuentaDebito where numeroCuenta=@NumeroCuentaDestino
 							return 1;
+					end
+				else
+					return 0;
 			end
+		else
+			return 0;
 
-	ROLLBACK
+/********************* Consultar Propositos ****************************************/
+
+GO
+CREATE PROCEDURE consultarPropositos
+	AS
+		SELECT TOP 100 P.Proposito, P.TasaInteres from Proposito AS P
 
 
