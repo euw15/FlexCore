@@ -1009,7 +1009,6 @@ public class getInformation extends javax.swing.JDialog {
             columnas_tabla.add("CIF");
             columnas_tabla.add("cedula");
             columnas_tabla.add("nombre");
-            columnas_tabla.add("apellido");
             columnas_tabla.add("direccion");
             columnas_tabla.add("telefono");
             ArrayList<ArrayList<String>> result = restfulConnection.getRESTful("http://localhost:52003/api/cbclient/getClienteJuridicoPorConcepto?concepto=Nombre&dato=Jason",
