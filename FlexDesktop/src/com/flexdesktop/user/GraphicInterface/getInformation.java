@@ -60,6 +60,8 @@ public class getInformation extends javax.swing.JDialog {
     private final int Actualizar = 2;
     private final int Beneficiario = 7;
     private final int getIdCliente = 8;
+    private final int RegisterCostumerFisico = 10;
+    private final int RegisterCostumerJuridico = 11;
     private String ced = "";
 
     public getInformation(java.awt.Frame parent, boolean modal) {
@@ -822,20 +824,13 @@ public class getInformation extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-        if (validateUI()) {
-//            for (int i = 0; i < table.getRowCount(); i++) {// Se crean las rutas por hoja en excel
-//                boolean isSelected = (boolean) table.getValueAt(i, 1);
-//                if (isSelected) {
-//                    String Tabla = table.getValueAt(i, 0).toString();
-//                    data.add(Tabla);
-//                }
-//            }
-            dispose();
-
-        } else {
-            InfError.showMessage(this, "Debe seleccionar al menos una tabla");
+        if (accion == RegisterCostumerFisico) {
+            System.out.println("registrarClientesFisico");
         }
+        if (accion == RegisterCostumerJuridico) {
+            System.out.println("registrarClientesJuridico");
+        }
+        dispose();
 
 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -1015,8 +1010,8 @@ public class getInformation extends javax.swing.JDialog {
                     columnas_tabla);
 
             Object cliente[][] = convertToObject(result);
-            String []colums = {"CIF","Cédula","Nombre","Apellido",
-                "Teléfono","DirreciónPrincipal"};
+            String[] colums = {"CIF", "Cédula", "Nombre", "Apellido",
+                "Teléfono", "DirreciónPrincipal"};
             sC.setColumName(colums);
             sC.setData(cliente);
             sC.showDialog();

@@ -42,6 +42,10 @@ public class Frame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabelVerSelected = new javax.swing.JLabel();
+        jPanelCltJuridico = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable5 = new javax.swing.JTable();
+        jLabelVerSelected1 = new javax.swing.JLabel();
         jPanelCuentas = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -99,7 +103,7 @@ public class Frame extends javax.swing.JFrame {
             jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelClienteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelClienteLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -110,13 +114,73 @@ public class Frame extends javax.swing.JFrame {
             jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelClienteLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
                 .addGap(40, 40, 40)
                 .addComponent(jLabelVerSelected)
                 .addGap(32, 32, 32))
         );
 
-        jTabbedPane1.addTab("    Clientes    ", jPanelCliente);
+        jTabbedPane1.addTab("    Clientes Físicos    ", jPanelCliente);
+
+        jTable5.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"   Registrar"},
+                {"   Consultar"},
+                {"   Ver Listado"},
+                {"   Eliminar"},
+                {"   Actualizar"},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Acción"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable5.setGridColor(new java.awt.Color(255, 255, 255));
+        jTable5.setRowHeight(41);
+        jScrollPane5.setViewportView(jTable5);
+
+        jLabelVerSelected1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/Images/Buttons/listBtt.png"))); // NOI18N
+        jLabelVerSelected1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabelVerSelected1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelVerSelected1MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelCltJuridicoLayout = new javax.swing.GroupLayout(jPanelCltJuridico);
+        jPanelCltJuridico.setLayout(jPanelCltJuridicoLayout);
+        jPanelCltJuridicoLayout.setHorizontalGroup(
+            jPanelCltJuridicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelCltJuridicoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCltJuridicoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelVerSelected1)
+                .addGap(43, 43, 43))
+        );
+        jPanelCltJuridicoLayout.setVerticalGroup(
+            jPanelCltJuridicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelCltJuridicoLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)
+                .addGap(44, 44, 44)
+                .addComponent(jLabelVerSelected1)
+                .addGap(29, 29, 29))
+        );
+
+        jTabbedPane1.addTab("Cliente Jurídico     ", jPanelCltJuridico);
 
         jTable2.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -160,7 +224,7 @@ public class Frame extends javax.swing.JFrame {
             .addGroup(jPanelCuentasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCuentasLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabelSelectRowCuenta)
@@ -171,7 +235,7 @@ public class Frame extends javax.swing.JFrame {
             jPanelCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCuentasLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
                 .addGap(31, 31, 31)
                 .addComponent(jLabelSelectRowCuenta)
                 .addGap(23, 23, 23))
@@ -321,9 +385,10 @@ public class Frame extends javax.swing.JFrame {
     private void jLabelVerSelectedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelVerSelectedMouseClicked
 
         int selection = jTable1.getSelectedRow();
-        System.out.println(jTabbedPane1.getSelectedIndex());
+
         if (selection == OPCION0) {
             getInformation getInfoPanel = new getInformation(null, true);
+            getInfoPanel.setActionIcon(10);
             getInfoPanel.showDialog("RegisterClt");
 
         } else if (selection == OPCION1) {
@@ -398,7 +463,6 @@ public class Frame extends javax.swing.JFrame {
         } else if (selection == OPCION2) {
             System.out.println("Cierres Realizados");
             showCustomers sC = new showCustomers(null, true);
-            
 
             //To do
             //Obtener los clientes para esa cedulaSeleccionada
@@ -420,6 +484,42 @@ public class Frame extends javax.swing.JFrame {
                     + "o");
         }
     }//GEN-LAST:event_jLabel17MouseClicked
+
+    private void jLabelVerSelected1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelVerSelected1MouseClicked
+       int selection = jTable5.getSelectedRow();
+
+        if (selection == OPCION0) {
+            getInformation getInfoPanel = new getInformation(null, true);
+            getInfoPanel.setActionIcon(11);
+            getInfoPanel.showDialog("RegisterClt");
+
+        } else if (selection == OPCION1) {
+            getInformation getInfoPanel = new getInformation(null, true);
+            getInfoPanel.showDialog("ConsultarClt");
+            getInfoPanel.setActionIcon(0);
+            getInfoPanel.SetTittle("Consultar Cliente");
+
+        } else if (selection == OPCION2) {
+            showCustomers sC = new showCustomers(null, true);
+            sC.ocultarBotones("VerListadoAcciones");
+            sC.showDialog();
+
+        } else if (selection == OPCION3) {
+            getInformation getInfoPanel = new getInformation(null, true);
+            getInfoPanel.setActionIcon(1);
+            //borrar cliente
+            getInfoPanel.SetTittle("Eliminar Cliente");
+            getInfoPanel.showDialog("ConsultarClt");
+
+        } else if (selection == OPCION4) {
+
+            getInformation getInfoPanel = new getInformation(null, true);
+            getInfoPanel.SetTittle("Actualizar Cliente");
+            getInfoPanel.setActionIcon(2);
+            getInfoPanel.showDialog("ConsultarClt");
+
+        }
+    }//GEN-LAST:event_jLabelVerSelected1MouseClicked
 
 //    /**
 //     * @param args the command line arguments
@@ -462,18 +562,22 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabelSelectRowCuenta;
     private javax.swing.JLabel jLabelVerSelected;
+    private javax.swing.JLabel jLabelVerSelected1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanelCliente;
+    private javax.swing.JPanel jPanelCltJuridico;
     private javax.swing.JPanel jPanelCuentas;
     private javax.swing.JPanel jPanelReportes;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
+    private javax.swing.JTable jTable5;
     // End of variables declaration//GEN-END:variables
 }
