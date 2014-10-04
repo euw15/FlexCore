@@ -11,5 +11,19 @@ namespace RESTfulFlexCore.Services
         {
 
         }
+
+        //POST
+      /*  public override String crearCuentaDebito(String nombre, String cedula, String telefono, String direccion)
+        {
+            try
+            {
+                CBConnectionMSQL.insertUpdateDeleteMSQL("EXEC crearEmpleadoJuridico @Nombre = '" + nombre + "',@Cedula ='" + cedula + "',@Telefono='" + telefono + "',@Direccion='" + direccion + "';");
+                return "sucess";
+            }
+            catch
+            {
+                return "fail";
+            }
+        }*/
     }
 }

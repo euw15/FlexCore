@@ -24,13 +24,15 @@ namespace RESTfulFlexCore.Services
             try
             {
                 CBConnectionMSQL.insertUpdateDeleteMSQL("EXEC crearEmpleadoJuridico @Nombre = '" + nombre + "',@Cedula ='" + cedula + "',@Telefono='" + telefono + "',@Direccion='" + direccion + "';");
-                return "sucess";
+                return CBConnectionMSQL.getAutoIncrement("ClienteJuridico", "CIF");
             }
             catch
             {
                 return "fail";
             }
-        }
+        }        
+
+       
 
         //POST
         public override String crearClienteFisico(String nombre, String apellidos, String cedula, String telefono, String direccion)
@@ -38,7 +40,7 @@ namespace RESTfulFlexCore.Services
             try
             {
                 CBConnectionMSQL.insertUpdateDeleteMSQL("EXEC crearEmpleadoFisico @Nombre = '" + nombre + "',@Apellidos='" + apellidos + "' ,@Cedula ='" + cedula + "' ,@Telefono = '" + telefono + "' ,@Direccion = '" + direccion + "';");
-                return "sucess";
+                return CBConnectionMSQL.getAutoIncrement("ClienteFisico", "CIF");
             }
             catch
             {
