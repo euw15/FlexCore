@@ -85,15 +85,6 @@ CREATE TABLE [DocumentoxCliente](
 	CONSTRAINT pk_DocumentosxCliente PRIMARY KEY (CIF,idDocumento)
 	)
 
-/*FALTA POR HACER!!!!
-/********************************************************************/
-/*GO
-CREATE TABLE [Documentos](
-	[idDocumento] [int] Identity(1,1),
-	[Documento] VARBINARY(MAX) FILESTREAM NULL
-	)
-
-/********************************************************************/
 GO
 CREATE TABLE [TipoMoneda](
 	[idTipoMoneda] [int] Identity(1,1) constraint pk_idTipoMoneda_TipoMoneda primary key,
