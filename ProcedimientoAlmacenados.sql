@@ -198,7 +198,6 @@ AS
 
 
 /********************* Realizar Pago ****************************************/
-GO
 CREATE PROCEDURE realizarPago
 	/*Parametros de entrada *******/
 	@NumeroCuentaDebito int,
