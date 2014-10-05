@@ -79,7 +79,7 @@ AS
 	INSERT INTO ClienteFisico (CIF, Nombre,Apellido,Cedula,idDireccionPrincipal,idTelefonoPrincipal) values (@id,@Nombre,@Apellidos,@Cedula,@idDireccionGenerado,@idTelefonoGenerado);
 
 	return @id;
-	
+
 /*******************Consultar CLientes Juridicos por concepto******************************/
 go
 CREATE PROCEDURE consultarClienteJuridicoPorConcepto
@@ -148,7 +148,7 @@ CREATE PROCEDURE consultarClientesFisicos
 	@Inicio int
 AS
 	/*Consulta los clientes fisico en el rago deseado */
-	SELECT CIF,Nombre,Cedula, Telefono, Direccion FROM ( 
+	SELECT CIF,Nombre,Apellido,Cedula, Telefono, Direccion FROM ( 
 	  SELECT *, ROW_NUMBER() OVER (ORDER BY CIF) as row FROM ClientesFisico
 	 ) a WHERE a.row > @Inicio and a.row <= @Inicio+@Cantidad
 
@@ -177,6 +177,12 @@ AS
 	/*Inserta la nueva cuenta de debito*/
 	INSERT INTO CuentaDebito (idCliente,Desripcion,idTipoMoneda,Estado,SaldoReal,SaldoFlotante) values (@ClienteCIF,@Descripcion,@Moneda,1,0,0)
 
+	declare @numeroCuentaGenerado int
+
+	select @numeroCuentaGenerado=numeroCuenta from CuentaDebito where idCuentaDebito = IDENT_CURRENT('CuentaDebito')
+
+	return @numeroCuentaGenerado;
+
 /********************* Crear Cuenta Ahorro ****************************************/
 
 go
@@ -193,11 +199,17 @@ CREATE PROCEDURE crearCuentaAhorro
 	@Moneda nvarchar(10),
 	@DuracionAhorro int
 AS
+	
+	
 	/*Inserta la informacion de la cuenta de Ahorro */
 	insert into CuentaAhorro (CIF, NumeroCuentaDebito,idProposito,Periodicidad,FechaInicio,FechaFinal,DuracionAhorro,MontoAhorro,idTipoMoneda)
 		values (@ClienteCIF,@NumeroCuentaOrigen,@idProposito,@Periodicidad,@FechaInicio,@FechaFinal,@DuracionAhorro,@MontoAhorro,@Moneda)
 
+	declare @numeroCuentaGenerado int
 
+	select @numeroCuentaGenerado=numeroCuenta from CuentaAhorro where idCuentaAhorro = IDENT_CURRENT('CuentaAhorro')
+
+	return @numeroCuentaGenerado;
 
 /********************* Realizar Pago ****************************************/
 CREATE PROCEDURE realizarPago
