@@ -15,13 +15,13 @@ CREATE PROCEDURE crearEmpleadoJuridico
     @Telefono nvarchar(30),
     @Direccion nvarchar(300)
 AS 
-	declare @CIFGenerado [int] ,  		    /*Contiene CIF Generado */
+	declare @id [int] ,  		    /*Contiene CIF Generado */
 	        @idDireccionGenerado [int],		/*Contiene id Direccion Generado */
 		    @idTelefonoGenerado [int]		/*Contiene id Telefono generado */
 
 	/*Inserta el clienteGenerico y obtiene el CIF*/
 	INSERT INTO Cliente (idTipoCliente) values (1)
-	SET @CIFGenerado = IDENT_CURRENT('Cliente')
+	SET @id = IDENT_CURRENT('Cliente')
 
 	/*Inserta la direccion */
 	INSERT INTO Direccion (Direccion) values (@Direccion)
@@ -32,14 +32,15 @@ AS
 	SET @idTelefonoGenerado = IDENT_CURRENT('Telefono')
 
 	/*Relaciona la Direccion con El Cliente */
-	INSERT INTO DireccionXCliente (idDireccion,CIF) values (@idDireccionGenerado,@CIFGenerado)
+	INSERT INTO DireccionXCliente (idDireccion,CIF) values (@idDireccionGenerado,@id)
 
 	/*Relaciona el telefono con el cliente*/
-	INSERT INTO TelefonoxCliente (idTelefono,CIF) values (@idTelefonoGenerado,@CIFGenerado)
+	INSERT INTO TelefonoxCliente (idTelefono,CIF) values (@idTelefonoGenerado,@id)
 
 	/*inserta en cliente juridico */
-	INSERT INTO ClienteJuridico (CIF, Nombre,Cedula,idDireccionPrincipal,idTelefonoPrincipal) values (@CIFGenerado,@Nombre,@Cedula,@idDireccionGenerado,@idTelefonoGenerado);
+	INSERT INTO ClienteJuridico (CIF, Nombre,Cedula,idDireccionPrincipal,idTelefonoPrincipal) values (@id,@Nombre,@Cedula,@idDireccionGenerado,@idTelefonoGenerado);
 
+	return @id;
 
 /**********************Crea un Empleado Fisico *******************/
 
@@ -52,13 +53,13 @@ CREATE PROCEDURE crearEmpleadoFisico
     @Direccion nvarchar(300),
     @Apellidos nvarchar(200)
 AS 
-	declare @CIFGenerado [int] ,  		    /*Contiene CIF Generado */
+	declare @id [int] ,  		    /*Contiene CIF Generado */
 	        @idDireccionGenerado [int],		/*Contiene id Direccion Generado */
 		    @idTelefonoGenerado [int]		/*Contiene id Telefono generado */
 
 	/*Inserta el clienteGenerico y obtiene el CIF*/
 	INSERT INTO Cliente (idTipoCliente) values (0)
-	SET @CIFGenerado = IDENT_CURRENT('Cliente')
+	SET @id = IDENT_CURRENT('Cliente')
 
 	/*Inserta la direccion */
 	INSERT INTO Direccion (Direccion) values (@Direccion)
@@ -69,15 +70,16 @@ AS
 	SET @idTelefonoGenerado = IDENT_CURRENT('Telefono')
 
 	/*Relaciona la Direccion con El Cliente */
-	INSERT INTO DireccionXCliente (idDireccion,CIF) values (@idDireccionGenerado,@CIFGenerado)
+	INSERT INTO DireccionXCliente (idDireccion,CIF) values (@idDireccionGenerado,@id)
 
 	/*Relaciona el telefono con el cliente*/
-	INSERT INTO TelefonoxCliente (idTelefono,CIF) values (@idTelefonoGenerado,@CIFGenerado)
+	INSERT INTO TelefonoxCliente (idTelefono,CIF) values (@idTelefonoGenerado,@id)
 
 	/*inserta en cliente juridico */
-	INSERT INTO ClienteFisico (CIF, Nombre,Apellido,Cedula,idDireccionPrincipal,idTelefonoPrincipal) values (@CIFGenerado,@Nombre,@Apellidos,@Cedula,@idDireccionGenerado,@idTelefonoGenerado);
+	INSERT INTO ClienteFisico (CIF, Nombre,Apellido,Cedula,idDireccionPrincipal,idTelefonoPrincipal) values (@id,@Nombre,@Apellidos,@Cedula,@idDireccionGenerado,@idTelefonoGenerado);
 
-
+	return @id;
+	
 /*******************Consultar CLientes Juridicos por concepto******************************/
 go
 CREATE PROCEDURE consultarClienteJuridicoPorConcepto
