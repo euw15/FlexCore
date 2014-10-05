@@ -177,11 +177,11 @@ AS
 	/*Inserta la nueva cuenta de debito*/
 	INSERT INTO CuentaDebito (idCliente,Desripcion,idTipoMoneda,Estado,SaldoReal,SaldoFlotante) values (@ClienteCIF,@Descripcion,@Moneda,1,0,0)
 
-	declare @numeroCuentaGenerado int
+	declare @id int
 
-	select @numeroCuentaGenerado=numeroCuenta from CuentaDebito where idCuentaDebito = IDENT_CURRENT('CuentaDebito')
+	select @id=numeroCuenta from CuentaDebito where idCuentaDebito = IDENT_CURRENT('CuentaDebito')
 
-	return @numeroCuentaGenerado;
+	return @id;
 
 /********************* Crear Cuenta Ahorro ****************************************/
 
@@ -205,11 +205,11 @@ AS
 	insert into CuentaAhorro (CIF, NumeroCuentaDebito,idProposito,Periodicidad,FechaInicio,FechaFinal,DuracionAhorro,MontoAhorro,idTipoMoneda)
 		values (@ClienteCIF,@NumeroCuentaOrigen,@idProposito,@Periodicidad,@FechaInicio,@FechaFinal,@DuracionAhorro,@MontoAhorro,@Moneda)
 
-	declare @numeroCuentaGenerado int
+	declare @id int
 
-	select @numeroCuentaGenerado=numeroCuenta from CuentaAhorro where idCuentaAhorro = IDENT_CURRENT('CuentaAhorro')
+	select @id=numeroCuenta from CuentaAhorro where idCuentaAhorro = IDENT_CURRENT('CuentaAhorro')
 
-	return @numeroCuentaGenerado;
+	return @id;
 
 /********************* Realizar Pago ****************************************/
 CREATE PROCEDURE realizarPago
