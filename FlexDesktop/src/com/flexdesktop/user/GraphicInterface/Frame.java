@@ -394,8 +394,9 @@ public class Frame extends javax.swing.JFrame {
 
         } else if (selection == OPCION1) {//Si se elige consutar cliente
             getInformation getInfoPanel = getInformation.getDialog();
-            getInfoPanel.showDialog("ConsultarClt");
             getInfoPanel.setActionIcon(0);
+            getInfoPanel.showDialog("ConsultarClt");
+            
             getInfoPanel.SetTittle("Consultar Cliente");
 
         } else if (selection == OPCION2) {
@@ -496,8 +497,9 @@ public class Frame extends javax.swing.JFrame {
 
         } else if (selection == OPCION1) {
             getInformation getInfoPanel = new getInformation(null, true);
+            getInfoPanel.setActionIcon(12);
             getInfoPanel.showDialog("ConsultarClt");
-            getInfoPanel.setActionIcon(0);
+
             getInfoPanel.SetTittle("Consultar Cliente");
 
         } else if (selection == OPCION2) {

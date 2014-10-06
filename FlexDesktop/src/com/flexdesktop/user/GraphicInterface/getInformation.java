@@ -42,12 +42,13 @@ public class getInformation extends javax.swing.JDialog {
     static private getInformation self;
     private int accion = 0;
     private final int BORRAR = 1;
-    private final int Ver = 0;
+    private final int VerCustomerFisico = 0;
     private final int Actualizar = 2;
     private final int Beneficiario = 7;
     private final int getIdCliente = 8;
     private final int RegisterCostumerFisico = 10;
     private final int RegisterCostumerJuridico = 11;
+    private final int VerCostumerJuridico = 12;
     private String ced = "";
 
     static getInformation getDialog() {
@@ -885,59 +886,80 @@ public class getInformation extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        //*********Se obtiene la informacion/*******
+        String nombre = jFormattedTextFieldEnterName.getText();
+        String apellido = jFormattedTextFieldEnterApellido.getText();
+        String cedula = jFormattedTextFieldEnterCedula.getText();
+        String direccion = "";
+        if (getAddres().size() > 0) {
+            direccion = getAddres().get(0);
+        }
+        String telefono = "";
+        if (listTelefono.size() > 0) {
+            telefono = listTelefono.get(0).toString();
+        }
+        System.out.println("registrarClientesFisico");
+        System.out.println("name: " + nombre);
+        System.out.println("Cedula: " + cedula);
+        System.out.println("Apellido: " + apellido);
+        System.out.println("adrdres: " + direccion);
+//********************/////////////////////////////////////
         if (accion == RegisterCostumerFisico) {
-            String nombre = jFormattedTextFieldEnterName.getText();
-            String apellido = jFormattedTextFieldEnterApellido.getText();
-            String cedula = jFormattedTextFieldEnterCedula.getText();
-            String direccion = getAddres().get(0);
-            String telefono = "89795421";
-            System.out.println("registrarClientesFisico");
-            System.out.println("name: " + nombre);
-            System.out.println("Cedula: " + cedula);
-            System.out.println("Apellido: " + apellido);
-            System.out.println("adrdres: " + direccion);
 
-            String CIF = restfulConnection.postRESTful("http://localhost:52003/api/cbclient/"
-                    + "crearClienteFisico?nombre=" + nombre + "&apellidos=" + apellido + "&cedula=" + cedula + "&telefono=" + telefono
-                    + "&direccion=" + direccion, "");
+            try {
 
-            //***falta guardar foto//****
-            dispose();
+                String CIF = restfulConnection.postRESTful("http://localhost:52003/api/cbclient/"
+                        + "crearClienteFisico?nombre=" + nombre + "&apellidos=" + apellido + "&cedula=" + cedula + "&telefono=" + telefono
+                        + "&direccion=" + direccion, "");
 
-            //mmostra la nueva informacion del cliente
-            getInformation getInfoPanel = getInformation.getDialog();
-            getInfoPanel.SetTittle("Consultar Cliente");
-            getInfoPanel.setInVisibleDeleteIcon();
-            getInfoPanel.setInfoClt(cedula, nombre, apellido, CIF, getPath());
+                //***falta guardar foto//****
+                dispose();
 
-            ArrayList<String> direcciones = getAddres();
-            for (int i = 0; i < direcciones.size(); i++) {
-                listDirecciones.addElement(direcciones.get(i));
-                jListShowAddres.setModel(listDirecciones);
-
+                //mmostra la nueva informacion del cliente
+                getInformation getInfoPanel = getInformation.getDialog();
+                getInfoPanel.SetTittle("Consultar Cliente");
+                getInfoPanel.setInVisibleDeleteIcon();
+                getInfoPanel.setInfoClt(cedula, nombre, apellido, CIF, getPath());
+                getInfoPanel.showDialog("VerClt");
+            } catch (Exception e) {
+                System.out.println("debe ingresar los datos Correctamente");
             }
-
-            getInfoPanel.showDialog("VerClt");
 
         }
         if (accion == RegisterCostumerJuridico) {
-            System.out.println("name: " + jFormattedTextFieldEnterName.getText());
-            System.out.println("Ceddula: " + jFormattedTextFieldEnterCedula.getText());
-            System.out.println("adrdres: " + getAddres().get(0));
-            System.out.println("registrarClientesJuridico");
-            String url = "http://localhost:52003/api/cbclient/"
-                    + "crearClienteJuridico?nombre=Juan MArtes&cedula=545fg&telefono=83416438&direccion=Por ahi";
-            System.out.println(url);
-            String CIF = restfulConnection.postRESTful(url, "");
-//            String CIF = restfulConnection.postRESTful("http://localhost:52003/api/cbclient/"
-//                    + "crearClienteJuridico?nombre="+
-//                    jFormattedTextFieldEnterName.getText()+
-//                    "&cedula="+jFormattedTextFieldEnterCedula.getText()+
-//                    "&telefono="+83416438+"&direccion="+getAddres().get(0), "");
 
-            System.out.println("CIF: " + CIF);
+            System.out.println("registrarClientesJuridico");
+
+            try {
+
+                String CIF = restfulConnection.postRESTful("http://localhost:52003/api/cbclient/"
+                        + "crearClienteJuridico?nombre="
+                        + nombre + "&cedula=" + cedula + "&telefono=" + telefono
+                        + "&direccion=" + direccion, "");
+
+                dispose();
+
+                //mmostra la nueva informacion del cliente
+                getInformation getInfoPanel = getInformation.getDialog();
+                getInfoPanel.SetTittle("Consultar Cliente");
+                getInfoPanel.setInVisibleDeleteIcon();
+                getInfoPanel.setInfoClt(cedula, nombre, "", CIF, getPath());
+                getInfoPanel.showDialog("VerClt");
+            } catch (Exception e) {
+                System.out.println("debe ingresar los datos Correctamente");
+            }
 
         }
+        //***********Mostrar las dirreciones y telefonos
+        ArrayList<String> direcciones = getAddres();
+        for (int i = 0; i < direcciones.size(); i++) {
+            listDirecciones.addElement(direcciones.get(i));
+            jListShowAddres.setModel(listDirecciones);
+
+        }
+
+        jListShowPhone.setModel(listTelefono);
+        //********************************************
         dispose();
 
 
@@ -1041,6 +1063,7 @@ public class getInformation extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        jListShowPhone.setModel(new DefaultListModel());
         dispose();
     }//GEN-LAST:event_jButton14ActionPerformed
 
@@ -1077,11 +1100,34 @@ public class getInformation extends javax.swing.JDialog {
         showCustomers sC = new showCustomers(null, true);
         sC.ocultarBotones("VerListado");
         if (jRadioButtonBuscarCed.isSelected()) {
-            //To do
-            //Obtener los clientes para esa cedulaSeleccionada
+            ArrayList<ArrayList<String>> result = null;
+            ArrayList<String> columnas_tabla = new ArrayList<>();
+            columnas_tabla.add("CIF");
+            columnas_tabla.add("cedula");
+            columnas_tabla.add("nombre");
+            columnas_tabla.add("direccion");
+            columnas_tabla.add("telefono");
+            
+            if (accion == VerCostumerJuridico) {
 
-            Object cliente[][] = {{jFormattedTextFieldBuscarPor.getText(),
-                "Jason", "Salazar"}};
+                result
+                        = restfulConnection.
+                        getRESTful("http://localhost:52003/api/cbclient/getCli"
+                                + "enteJuridicoPorConcepto?concepto=Cedula&dato="
+                                + jFormattedTextFieldBuscarPor.getText().toString(),
+                                columnas_tabla);
+                System.out.println(result.get(0).get(0));
+            }
+            if (accion == VerCustomerFisico) {
+                result
+                        = restfulConnection.
+                        getRESTful("http://localhost:52003/api/cbclient/"
+                                + "getClienteFisicoPorConcepto?concepto=Cedula&dato="
+                                + jFormattedTextFieldBuscarPor.getText().toString(),
+                                columnas_tabla);
+            }
+
+            Object cliente[][] = convertToObject(result);
             sC.setData(cliente);
             sC.showDialog();
             String cedulaSeleccionada = sC.getIdSelect();
@@ -1452,15 +1498,13 @@ public class getInformation extends javax.swing.JDialog {
         this.jLabelApellido.setText(lastName);
         this.jLabelCedula.setText(ced);
         this.jLabelCIF.setText(CIF);
-        if(str64 !=""){
-        jLabelShowImage.setIcon(new ImageIcon(
-                com.flexdesktop.user.GraphicInterface.Image.
-                generateImage(str64)));
+        if (str64 != "") {
+            jLabelShowImage.setIcon(new ImageIcon(
+                    com.flexdesktop.user.GraphicInterface.Image.
+                    generateImage(str64)));
+        } else {
+            jLabelShowImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/rostro.jpg")));
         }
-        else{
-       jLabelShowImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/rostro.jpg")));
-        }
-        
 
     }
 
@@ -1488,7 +1532,7 @@ public class getInformation extends javax.swing.JDialog {
     private void executeAction() {
 
         getInformation getInfoPanel = new getInformation(null, true);
-        if (accion == Ver) {
+        if (accion == VerCustomerFisico) {
             getInfoPanel.SetTittle("Consultar Cliente");
             getInfoPanel.setInVisibleDeleteIcon();
             getInfoPanel.setInfoClt("Cedula", "Nombre", "Apellido", "CIF", "");
