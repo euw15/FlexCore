@@ -10,7 +10,6 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -49,7 +48,8 @@ public class getInformation extends javax.swing.JDialog {
     private final int RegisterCostumerFisico = 10;
     private final int RegisterCostumerJuridico = 11;
     private final int VerCostumerJuridico = 12;
-    private String ced = "";
+    private String CIF = "";
+    Object cliente[][];
 
     static getInformation getDialog() {
         if (dialog == null) {
@@ -59,6 +59,7 @@ public class getInformation extends javax.swing.JDialog {
 
     }
     private String path = "";
+    private ArrayList<String> rowSelected;
 
     public getInformation(java.awt.Frame parent, boolean modal) {
 
@@ -74,10 +75,8 @@ public class getInformation extends javax.swing.JDialog {
         //Agregar una fila por defecto en las tablas
         addRow(jTable_Dirreciones);
 
-        ////////////////////////////////////
-//        java.awt.Image a = Toolkit.getDefaultToolkit().getImage("C:/Users/Jason/Documents/GitHub/FlexCore/FlexDesktop/src/com/flexdesktop/user/Images/hecho.png");
-//
-        jLabelShowImage.setIcon(new ImageIcon(com.flexdesktop.user.GraphicInterface.Image.generateImage(com.flexdesktop.user.GraphicInterface.Image.getStringBytesImage("C:\\\\Users\\\\Jason\\\\Documents\\\\GitHub\\\\FlexCore\\\\FlexDesktop\\\\src\\\\com\\\\flexdesktop\\\\user\\\\Images\\\\rostro.jpg"))));
+        jLabelShowImage.setIcon(new ImageIcon(com.flexdesktop.user.GraphicInterface.Image.generateImage(
+                com.flexdesktop.user.GraphicInterface.Image.getStringBytesImage("C:\\\\Users\\\\Jason\\\\Documents\\\\GitHub\\\\FlexCore\\\\FlexDesktop\\\\src\\\\com\\\\flexdesktop\\\\user\\\\Images\\\\rostro.jpg"))));
 
     }
 
@@ -1098,97 +1097,61 @@ public class getInformation extends javax.swing.JDialog {
     private void jLabelCreateCltMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCreateCltMouseClicked
 
         showCustomers sC = new showCustomers(null, true);
+
         sC.ocultarBotones("VerListado");
-        if (jRadioButtonBuscarCed.isSelected()) {
-            ArrayList<ArrayList<String>> result = null;
-            ArrayList<String> columnas_tabla = new ArrayList<>();
+
+        ArrayList<ArrayList<String>> result = null;
+        ArrayList<String> columnas_tabla = new ArrayList<>();
+
+        String concepto = getConceptoDeBusqueda();
+        String datoPorBuscar = jFormattedTextFieldBuscarPor.getText();
+
+        if (accion == VerCostumerJuridico) {
+
+            String[] colums = {"CIF", "Cédula", "Nombre",
+                "Teléfono", "DirreciónPrincipal"};
+            sC.setColumName(colums);
+
             columnas_tabla.add("CIF");
             columnas_tabla.add("cedula");
             columnas_tabla.add("nombre");
-            columnas_tabla.add("direccion");
             columnas_tabla.add("telefono");
-            
-            if (accion == VerCostumerJuridico) {
-
-                result
-                        = restfulConnection.
-                        getRESTful("http://localhost:52003/api/cbclient/getCli"
-                                + "enteJuridicoPorConcepto?concepto=Cedula&dato="
-                                + jFormattedTextFieldBuscarPor.getText().toString(),
-                                columnas_tabla);
-                System.out.println(result.get(0).get(0));
-            }
-            if (accion == VerCustomerFisico) {
-                result
-                        = restfulConnection.
-                        getRESTful("http://localhost:52003/api/cbclient/"
-                                + "getClienteFisicoPorConcepto?concepto=Cedula&dato="
-                                + jFormattedTextFieldBuscarPor.getText().toString(),
-                                columnas_tabla);
-            }
-
-            Object cliente[][] = convertToObject(result);
-            sC.setData(cliente);
-            sC.showDialog();
-            String cedulaSeleccionada = sC.getIdSelect();
-            setCed(cedulaSeleccionada);
-            if (cedulaSeleccionada != "") {
-                dispose();
-                executeAction();
-            }
-
-//****Hacer los mismo para cualquier otra pero cambiar la consulta a resfult
-        } else if (jRadioButtonBuscarCuenta.isSelected()) {
-            //To do
-            //Obtener los clientes para esa cedulaSeleccionada
-
-            Object cliente[][] = {{jFormattedTextFieldBuscarPor.getText(),
-                "Jason", "Salazar"}};
-            sC.setData(cliente);
-            sC.showDialog();
-            String cedulaSeleccionada = sC.getIdSelect();
-            System.out.println(cedulaSeleccionada);
-            if (cedulaSeleccionada != "") {
-                dispose();
-                executeAction();
-            }
-
-        } else if (jRadioButtonNombre.isSelected()) {
-//            Object cliente[][] = {{jFormattedTextFieldBuscarPor.getText(),
-//                "Jason", "Salazar"}};
-
-            ArrayList<String> columnas_tabla = new ArrayList<>();
-            columnas_tabla.add("CIF");
-            columnas_tabla.add("cedula");
-            columnas_tabla.add("nombre");
             columnas_tabla.add("direccion");
-            columnas_tabla.add("telefono");
-            ArrayList<ArrayList<String>> result = restfulConnection.getRESTful("http://localhost:52003/api/cbclient/getClienteJuridicoPorConcepto?concepto=Nombre&dato=" + jFormattedTextFieldBuscarPor.getText().toString(),
-                    columnas_tabla);
 
-            Object cliente[][] = convertToObject(result);
+            result = restfulConnection.getRESTful("http://localhost:52003/api/"
+                    + "cbclient/getClienteJuridicoPorConcepto?concepto="
+                    + concepto + "&dato=" + datoPorBuscar, columnas_tabla);
+
+        }
+        if (accion == VerCustomerFisico) {
+
             String[] colums = {"CIF", "Cédula", "Nombre", "Apellido",
                 "Teléfono", "DirreciónPrincipal"};
             sC.setColumName(colums);
-            sC.setData(cliente);
-            sC.showDialog();
-            String cedulaSeleccionada = sC.getIdSelect();
 
-            if (cedulaSeleccionada != "") {
-                dispose();
-                executeAction();
-            }
-        } else if (jRadioButtonApellido.isSelected()) {
-            Object cliente[][] = {{jFormattedTextFieldBuscarPor.getText(),
-                "Jason", "Salazar"}};
-            sC.setData(cliente);
-            sC.showDialog();
-            String cedulaSeleccionada = sC.getIdSelect();
-            System.out.println(cedulaSeleccionada);
-            if (cedulaSeleccionada != "") {
-                dispose();
-                executeAction();
-            }
+            columnas_tabla.add("CIF");
+            columnas_tabla.add("cedula");
+            columnas_tabla.add("nombre");
+            columnas_tabla.add("apellido");
+            columnas_tabla.add("direccion");
+            columnas_tabla.add("telefono");
+
+            result = restfulConnection.
+                    getRESTful("http://localhost:52003/api/cbclient/getCliente"
+                            + "FisicoPorConcepto?concepto=" + concepto
+                            + "&dato=" + datoPorBuscar, columnas_tabla);
+        }
+
+        cliente = convertToObject(result);
+        sC.setData(cliente);
+        sC.showDialog();
+
+        String CIFSelected = sC.getIdSelect();
+        rowSelected = sC.getRowSelect();
+        setCIF(CIFSelected);
+        if (CIFSelected != "") {
+            dispose();
+            executeAction();
         }
 
 
@@ -1324,42 +1287,6 @@ public class getInformation extends javax.swing.JDialog {
     private javax.swing.JPanel registerClt;
     // End of variables declaration//GEN-END:variables
 
-    private void configureTableLook() {
-//        DefaultTableCellRenderer centerRender = new DefaultTableCellRenderer();
-//        centerRender.setHorizontalAlignment(JLabel.LEFT);
-//
-//        table.setRowHeight(25);
-//        table.getColumnModel().getColumn(0).setPreferredWidth(60);
-//
-//        table.getColumnModel().getColumn(1).setPreferredWidth(10);
-//        table.getColumnModel().getColumn(0).setCellRenderer(centerRender);
-//        //  table.getColumnModel().getColumn(1).setCellRenderer(centerRender);
-//
-//        TableCellRenderer rendererFromHeader = table.getTableHeader().getDefaultRenderer();
-//        JLabel headerLabel = (JLabel) rendererFromHeader;
-//        headerLabel.setHorizontalAlignment(JLabel.LEFT);
-//
-//        table.getTableHeader().setFont(new Font("Khmer UI", Font.PLAIN, 14));
-//        table.getTableHeader().setForeground(new Color(102, 102, 102));
-    }
-
-    private boolean validateUI() {
-
-//        for (int i = 0; i < table.getRowCount() - 1; i++) {
-//            boolean parseBoolean = Boolean.parseBoolean(table.getValueAt(i, 1).toString());
-//            if (parseBoolean) {
-//                return true;
-//            }
-//        }
-        return true;
-    }
-
-    private void showPanelOnDialog(javax.swing.JPanel pPanel, javax.swing.JDialog pDialog) {
-        pDialog.add(pPanel);
-        pPanel.setVisible(true);
-        pDialog.setVisible(true);
-    }
-
     private void setVisiblePanel(String panel) {
 
         this.setSize(448, 665);
@@ -1413,19 +1340,6 @@ public class getInformation extends javax.swing.JDialog {
 
     }
 
-//    public void completarTablaFacturacion() {
-//        //Crea la tabla generica para Facturas
-//
-//        MyTableModel_FACT model = new MyTableModel_FACT(columnNames, data2, true);
-//        this.table1.setModel(
-//                model);
-////        this.table1.setModel(new Modelo_Facturacion(columnNames, data));
-//        //Alinea la primer columna de esta tabla hacia el centro
-//        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-//      model.removeRow(1);
-//        this.table1.getColumnModel()
-//                .getColumn(0).setCellRenderer(centerRenderer);
-//    }
     private void eliminarFila(JTable table) {
         try {
             tableModelAddres model = (tableModelAddres) table.getModel();
@@ -1533,9 +1447,22 @@ public class getInformation extends javax.swing.JDialog {
 
         getInformation getInfoPanel = new getInformation(null, true);
         if (accion == VerCustomerFisico) {
+
             getInfoPanel.SetTittle("Consultar Cliente");
             getInfoPanel.setInVisibleDeleteIcon();
-            getInfoPanel.setInfoClt("Cedula", "Nombre", "Apellido", "CIF", "");
+            getInfoPanel.setInfoClt(rowSelected.get(1), rowSelected.get(2), 
+                    rowSelected.get(3), rowSelected.get(0), "");
+            getInfoPanel.showDialog("VerClt");
+        }
+        if (accion == VerCostumerJuridico) {
+
+            jLabel12.setVisible(false);
+            jLabelApellido.setVisible(false);
+            getInfoPanel.SetTittle("Consultar Cliente");
+            getInfoPanel.setInVisibleDeleteIcon();
+
+            getInfoPanel.setInfoClt(rowSelected.get(1), rowSelected.get(2),
+                    "", rowSelected.get(0), "");
             getInfoPanel.showDialog("VerClt");
         }
         if (accion == BORRAR) {
@@ -1571,10 +1498,6 @@ public class getInformation extends javax.swing.JDialog {
 
         }
         if (accion == RegisterCostumerJuridico) {
-//            jLabel4.setVisible(false);
-//            jButton7.setVisible(false);
-//            jFormattedTextFieldEnterApellido.setVisible(false);
-//            System.out.println("entree");
 
         }
 
@@ -1585,13 +1508,13 @@ public class getInformation extends javax.swing.JDialog {
 
     }
 
-    String getCed() {
-        return ced;
+    String getCIF() {
+        return CIF;
 
     }
 
-    void setCed(String cedNew) {
-        ced = cedNew;
+    void setCIF(String cedNew) {
+        CIF = cedNew;
 
     }
 
@@ -1617,6 +1540,22 @@ public class getInformation extends javax.swing.JDialog {
 
     private String getPath() {
         return this.path;
+    }
+
+    private String getConceptoDeBusqueda() {
+
+        if (jRadioButtonBuscarCed.isSelected()) {
+            return "Cedula";
+        } else if (jRadioButtonBuscarCuenta.isSelected()) {
+            return "Cuenta";
+        } else if (jRadioButtonApellido.isSelected()) {
+            return "Apellido";
+        }
+        if (jRadioButtonNombre.isSelected()) {
+            return "Nombre";
+        }
+        return "";
+
     }
 
 }

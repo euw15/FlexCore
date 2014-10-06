@@ -29,11 +29,8 @@ import javax.swing.table.TableRowSorter;
 /**
  *
  * @author Melvin
- * 
+ *
  */
-
-
-
 public class showCustomers extends javax.swing.JDialog {
 
     /**
@@ -76,10 +73,12 @@ public class showCustomers extends javax.swing.JDialog {
     private int numeroDePaginas = 0;
     private int paginalActual = 1;
     private String idSelect = "";
+    private ArrayList<String> rowSelect;
 
     public showCustomers(java.awt.Frame parent, boolean modal) {
 
         super(parent, modal);
+        this.rowSelect = new ArrayList<>();
         initComponents();
         setLocationRelativeTo(parent);
 
@@ -503,7 +502,7 @@ public class showCustomers extends javax.swing.JDialog {
                 jTable_Generica.getSelectedRow(), 2).toString();
 
         getInformation getInfoPanel = new getInformation(null, true);
-        getInfoPanel.setInfoClt(ced, name, lastName,"CIF","");
+        getInfoPanel.setInfoClt(ced, name, lastName, "CIF", "");
         getInfoPanel.setActionIcon(0);
         getInfoPanel.setInVisibleDeleteIcon();
         getInfoPanel.showDialog("VerClt");
@@ -665,6 +664,7 @@ public class showCustomers extends javax.swing.JDialog {
     private void jLabelSelectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSelectMouseClicked
         setIdSelect(jTable_Generica.getValueAt(
                 jTable_Generica.getSelectedRow(), 0).toString());
+        setRowSelect();
         dispose();
     }//GEN-LAST:event_jLabelSelectMouseClicked
 
@@ -694,8 +694,6 @@ public class showCustomers extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable_Generica;
     // End of variables declaration//GEN-END:variables
-
-
 
     private boolean validateUI() {
 
@@ -996,5 +994,18 @@ public class showCustomers extends javax.swing.JDialog {
      */
     public void setColumName(String[] ColumName) {
         this.ColumName = ColumName;
+    }
+
+    private void setRowSelect() {
+        for (int i = 0; i < jTable_Generica.getColumnCount(); i++) {
+            rowSelect.add(jTable_Generica.getValueAt(
+                    jTable_Generica.getSelectedRow(), i).toString());
+        }
+
+    }
+
+    ArrayList<String> getRowSelect() {
+        return rowSelect;
+
     }
 }

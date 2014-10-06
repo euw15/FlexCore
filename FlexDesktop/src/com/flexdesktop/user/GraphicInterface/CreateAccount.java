@@ -755,7 +755,7 @@ jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
         getInfoPanel.setActionIcon(8);
         getInfoPanel.SetTittle("Consultar Beneficiario");
         getInfoPanel.showDialog("CreateBneficiario");
-        String ced = getInfoPanel.getCed();
+        String ced = getInfoPanel.getCIF();
         String[] benefi = {ced};
 
         beneciarios.add(benefi);
@@ -789,7 +789,7 @@ jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
         getInfoPanel.setActionIcon(8);
         getInfoPanel.SetTittle("Consultar Cliente");
         getInfoPanel.showDialog("ConsultarClt");
-        String ced = getInfoPanel.getCed();
+        String ced = getInfoPanel.getCIF();
         if (ced != "") {
             jFormattedTextFieldEnterName.setText(ced);
         }
