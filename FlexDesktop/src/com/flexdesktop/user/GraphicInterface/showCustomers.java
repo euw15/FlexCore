@@ -73,6 +73,9 @@ public class showCustomers extends javax.swing.JDialog {
     private int numeroDePaginas = 0;
     private int paginalActual = 1;
     private String idSelect = "";
+    private int accionActual=0;
+    private int VerListadoClientesFisicos=0;
+    private int VerListadoClientesJuridicos=1;
     private ArrayList<String> rowSelect;
 
     public showCustomers(java.awt.Frame parent, boolean modal) {
@@ -1007,5 +1010,19 @@ public class showCustomers extends javax.swing.JDialog {
     ArrayList<String> getRowSelect() {
         return rowSelect;
 
+    }
+
+    /**
+     * @return the accionActual
+     */
+    public int getAccionActual() {
+        return accionActual;
+    }
+
+    /**
+     * @param accionActual the accionActual to set
+     */
+    public void setAccionActual(int accionActual) {
+        this.accionActual = accionActual;
     }
 }

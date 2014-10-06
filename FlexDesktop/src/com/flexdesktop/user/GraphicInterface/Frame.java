@@ -400,11 +400,14 @@ public class Frame extends javax.swing.JFrame {
             getInfoPanel.SetTittle("Consultar Cliente");
 
         } else if (selection == OPCION2) {
-            System.out.println("sfdsnd");
+            System.out.println("ahirxd");
             showCustomers sC = new showCustomers(null, true);
             sC.ocultarBotones("VerListadoAcciones");
             String[] columsNames = {"CIF", "Cédula", "Nombre", "Apellido",
                 "Teléfono", "DirecciónPrincipal"};
+            sC.setAccionActual(0);
+            sC.setPaginalActual(1);
+            sC.setNumeroDePaginas(1);
             sC.setColumName(columsNames);
             sC.showDialog();
 

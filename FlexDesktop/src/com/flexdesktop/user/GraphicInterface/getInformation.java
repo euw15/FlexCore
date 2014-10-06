@@ -58,7 +58,7 @@ public class getInformation extends javax.swing.JDialog {
         return dialog;
 
     }
-    private String path = "";
+    private String string64 = "";
     private ArrayList<String> rowSelected;
 
     public getInformation(java.awt.Frame parent, boolean modal) {
@@ -561,8 +561,8 @@ public class getInformation extends javax.swing.JDialog {
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelCIF, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(VerCltLayout.createSequentialGroup()
@@ -911,7 +911,8 @@ public class getInformation extends javax.swing.JDialog {
                         + "crearClienteFisico?nombre=" + nombre + "&apellidos=" + apellido + "&cedula=" + cedula + "&telefono=" + telefono
                         + "&direccion=" + direccion, "");
 
-                //***falta guardar foto//****
+                //***falta indicar el CIF para guardar foto//****
+                restfulConnection.postRESTful("http://localhost:52003/api/cbimage/insertImage?CIF=503890620", getPath());
                 dispose();
 
                 //mmostra la nueva informacion del cliente
@@ -1450,7 +1451,7 @@ public class getInformation extends javax.swing.JDialog {
 
             getInfoPanel.SetTittle("Consultar Cliente");
             getInfoPanel.setInVisibleDeleteIcon();
-            getInfoPanel.setInfoClt(rowSelected.get(1), rowSelected.get(2), 
+            getInfoPanel.setInfoClt(rowSelected.get(1), rowSelected.get(2),
                     rowSelected.get(3), rowSelected.get(0), "");
             getInfoPanel.showDialog("VerClt");
         }
@@ -1534,12 +1535,12 @@ public class getInformation extends javax.swing.JDialog {
     }
 
     private void setPatchImage(String absolutePath) {
-        this.path = absolutePath;
+        this.string64 = absolutePath;
 
     }
 
     private String getPath() {
-        return this.path;
+        return this.string64;
     }
 
     private String getConceptoDeBusqueda() {
