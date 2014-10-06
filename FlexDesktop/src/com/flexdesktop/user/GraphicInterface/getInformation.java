@@ -7,6 +7,7 @@ package com.flexdesktop.user.GraphicInterface;
 
 import com.flexdesktop.connections.restfulConnection;
 import com.flexdesktop.user.Error.InfError;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -37,9 +38,17 @@ import javax.swing.Timer;
 
 /**
  *
- * @author Melvin
+ * @author Jason
  */
 public class getInformation extends javax.swing.JDialog {
+
+    static getInformation getDialog() {
+        if (dialog == null) {
+            dialog = new getInformation(null, true);
+        }
+        return dialog;
+
+    }
 
     /**
      * Creates new form EditRoutes
@@ -51,7 +60,7 @@ public class getInformation extends javax.swing.JDialog {
 
     private String[] direccion = {"Direcciones"};
     private String[] phone = {"Phone"};
-
+    static getInformation dialog;
     public List<Object[]> data2 = new ArrayList<Object[]>();
     static private getInformation self;
     private int accion = 0;
@@ -151,6 +160,8 @@ public class getInformation extends javax.swing.JDialog {
         jLabelBorrarClt = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabelCIF = new javax.swing.JLabel();
         registerClt = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -454,39 +465,53 @@ public class getInformation extends javax.swing.JDialog {
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel12.setText("Apellido:");
 
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel15.setText("CIF:");
+
+        jLabelCIF.setBackground(new java.awt.Color(255, 255, 255));
+        jLabelCIF.setFont(new java.awt.Font("Khmer UI", 0, 16)); // NOI18N
+        jLabelCIF.setForeground(new java.awt.Color(102, 102, 102));
+
         javax.swing.GroupLayout VerCltLayout = new javax.swing.GroupLayout(VerClt);
         VerClt.setLayout(VerCltLayout);
         VerCltLayout.setHorizontalGroup(
             VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(VerCltLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
                 .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(VerCltLayout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4))
-                    .addGroup(VerCltLayout.createSequentialGroup()
-                        .addComponent(jLabelBorrarClt, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(VerCltLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
                         .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, VerCltLayout.createSequentialGroup()
-                                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabelCedula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, VerCltLayout.createSequentialGroup()
-                                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabelApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, VerCltLayout.createSequentialGroup()
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabelShowImage, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 44, Short.MAX_VALUE)))
+                            .addGroup(VerCltLayout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4))
+                            .addGroup(VerCltLayout.createSequentialGroup()
+                                .addComponent(jLabelBorrarClt, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(VerCltLayout.createSequentialGroup()
+                                .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, VerCltLayout.createSequentialGroup()
+                                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jLabelCedula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, VerCltLayout.createSequentialGroup()
+                                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jLabelApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, VerCltLayout.createSequentialGroup()
+                                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabelShowImage, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 44, Short.MAX_VALUE))))
+                    .addGroup(VerCltLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelCIF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         VerCltLayout.setVerticalGroup(
@@ -510,7 +535,11 @@ public class getInformation extends javax.swing.JDialog {
                 .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 241, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelCIF, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
                 .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelBorrarClt, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -685,8 +714,8 @@ public class getInformation extends javax.swing.JDialog {
         jButton7.setText("Cargar Fotografía");
 
         jButton9.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jButton9.setForeground(new java.awt.Color(0, 51, 153));
-        jButton9.setText("Print Dirreciones");
+        jButton9.setForeground(new java.awt.Color(51, 51, 51));
+        jButton9.setText("Cargar Documentos");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
@@ -718,21 +747,6 @@ public class getInformation extends javax.swing.JDialog {
                                     .addComponent(jFormattedTextFieldEnterName, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 18, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registerCltLayout.createSequentialGroup()
-                        .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(registerCltLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(registerCltLayout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(registerCltLayout.createSequentialGroup()
-                                        .addComponent(jButton12)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton13))
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(22, 22, 22))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registerCltLayout.createSequentialGroup()
                         .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(registerCltLayout.createSequentialGroup()
@@ -747,7 +761,22 @@ public class getInformation extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registerCltLayout.createSequentialGroup()
+                        .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(registerCltLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButton9))
+                            .addGroup(registerCltLayout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(registerCltLayout.createSequentialGroup()
+                                        .addComponent(jButton12)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton13))
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(22, 22, 22)))
                 .addContainerGap())
         );
         registerCltLayout.setVerticalGroup(
@@ -825,10 +854,46 @@ public class getInformation extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (accion == RegisterCostumerFisico) {
+            String nombre = jFormattedTextFieldEnterName.getText();
+            String apellido = jFormattedTextFieldEnterApellido.getText();
+            String cedula = jFormattedTextFieldEnterCedula.getText();
+            String direccion = getAddres().get(0);
+            String telefono = "89795421";
             System.out.println("registrarClientesFisico");
+            System.out.println("name: " + nombre);
+            System.out.println("Cedula: " + cedula);
+            System.out.println("Apellido: " + apellido);
+            System.out.println("adrdres: " + direccion);
+
+            String CIF = restfulConnection.postRESTful("http://localhost:52003/api/cbclient/"
+                    + "crearClienteFisico?nombre=" + nombre + "&apellidos=" + apellido + "&cedula=" + cedula + "&telefono=" + telefono
+                    + "&direccion=" + direccion, "");
+            dispose();
+
+            getInformation getInfoPanel = getInformation.getDialog();
+            getInfoPanel.SetTittle("Consultar Cliente");
+            getInfoPanel.setInVisibleDeleteIcon();
+            getInfoPanel.setInfoClt(cedula, nombre, apellido,CIF);
+            getInfoPanel.showDialog("VerClt");
+
         }
         if (accion == RegisterCostumerJuridico) {
+            System.out.println("name: " + jFormattedTextFieldEnterName.getText());
+            System.out.println("Ceddula: " + jFormattedTextFieldEnterCedula.getText());
+            System.out.println("adrdres: " + getAddres().get(0));
             System.out.println("registrarClientesJuridico");
+            String url = "http://localhost:52003/api/cbclient/"
+                    + "crearClienteJuridico?nombre=Juan MArtes&cedula=545fg&telefono=83416438&direccion=Por ahi";
+            System.out.println(url);
+            String CIF = restfulConnection.postRESTful(url, "");
+//            String CIF = restfulConnection.postRESTful("http://localhost:52003/api/cbclient/"
+//                    + "crearClienteJuridico?nombre="+
+//                    jFormattedTextFieldEnterName.getText()+
+//                    "&cedula="+jFormattedTextFieldEnterCedula.getText()+
+//                    "&telefono="+83416438+"&direccion="+getAddres().get(0), "");
+
+            System.out.println("CIF: " + CIF);
+
         }
         dispose();
 
@@ -1006,7 +1071,7 @@ public class getInformation extends javax.swing.JDialog {
             columnas_tabla.add("nombre");
             columnas_tabla.add("direccion");
             columnas_tabla.add("telefono");
-            ArrayList<ArrayList<String>> result = restfulConnection.getRESTful("http://localhost:52003/api/cbclient/getClienteJuridicoPorConcepto?concepto=Nombre&dato=Jason",
+            ArrayList<ArrayList<String>> result = restfulConnection.getRESTful("http://localhost:52003/api/cbclient/getClienteJuridicoPorConcepto?concepto=Nombre&dato=" + jFormattedTextFieldBuscarPor.getText().toString(),
                     columnas_tabla);
 
             Object cliente[][] = convertToObject(result);
@@ -1105,6 +1170,7 @@ public class getInformation extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1115,6 +1181,7 @@ public class getInformation extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelApellido;
     private javax.swing.JLabel jLabelBorrarClt;
     private javax.swing.JLabel jLabelBusquedaPor;
+    private javax.swing.JLabel jLabelCIF;
     private javax.swing.JLabel jLabelCedula;
     private javax.swing.JLabel jLabelCrear;
     private javax.swing.JLabel jLabelCreateBeneficiario;
@@ -1179,7 +1246,6 @@ public class getInformation extends javax.swing.JDialog {
                 registerClt.setVisible(true);
                 registerClt.setLocation(0, 0);
             case "ConsultarClt":
-
                 add(ConsultarClt);
                 ConsultarClt.setVisible(true);
                 ConsultarClt.setLocation(0, 0);
@@ -1196,6 +1262,17 @@ public class getInformation extends javax.swing.JDialog {
             jLabelCrear.setVisible(true);
             ConsultarClt.setVisible(true);
             ConsultarClt.setLocation(0, 0);
+        }
+        if ("RegisterCltJuridico".equals(panel)) {
+
+            add(registerClt);
+            jLabel7.setText("Registrar Cliente Júridico");
+            jLabel4.setVisible(false);
+            jButton7.setVisible(false);
+            jFormattedTextFieldEnterApellido.setVisible(false);
+            registerClt.setVisible(true);
+            registerClt.setLocation(0, 0);
+
         }
     }
 
@@ -1291,10 +1368,11 @@ public class getInformation extends javax.swing.JDialog {
         return result;
     }
 
-    void setInfoClt(String ced, String name, String lastName) {
+    void setInfoClt(String ced, String name, String lastName,String CIF) {
         this.jLabelName.setText(name);
         this.jLabelApellido.setText(lastName);
         this.jLabelCedula.setText(ced);
+        this.jLabelCIF.setText(CIF);
 
     }
 
@@ -1325,13 +1403,13 @@ public class getInformation extends javax.swing.JDialog {
         if (accion == Ver) {
             getInfoPanel.SetTittle("Consultar Cliente");
             getInfoPanel.setInVisibleDeleteIcon();
-            getInfoPanel.setInfoClt("Cedula", "Nombre", "Apellido");
+            getInfoPanel.setInfoClt("Cedula", "Nombre", "Apellido","CIF");
             getInfoPanel.showDialog("VerClt");
         }
         if (accion == BORRAR) {
             getInfoPanel.SetTittle("Eliminar Cliente");
             getInfoPanel.jLabelBorrarClt.setVisible(true);
-            getInfoPanel.setInfoClt("Cedula", "Nombre", "Apellido");
+            getInfoPanel.setInfoClt("Cedula", "Nombre", "Apellido","CIF");
             getInfoPanel.showDialog("VerClt");
         }
         if (accion == Actualizar) {
@@ -1358,6 +1436,13 @@ public class getInformation extends javax.swing.JDialog {
         }
         if (accion == getIdCliente) {
             System.out.println("retun idcostumer");
+
+        }
+        if (accion == RegisterCostumerJuridico) {
+//            jLabel4.setVisible(false);
+//            jButton7.setVisible(false);
+//            jFormattedTextFieldEnterApellido.setVisible(false);
+//            System.out.println("entree");
 
         }
 

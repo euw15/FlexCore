@@ -503,7 +503,7 @@ public class showCustomers extends javax.swing.JDialog {
                 jTable_Generica.getSelectedRow(), 2).toString();
 
         getInformation getInfoPanel = new getInformation(null, true);
-        getInfoPanel.setInfoClt(ced, name, lastName);
+        getInfoPanel.setInfoClt(ced, name, lastName,"CIF");
         getInfoPanel.setActionIcon(0);
         getInfoPanel.setInVisibleDeleteIcon();
         getInfoPanel.showDialog("VerClt");

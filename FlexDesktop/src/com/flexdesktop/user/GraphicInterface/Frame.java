@@ -40,7 +40,7 @@ public class Frame extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanelCliente = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableModuloCltFisico = new javax.swing.JTable();
         jLabelVerSelected = new javax.swing.JLabel();
         jPanelCltJuridico = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -62,8 +62,8 @@ public class Frame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableModuloCltFisico.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        jTableModuloCltFisico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"   Registrar"},
                 {"   Consultar"},
@@ -85,9 +85,9 @@ public class Frame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
-        jTable1.setRowHeight(41);
-        jScrollPane1.setViewportView(jTable1);
+        jTableModuloCltFisico.setGridColor(new java.awt.Color(255, 255, 255));
+        jTableModuloCltFisico.setRowHeight(41);
+        jScrollPane1.setViewportView(jTableModuloCltFisico);
 
         jLabelVerSelected.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/Images/Buttons/listBtt.png"))); // NOI18N
         jLabelVerSelected.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -384,15 +384,16 @@ public class Frame extends javax.swing.JFrame {
 
     private void jLabelVerSelectedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelVerSelectedMouseClicked
 
-        int selection = jTable1.getSelectedRow();
+        int selection = jTableModuloCltFisico.getSelectedRow();
 
-        if (selection == OPCION0) {
-            getInformation getInfoPanel = new getInformation(null, true);
+        if (selection == OPCION0) {//Si se elige registrar cliente fisico
+            
+            getInformation getInfoPanel = getInformation.getDialog();
             getInfoPanel.setActionIcon(10);
             getInfoPanel.showDialog("RegisterClt");
 
-        } else if (selection == OPCION1) {
-            getInformation getInfoPanel = new getInformation(null, true);
+        } else if (selection == OPCION1) {//Si se elige consutar cliente
+            getInformation getInfoPanel = getInformation.getDialog();
             getInfoPanel.showDialog("ConsultarClt");
             getInfoPanel.setActionIcon(0);
             getInfoPanel.SetTittle("Consultar Cliente");
@@ -491,7 +492,7 @@ public class Frame extends javax.swing.JFrame {
         if (selection == OPCION0) {
             getInformation getInfoPanel = new getInformation(null, true);
             getInfoPanel.setActionIcon(11);
-            getInfoPanel.showDialog("RegisterClt");
+            getInfoPanel.showDialog("RegisterCltJuridico");
 
         } else if (selection == OPCION1) {
             getInformation getInfoPanel = new getInformation(null, true);
@@ -574,10 +575,10 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
+    private javax.swing.JTable jTableModuloCltFisico;
     // End of variables declaration//GEN-END:variables
 }
