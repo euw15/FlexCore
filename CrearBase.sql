@@ -177,9 +177,6 @@ CREATE TABLE [Cierres](
 /*******************************************************************/
 /*******************************************************************/
 
-
-USE FlexCoreDataBase;
-
 /****************Crea funcion para numeroCuentas *******************/
 /* Verifica el tipo de moneda en la insercion y le agrega el digito correspondiente */
 go
@@ -221,24 +218,29 @@ ALTER TABLE ClienteJuridico
 ADD CONSTRAINT FK_ClienteJuridico_CIF FOREIGN KEY (CIF) 
     REFERENCES Cliente (CIF) 
 
+go
 ALTER TABLE ClienteJuridico 
 ADD CONSTRAINT FK_ClienteJuridico_DireccionPrincipal FOREIGN KEY (idDireccionPrincipal) 
     REFERENCES Direccion (idDireccion) 
 
+go
 ALTER TABLE ClienteJuridico 
 ADD CONSTRAINT FK_ClienteJuridico_TelefonoPrincipal FOREIGN KEY (idTelefonoPrincipal) 
     REFERENCES Telefono (idTelefono) 
 
 
 /******Para CLientes Fisico ********************************/
+go
 ALTER TABLE ClienteFisico 
 ADD CONSTRAINT FK_ClienteFisico_DireccionPrincipal FOREIGN KEY (idDireccionPrincipal) 
     REFERENCES Direccion (idDireccion) 
 
+go
 ALTER TABLE ClienteFisico 
 ADD CONSTRAINT FK_ClienteFisico_TelefonoPrincipal FOREIGN KEY (idTelefonoPrincipal) 
     REFERENCES Telefono (idTelefono) 
 
+go
  ALTER TABLE ClienteFisico 
 ADD CONSTRAINT FK_ClienteFisico_CIF FOREIGN KEY (CIF) 
     REFERENCES Cliente (CIF) 
@@ -253,7 +255,7 @@ ALTER TABLE CuentaDebito
 ADD CONSTRAINT FK_CuentaDebito_idTipoMoneda FOREIGN KEY (idTipoMoneda) 
     REFERENCES TipoMoneda (idTipoMoneda) 
 
-
+go
 ALTER TABLE CuentaDebito
 ADD CONSTRAINT FK_CuentaDebito_idCliente FOREIGN KEY (idCliente) 
     REFERENCES Cliente (CIF) 
@@ -265,7 +267,7 @@ ALTER TABLE Beneficiarios
 ADD CONSTRAINT FK_Beneficiarios_idCliente FOREIGN KEY (idCliente) 
     REFERENCES Cliente (CIF) 
 
-
+go
 ALTER TABLE Beneficiarios
 ADD CONSTRAINT FK_Beneficiarios_NumeroCuentaDebito FOREIGN KEY (NumeroCuentaDebito) 
     REFERENCES CuentaDebito (idCuentaDebito) 
@@ -285,12 +287,12 @@ ALTER TABLE CuentaAhorro
 ADD CONSTRAINT FK_CuentaAhorro_Proposito FOREIGN KEY (idProposito)
 	REFERENCES Proposito (idProposito)
 
-
+go
 ALTER TABLE CuentaAhorro
 ADD CONSTRAINT FK_CuentaAhorro_idCliente FOREIGN KEY (CIF)
 	REFERENCES Cliente (CIF)
 
-
+go
 ALTER TABLE CuentaAhorro
 ADD CONSTRAINT FK_CuentaAhorro_NumeroCuentaDebito FOREIGN KEY (NumeroCuentaDebito)
 	REFERENCES CuentaDebito (idCuentaDebito)
@@ -302,13 +304,13 @@ ALTER TABLE DireccionXCliente
 ADD CONSTRAINT FK_DireccionXCliente_CIF FOREIGN KEY (CIF)
 	REFERENCES Cliente (CIF)
 
+go
 ALTER TABLE DireccionXCliente
 ADD CONSTRAINT FK_DireccionXCliente_idDireccion FOREIGN KEY (idDireccion)
 	REFERENCES Direccion (idDireccion)
 
 
 /********************Crea vistas *******************************************************/
-USE FlexCoreDataBase;
 
 go
 CREATE VIEW ClientesFisicos
@@ -332,8 +334,6 @@ AS select Cliente.CIF,ClienteJuridico.Nombre,ClienteJuridico.Cedula, Telefono.Te
 /************* Crear Procedimientos  Almacenados********************/
 /*******************************************************************/
 /*******************************************************************/
-GO
-USE FlexCoreDataBase;
 
 /**********************Crea un Empleado Juridico *******************/
 GO
@@ -541,6 +541,7 @@ AS
 	return @id;
 
 /********************* Realizar Pago ****************************************/
+go
 CREATE PROCEDURE realizarPago
 	/*Parametros de entrada *******/
 	@NumeroCuentaDebito int,
