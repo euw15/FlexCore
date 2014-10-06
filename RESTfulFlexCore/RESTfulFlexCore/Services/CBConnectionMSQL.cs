@@ -14,7 +14,9 @@ namespace RESTfulFlexCore.Services
 
         }
 
-        public static String insertUpdateDeleteMSQL(string query)
+       
+
+        public static String insertUpdateDeleteMSQL(string query,int getAutoIncrement)
         {
             /*   SqlConnection connection = new SqlConnection("Data Source=localhost;Network Library=DBMSSOCN; user id=json;" +
                                          "password=123456;server=JASON04;" +
@@ -34,7 +36,16 @@ namespace RESTfulFlexCore.Services
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
                 command.ExecuteNonQuery();
-                return "sucess";
+            
+                
+                if (getAutoIncrement == 1)
+                {
+                    return command.Parameters["ID"].Value.ToString();
+                }
+                else
+                {
+                    return "sucess";
+                }
 
             }
             catch (Exception e)
@@ -85,21 +96,7 @@ namespace RESTfulFlexCore.Services
             return table;
 
         }
-
-        //Autoincrement
-        public static String getAutoIncrement(String tabla, String columna)
-        {
-            try
-            {
-                DataTable table = CBConnectionMSQL.retrieveMSQL("select max(" + columna + ") as ID from " + tabla + "");
-                return table.Rows[0]["ID"].ToString();
-            }
-            catch (Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine(e.ToString());
-                return "";
-            }
-        }
+        
     }
 }
 

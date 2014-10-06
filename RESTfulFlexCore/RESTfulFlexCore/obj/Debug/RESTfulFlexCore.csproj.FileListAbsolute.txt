@@ -127,7 +127,6 @@ C:\Users\Daniel\Documents\Bases Repos\FlexCore\RESTfulFlexCore\RESTfulFlexCore\b
 C:\Users\Daniel\Documents\Bases Repos\FlexCore\RESTfulFlexCore\RESTfulFlexCore\bin\es\System.Web.WebPages.resources.dll
 C:\Users\Daniel\Documents\Bases Repos\FlexCore\RESTfulFlexCore\RESTfulFlexCore\bin\es\System.Web.WebPages.Deployment.resources.dll
 C:\Users\Daniel\Documents\Bases Repos\FlexCore\RESTfulFlexCore\RESTfulFlexCore\bin\es\System.Web.WebPages.Razor.resources.dll
-C:\Users\Daniel\Documents\Bases Repos\FlexCore\RESTfulFlexCore\RESTfulFlexCore\obj\Debug\RESTfulFlexCore.csprojResolveAssemblyReference.cache
 C:\Users\Daniel\Documents\Bases Repos\FlexCore\RESTfulFlexCore\RESTfulFlexCore\obj\Debug\RESTfulFlexCore.dll
 C:\Users\Daniel\Documents\Bases Repos\FlexCore\RESTfulFlexCore\RESTfulFlexCore\obj\Debug\RESTfulFlexCore.pdb
 C:\Users\Jason\Documents\GitHub\FlexCore\RESTfulFlexCore\RESTfulFlexCore\bin\RESTfulFlexCore.dll
@@ -174,3 +173,4 @@ C:\Users\Jason\Documents\GitHub\FlexCore\RESTfulFlexCore\RESTfulFlexCore\bin\es\
 C:\Users\Jason\Documents\GitHub\FlexCore\RESTfulFlexCore\RESTfulFlexCore\obj\Debug\RESTfulFlexCore.csprojResolveAssemblyReference.cache
 C:\Users\Jason\Documents\GitHub\FlexCore\RESTfulFlexCore\RESTfulFlexCore\obj\Debug\RESTfulFlexCore.dll
 C:\Users\Jason\Documents\GitHub\FlexCore\RESTfulFlexCore\RESTfulFlexCore\obj\Debug\RESTfulFlexCore.pdb
+C:\Users\Daniel\Documents\Bases Repos\FlexCore\RESTfulFlexCore\RESTfulFlexCore\obj\Debug\RESTfulFlexCore.csprojResolveAssemblyReference.cache

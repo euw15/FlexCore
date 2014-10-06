@@ -36,5 +36,23 @@ namespace RESTfulFlexCore.Controllers
             return instanceCuentaAbstract.crearCuentaAhorro(CIF, idProposito, Periodicidad, FechaInicio, FechaFinal,
              TiempoAhorro, MontoAhorro, NumeroCuentaOrigen, Moneda, DuracionAhorro);
         }
+
+        [HttpPost]
+        [ActionName("realizarPago")]
+        public String realizarPago(String cuentaPago, String cuentaDestino, String monto)
+        {
+            //api/cbcuenta/realizarPago?cuentaPago=1000000006&cuentaDestino=524513241&monto=1000
+            return instanceCuentaAbstract.realizarPago(cuentaPago, cuentaDestino, monto);
+        }
+
+        [HttpGet]
+        [ActionName("getObtenerPropositos")]
+        public Cuenta[] getObtenerPropositos()
+        {
+            //api/cbcuenta/getObtenerPropositos
+            return instanceCuentaAbstract.getObtenerPropositos();
+        }
+
+
     }
 }

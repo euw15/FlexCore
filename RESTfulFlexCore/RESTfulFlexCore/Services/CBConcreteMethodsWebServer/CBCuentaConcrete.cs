@@ -2,11 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using RESTfulFlexCore.Models;
+using System.Data;
 
 namespace RESTfulFlexCore.Services
 {
     public class CBCuentaConcrete : CBCuentaAbstract
     {
+
+        public const string CacheKey = "CBCuenta";
+
+
         public CBCuentaConcrete()
         {
 
@@ -17,15 +23,8 @@ namespace RESTfulFlexCore.Services
         {
             try
             {
-                String flag = CBConnectionMSQL.insertUpdateDeleteMSQL("EXEC crearCuentaDebito @ClienteCIF = '" + CIF + "', @Descripcion = '" + descripcion + "', @Moneda = '" + moneda + "'");
-                if (flag == "sucess")
-                {
-                    return CBConnectionMSQL.getAutoIncrement("CuentaDebito", "idCuentaDebito");
-                }
-                else
-                {
-                    return "fail";
-                }
+                return CBConnectionMSQL.insertUpdateDeleteMSQL("EXEC crearCuentaDebito @ClienteCIF = '" + CIF + "', @Descripcion = '" + descripcion + "', @Moneda = '" + moneda + "'", 1);
+
             }
             catch
             {
@@ -39,22 +38,110 @@ namespace RESTfulFlexCore.Services
         {
             try
             {
-                String flag = CBConnectionMSQL.insertUpdateDeleteMSQL("@ClienteCIF = '" + ClienteCIF + "',	@idProposito = '" + idProposito + "',	@Periodicidad = '" + Periodicidad + "',	@FechaInicio = '" + FechaInicio + "',	" +
+                return CBConnectionMSQL.insertUpdateDeleteMSQL("@ClienteCIF = '" + ClienteCIF + "',	@idProposito = '" + idProposito + "',	@Periodicidad = '" + Periodicidad + "',	@FechaInicio = '" + FechaInicio + "',	" +
                     "@FechaFinal = '" + FechaFinal + "',	@TiempoAhorro = '" + TiempoAhorro + "',	@MontoAhorro = '" + MontoAhorro + "',	@NumeroCuentaOrigen = '" + NumeroCuentaOrigen + "',	" +
-                    "@Moneda = '" + Moneda + "',	@DuracionAhorro = '" + DuracionAhorro + "'");
-                if (flag == "sucess")
-                { 
-                    return CBConnectionMSQL.getAutoIncrement("CuentaAhorro", "idCuentaAhorro"); 
-                }
-                else
-                {
-                    return "fail";
-                }
+                    "@Moneda = '" + Moneda + "',	@DuracionAhorro = '" + DuracionAhorro + "'", 1);
             }
             catch
             {
                 return "fail";
             }
+        }
+
+        //POST
+        public override String realizarPago(String cuentaPago, String cuentaDestino, String monto)
+        {
+            try
+            {
+                return CBConnectionMSQL.insertUpdateDeleteMSQL("", 1);
+            }
+            catch
+            {
+                return "fail";
+            }
+        }
+
+        //GET
+        public override Cuenta[] getObtenerPropositos()
+        {
+            DataTable table = CBConnectionMSQL.retrieveMSQL("EXEC consultarPropositos");
+            List<Cuenta> cuentaSelected = getTableGetCuenta(table);
+            return loadCache(cuentaSelected);
+        }
+
+
+        public List<Cuenta> getTableGetCuenta(DataTable table)
+        {
+            List<Cuenta> listCuenta = new List<Cuenta>();
+            foreach (DataRow row in table.Rows)
+            {
+                int idCliente = -1;
+                int Estado = -1;
+                int CIF = -1;
+                int numeroCuenta = -1;
+                int TasaInteres = -1;
+                int Periodicidad = -1;
+                int DuracionAhorro = -1;
+                int MontoAhorro = -1;
+                String FechaInicio = "";
+                String FechaFinal = "";
+                String Desripcion = "";
+                String Moneda = "";
+                String Proposito = "";
+                double SaldoReal = -1;
+                double SaldoFlotante = -1;
+
+                if (table.Columns.Contains("idCliente") && row["idCliente"] != DBNull.Value) { idCliente = Convert.ToInt32(row["idCliente"]); }
+                if (table.Columns.Contains("Estado") && row["Estado"] != DBNull.Value) { Estado = Convert.ToInt32(row["Estado"]); }
+                if (table.Columns.Contains("CIF") && row["CIF"] != DBNull.Value) { CIF = Convert.ToInt32(row["CIF"]); }
+                if (table.Columns.Contains("numeroCuenta") && row["numeroCuenta"] != DBNull.Value) { numeroCuenta = Convert.ToInt32(row["numeroCuenta"]); }
+                if (table.Columns.Contains("TasaInteres") && row["TasaInteres"] != DBNull.Value) { TasaInteres = Convert.ToInt32(row["TasaInteres"]); }
+                if (table.Columns.Contains("Periodicidad") && row["Periodicidad"] != DBNull.Value) { Periodicidad = Convert.ToInt32(row["Periodicidad"]); }
+                if (table.Columns.Contains("DuracionAhorro") && row["DuracionAhorro"] != DBNull.Value) { DuracionAhorro = Convert.ToInt32(row["DuracionAhorro"]); }
+                if (table.Columns.Contains("MontoAhorro") && row["MontoAhorro"] != DBNull.Value) { MontoAhorro = Convert.ToInt32(row["MontoAhorro"]); }
+                if (table.Columns.Contains("FechaInicio") && row["FechaInicio"] != DBNull.Value) { FechaInicio = row["FechaInicio"].ToString(); }
+                if (table.Columns.Contains("FechaFinal") && row["FechaFinal"] != DBNull.Value) { FechaFinal = row["FechaFinal"].ToString(); }
+                if (table.Columns.Contains("Desripcion") && row["Desripcion"] != DBNull.Value) { Desripcion = row["Desripcion"].ToString(); }
+                if (table.Columns.Contains("Moneda") && row["Moneda"] != DBNull.Value) { Moneda = row["Moneda"].ToString(); }
+                if (table.Columns.Contains("Proposito") && row["Proposito"] != DBNull.Value) { Proposito = row["Proposito"].ToString(); }
+                if (table.Columns.Contains("SaldoReal") && row["SaldoReal"] != DBNull.Value) { SaldoReal = Convert.ToDouble(row["SaldoReal"]); }
+                if (table.Columns.Contains("SaldoFlotante") && row["SaldoFlotante"] != DBNull.Value) { SaldoFlotante = Convert.ToDouble(row["SaldoFlotante"]); }
+
+                listCuenta.Add(new Cuenta
+                {
+                    idCliente = idCliente,
+                    Estado = Estado,
+                    CIF = CIF,
+                    numeroCuenta = numeroCuenta,
+                    TasaInteres = TasaInteres,
+                    Periodicidad = Periodicidad,
+                    DuracionAhorro = DuracionAhorro,
+                    MontoAhorro = MontoAhorro,
+                    FechaInicio = FechaInicio,
+                    FechaFinal = FechaFinal,
+                    Desripcion = Desripcion,
+                    Moneda = Moneda,
+                    Proposito = Proposito,
+                    SaldoReal = SaldoReal,
+                    SaldoFlotante = SaldoFlotante
+                });
+            }
+            return listCuenta;
+        }
+
+        public Cuenta[] loadCache(List<Cuenta> dataToLoad)
+        {
+            HttpContext.Current.Cache.Remove(CacheKey);
+            var ctx = HttpContext.Current;
+            if (ctx != null)
+            {
+                if (ctx.Cache[CacheKey] == null)
+                {
+                    ctx.Cache[CacheKey] = dataToLoad.ToArray();
+                    return (Cuenta[])ctx.Cache[CacheKey];
+                }
+            }
+            return null;
         }
 
     }

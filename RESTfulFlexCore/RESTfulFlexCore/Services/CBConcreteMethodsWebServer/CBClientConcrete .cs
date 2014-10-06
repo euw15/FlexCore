@@ -23,13 +23,8 @@ namespace RESTfulFlexCore.Services
         {
             try
             {
-                String flag= CBConnectionMSQL.insertUpdateDeleteMSQL("EXEC crearEmpleadoJuridico @Nombre = '" + nombre + "',@Cedula ='" + cedula + "',@Telefono='" + telefono + "',@Direccion='" + direccion + "';");
-                if(flag=="sucess"){
-                    return CBConnectionMSQL.getAutoIncrement("ClienteJuridico", "CIF");
-                }else
-                {
-                    return"fail";
-                }
+                return CBConnectionMSQL.insertUpdateDeleteMSQL("EXEC crearEmpleadoJuridico @Nombre = '" + nombre + "',@Cedula ='" + cedula + "',@Telefono='" + telefono + "',@Direccion='" + direccion + "';",1);
+            
             }
             catch
             {
@@ -43,15 +38,7 @@ namespace RESTfulFlexCore.Services
         {
             try
             {
-
-                String flag = CBConnectionMSQL.insertUpdateDeleteMSQL("EXEC crearEmpleadoFisico @Nombre = '" + nombre + "',@Apellidos='" + apellidos + "' ,@Cedula ='" + cedula + "' ,@Telefono = '" + telefono + "' ,@Direccion = '" + direccion + "';");
-                 if(flag=="sucess"){
-                     return CBConnectionMSQL.getAutoIncrement("ClienteFisico", "CIF");
-                 }
-                 else
-                 {
-                     return "fail";
-                 }
+                return CBConnectionMSQL.insertUpdateDeleteMSQL("EXEC crearEmpleadoFisico @Nombre = '" + nombre + "',@Apellidos='" + apellidos + "' ,@Cedula ='" + cedula + "' ,@Telefono = '" + telefono + "' ,@Direccion = '" + direccion + "';",1);
             }
             catch
             {
@@ -64,7 +51,7 @@ namespace RESTfulFlexCore.Services
         {
             try
             {
-                CBConnectionMSQL.insertUpdateDeleteMSQL("");
+                CBConnectionMSQL.insertUpdateDeleteMSQL("",0);
                 return "sucess";
             }
             catch
@@ -78,7 +65,7 @@ namespace RESTfulFlexCore.Services
         {
             try
             {
-                CBConnectionMSQL.insertUpdateDeleteMSQL("");
+                CBConnectionMSQL.insertUpdateDeleteMSQL("",0);
                 return "sucess";
             }
             catch
@@ -92,7 +79,7 @@ namespace RESTfulFlexCore.Services
         {
             try
             {
-                CBConnectionMSQL.insertUpdateDeleteMSQL("");
+                CBConnectionMSQL.insertUpdateDeleteMSQL("",0);
                 return "sucess";
             }
             catch
@@ -106,7 +93,7 @@ namespace RESTfulFlexCore.Services
         {
             try
             {
-                CBConnectionMSQL.insertUpdateDeleteMSQL("");
+                CBConnectionMSQL.insertUpdateDeleteMSQL("",0);
                 return "sucess";
             }
             catch
@@ -147,6 +134,8 @@ namespace RESTfulFlexCore.Services
             return loadCache(clientSelected);
         }
 
+
+
         public List<Client> getTableGetCliente(DataTable table)
         {
 
@@ -160,11 +149,11 @@ namespace RESTfulFlexCore.Services
                 String telefono = "";
                 String direccion = "";
 
-                if (row["CIF"] != DBNull.Value) { CIF = Convert.ToInt32(row["CIF"]); }
-                if (row["Nombre"] != DBNull.Value) { nombre = row["Nombre"].ToString(); }
-                if (row["Cedula"] != DBNull.Value) { cedula = row["Cedula"].ToString(); }
-                if (row["Telefono"] != DBNull.Value) { telefono = row["Telefono"].ToString(); }
-                if (row["Direccion"] != DBNull.Value) { direccion = row["Direccion"].ToString(); }
+                if (table.Columns.Contains("CIF") && row["CIF"] != DBNull.Value) { CIF = Convert.ToInt32(row["CIF"]); }
+                if (table.Columns.Contains("Nombre") && row["Nombre"] != DBNull.Value) { nombre = row["Nombre"].ToString(); }
+                if (table.Columns.Contains("Cedula") && row["Cedula"] != DBNull.Value) { cedula = row["Cedula"].ToString(); }
+                if (table.Columns.Contains("Telefono") && row["Telefono"] != DBNull.Value) { telefono = row["Telefono"].ToString(); }
+                if (table.Columns.Contains("Direccion") && row["Direccion"] != DBNull.Value) { direccion = row["Direccion"].ToString(); }
                 // if (row["Model"] != DBNull.Value) { apellido = row["Model"].ToString(); }
                 listClient.Add(new Client
                 {

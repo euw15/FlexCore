@@ -22,7 +22,7 @@ namespace RESTfulFlexCore.Models
 
         public int CIF { get; set; }
 
-        public int NumeroCuentaDebito { get; set; }
+        public int numeroCuenta { get; set; }
 
         public String Proposito { get; set; }
 
