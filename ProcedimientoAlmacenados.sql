@@ -253,4 +253,15 @@ CREATE PROCEDURE consultarPropositos
 	AS
 		SELECT TOP 100 P.Proposito, P.TasaInteres from Proposito AS P
 
+/********************* Agregar Imagenes USuario ***********************************/
+GO 
+CREATE PROCEDURE agregarImagenCliente
+		@imagen varchar(max),
+		@CIF int
+	AS
+		insert into Imagen (imagen) values (@imagen)
+
+		update ClienteFisico set idImagenCliente= IDENT_CURRENT('Imagen') from ClienteFisico where CIF= @CIF;
+
+
 

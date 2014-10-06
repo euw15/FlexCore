@@ -133,3 +133,12 @@ ALTER TABLE DireccionXCliente
 ADD CONSTRAINT FK_DireccionXCliente_idDireccion FOREIGN KEY (idDireccion)
 	REFERENCES Direccion (idDireccion)
 
+/**********************Imagenes por Cliente ********************************/
+
+GO
+ALTER TABLE ClienteFisico
+	ADD CONSTRAINT FK_IdImagen_ClienteFisico FOREIGN KEY (idImagenCliente)
+		REFERENCES Imagen (idImagen)
+
+
+

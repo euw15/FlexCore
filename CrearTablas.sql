@@ -168,4 +168,10 @@ CREATE TABLE [Cierres](
 	[idCierre] [int] Identity(1,1) constraint pk_idCierre_Cierres primary key,
 	[FechaFinal] [datetime] NOT NULL
 	)
+/*********************************************************************/
+GO
+CREATE TABLE [Imagen] (
+	[idImagen] [int] Identity(1,1) constraint pk_Imagen_idImagen primary key,
+	[imagen] varchar(max)
+	)
 
