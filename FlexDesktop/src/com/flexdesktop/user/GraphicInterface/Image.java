@@ -31,10 +31,10 @@ public class Image {
         String base64String = "";
         try {
 
-            File file = new File("C:\\Users\\Jason\\Documents\\GitHub\\FlexCore\\FlexDesktop\\src\\com\\flexdesktop\\user\\Images\\rostro.jpg");
+//            File file = new File("C:\\Users\\Jason\\Documents\\GitHub\\FlexCore\\FlexDesktop\\src\\com\\flexdesktop\\user\\Images\\rostro.jpg");
            
 //            File file = new File("C:\\Users\\Jason\\Pictures\\Fondos2\\Image3.jpg");
-            // File file = new File(path);            
+             File file = new File(path);            
             FileInputStream fis = new FileInputStream(file);
             ByteArrayOutputStream byteOuputStream = new ByteArrayOutputStream();
             byte[] byteArrayBuffer = new byte[1024];

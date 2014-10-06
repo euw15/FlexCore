@@ -6,32 +6,16 @@
 package com.flexdesktop.user.GraphicInterface;
 
 import com.flexdesktop.connections.restfulConnection;
-import com.flexdesktop.user.Error.InfError;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-
 import java.awt.Point;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Base64;
-import java.util.Iterator;
 import java.util.List;
-import javax.imageio.ImageIO;
-import javax.imageio.ImageReadParam;
-import javax.imageio.ImageReader;
-import javax.imageio.stream.ImageInputStream;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.Timer;
@@ -42,14 +26,6 @@ import javax.swing.Timer;
  */
 public class getInformation extends javax.swing.JDialog {
 
-    static getInformation getDialog() {
-        if (dialog == null) {
-            dialog = new getInformation(null, true);
-        }
-        return dialog;
-
-    }
-
     /**
      * Creates new form EditRoutes
      *
@@ -57,7 +33,8 @@ public class getInformation extends javax.swing.JDialog {
      * @param modal
      */
     private final Point point = new Point(0, 0);
-
+    DefaultListModel listDirecciones;
+    DefaultListModel listTelefono;
     private String[] direccion = {"Direcciones"};
     private String[] phone = {"Phone"};
     static getInformation dialog;
@@ -73,9 +50,20 @@ public class getInformation extends javax.swing.JDialog {
     private final int RegisterCostumerJuridico = 11;
     private String ced = "";
 
+    static getInformation getDialog() {
+        if (dialog == null) {
+            dialog = new getInformation(null, true);
+        }
+        return dialog;
+
+    }
+    private String path = "";
+
     public getInformation(java.awt.Frame parent, boolean modal) {
 
         super(parent, modal);
+        this.listDirecciones = new DefaultListModel();
+        this.listTelefono = new DefaultListModel();
         initComponents();
         setLocationRelativeTo(parent);
 
@@ -88,7 +76,7 @@ public class getInformation extends javax.swing.JDialog {
         ////////////////////////////////////
 //        java.awt.Image a = Toolkit.getDefaultToolkit().getImage("C:/Users/Jason/Documents/GitHub/FlexCore/FlexDesktop/src/com/flexdesktop/user/Images/hecho.png");
 //
-        jLabelShowImage.setIcon(new ImageIcon(com.flexdesktop.user.GraphicInterface.Image.generateImage(com.flexdesktop.user.GraphicInterface.Image.getStringBytesImage(""))));
+        jLabelShowImage.setIcon(new ImageIcon(com.flexdesktop.user.GraphicInterface.Image.generateImage(com.flexdesktop.user.GraphicInterface.Image.getStringBytesImage("C:\\\\Users\\\\Jason\\\\Documents\\\\GitHub\\\\FlexCore\\\\FlexDesktop\\\\src\\\\com\\\\flexdesktop\\\\user\\\\Images\\\\rostro.jpg"))));
 
     }
 
@@ -162,6 +150,13 @@ public class getInformation extends javax.swing.JDialog {
         jLabel12 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabelCIF = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jListShowAddres = new javax.swing.JList();
+        jLabel16 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jListShowPhone = new javax.swing.JList();
+        jLabel17 = new javax.swing.JLabel();
+        jButton11 = new javax.swing.JButton();
         registerClt = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -177,13 +172,14 @@ public class getInformation extends javax.swing.JDialog {
         jButton13 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable_Dirreciones = new javax.swing.JTable();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTablePhone = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jListPhone = new javax.swing.JList();
+        jTextFieldPhone = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(418, 578));
@@ -472,6 +468,24 @@ public class getInformation extends javax.swing.JDialog {
         jLabelCIF.setFont(new java.awt.Font("Khmer UI", 0, 16)); // NOI18N
         jLabelCIF.setForeground(new java.awt.Color(102, 102, 102));
 
+        jScrollPane1.setViewportView(jListShowAddres);
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel16.setText("Teléfonos:");
+
+        jScrollPane4.setViewportView(jListShowPhone);
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel17.setText("Direcciones:");
+
+        jButton11.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jButton11.setText("Ver Documentos");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout VerCltLayout = new javax.swing.GroupLayout(VerClt);
         VerClt.setLayout(VerCltLayout);
         VerCltLayout.setHorizontalGroup(
@@ -479,8 +493,22 @@ public class getInformation extends javax.swing.JDialog {
             .addGroup(VerCltLayout.createSequentialGroup()
                 .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(VerCltLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25)
+                        .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane4)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(VerCltLayout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(VerCltLayout.createSequentialGroup()
+                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(2, 2, 2)
+                                .addComponent(jLabelCIF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(VerCltLayout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -488,6 +516,8 @@ public class getInformation extends javax.swing.JDialog {
                                 .addGap(4, 4, 4))
                             .addGroup(VerCltLayout.createSequentialGroup()
                                 .addComponent(jLabelBorrarClt, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(VerCltLayout.createSequentialGroup()
@@ -506,12 +536,7 @@ public class getInformation extends javax.swing.JDialog {
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                             .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addComponent(jLabelShowImage, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 44, Short.MAX_VALUE))))
-                    .addGroup(VerCltLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelCIF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(0, 44, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         VerCltLayout.setVerticalGroup(
@@ -539,10 +564,27 @@ public class getInformation extends javax.swing.JDialog {
                 .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelCIF, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
                 .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelBorrarClt, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(VerCltLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(VerCltLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(VerCltLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VerCltLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47)))
+                .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jButton14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelBorrarClt, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -679,28 +721,6 @@ public class getInformation extends javax.swing.JDialog {
         jScrollPane2.setViewportView(jTable_Dirreciones);
         jTable_Dirreciones.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
-        jTablePhone.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTablePhone.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jTablePhone.setCellSelectionEnabled(true);
-        jTablePhone.setFillsViewportHeight(true);
-        jTablePhone.setSurrendersFocusOnKeystroke(true);
-        jTablePhone.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTablePhoneKeyPressed(evt);
-            }
-        });
-        jScrollPane3.setViewportView(jTablePhone);
-
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Nombre:");
 
@@ -712,6 +732,11 @@ public class getInformation extends javax.swing.JDialog {
 
         jButton7.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButton7.setText("Cargar Fotografía");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton9.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButton9.setForeground(new java.awt.Color(51, 51, 51));
@@ -721,6 +746,8 @@ public class getInformation extends javax.swing.JDialog {
                 jButton9ActionPerformed(evt);
             }
         });
+
+        jScrollPane5.setViewportView(jListPhone);
 
         javax.swing.GroupLayout registerCltLayout = new javax.swing.GroupLayout(registerClt);
         registerClt.setLayout(registerCltLayout);
@@ -769,13 +796,15 @@ public class getInformation extends javax.swing.JDialog {
                                 .addComponent(jButton9))
                             .addGroup(registerCltLayout.createSequentialGroup()
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(registerCltLayout.createSequentialGroup()
-                                        .addComponent(jButton12)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton13))
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                                    .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jTextFieldPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, registerCltLayout.createSequentialGroup()
+                                            .addComponent(jButton12)
+                                            .addGap(22, 22, 22)
+                                            .addComponent(jButton13))))))
                         .addGap(22, 22, 22)))
                 .addContainerGap())
         );
@@ -807,20 +836,23 @@ public class getInformation extends javax.swing.JDialog {
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jFormattedTextFieldEnterCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
-                .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(registerCltLayout.createSequentialGroup()
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextFieldPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(17, 17, 17)
                 .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
+                .addGap(41, 41, 41)
                 .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(registerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -868,12 +900,23 @@ public class getInformation extends javax.swing.JDialog {
             String CIF = restfulConnection.postRESTful("http://localhost:52003/api/cbclient/"
                     + "crearClienteFisico?nombre=" + nombre + "&apellidos=" + apellido + "&cedula=" + cedula + "&telefono=" + telefono
                     + "&direccion=" + direccion, "");
+
+            //***falta guardar foto//****
             dispose();
 
+            //mmostra la nueva informacion del cliente
             getInformation getInfoPanel = getInformation.getDialog();
             getInfoPanel.SetTittle("Consultar Cliente");
             getInfoPanel.setInVisibleDeleteIcon();
-            getInfoPanel.setInfoClt(cedula, nombre, apellido,CIF);
+            getInfoPanel.setInfoClt(cedula, nombre, apellido, CIF, getPath());
+
+            ArrayList<String> direcciones = getAddres();
+            for (int i = 0; i < direcciones.size(); i++) {
+                listDirecciones.addElement(direcciones.get(i));
+                jListShowAddres.setModel(listDirecciones);
+
+            }
+
             getInfoPanel.showDialog("VerClt");
 
         }
@@ -965,11 +1008,18 @@ public class getInformation extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        eliminarFila(jTablePhone);
+        if (listTelefono.size() - 1 >= 0) {
+            this.listTelefono.remove(listTelefono.size() - 1);
+            jListPhone.setModel(listTelefono);
+        }
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        addRow(jTablePhone);
+        if (!"".equals(jTextFieldPhone.getText())) {
+            this.listTelefono.addElement(jTextFieldPhone.getText());
+            jListPhone.setModel(listTelefono);
+            jTextFieldPhone.setText("");
+        }
 
     }//GEN-LAST:event_jButton12ActionPerformed
 
@@ -989,10 +1039,6 @@ public class getInformation extends javax.swing.JDialog {
 
         }
     }//GEN-LAST:event_jButton9ActionPerformed
-
-    private void jTablePhoneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTablePhoneKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTablePhoneKeyPressed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         dispose();
@@ -1143,6 +1189,31 @@ public class getInformation extends javax.swing.JDialog {
         jLabelCreateBeneficiario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/Images/Buttons/addBtt.png")));
     }//GEN-LAST:event_jLabelCreateBeneficiarioMouseExited
 
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        JFileChooser dialog = new JFileChooser();
+        dialog.setFileFilter(Utils.getFileFilter());
+        dialog.setAcceptAllFileFilterUsed(false);
+        int op = dialog.showOpenDialog(this);
+        System.out.println(op);
+        if (op == JFileChooser.APPROVE_OPTION) {
+            if (dialog.getSelectedFile().exists() && Utils.isExtValid(dialog.getSelectedFile())) {
+                try {
+
+                    setPatchImage(Image.getStringBytesImage(dialog.getSelectedFile().getAbsolutePath()));
+
+                } catch (Exception ex) {
+
+                }
+            }
+        }
+
+
+    }//GEN-LAST:event_jButton7ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ConsultarClt;
@@ -1150,6 +1221,7 @@ public class getInformation extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
@@ -1171,6 +1243,8 @@ public class getInformation extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1188,14 +1262,19 @@ public class getInformation extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelCreateClt;
     private javax.swing.JLabel jLabelName;
     private javax.swing.JLabel jLabelShowImage;
+    private javax.swing.JList jListPhone;
+    private javax.swing.JList jListShowAddres;
+    private javax.swing.JList jListShowPhone;
     private javax.swing.JRadioButton jRadioButtonApellido;
     private javax.swing.JRadioButton jRadioButtonBuscarCed;
     private javax.swing.JRadioButton jRadioButtonBuscarCuenta;
     private javax.swing.JRadioButton jRadioButtonNombre;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTablePhone;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable_Dirreciones;
+    private javax.swing.JTextField jTextFieldPhone;
     private javax.swing.JPanel registerClt;
     // End of variables declaration//GEN-END:variables
 
@@ -1368,11 +1447,20 @@ public class getInformation extends javax.swing.JDialog {
         return result;
     }
 
-    void setInfoClt(String ced, String name, String lastName,String CIF) {
+    void setInfoClt(String ced, String name, String lastName, String CIF, String str64) {
         this.jLabelName.setText(name);
         this.jLabelApellido.setText(lastName);
         this.jLabelCedula.setText(ced);
         this.jLabelCIF.setText(CIF);
+        if(str64 !=""){
+        jLabelShowImage.setIcon(new ImageIcon(
+                com.flexdesktop.user.GraphicInterface.Image.
+                generateImage(str64)));
+        }
+        else{
+       jLabelShowImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/rostro.jpg")));
+        }
+        
 
     }
 
@@ -1403,13 +1491,13 @@ public class getInformation extends javax.swing.JDialog {
         if (accion == Ver) {
             getInfoPanel.SetTittle("Consultar Cliente");
             getInfoPanel.setInVisibleDeleteIcon();
-            getInfoPanel.setInfoClt("Cedula", "Nombre", "Apellido","CIF");
+            getInfoPanel.setInfoClt("Cedula", "Nombre", "Apellido", "CIF", "");
             getInfoPanel.showDialog("VerClt");
         }
         if (accion == BORRAR) {
             getInfoPanel.SetTittle("Eliminar Cliente");
             getInfoPanel.jLabelBorrarClt.setVisible(true);
-            getInfoPanel.setInfoClt("Cedula", "Nombre", "Apellido","CIF");
+            getInfoPanel.setInfoClt("Cedula", "Nombre", "Apellido", "CIF", "");
             getInfoPanel.showDialog("VerClt");
         }
         if (accion == Actualizar) {
@@ -1476,6 +1564,15 @@ public class getInformation extends javax.swing.JDialog {
         }
         return data;
 
+    }
+
+    private void setPatchImage(String absolutePath) {
+        this.path = absolutePath;
+
+    }
+
+    private String getPath() {
+        return this.path;
     }
 
 }
