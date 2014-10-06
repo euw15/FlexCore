@@ -21,10 +21,10 @@ namespace RESTfulFlexCore.Controllers
 
         [HttpPost]
         [ActionName("insertImage")]
-        public String insertImage(String clientAccount)
+        public String insertImage(String CIF)
         {
-            //api/cbimage/insertImage?clientAccount=45453121TYFJTY
-            return instanceImageAbstract.insertImage(clientAccount);
+            //api/cbimage/insertImage?CIF=45453121TYFJTY
+            return instanceImageAbstract.insertImage(CIF);
         }
 
         [HttpGet]
