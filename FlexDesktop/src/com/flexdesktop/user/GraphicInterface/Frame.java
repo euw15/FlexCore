@@ -387,7 +387,7 @@ public class Frame extends javax.swing.JFrame {
         int selection = jTableModuloCltFisico.getSelectedRow();
 
         if (selection == OPCION0) {//Si se elige registrar cliente fisico
-            
+
             getInformation getInfoPanel = getInformation.getDialog();
             getInfoPanel.setActionIcon(10);
             getInfoPanel.showDialog("RegisterClt");
@@ -396,12 +396,16 @@ public class Frame extends javax.swing.JFrame {
             getInformation getInfoPanel = getInformation.getDialog();
             getInfoPanel.setActionIcon(0);
             getInfoPanel.showDialog("ConsultarClt");
-            
+
             getInfoPanel.SetTittle("Consultar Cliente");
 
         } else if (selection == OPCION2) {
+            System.out.println("sfdsnd");
             showCustomers sC = new showCustomers(null, true);
             sC.ocultarBotones("VerListadoAcciones");
+            String[] columsNames = {"CIF", "Cédula", "Nombre", "Apellido",
+                "Teléfono", "DirecciónPrincipal"};
+            sC.setColumName(columsNames);
             sC.showDialog();
 
         } else if (selection == OPCION3) {
@@ -488,7 +492,7 @@ public class Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel17MouseClicked
 
     private void jLabelVerSelected1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelVerSelected1MouseClicked
-       int selection = jTable5.getSelectedRow();
+        int selection = jTable5.getSelectedRow();
 
         if (selection == OPCION0) {
             getInformation getInfoPanel = new getInformation(null, true);
