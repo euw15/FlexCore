@@ -136,12 +136,16 @@ CREATE TABLE [CuentaAhorro](
 	[NumeroCuentaDebito] [int] NOT NULL,
 	[idProposito] [int] NOT NULL,
 	[Periodicidad] [int] NOT NULL,
-	[FechaInicio] [date] NOT NULL,
+	[FechaInicio] [datetime] NOT NULL,
 	[DuracionAhorro] [int] NOT NULL,
-	[FechaFinal] [date] NOT NULL,
+	[FechaFinal] [datetime] NOT NULL,
 	[MontoAhorro] [money] NOT NULL,
 	[idTipoMoneda] [int] NOT NULL,
-	[MontoAhorroActual] [money] NOT NULL
+	[MontoAhorroActual] [money] NOT NULL,
+	[MontoAhorroDeseado] [money] NOT NULL,
+	[FechaProximoPago] [datetime] NOT NULL,
+	[terminoAhorro] [bit] NOT NULL,
+	[dominioPeriodicidad] [nvarchar](20)
 	)
 
 /********************************************************************/

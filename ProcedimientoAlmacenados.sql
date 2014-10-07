@@ -263,5 +263,69 @@ CREATE PROCEDURE agregarImagenCliente
 
 		update ClienteFisico set idImagenCliente= IDENT_CURRENT('Imagen') from ClienteFisico where CIF= @CIF;
 
+/******************* Crear Job que revisa saldos **********************************/
+
+/*Revisar todos las cuentas donde la fecha ProximaPago sea mas temprana que FechaActual  y tienen el terminoAhorro en 0**/
+GO 
+CREATE PROCEDURE pagosAutomaticos
+as
+	declare @numeroCuenta int,
+			@FechaProximaPago datetime,
+			@MontoAhorro money,
+			@Periodicidad int,
+			@MontoAhorroActual money,
+			@MontoAhorroDeseado money,
+			@TerminoAhorro bit,
+			@NumeroCuentaDebito int,
+			@FechaFinal dateTime,
+			@dominioPeriodicidad [nvarchar](100)
+
+	select @numeroCuenta = min(NumeroCuentaDebito) from CuentaAhorro
+
+	while @numeroCuenta is not null
+	begin
+		/*Selecciona todas las variables de la cuenta actual */
+	    select @dominioPeriodicidad= dominioPeriodicidad , @FechaFinal=FechaFinal, @NumeroCuentaDebito=NumeroCuentaDebito , @FechaProximaPago=FechaProximoPago , @MontoAhorro=MontoAhorro ,@Periodicidad=Periodicidad , @MontoAhorroActual=MontoAhorroActual, @MontoAhorroDeseado=MontoAhorroDeseado, @TerminoAhorro=terminoAhorro
+	    		 from CuentaAhorro where numeroCuenta = @numeroCuenta
+	    
+	    /*Pregunta si ya debe hacer el pago y que la cuenta no haya finalizado su tiempo*/
+	    IF(GETDATE()>=@FechaProximaPago and @TerminoAhorro=0)
+	    	begin
+	    		declare @fondosCuentaDebito int
+	    		select @fondosCuentaDebito=SaldoFlotante from CuentaDebito where numeroCuenta = @numeroCuenta
+	    			
+	    			/*Si tiene fondos suficientes */
+	    			if(@fondosCuentaDebito>=@MontoAhorro)
+	    				begin
+	    					update CuentaAhorro set MontoAhorroActual= @MontoAhorroActual+@MontoAhorro where numeroCuenta = @numeroCuenta
+	    					update CuentaDebito set SaldoFlotante = @fondosCuentaDebito-@MontoAhorro where numeroCuenta = @NumeroCuentaDebito
+	    					update CuentaAhorro set FechaProximoPago= DATEADD(@dominioPeriodicidad,@Periodicidad,@FechaProximaPago) where numeroCuenta = @numeroCuenta
+	    				end
+
+	    			/***Verifica si ya termino ya sea por fecha y por que alcanzo objetivo *******/
+	    			if(GETDATE()>@FechaFinal or (@MontoAhorroActual+@MontoAhorro)>=@MontoAhorroDeseado)
+	    				begin
+	    					update CuentaAhorro set terminoAhorro= 1 where numeroCuenta = @numeroCuenta;
+	    				end
+
+	    	end
+	    else
+	    	begin
+	    		select @numeroCuenta = min( numeroCuenta ) from CuentaAhorro where numeroCuenta > @numeroCuenta
+	    	end
+	    
+
+	end
+
+
+/*Si debe realizar el pago*/
+	
+	/* Pregunta si la cuenta de debito tiene plata/
+
+	/*Si tiene, pregunta si el pago va a acceder lo que quiere ahorrar, (si se pasa calcula cuanto le falta y cambia el estado a listo) y si no hace un pago normal*/
+
+	/*Cambia la fecha del proximo pago si es necesario*/
+
+	
 
 
