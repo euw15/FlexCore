@@ -49,7 +49,41 @@ namespace RESTfulFlexCore.Controllers
         {
             //api/cbclient/getClientesJuridicosPorPaginacion?cantidad=1&inicio=1    
             return instanceClientAbstract.getClientesJuridicosPorPaginacion(cantidad, inicio);
-        }       
+        }
+
+        [HttpGet]
+        [ActionName("getDireccionesClienteJuridico")]
+        public Client[] getDireccionesClienteJuridico(int CIF)
+        {
+            //api/cbclient/getDireccionesClienteJuridico?CIF= 
+            return instanceClientAbstract.getDireccionesClienteJuridico(CIF);
+        }
+
+        [HttpGet]
+        [ActionName("getDireccionesClienteFisico")]
+        public Client[] getDireccionesClienteFisico(int CIF)
+        {
+            //api/cbclient/getDireccionesClienteFisico?CIF= 
+            return instanceClientAbstract.getDireccionesClienteFisico(CIF);
+        }
+
+        [HttpGet]
+        [ActionName("getTelefonosClienteFisico")]
+        public Client[] getTelefonosClienteFisico(int CIF)
+        {
+            //api/cbclient/getTelefonosClienteFisico?CIF= 
+            return instanceClientAbstract.getTelefonosClienteFisico(CIF);
+        }
+
+        [HttpGet]
+        [ActionName("getTelefonosClienteJuridico")]
+        public Client[] getTelefonosClienteJuridico(int CIF)
+        {
+            //api/cbclient/getTelefonosClienteJuridico?CIF= 
+            return instanceClientAbstract.getTelefonosClienteJuridico(CIF);
+        }
+
+        
 
         [HttpPost]
         [ActionName("crearClienteJuridico")]

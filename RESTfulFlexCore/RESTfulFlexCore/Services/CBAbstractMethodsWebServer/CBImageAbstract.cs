@@ -10,6 +10,6 @@ namespace RESTfulFlexCore.Services
     {
         public abstract String insertImage(String clientAccount);
 
-        public abstract  Image[] getImage(int ID);
+        public abstract Image[] getImage(int CIF);
     }
 }

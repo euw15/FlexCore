@@ -29,12 +29,12 @@ namespace RESTfulFlexCore.Controllers
 
         [HttpPost]
         [ActionName("crearCuentaAhorro")]
-        public String crearCuentaAhorro(String CIF, String idProposito, String Periodicidad, String FechaInicio, String FechaFinal,
-            String TiempoAhorro, String MontoAhorro, String NumeroCuentaOrigen, String Moneda, String DuracionAhorro)
+        public String crearCuentaAhorro(String CIF, int idProposito, int Periodicidad, String FechaInicio, String FechaFinal,
+            int TiempoAhorro, int MontoAhorroPeriodico, int NumeroCuentaOrigen, String Moneda, String dominioPeriodicidad, int MontoAhorroDeseado)
         {
-            //api/cbcuenta/crearCuentaAhorro?CIF=1000000006&idProposito=1&Periodicidad=1&FechaInicio=1&FechaFinal=1&TiempoAhorro=1&MontoAhorro=1&NumeroCuentaOrigen=1&Moneda=1&DuracionAhorro=1
+            //api/cbcuenta/crearCuentaAhorro?CIF = & idProposito = & Periodicidad = & FechaInicio = & FechaFinal = & TiempoAhorro = & MontoAhorroPeriodico = & NumeroCuentaOrigen = & Moneda = & dominioPeriodicidad = & MontoAhorroDeseado
             return instanceCuentaAbstract.crearCuentaAhorro(CIF, idProposito, Periodicidad, FechaInicio, FechaFinal,
-             TiempoAhorro, MontoAhorro, NumeroCuentaOrigen, Moneda, DuracionAhorro);
+                TiempoAhorro, MontoAhorroPeriodico, NumeroCuentaOrigen, Moneda, dominioPeriodicidad, MontoAhorroDeseado);
         }
 
         [HttpPost]

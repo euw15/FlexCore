@@ -134,7 +134,37 @@ namespace RESTfulFlexCore.Services
             return loadCache(clientSelected);
         }
 
+        //GET
+        public override Client[] getDireccionesClienteJuridico(int CIF)
+        {
+            DataTable table = CBConnectionMSQL.retrieveMSQL("EXEC  obtenerDireccionesClienteJuridico @CIF = " + CIF + "");
+            List<Client> clientSelected = getTableGetCliente(table);
+            return loadCache(clientSelected);
+        }
 
+        //GET
+        public override Client[] getDireccionesClienteFisico(int CIF)
+        {
+            DataTable table = CBConnectionMSQL.retrieveMSQL("EXEC obtenerDireccionesClienteFisico @CIF =" + CIF + "");
+            List<Client> clientSelected = getTableGetCliente(table);
+            return loadCache(clientSelected);
+        }
+
+        //GET
+        public override Client[] getTelefonosClienteJuridico(int CIF)
+        {
+            DataTable table = CBConnectionMSQL.retrieveMSQL("EXEC obtenerTelefonosClienteJuridico @CIF = "+CIF+"");
+            List<Client> clientSelected = getTableGetCliente(table);
+            return loadCache(clientSelected);
+        }
+
+        //GET
+        public override Client[] getTelefonosClienteFisico(int CIF)
+        {
+            DataTable table = CBConnectionMSQL.retrieveMSQL("EXEC obtenerTelefonosClienteFisico  @CIF = " + CIF + "");
+            List<Client> clientSelected = getTableGetCliente(table);
+            return loadCache(clientSelected);
+        }
 
         public List<Client> getTableGetCliente(DataTable table)
         {
@@ -154,7 +184,7 @@ namespace RESTfulFlexCore.Services
                 if (table.Columns.Contains("Cedula") && row["Cedula"] != DBNull.Value) { cedula = row["Cedula"].ToString(); }
                 if (table.Columns.Contains("Telefono") && row["Telefono"] != DBNull.Value) { telefono = row["Telefono"].ToString(); }
                 if (table.Columns.Contains("Direccion") && row["Direccion"] != DBNull.Value) { direccion = row["Direccion"].ToString(); }
-                // if (row["Model"] != DBNull.Value) { apellido = row["Model"].ToString(); }
+                if (table.Columns.Contains("Apellido") && row["Apellido"] != DBNull.Value) { apellido = row["Apellido"].ToString(); }
                 listClient.Add(new Client
                 {
                     CIF = CIF,

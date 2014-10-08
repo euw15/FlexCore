@@ -10,8 +10,8 @@ namespace RESTfulFlexCore.Services
     {
         public abstract String crearCuentaDebito(int CIF, String descripcion, int moneda);
 
-        public abstract String crearCuentaAhorro(String ClienteCIF, String idProposito, String Periodicidad, String FechaInicio, String FechaFinal,
-            String TiempoAhorro, String MontoAhorro, String NumeroCuentaOrigen, String Moneda, String DuracionAhorro);
+        public abstract String crearCuentaAhorro(String CIF, int idProposito, int Periodicidad, String FechaInicio, String FechaFinal,
+            int TiempoAhorro, int MontoAhorroPeriodico, int NumeroCuentaOrigen, String Moneda, String dominioPeriodicidad, int MontoAhorroDeseado);
 
         public abstract String realizarPago(String cuentaPago, String cuentaDestino, String monto);
 

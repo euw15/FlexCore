@@ -29,9 +29,9 @@ namespace RESTfulFlexCore.Services
             }           
         }
 
-        public override Image[] getImage(int ID)
+        public override Image[] getImage(int CIF)
         {
-            DataTable table = CBConnectionMSQL.retrieveMSQL("SELECT [ID] ,[byteArray]  FROM [Envy].[dbo].[image]  WHERE ID="+ID+";");
+            DataTable table = CBConnectionMSQL.retrieveMSQL("EXEC obtenerImagenCliente @CIF = "+CIF+"");
             List<Image> ImageSelected = getTableGetImage(table);
             return loadCache(ImageSelected);
 

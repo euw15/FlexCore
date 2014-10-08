@@ -33,14 +33,14 @@ namespace RESTfulFlexCore.Services
         }
 
         //POST
-        public override String crearCuentaAhorro(String ClienteCIF, String idProposito, String Periodicidad, String FechaInicio, String FechaFinal,
-            String TiempoAhorro, String MontoAhorro, String NumeroCuentaOrigen, String Moneda, String DuracionAhorro)
+        public override String crearCuentaAhorro(String CIF, int idProposito, int Periodicidad, String FechaInicio, String FechaFinal,
+            int TiempoAhorro, int MontoAhorroPeriodico, int NumeroCuentaOrigen, String Moneda, String dominioPeriodicidad, int MontoAhorroDeseado)
         {
             try
             {
-                return CBConnectionMSQL.insertUpdateDeleteMSQL("@ClienteCIF = '" + ClienteCIF + "',	@idProposito = '" + idProposito + "',	@Periodicidad = '" + Periodicidad + "',	@FechaInicio = '" + FechaInicio + "',	" +
-                    "@FechaFinal = '" + FechaFinal + "',	@TiempoAhorro = '" + TiempoAhorro + "',	@MontoAhorro = '" + MontoAhorro + "',	@NumeroCuentaOrigen = '" + NumeroCuentaOrigen + "',	" +
-                    "@Moneda = '" + Moneda + "',	@DuracionAhorro = '" + DuracionAhorro + "'", 1);
+                return CBConnectionMSQL.insertUpdateDeleteMSQL("EXEC crearCuentaAhorro @ClienteCIF = '"+CIF+"', @idProposito = "+idProposito+", @Periodicidad = "+Periodicidad+", @FechaInicio = '"+FechaInicio+"',"
+                    +" @FechaFinal = '"+FechaFinal+"', @TiempoAhorro = "+TiempoAhorro+", @MontoAhorroPeriodico = "+MontoAhorroPeriodico+", @NumeroCuentaOrigen = "+NumeroCuentaOrigen+", @Moneda = '"+Moneda+"',"
+                    + "     @dominioPeriodicidad = '" + dominioPeriodicidad + "', @MontoAhorroDeseado = " + MontoAhorroDeseado + "", 1);
             }
             catch
             {

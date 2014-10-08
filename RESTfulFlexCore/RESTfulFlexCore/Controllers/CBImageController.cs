@@ -29,10 +29,10 @@ namespace RESTfulFlexCore.Controllers
 
         [HttpGet]
         [ActionName("getImage")]
-        public Image[] getImage(int ID)
+        public Image[] getImage(int CIF)
         {
-            //api/cbimage/getImage?ID=21
-            return instanceImageAbstract.getImage(ID);
+            //api/cbimage/getImage?CIF=21
+            return instanceImageAbstract.getImage(CIF);
         }
     }
 }
