@@ -196,19 +196,18 @@ CREATE PROCEDURE crearCuentaAhorro
 	@TiempoAhorro int,
 	@MontoAhorroPeriodico int,
 	@NumeroCuentaOrigen int,
-	@Moneda int,
-	@DuracionAhorro int,
+	@Moneda nvarchar(11),
 	@dominioPeriodicidad nvarchar(11),
 	@MontoAhorroDeseado int
 AS
 	
-	@declare idNumeroCuentaDebito
+	declare @idNumeroCuentaDebito int
 
 	select @idNumeroCuentaDebito=idCuentaDebito from CuentaDebito where numeroCuenta= @NumeroCuentaOrigen
 	/*Inserta la informacion de la cuenta de Ahorro */
-	insert into CuentaAhorro (CIF, NumeroCuentaDebito,idProposito,Periodicidad,FechaInicio,FechaFinal,FechaProximaPago,DuracionAhorro,
+	insert into CuentaAhorro (CIF, NumeroCuentaDebito,idProposito,Periodicidad,FechaInicio,FechaFinal,FechaProximoPago,DuracionAhorro,
 		MontoAhorro,idTipoMoneda,MontoAhorroActual,dominioPeriodicidad,terminoAhorro,MontoAhorroDeseado)
-		values (@ClienteCIF,@idNumeroCuentaDebito,@idProposito,@Periodicidad,@FechaInicio,@FechaFinal,@FechaInicio,@DuracionAhorro,
+		values (@ClienteCIF,@idNumeroCuentaDebito,@idProposito,@Periodicidad,@FechaInicio,@FechaFinal,@FechaInicio,@TiempoAhorro,
 			@MontoAhorroPeriodico,@Moneda,0,@dominioPeriodicidad,0,@MontoAhorroDeseado)
 
 	declare @id int
@@ -331,14 +330,66 @@ as
 
 	end
 
+/**************** Obtener Imagen Cliente ***************************************/
+GO
+CREATE PROCEDURE obtenerImagenCliente
+	@CIF int 
 
-/*Si debe realizar el pago*/
-	
-	/* Pregunta si la cuenta de debito tiene plata/
+	as
+		select I.imagen from ClienteFisico as C 
+		inner join Imagen as I on I.idImagen=C.idImagenCliente
+		where C.CIF= @CIF
 
-	/*Si tiene, pregunta si el pago va a acceder lo que quiere ahorrar, (si se pasa calcula cuanto le falta y cambia el estado a listo) y si no hace un pago normal*/
+/************** obtener direcciones cliente fisico ****************************/
+GO
+CREATE PROCEDURE obtenerDireccionesClienteFisico
+	@CIF int
+	as
+		select D.Direccion from DireccionXCliente as DirCli
+		inner join Direccion as D on DirCli.idDireccion = D.idDireccion
+		inner join ClienteFisico as Cli on DirCli.CIF = Cli.CIF
+		where Cli.CIF = @CIF
 
-	/*Cambia la fecha del proximo pago si es necesario*/
+
+/************** obtener direcciones cliente juridico ****************************/
+GO
+CREATE PROCEDURE obtenerDireccionesClienteJuridico
+	@CIF int
+	as
+		select D.Direccion from DireccionXCliente as DirCli
+		inner join Direccion as D on DirCli.idDireccion = D.idDireccion
+		inner join ClienteJuridico as Cli on DirCli.CIF = Cli.CIF
+		where Cli.CIF = @CIF
+
+/*********** obtener telefonos cliente fisico *******************************/
+GO
+CREATE PROCEDURE obtenerTelefonosClienteFisico
+	@CIF int 
+	as
+		select Tel.Telefono from TelefonoxCliente as TelCli
+		inner join ClienteFisico as Cli on TelCli.CIF=Cli.CIF
+		inner join Telefono as Tel on TelCli.idTelefono= Tel.idTelefono
+		where Cli.CIF = @CIF
+
+/********** obtener telefonos cliente juridico ****************************/
+
+GO
+CREATE PROCEDURE obtenerTelefonosClienteJuridico
+	@CIF int 
+	as
+		select Tel.Telefono from TelefonoxCliente as TelCli
+		inner join ClienteJuridico as Cli on TelCli.CIF=Cli.CIF
+		inner join Telefono as Tel on TelCli.idTelefono= Tel.idTelefono
+		where Cli.CIF = @CIF
+
+/*********** Agregar direcciones cliente juridico ***********************/
+GO
+CREATE PROCEDURE agregarDireccionClienteJuridico
+	@CIF int 
+	as
+		insert into 
+
+
 
 	
 
