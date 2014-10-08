@@ -224,7 +224,8 @@ CREATE PROCEDURE realizarPago
 	@NumeroCuentaDestino int,
 	@MontoPago money
 AS
-		declare 
+		declare
+			@id int,
 			@EstadoCuentaDebito bit,
 			@EstadoCuentaDestino bit,
 			@SaldoActualCuentaDebito money,
@@ -244,13 +245,18 @@ AS
 					begin
 							update CuentaDebito set SaldoFlotante=@SaldoActualCuentaDebito-@MontoPago from CuentaDebito where numeroCuenta=@NumeroCuentaDebito
 							update CuentaDebito set SaldoFlotante=@SaldoActualCuentaDestino+@MontoPago from CuentaDebito where numeroCuenta=@NumeroCuentaDestino
-							return 1;
+							insert into TranssacionesVuelo (NumeroCuenta,TipoTranssacion,MontoTransferido) values (@NumeroCuentaDebito,'Debito',@MontoPago)
+							insert into TranssacionesVuelo (NumeroCuenta,TipoTranssacion,MontoTransferido) values (@NumeroCuentaDestino,'Credito',@MontoPago)
+							set @id=1
+							return @id;
 					end
 				else
-					return 0;
+					set @id=0
+					return @id;
 			end
 		else
-			return 0;
+			set @id=0
+			return @id;
 
 /********************* Consultar Propositos ****************************************/
 
@@ -382,12 +388,18 @@ CREATE PROCEDURE obtenerTelefonosClienteJuridico
 		inner join Telefono as Tel on TelCli.idTelefono= Tel.idTelefono
 		where Cli.CIF = @CIF
 
-/*********** Agregar direcciones cliente juridico ***********************/
+/*********** Agregar direcciones cliente ***************************/
 GO
-CREATE PROCEDURE agregarDireccionClienteJuridico
-	@CIF int 
+CREATE PROCEDURE agregarDireccionCliente
+	@CIF int ,
+	@Direccion nvarchar(300)
 	as
-		insert into 
+		insert into Direccion (Direccion) values (@Direccion)
+
+		insert into DireccionXCliente (idDireccion, CIF) values (IDENT_CURRENT('Direccion'),@CIF)
+
+
+
 
 
 
