@@ -194,16 +194,22 @@ CREATE PROCEDURE crearCuentaAhorro
 	@FechaInicio nvarchar(11),
 	@FechaFinal nvarchar(11),
 	@TiempoAhorro int,
-	@MontoAhorro int,
+	@MontoAhorroPeriodico int,
 	@NumeroCuentaOrigen int,
-	@Moneda nvarchar(10),
-	@DuracionAhorro int
+	@Moneda int,
+	@DuracionAhorro int,
+	@dominioPeriodicidad nvarchar(11),
+	@MontoAhorroDeseado int
 AS
 	
-	
+	@declare idNumeroCuentaDebito
+
+	select @idNumeroCuentaDebito=idCuentaDebito from CuentaDebito where numeroCuenta= @NumeroCuentaOrigen
 	/*Inserta la informacion de la cuenta de Ahorro */
-	insert into CuentaAhorro (CIF, NumeroCuentaDebito,idProposito,Periodicidad,FechaInicio,FechaFinal,DuracionAhorro,MontoAhorro,idTipoMoneda)
-		values (@ClienteCIF,@NumeroCuentaOrigen,@idProposito,@Periodicidad,@FechaInicio,@FechaFinal,@DuracionAhorro,@MontoAhorro,@Moneda)
+	insert into CuentaAhorro (CIF, NumeroCuentaDebito,idProposito,Periodicidad,FechaInicio,FechaFinal,FechaProximaPago,DuracionAhorro,
+		MontoAhorro,idTipoMoneda,MontoAhorroActual,dominioPeriodicidad,terminoAhorro,MontoAhorroDeseado)
+		values (@ClienteCIF,@idNumeroCuentaDebito,@idProposito,@Periodicidad,@FechaInicio,@FechaFinal,@FechaInicio,@DuracionAhorro,
+			@MontoAhorroPeriodico,@Moneda,0,@dominioPeriodicidad,0,@MontoAhorroDeseado)
 
 	declare @id int
 
@@ -212,6 +218,7 @@ AS
 	return @id;
 
 /********************* Realizar Pago ****************************************/
+go
 CREATE PROCEDURE realizarPago
 	/*Parametros de entrada *******/
 	@NumeroCuentaDebito int,
@@ -265,8 +272,6 @@ CREATE PROCEDURE agregarImagenCliente
 
 /******************* Crear Job que revisa saldos **********************************/
 
-/*Revisar todos las cuentas donde la fecha ProximaPago sea mas temprana que FechaActual  y tienen el terminoAhorro en 0**/
-GO 
 CREATE PROCEDURE pagosAutomaticos
 as
 	declare @numeroCuenta int,
@@ -280,7 +285,7 @@ as
 			@FechaFinal dateTime,
 			@dominioPeriodicidad [nvarchar](100)
 
-	select @numeroCuenta = min(NumeroCuentaDebito) from CuentaAhorro
+	select @numeroCuenta = min(numeroCuenta) from CuentaAhorro
 
 	while @numeroCuenta is not null
 	begin
@@ -292,14 +297,22 @@ as
 	    IF(GETDATE()>=@FechaProximaPago and @TerminoAhorro=0)
 	    	begin
 	    		declare @fondosCuentaDebito int
-	    		select @fondosCuentaDebito=SaldoFlotante from CuentaDebito where numeroCuenta = @numeroCuenta
-	    			
+	    		select @fondosCuentaDebito=SaldoFlotante from CuentaDebito where idCuentaDebito = @NumeroCuentaDebito
 	    			/*Si tiene fondos suficientes */
 	    			if(@fondosCuentaDebito>=@MontoAhorro)
 	    				begin
 	    					update CuentaAhorro set MontoAhorroActual= @MontoAhorroActual+@MontoAhorro where numeroCuenta = @numeroCuenta
-	    					update CuentaDebito set SaldoFlotante = @fondosCuentaDebito-@MontoAhorro where numeroCuenta = @NumeroCuentaDebito
-	    					update CuentaAhorro set FechaProximoPago= DATEADD(@dominioPeriodicidad,@Periodicidad,@FechaProximaPago) where numeroCuenta = @numeroCuenta
+	    					update CuentaDebito set SaldoFlotante = @fondosCuentaDebito-@MontoAhorro where idCuentaDebito = @NumeroCuentaDebito
+	    					if(@dominioPeriodicidad = 'segundos')
+	    						update CuentaAhorro set FechaProximoPago= DATEADD(second,@Periodicidad,@FechaProximaPago) where numeroCuenta = @numeroCuenta
+	    					if(@dominioPeriodicidad = 'minutos')
+	    						update CuentaAhorro set FechaProximoPago= DATEADD(minute,@Periodicidad,@FechaProximaPago) where numeroCuenta = @numeroCuenta
+	    					if(@dominioPeriodicidad = 'horas')
+	    						update CuentaAhorro set FechaProximoPago= DATEADD(hour,@Periodicidad,@FechaProximaPago) where numeroCuenta = @numeroCuenta
+	    					if(@dominioPeriodicidad = 'dias')
+	    						update CuentaAhorro set FechaProximoPago= DATEADD(day,@Periodicidad,@FechaProximaPago) where numeroCuenta = @numeroCuenta
+	    					if(@dominioPeriodicidad = 'meses')
+	    						update CuentaAhorro set FechaProximoPago= DATEADD(month,@Periodicidad,@FechaProximaPago) where numeroCuenta = @numeroCuenta
 	    				end
 
 	    			/***Verifica si ya termino ya sea por fecha y por que alcanzo objetivo *******/
@@ -308,6 +321,7 @@ as
 	    					update CuentaAhorro set terminoAhorro= 1 where numeroCuenta = @numeroCuenta;
 	    				end
 
+				select @numeroCuenta = min( numeroCuenta ) from CuentaAhorro where numeroCuenta > @numeroCuenta
 	    	end
 	    else
 	    	begin
