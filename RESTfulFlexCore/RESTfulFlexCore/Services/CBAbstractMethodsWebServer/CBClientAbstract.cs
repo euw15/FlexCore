@@ -37,6 +37,8 @@ namespace RESTfulFlexCore.Services
 
         public abstract String actualizarClienteFisico(int CIF);
 
+        public abstract String agregarDireccionCliente(int CIF, String direccion);
+
 
 
     }

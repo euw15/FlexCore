@@ -132,6 +132,14 @@ namespace RESTfulFlexCore.Controllers
             //api/cbclient/eliminarClienteJuridico?CIF=54652345
             return instanceClientAbstract.eliminarClienteJuridico(CIF);
         }
+
+        [HttpPost]
+        [ActionName("agregarDireccionCliente")]
+        public String agregarDireccionCliente(int CIF, String direccion)
+        {
+            //api/cbclient/agregarDireccionCliente?CIF=54652345&direccion=Paraiso
+            return instanceClientAbstract.agregarDireccionCliente(CIF, direccion);
+        }
      
     }
 

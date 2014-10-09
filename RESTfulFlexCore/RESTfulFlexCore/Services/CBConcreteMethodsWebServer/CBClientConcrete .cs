@@ -88,6 +88,7 @@ namespace RESTfulFlexCore.Services
             }
         }
 
+       
         //POST
         public override String actualizarClienteFisico(int CIF)
         {
@@ -101,6 +102,21 @@ namespace RESTfulFlexCore.Services
                 return "fail";
             }
         }
+
+        //POST
+        public override String agregarDireccionCliente(int CIF,String direccion)
+        {
+            try
+            {
+                return CBConnectionMSQL.UpdateDeleteMSQL("EXEC  agregarDireccionCliente @CIF = " + CIF + ", @Direccion = '" + direccion + "'");
+
+            }
+            catch
+            {
+                return "fail";
+            }
+        }
+
 
         //GET
         public override Client[] getClienteJuridicoPorConcepto(String concepto, String dato)
