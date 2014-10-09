@@ -276,7 +276,7 @@ CREATE PROCEDURE agregarImagenCliente
 		update ClienteFisico set idImagenCliente= IDENT_CURRENT('Imagen') from ClienteFisico where CIF= @CIF;
 
 /******************* Crear Job que revisa saldos **********************************/
-
+GO
 CREATE PROCEDURE pagosAutomaticos
 as
 	declare @numeroCuenta int,
@@ -388,7 +388,7 @@ CREATE PROCEDURE obtenerTelefonosClienteJuridico
 		inner join Telefono as Tel on TelCli.idTelefono= Tel.idTelefono
 		where Cli.CIF = @CIF
 
-/*********** Agregar direcciones cliente ***************************/
+/***************** Agregar direcciones cliente ***************************/
 GO
 CREATE PROCEDURE agregarDireccionCliente
 	@CIF int ,
@@ -399,9 +399,48 @@ CREATE PROCEDURE agregarDireccionCliente
 		insert into DireccionXCliente (idDireccion, CIF) values (IDENT_CURRENT('Direccion'),@CIF)
 
 
+/****************** Crear Cerrar Cuentas ************************************/
 
+GO
+CREATE PROCEDURE crearCierreBancario
+	as
+		/***********Cambia los saldos reales a los cambios flotantes **********************/
+		declare @numeroCuenta int 
 
+		select @numeroCuenta = min(numeroCuenta) from CuentaDebito
 
+		while @numeroCuenta is not null
+		begin
+			/* Cambia los flotatente a la cuenta real */
+			declare @saldoFlotante int
+
+			select @saldoFlotante=SaldoFlotante from CuentaDebito where numeroCuenta=@NumeroCuenta 
+			update CuentaDebito set SaldoReal= @saldoFlotante where numeroCuenta= @NumeroCuenta
+
+			/*Cambia la tabla de de varas en vuelo y lo mete en el historial en el historial */
+			select @numeroCuenta = min( numeroCuenta ) from CuentaDebito where numeroCuenta > @numeroCuenta
+		end
+
+		/**************Hace las transsacciones en vuelo ****************************************/
+
+		declare @idTranssacion int,
+		@TipoTranssacion nvarchar(100),
+		@MontoTransferido int
+
+		select @idTranssacion = min(idTranssacion) from TranssacionesVuelo
+
+		while @idTranssacion is not null
+		begin
+			select @NumeroCuenta= NumeroCuenta, @TipoTranssacion= TipoTranssacion, @MontoTransferido= MontoTransferido from TranssacionesVuelo  where idTranssacion=@idTranssacion
+
+			insert into Historico (NumeroCuenta, TipoTranssacion, MontoTransferido) values (@NumeroCuenta,@TipoTranssacion,@MontoTransferido)
+
+			delete from TranssacionesVuelo where idTranssacion=@idTranssacion
+
+			select @idTranssacion = min( idTranssacion ) from TranssacionesVuelo where idTranssacion > @idTranssacion
+		end
+
+	
 
 	
 

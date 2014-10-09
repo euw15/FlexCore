@@ -179,12 +179,14 @@ CREATE TABLE [Imagen] (
 	[imagen] varchar(max)
 	)
 
-
 /*******************************************************************/
 /*******************************************************************/
 /**********************  Crear Llaves Primarias ********************/
 /*******************************************************************/
 /*******************************************************************/
+
+
+USE FlexCoreDataBase;
 
 /****************Crea funcion para numeroCuentas *******************/
 /* Verifica el tipo de moneda en la insercion y le agrega el digito correspondiente */
@@ -227,29 +229,24 @@ ALTER TABLE ClienteJuridico
 ADD CONSTRAINT FK_ClienteJuridico_CIF FOREIGN KEY (CIF) 
     REFERENCES Cliente (CIF) 
 
-go
 ALTER TABLE ClienteJuridico 
 ADD CONSTRAINT FK_ClienteJuridico_DireccionPrincipal FOREIGN KEY (idDireccionPrincipal) 
     REFERENCES Direccion (idDireccion) 
 
-go
 ALTER TABLE ClienteJuridico 
 ADD CONSTRAINT FK_ClienteJuridico_TelefonoPrincipal FOREIGN KEY (idTelefonoPrincipal) 
     REFERENCES Telefono (idTelefono) 
 
 
 /******Para CLientes Fisico ********************************/
-go
 ALTER TABLE ClienteFisico 
 ADD CONSTRAINT FK_ClienteFisico_DireccionPrincipal FOREIGN KEY (idDireccionPrincipal) 
     REFERENCES Direccion (idDireccion) 
 
-go
 ALTER TABLE ClienteFisico 
 ADD CONSTRAINT FK_ClienteFisico_TelefonoPrincipal FOREIGN KEY (idTelefonoPrincipal) 
     REFERENCES Telefono (idTelefono) 
 
-go
  ALTER TABLE ClienteFisico 
 ADD CONSTRAINT FK_ClienteFisico_CIF FOREIGN KEY (CIF) 
     REFERENCES Cliente (CIF) 
@@ -264,7 +261,7 @@ ALTER TABLE CuentaDebito
 ADD CONSTRAINT FK_CuentaDebito_idTipoMoneda FOREIGN KEY (idTipoMoneda) 
     REFERENCES TipoMoneda (idTipoMoneda) 
 
-go
+
 ALTER TABLE CuentaDebito
 ADD CONSTRAINT FK_CuentaDebito_idCliente FOREIGN KEY (idCliente) 
     REFERENCES Cliente (CIF) 
@@ -276,7 +273,7 @@ ALTER TABLE Beneficiarios
 ADD CONSTRAINT FK_Beneficiarios_idCliente FOREIGN KEY (idCliente) 
     REFERENCES Cliente (CIF) 
 
-go
+
 ALTER TABLE Beneficiarios
 ADD CONSTRAINT FK_Beneficiarios_NumeroCuentaDebito FOREIGN KEY (NumeroCuentaDebito) 
     REFERENCES CuentaDebito (idCuentaDebito) 
@@ -296,12 +293,12 @@ ALTER TABLE CuentaAhorro
 ADD CONSTRAINT FK_CuentaAhorro_Proposito FOREIGN KEY (idProposito)
 	REFERENCES Proposito (idProposito)
 
-go
+
 ALTER TABLE CuentaAhorro
 ADD CONSTRAINT FK_CuentaAhorro_idCliente FOREIGN KEY (CIF)
 	REFERENCES Cliente (CIF)
 
-go
+
 ALTER TABLE CuentaAhorro
 ADD CONSTRAINT FK_CuentaAhorro_NumeroCuentaDebito FOREIGN KEY (NumeroCuentaDebito)
 	REFERENCES CuentaDebito (idCuentaDebito)
@@ -313,13 +310,21 @@ ALTER TABLE DireccionXCliente
 ADD CONSTRAINT FK_DireccionXCliente_CIF FOREIGN KEY (CIF)
 	REFERENCES Cliente (CIF)
 
-go
 ALTER TABLE DireccionXCliente
 ADD CONSTRAINT FK_DireccionXCliente_idDireccion FOREIGN KEY (idDireccion)
 	REFERENCES Direccion (idDireccion)
 
+/**********************Imagenes por Cliente ********************************/
+
+GO
+ALTER TABLE ClienteFisico
+	ADD CONSTRAINT FK_IdImagen_ClienteFisico FOREIGN KEY (idImagenCliente)
+		REFERENCES Imagen (idImagen)
+
+
 
 /********************Crea vistas *******************************************************/
+USE FlexCoreDataBase;
 
 go
 CREATE VIEW ClientesFisicos
@@ -343,6 +348,8 @@ AS select Cliente.CIF,ClienteJuridico.Nombre,ClienteJuridico.Cedula, Telefono.Te
 /************* Crear Procedimientos  Almacenados********************/
 /*******************************************************************/
 /*******************************************************************/
+GO
+USE FlexCoreDataBase;
 
 /**********************Crea un Empleado Juridico *******************/
 GO
@@ -532,16 +539,21 @@ CREATE PROCEDURE crearCuentaAhorro
 	@FechaInicio nvarchar(11),
 	@FechaFinal nvarchar(11),
 	@TiempoAhorro int,
-	@MontoAhorro int,
+	@MontoAhorroPeriodico int,
 	@NumeroCuentaOrigen int,
-	@Moneda nvarchar(10),
-	@DuracionAhorro int
+	@Moneda nvarchar(11),
+	@dominioPeriodicidad nvarchar(11),
+	@MontoAhorroDeseado int
 AS
 	
-	
+	declare @idNumeroCuentaDebito int
+
+	select @idNumeroCuentaDebito=idCuentaDebito from CuentaDebito where numeroCuenta= @NumeroCuentaOrigen
 	/*Inserta la informacion de la cuenta de Ahorro */
-	insert into CuentaAhorro (CIF, NumeroCuentaDebito,idProposito,Periodicidad,FechaInicio,FechaFinal,DuracionAhorro,MontoAhorro,idTipoMoneda)
-		values (@ClienteCIF,@NumeroCuentaOrigen,@idProposito,@Periodicidad,@FechaInicio,@FechaFinal,@DuracionAhorro,@MontoAhorro,@Moneda)
+	insert into CuentaAhorro (CIF, NumeroCuentaDebito,idProposito,Periodicidad,FechaInicio,FechaFinal,FechaProximoPago,DuracionAhorro,
+		MontoAhorro,idTipoMoneda,MontoAhorroActual,dominioPeriodicidad,terminoAhorro,MontoAhorroDeseado)
+		values (@ClienteCIF,@idNumeroCuentaDebito,@idProposito,@Periodicidad,@FechaInicio,@FechaFinal,@FechaInicio,@TiempoAhorro,
+			@MontoAhorroPeriodico,@Moneda,0,@dominioPeriodicidad,0,@MontoAhorroDeseado)
 
 	declare @id int
 
@@ -557,7 +569,8 @@ CREATE PROCEDURE realizarPago
 	@NumeroCuentaDestino int,
 	@MontoPago money
 AS
-		declare 
+		declare
+			@id int,
 			@EstadoCuentaDebito bit,
 			@EstadoCuentaDestino bit,
 			@SaldoActualCuentaDebito money,
@@ -577,13 +590,18 @@ AS
 					begin
 							update CuentaDebito set SaldoFlotante=@SaldoActualCuentaDebito-@MontoPago from CuentaDebito where numeroCuenta=@NumeroCuentaDebito
 							update CuentaDebito set SaldoFlotante=@SaldoActualCuentaDestino+@MontoPago from CuentaDebito where numeroCuenta=@NumeroCuentaDestino
-							return 1;
+							insert into TranssacionesVuelo (NumeroCuenta,TipoTranssacion,MontoTransferido) values (@NumeroCuentaDebito,'Debito',@MontoPago)
+							insert into TranssacionesVuelo (NumeroCuenta,TipoTranssacion,MontoTransferido) values (@NumeroCuentaDestino,'Credito',@MontoPago)
+							set @id=1
+							return @id;
 					end
 				else
-					return 0;
+					set @id=0
+					return @id;
 			end
 		else
-			return 0;
+			set @id=0
+			return @id;
 
 /********************* Consultar Propositos ****************************************/
 
@@ -601,3 +619,216 @@ CREATE PROCEDURE agregarImagenCliente
 		insert into Imagen (imagen) values (@imagen)
 
 		update ClienteFisico set idImagenCliente= IDENT_CURRENT('Imagen') from ClienteFisico where CIF= @CIF;
+
+/******************* Crear Job que revisa saldos **********************************/
+GO
+CREATE PROCEDURE pagosAutomaticos
+as
+	declare @numeroCuenta int,
+			@FechaProximaPago datetime,
+			@MontoAhorro money,
+			@Periodicidad int,
+			@MontoAhorroActual money,
+			@MontoAhorroDeseado money,
+			@TerminoAhorro bit,
+			@NumeroCuentaDebito int,
+			@FechaFinal dateTime,
+			@dominioPeriodicidad [nvarchar](100)
+
+	select @numeroCuenta = min(numeroCuenta) from CuentaAhorro
+
+	while @numeroCuenta is not null
+	begin
+		/*Selecciona todas las variables de la cuenta actual */
+	    select @dominioPeriodicidad= dominioPeriodicidad , @FechaFinal=FechaFinal, @NumeroCuentaDebito=NumeroCuentaDebito , @FechaProximaPago=FechaProximoPago , @MontoAhorro=MontoAhorro ,@Periodicidad=Periodicidad , @MontoAhorroActual=MontoAhorroActual, @MontoAhorroDeseado=MontoAhorroDeseado, @TerminoAhorro=terminoAhorro
+	    		 from CuentaAhorro where numeroCuenta = @numeroCuenta
+	    
+	    /*Pregunta si ya debe hacer el pago y que la cuenta no haya finalizado su tiempo*/
+	    IF(GETDATE()>=@FechaProximaPago and @TerminoAhorro=0)
+	    	begin
+	    		declare @fondosCuentaDebito int
+	    		select @fondosCuentaDebito=SaldoFlotante from CuentaDebito where idCuentaDebito = @NumeroCuentaDebito
+	    			/*Si tiene fondos suficientes */
+	    			if(@fondosCuentaDebito>=@MontoAhorro)
+	    				begin
+	    					update CuentaAhorro set MontoAhorroActual= @MontoAhorroActual+@MontoAhorro where numeroCuenta = @numeroCuenta
+	    					update CuentaDebito set SaldoFlotante = @fondosCuentaDebito-@MontoAhorro where idCuentaDebito = @NumeroCuentaDebito
+	    					if(@dominioPeriodicidad = 'segundos')
+	    						update CuentaAhorro set FechaProximoPago= DATEADD(second,@Periodicidad,@FechaProximaPago) where numeroCuenta = @numeroCuenta
+	    					if(@dominioPeriodicidad = 'minutos')
+	    						update CuentaAhorro set FechaProximoPago= DATEADD(minute,@Periodicidad,@FechaProximaPago) where numeroCuenta = @numeroCuenta
+	    					if(@dominioPeriodicidad = 'horas')
+	    						update CuentaAhorro set FechaProximoPago= DATEADD(hour,@Periodicidad,@FechaProximaPago) where numeroCuenta = @numeroCuenta
+	    					if(@dominioPeriodicidad = 'dias')
+	    						update CuentaAhorro set FechaProximoPago= DATEADD(day,@Periodicidad,@FechaProximaPago) where numeroCuenta = @numeroCuenta
+	    					if(@dominioPeriodicidad = 'meses')
+	    						update CuentaAhorro set FechaProximoPago= DATEADD(month,@Periodicidad,@FechaProximaPago) where numeroCuenta = @numeroCuenta
+	    				end
+
+	    			/***Verifica si ya termino ya sea por fecha y por que alcanzo objetivo *******/
+	    			if(GETDATE()>@FechaFinal or (@MontoAhorroActual+@MontoAhorro)>=@MontoAhorroDeseado)
+	    				begin
+	    					update CuentaAhorro set terminoAhorro= 1 where numeroCuenta = @numeroCuenta;
+	    				end
+
+				select @numeroCuenta = min( numeroCuenta ) from CuentaAhorro where numeroCuenta > @numeroCuenta
+	    	end
+	    else
+	    	begin
+	    		select @numeroCuenta = min( numeroCuenta ) from CuentaAhorro where numeroCuenta > @numeroCuenta
+	    	end
+	    
+
+	end
+
+/**************** Obtener Imagen Cliente ***************************************/
+GO
+CREATE PROCEDURE obtenerImagenCliente
+	@CIF int 
+
+	as
+		select I.imagen from ClienteFisico as C 
+		inner join Imagen as I on I.idImagen=C.idImagenCliente
+		where C.CIF= @CIF
+
+/************** obtener direcciones cliente fisico ****************************/
+GO
+CREATE PROCEDURE obtenerDireccionesClienteFisico
+	@CIF int
+	as
+		select D.Direccion from DireccionXCliente as DirCli
+		inner join Direccion as D on DirCli.idDireccion = D.idDireccion
+		inner join ClienteFisico as Cli on DirCli.CIF = Cli.CIF
+		where Cli.CIF = @CIF
+
+
+/************** obtener direcciones cliente juridico ****************************/
+GO
+CREATE PROCEDURE obtenerDireccionesClienteJuridico
+	@CIF int
+	as
+		select D.Direccion from DireccionXCliente as DirCli
+		inner join Direccion as D on DirCli.idDireccion = D.idDireccion
+		inner join ClienteJuridico as Cli on DirCli.CIF = Cli.CIF
+		where Cli.CIF = @CIF
+
+/*********** obtener telefonos cliente fisico *******************************/
+GO
+CREATE PROCEDURE obtenerTelefonosClienteFisico
+	@CIF int 
+	as
+		select Tel.Telefono from TelefonoxCliente as TelCli
+		inner join ClienteFisico as Cli on TelCli.CIF=Cli.CIF
+		inner join Telefono as Tel on TelCli.idTelefono= Tel.idTelefono
+		where Cli.CIF = @CIF
+
+/********** obtener telefonos cliente juridico ****************************/
+
+GO
+CREATE PROCEDURE obtenerTelefonosClienteJuridico
+	@CIF int 
+	as
+		select Tel.Telefono from TelefonoxCliente as TelCli
+		inner join ClienteJuridico as Cli on TelCli.CIF=Cli.CIF
+		inner join Telefono as Tel on TelCli.idTelefono= Tel.idTelefono
+		where Cli.CIF = @CIF
+
+/***************** Agregar direcciones cliente ***************************/
+GO
+CREATE PROCEDURE agregarDireccionCliente
+	@CIF int ,
+	@Direccion nvarchar(300)
+	as
+		insert into Direccion (Direccion) values (@Direccion)
+
+		insert into DireccionXCliente (idDireccion, CIF) values (IDENT_CURRENT('Direccion'),@CIF)
+
+
+/****************** Crear Cerrar Cuentas ************************************/
+
+GO
+CREATE PROCEDURE crearCierreBancario
+	as
+		/***********Cambia los saldos reales a los cambios flotantes **********************/
+		declare @numeroCuenta int 
+
+		select @numeroCuenta = min(numeroCuenta) from CuentaDebito
+
+		while @numeroCuenta is not null
+		begin
+			/* Cambia los flotatente a la cuenta real */
+			declare @saldoFlotante int
+
+			select @saldoFlotante=SaldoFlotante from CuentaDebito where numeroCuenta=@NumeroCuenta 
+			update CuentaDebito set SaldoReal= @saldoFlotante where numeroCuenta= @NumeroCuenta
+
+			/*Cambia la tabla de de varas en vuelo y lo mete en el historial en el historial */
+			select @numeroCuenta = min( numeroCuenta ) from CuentaDebito where numeroCuenta > @numeroCuenta
+		end
+
+		/**************Hace las transsacciones en vuelo ****************************************/
+
+		declare @idTranssacion int,
+		@TipoTranssacion nvarchar(100),
+		@MontoTransferido int
+
+		select @idTranssacion = min(idTranssacion) from TranssacionesVuelo
+
+		while @idTranssacion is not null
+		begin
+			select @NumeroCuenta= NumeroCuenta, @TipoTranssacion= TipoTranssacion, @MontoTransferido= MontoTransferido from TranssacionesVuelo  where idTranssacion=@idTranssacion
+
+			insert into Historico (NumeroCuenta, TipoTranssacion, MontoTransferido) values (@NumeroCuenta,@TipoTranssacion,@MontoTransferido)
+
+			delete from TranssacionesVuelo where idTranssacion=@idTranssacion
+
+			select @idTranssacion = min( idTranssacion ) from TranssacionesVuelo where idTranssacion > @idTranssacion
+		end
+
+	
+GO
+SET IDENTITY_INSERT [dbo].[Cliente] ON 
+
+INSERT [dbo].[Cliente] ([CIF], [idTipoCliente]) VALUES (1000000000, 0)
+SET IDENTITY_INSERT [dbo].[Cliente] OFF
+SET IDENTITY_INSERT [dbo].[Direccion] ON 
+
+INSERT [dbo].[Direccion] ([idDireccion], [Direccion]) VALUES (1, N'200 metros este')
+SET IDENTITY_INSERT [dbo].[Direccion] OFF
+INSERT [dbo].[DireccionXCliente] ([idDireccion], [CIF]) VALUES (1, 1000000000)
+SET IDENTITY_INSERT [dbo].[Telefono] ON 
+
+INSERT [dbo].[Telefono] ([idTelefono], [Telefono]) VALUES (1, N'456575')
+SET IDENTITY_INSERT [dbo].[Telefono] OFF
+INSERT [dbo].[TelefonoxCliente] ([CIF], [idTelefono]) VALUES (1000000000, 1)
+SET IDENTITY_INSERT [dbo].[ClienteFisico] ON 
+
+INSERT [dbo].[ClienteFisico] ([idCLienteFisico], [CIF], [Nombre], [Apellido], [idImagenCliente], [Cedula], [idDireccionPrincipal], [idTelefonoPrincipal]) VALUES (1, 1000000000, N'Edward', N'umana', NULL, N'115260530', 1, 1)
+SET IDENTITY_INSERT [dbo].[ClienteFisico] OFF
+SET IDENTITY_INSERT [dbo].[TipoMoneda] ON 
+
+INSERT [dbo].[TipoMoneda] ([idTipoMoneda], [Moneda]) VALUES (1, N'Colones')
+INSERT [dbo].[TipoMoneda] ([idTipoMoneda], [Moneda]) VALUES (2, N'Dolares')
+SET IDENTITY_INSERT [dbo].[TipoMoneda] OFF
+SET IDENTITY_INSERT [dbo].[CuentaDebito] ON 
+
+INSERT [dbo].[CuentaDebito] ([idCuentaDebito], [idCliente], [Desripcion], [idTipoMoneda], [Estado], [SaldoReal], [SaldoFlotante]) VALUES (100000000, 1000000000, N'Lavado dinero', 1, 1, 40000.0000, 36000.0000)
+INSERT [dbo].[CuentaDebito] ([idCuentaDebito], [idCliente], [Desripcion], [idTipoMoneda], [Estado], [SaldoReal], [SaldoFlotante]) VALUES (100000001, 1000000000, N'prestamos', 1, 1, 80000.0000, 73895.0000)
+SET IDENTITY_INSERT [dbo].[CuentaDebito] OFF
+SET IDENTITY_INSERT [dbo].[Proposito] ON 
+
+INSERT [dbo].[Proposito] ([idProposito], [Proposito], [TasaInteres]) VALUES (1, N'MAtrimonio', 0)
+SET IDENTITY_INSERT [dbo].[Proposito] OFF
+SET IDENTITY_INSERT [dbo].[CuentaAhorro] ON 
+
+INSERT [dbo].[CuentaAhorro] ([idCuentaAhorro], [CIF], [NumeroCuentaDebito], [idProposito], [Periodicidad], [FechaInicio], [DuracionAhorro], [FechaFinal], [MontoAhorro], [idTipoMoneda], [MontoAhorroActual], [MontoAhorroDeseado], [FechaProximoPago], [terminoAhorro], [dominioPeriodicidad]) VALUES (2, 1000000000, 100000000, 1, 20, CAST(N'2014-01-01 00:00:00.000' AS DateTime), 30, CAST(N'2013-01-01 00:00:00.000' AS DateTime), 1000.0000, 1, 5000.0000, 8000.0000, CAST(N'2014-01-01 00:01:40.000' AS DateTime), 1, N'segundos')
+INSERT [dbo].[CuentaAhorro] ([idCuentaAhorro], [CIF], [NumeroCuentaDebito], [idProposito], [Periodicidad], [FechaInicio], [DuracionAhorro], [FechaFinal], [MontoAhorro], [idTipoMoneda], [MontoAhorroActual], [MontoAhorroDeseado], [FechaProximoPago], [terminoAhorro], [dominioPeriodicidad]) VALUES (5, 1000000000, 100000001, 1, 2, CAST(N'2014-01-01 00:00:00.000' AS DateTime), 30, CAST(N'2014-12-12 00:00:00.000' AS DateTime), 555.0000, 1, 6105.0000, 5588.0000, CAST(N'2014-01-01 00:22:00.000' AS DateTime), 1, N'minutos')
+SET IDENTITY_INSERT [dbo].[CuentaAhorro] OFF
+
+
+
+
+
+
+
+
