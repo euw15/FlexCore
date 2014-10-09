@@ -23,7 +23,7 @@ namespace RESTfulFlexCore.Services
         {
             try
             {
-                return CBConnectionMSQL.insertUpdateDeleteMSQL("EXEC crearEmpleadoJuridico @Nombre = '" + nombre + "',@Cedula ='" + cedula + "',@Telefono='" + telefono + "',@Direccion='" + direccion + "';",1);
+                return CBConnectionMSQL.insertMSQL("EXEC crearEmpleadoJuridico @Nombre = '" + nombre + "',@Cedula ='" + cedula + "',@Telefono='" + telefono + "',@Direccion='" + direccion + "';");
             
             }
             catch
@@ -38,7 +38,7 @@ namespace RESTfulFlexCore.Services
         {
             try
             {
-                return CBConnectionMSQL.insertUpdateDeleteMSQL("EXEC crearEmpleadoFisico @Nombre = '" + nombre + "',@Apellidos='" + apellidos + "' ,@Cedula ='" + cedula + "' ,@Telefono = '" + telefono + "' ,@Direccion = '" + direccion + "';",1);
+                return CBConnectionMSQL.insertMSQL("EXEC crearEmpleadoFisico @Nombre = '" + nombre + "',@Apellidos='" + apellidos + "' ,@Cedula ='" + cedula + "' ,@Telefono = '" + telefono + "' ,@Direccion = '" + direccion + "';");
             }
             catch
             {
@@ -51,8 +51,8 @@ namespace RESTfulFlexCore.Services
         {
             try
             {
-                CBConnectionMSQL.insertUpdateDeleteMSQL("",0);
-                return "sucess";
+                return CBConnectionMSQL.UpdateDeleteMSQL("");
+                
             }
             catch
             {
@@ -65,8 +65,8 @@ namespace RESTfulFlexCore.Services
         {
             try
             {
-                CBConnectionMSQL.insertUpdateDeleteMSQL("",0);
-                return "sucess";
+                return CBConnectionMSQL.UpdateDeleteMSQL("");
+                 
             }
             catch
             {
@@ -79,8 +79,8 @@ namespace RESTfulFlexCore.Services
         {
             try
             {
-                CBConnectionMSQL.insertUpdateDeleteMSQL("",0);
-                return "sucess";
+                return CBConnectionMSQL.UpdateDeleteMSQL("");
+                
             }
             catch
             {
@@ -93,8 +93,8 @@ namespace RESTfulFlexCore.Services
         {
             try
             {
-                CBConnectionMSQL.insertUpdateDeleteMSQL("",0);
-                return "sucess";
+                return CBConnectionMSQL.UpdateDeleteMSQL("");
+                 
             }
             catch
             {
@@ -173,11 +173,11 @@ namespace RESTfulFlexCore.Services
             foreach (DataRow row in table.Rows)
             {
                 int CIF = -1;
-                String nombre = "";
-                String apellido = "";
-                String cedula = "";
-                String telefono = "";
-                String direccion = "";
+                String nombre = " ";
+                String apellido = " ";
+                String cedula = " ";
+                String telefono = " ";
+                String direccion = " ";
 
                 if (table.Columns.Contains("CIF") && row["CIF"] != DBNull.Value) { CIF = Convert.ToInt32(row["CIF"]); }
                 if (table.Columns.Contains("Nombre") && row["Nombre"] != DBNull.Value) { nombre = row["Nombre"].ToString(); }

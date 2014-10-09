@@ -23,7 +23,7 @@ namespace RESTfulFlexCore.Services
         {
             try
             {
-                return CBConnectionMSQL.insertUpdateDeleteMSQL("EXEC crearCuentaDebito @ClienteCIF = '" + CIF + "', @Descripcion = '" + descripcion + "', @Moneda = '" + moneda + "'", 1);
+                return CBConnectionMSQL.insertMSQL("EXEC crearCuentaDebito @ClienteCIF = '" + CIF + "', @Descripcion = '" + descripcion + "', @Moneda = '" + moneda + "'");
 
             }
             catch
@@ -38,9 +38,9 @@ namespace RESTfulFlexCore.Services
         {
             try
             {
-                return CBConnectionMSQL.insertUpdateDeleteMSQL("EXEC crearCuentaAhorro @ClienteCIF = '"+CIF+"', @idProposito = "+idProposito+", @Periodicidad = "+Periodicidad+", @FechaInicio = '"+FechaInicio+"',"
+                return CBConnectionMSQL.insertMSQL("EXEC crearCuentaAhorro @ClienteCIF = '"+CIF+"', @idProposito = "+idProposito+", @Periodicidad = "+Periodicidad+", @FechaInicio = '"+FechaInicio+"',"
                     +" @FechaFinal = '"+FechaFinal+"', @TiempoAhorro = "+TiempoAhorro+", @MontoAhorroPeriodico = "+MontoAhorroPeriodico+", @NumeroCuentaOrigen = "+NumeroCuentaOrigen+", @Moneda = '"+Moneda+"',"
-                    + "     @dominioPeriodicidad = '" + dominioPeriodicidad + "', @MontoAhorroDeseado = " + MontoAhorroDeseado + "", 1);
+                    + "     @dominioPeriodicidad = '" + dominioPeriodicidad + "', @MontoAhorroDeseado = " + MontoAhorroDeseado + "");
             }
             catch
             {
@@ -53,7 +53,7 @@ namespace RESTfulFlexCore.Services
         {
             try
             {
-                return CBConnectionMSQL.insertUpdateDeleteMSQL("", 1);
+                return CBConnectionMSQL.insertMSQL("EXEC realizarPago @NumeroCuentaDebito =" + cuentaPago + " , @NumeroCuentaDestino = " + cuentaDestino + ", @MontoPago =" + monto + "");
             }
             catch
             {
@@ -83,11 +83,11 @@ namespace RESTfulFlexCore.Services
                 int Periodicidad = -1;
                 int DuracionAhorro = -1;
                 int MontoAhorro = -1;
-                String FechaInicio = "";
-                String FechaFinal = "";
-                String Desripcion = "";
-                String Moneda = "";
-                String Proposito = "";
+                String FechaInicio = " ";
+                String FechaFinal = " ";
+                String Desripcion = " ";
+                String Moneda = " ";
+                String Proposito = " ";
                 double SaldoReal = -1;
                 double SaldoFlotante = -1;
 
