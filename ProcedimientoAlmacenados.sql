@@ -248,15 +248,15 @@ AS
 							insert into TranssacionesVuelo (NumeroCuenta,TipoTranssacion,MontoTransferido) values (@NumeroCuentaDebito,'Debito',@MontoPago)
 							insert into TranssacionesVuelo (NumeroCuenta,TipoTranssacion,MontoTransferido) values (@NumeroCuentaDestino,'Credito',@MontoPago)
 							set @id=1
-							select @id;
+							select @id as id;
 					end
 				else
 					set @id=0
-					select @id;
+					select @id as id;
 			end
 		else
 			set @id=0
-			select @id;
+			select @id as id;
 
 /********************* Consultar Propositos ****************************************/
 
