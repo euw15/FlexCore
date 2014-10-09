@@ -248,15 +248,15 @@ AS
 							insert into TranssacionesVuelo (NumeroCuenta,TipoTranssacion,MontoTransferido) values (@NumeroCuentaDebito,'Debito',@MontoPago)
 							insert into TranssacionesVuelo (NumeroCuenta,TipoTranssacion,MontoTransferido) values (@NumeroCuentaDestino,'Credito',@MontoPago)
 							set @id=1
-							return @id;
+							select @id;
 					end
 				else
 					set @id=0
-					return @id;
+					select @id;
 			end
 		else
 			set @id=0
-			return @id;
+			select @id;
 
 /********************* Consultar Propositos ****************************************/
 
@@ -438,6 +438,10 @@ CREATE PROCEDURE crearCierreBancario
 			delete from TranssacionesVuelo where idTranssacion=@idTranssacion
 
 			select @idTranssacion = min( idTranssacion ) from TranssacionesVuelo where idTranssacion > @idTranssacion
+
+		/************Guarda el cierre bancario ********************/
+		insert into Cierres (FechaFinal) values (GETDATE ())
+
 		end
 
 	
