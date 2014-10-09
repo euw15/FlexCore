@@ -40,7 +40,7 @@ AS
 	/*inserta en cliente juridico */
 	INSERT INTO ClienteJuridico (CIF, Nombre,Cedula,idDireccionPrincipal,idTelefonoPrincipal) values (@id,@Nombre,@Cedula,@idDireccionGenerado,@idTelefonoGenerado);
 
-	return @id;
+	select @id as id;
 
 /**********************Crea un Empleado Fisico *******************/
 
@@ -78,7 +78,7 @@ AS
 	/*inserta en cliente juridico */
 	INSERT INTO ClienteFisico (CIF, Nombre,Apellido,Cedula,idDireccionPrincipal,idTelefonoPrincipal) values (@id,@Nombre,@Apellidos,@Cedula,@idDireccionGenerado,@idTelefonoGenerado);
 
-	return @id;
+	select @id as id;
 
 /*******************Consultar CLientes Juridicos por concepto******************************/
 go
@@ -179,9 +179,8 @@ AS
 
 	declare @id int
 
-	select @id=numeroCuenta from CuentaDebito where idCuentaDebito = IDENT_CURRENT('CuentaDebito')
+	select numeroCuenta as id from CuentaDebito where idCuentaDebito = IDENT_CURRENT('CuentaDebito')
 
-	return @id;
 
 /********************* Crear Cuenta Ahorro ****************************************/
 
@@ -212,9 +211,8 @@ AS
 
 	declare @id int
 
-	select @id=numeroCuenta from CuentaAhorro where idCuentaAhorro = IDENT_CURRENT('CuentaAhorro')
+	select numeroCuenta as id from CuentaAhorro where idCuentaAhorro = IDENT_CURRENT('CuentaAhorro')
 
-	return @id;
 
 /********************* Realizar Pago ****************************************/
 go
