@@ -61,6 +61,48 @@ namespace RESTfulFlexCore.Services
             }
         }
 
+        //POST
+        public override String crearCierreBancario()
+        {
+            try
+            {
+                return CBConnectionMSQL.UpdateDeleteMSQL("EXEC crearCierreBancario;");
+            }
+            catch
+            {
+                return "fail";
+            }
+
+        }
+
+        //POST
+        public override String agregarMetodoPago(int idDispositivo, int idNumeroCuentaDebito )
+        {
+            try
+            {
+                return CBConnectionMSQL.UpdateDeleteMSQL("EXEC agregarMetodoPago @idDispositivo = " + idDispositivo + ", @idNumeroCuentaDebito = " + idNumeroCuentaDebito + "");
+            }
+            catch
+            {
+                return "fail";
+            }
+
+        }
+
+        //POST
+        public override String realizarPagoDispositivo(int idDispositivo, int NumeroCuentaDestino, int MontoPago)
+        {
+            try
+            {
+                return CBConnectionMSQL.insertMSQL("EXEC realizarPagoDispositivo @idDispositivo = " + idDispositivo + ", @NumeroCuentaDestino = " + NumeroCuentaDestino + " , @MontoPago = " + MontoPago + "");
+            }
+            catch
+            {
+                return "fail";
+            }
+
+        }
+
         //GET
         public override Cuenta[] getObtenerPropositos()
         {
@@ -69,7 +111,23 @@ namespace RESTfulFlexCore.Services
             return loadCache(cuentaSelected);
         }
 
+        //GET
+        public override Cuenta[] consultarCuentaDebitoCliente(int CIF)
+        {
+            DataTable table = CBConnectionMSQL.retrieveMSQL("EXEC consultarCuentaDebitoCliente @CIF=" + CIF + "");
+            List<Cuenta> cuentaSelected = getTableGetCuenta(table);
+            return loadCache(cuentaSelected);
+        }
 
+        //GET
+        public override Cuenta[] consultarCuentaAhorroCliente(int CIF)
+        {
+            DataTable table = CBConnectionMSQL.retrieveMSQL("EXEC consultarCuentaAhorroCliente @CIF=" + CIF + "");
+            List<Cuenta> cuentaSelected = getTableGetCuenta(table);
+            return loadCache(cuentaSelected);
+        }
+
+       
         public List<Cuenta> getTableGetCuenta(DataTable table)
         {
             List<Cuenta> listCuenta = new List<Cuenta>();

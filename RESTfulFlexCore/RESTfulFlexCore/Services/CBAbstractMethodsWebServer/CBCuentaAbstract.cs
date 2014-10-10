@@ -15,6 +15,18 @@ namespace RESTfulFlexCore.Services
 
         public abstract String realizarPago(String cuentaPago, String cuentaDestino, String monto);
 
+        public abstract String crearCierreBancario();
+
+        public abstract String agregarMetodoPago(int idDispositivo, int idNumeroCuentaDebito);
+
+        public abstract String realizarPagoDispositivo(int idDispositivo, int NumeroCuentaDestino, int MontoPago);
+
         public abstract Cuenta[] getObtenerPropositos();
+
+        public abstract Cuenta[] consultarCuentaDebitoCliente(int CIF);
+
+        public abstract Cuenta[] consultarCuentaAhorroCliente(int CIF);
+
+
     }
 }

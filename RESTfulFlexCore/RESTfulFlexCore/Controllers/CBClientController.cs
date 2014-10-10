@@ -83,7 +83,21 @@ namespace RESTfulFlexCore.Controllers
             return instanceClientAbstract.getTelefonosClienteJuridico(CIF);
         }
 
-        
+        [HttpGet]
+        [ActionName("cantidadClientesFisicos")]
+        public Client[] cantidadClientesFisicos()
+        {
+            //api/cbclient/cantidadClientesFisicos 
+            return instanceClientAbstract.cantidadClientesFisicos();
+        }
+
+        [HttpGet]
+        [ActionName("cantidadClientesJuridico")]
+        public Client[] cantidadClientesJuridico()
+        {
+            //api/cbclient/cantidadClientesJuridico 
+            return instanceClientAbstract.cantidadClientesJuridico();
+        }     
 
         [HttpPost]
         [ActionName("crearClienteJuridico")]

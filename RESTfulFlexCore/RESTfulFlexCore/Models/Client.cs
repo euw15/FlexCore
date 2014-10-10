@@ -21,6 +21,8 @@ namespace RESTfulFlexCore.Models
 
         public String direccion { get; set; }
 
+        public int cantClientes { get; set; }      
+
        
     }
 }

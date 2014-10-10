@@ -24,6 +24,11 @@ namespace RESTfulFlexCore.Services
 
         public abstract Client[] getTelefonosClienteFisico(int CIF);
 
+        public abstract Client[] cantidadClientesFisicos();
+
+        public abstract Client[] cantidadClientesJuridico();
+
+
         public abstract String crearClienteJuridico(String nombre, String cedula, String telefono, String direccion);
 
         public abstract String crearClienteFisico(String nombre, String apellidos, String cedula, String telefono, String direccion);

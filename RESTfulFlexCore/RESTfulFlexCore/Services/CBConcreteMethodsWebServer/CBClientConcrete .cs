@@ -117,6 +117,21 @@ namespace RESTfulFlexCore.Services
             }
         }
 
+        //GET
+        public override Client[] cantidadClientesJuridico()
+        {
+            DataTable table = CBConnectionMSQL.retrieveMSQL("EXEC cantidadClientesJuridico");
+            List<Client> clientSelected = getTableGetCliente(table);
+            return loadCache(clientSelected);
+        }
+
+        //GET
+        public override Client[] cantidadClientesFisicos()
+        {
+            DataTable table = CBConnectionMSQL.retrieveMSQL("EXEC cantidadClientesFisicos");
+            List<Client> clientSelected = getTableGetCliente(table);
+            return loadCache(clientSelected);
+        }
 
         //GET
         public override Client[] getClienteJuridicoPorConcepto(String concepto, String dato)
@@ -194,6 +209,7 @@ namespace RESTfulFlexCore.Services
                 String cedula = " ";
                 String telefono = " ";
                 String direccion = " ";
+                int cantClientes = -1;
 
                 if (table.Columns.Contains("CIF") && row["CIF"] != DBNull.Value) { CIF = Convert.ToInt32(row["CIF"]); }
                 if (table.Columns.Contains("Nombre") && row["Nombre"] != DBNull.Value) { nombre = row["Nombre"].ToString(); }
@@ -201,6 +217,7 @@ namespace RESTfulFlexCore.Services
                 if (table.Columns.Contains("Telefono") && row["Telefono"] != DBNull.Value) { telefono = row["Telefono"].ToString(); }
                 if (table.Columns.Contains("Direccion") && row["Direccion"] != DBNull.Value) { direccion = row["Direccion"].ToString(); }
                 if (table.Columns.Contains("Apellido") && row["Apellido"] != DBNull.Value) { apellido = row["Apellido"].ToString(); }
+                if (table.Columns.Contains("cantClientes") && row["cantClientes"] != DBNull.Value) { cantClientes = Convert.ToInt32(row["cantClientes"]); }
                 listClient.Add(new Client
                 {
                     CIF = CIF,
@@ -208,7 +225,8 @@ namespace RESTfulFlexCore.Services
                     apellido = apellido,
                     cedula = cedula,
                     telefono = telefono,
-                    direccion = direccion
+                    direccion = direccion,
+                    cantClientes = cantClientes
                 });
             }
             return listClient;

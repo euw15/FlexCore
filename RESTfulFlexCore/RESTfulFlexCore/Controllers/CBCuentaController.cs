@@ -45,12 +45,52 @@ namespace RESTfulFlexCore.Controllers
             return instanceCuentaAbstract.realizarPago(cuentaPago, cuentaDestino, monto);
         }
 
+        [HttpPost]
+        [ActionName("crearCierreBancario")]
+        public String crearCierreBancario()
+        {
+            //api/cbcuenta/crearCierreBancario
+            return instanceCuentaAbstract.crearCierreBancario();
+        }
+
+        [HttpPost]
+        [ActionName("agregarMetodoPago")]
+        public String agregarMetodoPago(int idDispositivo, int idNumeroCuentaDebito)
+        {
+            //api/cbcuenta/agregarMetodoPago?idDispositivo=1000000006&idNumeroCuentaDebito=524513241
+            return instanceCuentaAbstract.agregarMetodoPago(idDispositivo, idNumeroCuentaDebito);
+        }
+        
+        [HttpPost]
+        [ActionName("realizarPagoDispositivo")]
+        public String realizarPagoDispositivo(int idDispositivo, int NumeroCuentaDestino, int MontoPago)
+        {
+            //api/cbcuenta/realizarPagoDispositivo?idDispositivo=1000000006&NumeroCuentaDestino=524513241&MontoPago=20000
+            return instanceCuentaAbstract.realizarPagoDispositivo(idDispositivo, NumeroCuentaDestino, MontoPago);
+        }
+
         [HttpGet]
         [ActionName("getObtenerPropositos")]
         public Cuenta[] getObtenerPropositos()
         {
             //api/cbcuenta/getObtenerPropositos
             return instanceCuentaAbstract.getObtenerPropositos();
+        }
+
+        [HttpGet]
+        [ActionName("consultarCuentaAhorroCliente")]
+        public Cuenta[] consultarCuentaAhorroCliente(int CIF)
+        {
+            //api/cbcuenta/consultarCuentaAhorroCliente?CIF=1000000000
+            return instanceCuentaAbstract.consultarCuentaAhorroCliente(CIF);
+        }
+
+        [HttpGet]
+        [ActionName("consultarCuentaDebitoCliente")]
+        public Cuenta[] consultarCuentaDebitoCliente(int CIF)
+        {
+            //api/cbcuenta/consultarCuentaDebitoCliente?CIF=1000000000
+            return instanceCuentaAbstract.consultarCuentaDebitoCliente(CIF);
         }
 
 
