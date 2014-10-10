@@ -50,6 +50,10 @@ namespace RESTfulFlexCore.Services
         {
             return new CBMetodoPagoConcrete();
         }
+        public override CBTranssacionesVueloAbstract CreateCBTransaccionesVueloAbstract()
+        {
+            return new CBTranssacionesVueloConcrete();
+        }
      
         
     }

@@ -128,6 +128,7 @@
     <Compile Include="Controllers\CBDocumentosController.cs" />
     <Compile Include="Controllers\CBImageController.cs" />
     <Compile Include="Controllers\CBMetodoPagoController.cs" />
+    <Compile Include="Controllers\CBTranssacionesVueloController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -138,6 +139,7 @@
     <Compile Include="Models\Documentos.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\MetodoPago.cs" />
+    <Compile Include="Models\TranssacionesVuelo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CBAbstractFactoryWebServer.cs" />
     <Compile Include="Services\CBAbstractMethodsWebServer\CBBeneficiarioAbstract.cs" />
@@ -146,6 +148,7 @@
     <Compile Include="Services\CBAbstractMethodsWebServer\CBDocumentosAbstract.cs" />
     <Compile Include="Services\CBAbstractMethodsWebServer\CBImageAbstract.cs" />
     <Compile Include="Services\CBAbstractMethodsWebServer\CBMetodoPagoAbstract.cs" />
+    <Compile Include="Services\CBAbstractMethodsWebServer\CBTranssacionesVueloAbstract.cs" />
     <Compile Include="Services\CBConcreteFactoryWebServer .cs" />
     <Compile Include="Services\CBConcreteMethodsWebServer\CBBeneficiarioConcrete.cs" />
     <Compile Include="Services\CBConcreteMethodsWebServer\CBClientConcrete .cs" />
@@ -153,8 +156,8 @@
     <Compile Include="Services\CBConcreteMethodsWebServer\CBDocumentosConcrete.cs" />
     <Compile Include="Services\CBConcreteMethodsWebServer\CBImageConcrete.cs" />
     <Compile Include="Services\CBConcreteMethodsWebServer\CBMetodoPagoConcrete.cs" />
+    <Compile Include="Services\CBConcreteMethodsWebServer\CBTranssacionesVueloConcrete.cs" />
     <Compile Include="Services\CBConnectionMSQL.cs" />
-    <Compile Include="Services\CBTransaccionesVueloAbstract.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
