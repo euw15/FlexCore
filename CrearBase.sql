@@ -11,7 +11,8 @@ GO
 
 CREATE TABLE [Cliente](
 	[CIF] [int] Identity(1000000000,1) constraint pk_CIF_Cliente primary key,
-	[idTipoCliente] [int] NOT NULL
+	[idTipoCliente] [int] NOT NULL,
+	[Estado] [bit]
 )
 
 /*******************************************************************/
@@ -116,7 +117,7 @@ GO
 CREATE TABLE [MetodoPago](
 	[idMetodoPago] [int] Identity(1,1) constraint pk_PKMetogoPago_MetodoPago primary key,
 	[NumeroCuentaDebito] [int] NOT NULL,
-	[idDispositivo] [int] NOT NULL,
+	[idDispositivo] [bigint] NOT NULL,
 	[estado] [bit] NOT NULL
 	)
 
@@ -154,7 +155,8 @@ CREATE TABLE [TranssacionesVuelo](
 	[idTranssacion] [int] Identity(1,1) constraint pk_idTranssacion_TranssacionesVuelo primary key,
 	[NumeroCuenta] [int] NOT NULL,
 	[TipoTranssacion] [nvarchar](100) NOT NULL,
-	[MontoTransferido] [int]
+	[MontoTransferido] [int],
+	[Fecha] [datetime] DEFAULT GETDATE()
 	)
 
 /********************************************************************/
@@ -163,7 +165,8 @@ CREATE TABLE [Historico](
 	[idTranssacion] [int] Identity(1,1) constraint pk_idTranssacion_Historico primary key,
 	[NumeroCuenta] [int] NOT NULL,
 	[TipoTranssacion] [nvarchar](100) NOT NULL,
-	[MontoTransferido] [int]
+	[MontoTransferido] [int],
+	[Fecha] [datetime]
 	)
 
 /********************************************************************/
@@ -179,14 +182,12 @@ CREATE TABLE [Imagen] (
 	[imagen] varchar(max)
 	)
 
+
 /*******************************************************************/
 /*******************************************************************/
 /**********************  Crear Llaves Primarias ********************/
 /*******************************************************************/
 /*******************************************************************/
-
-
-USE FlexCoreDataBase;
 
 /****************Crea funcion para numeroCuentas *******************/
 /* Verifica el tipo de moneda en la insercion y le agrega el digito correspondiente */
@@ -348,8 +349,6 @@ AS select Cliente.CIF,ClienteJuridico.Nombre,ClienteJuridico.Cedula, Telefono.Te
 /************* Crear Procedimientos  Almacenados********************/
 /*******************************************************************/
 /*******************************************************************/
-GO
-USE FlexCoreDataBase;
 
 /**********************Crea un Empleado Juridico *******************/
 GO
@@ -385,7 +384,7 @@ AS
 	/*inserta en cliente juridico */
 	INSERT INTO ClienteJuridico (CIF, Nombre,Cedula,idDireccionPrincipal,idTelefonoPrincipal) values (@id,@Nombre,@Cedula,@idDireccionGenerado,@idTelefonoGenerado);
 
-	return @id;
+	select @id as id;
 
 /**********************Crea un Empleado Fisico *******************/
 
@@ -423,7 +422,7 @@ AS
 	/*inserta en cliente juridico */
 	INSERT INTO ClienteFisico (CIF, Nombre,Apellido,Cedula,idDireccionPrincipal,idTelefonoPrincipal) values (@id,@Nombre,@Apellidos,@Cedula,@idDireccionGenerado,@idTelefonoGenerado);
 
-	return @id;
+	select @id as id;
 
 /*******************Consultar CLientes Juridicos por concepto******************************/
 go
@@ -524,9 +523,8 @@ AS
 
 	declare @id int
 
-	select @id=numeroCuenta from CuentaDebito where idCuentaDebito = IDENT_CURRENT('CuentaDebito')
+	select numeroCuenta as id from CuentaDebito where idCuentaDebito = IDENT_CURRENT('CuentaDebito')
 
-	return @id;
 
 /********************* Crear Cuenta Ahorro ****************************************/
 
@@ -557,9 +555,8 @@ AS
 
 	declare @id int
 
-	select @id=numeroCuenta from CuentaAhorro where idCuentaAhorro = IDENT_CURRENT('CuentaAhorro')
+	select numeroCuenta as id from CuentaAhorro where idCuentaAhorro = IDENT_CURRENT('CuentaAhorro')
 
-	return @id;
 
 /********************* Realizar Pago ****************************************/
 go
@@ -593,15 +590,14 @@ AS
 							insert into TranssacionesVuelo (NumeroCuenta,TipoTranssacion,MontoTransferido) values (@NumeroCuentaDebito,'Debito',@MontoPago)
 							insert into TranssacionesVuelo (NumeroCuenta,TipoTranssacion,MontoTransferido) values (@NumeroCuentaDestino,'Credito',@MontoPago)
 							set @id=1
-							return @id;
 					end
 				else
 					set @id=0
-					return @id;
 			end
 		else
 			set @id=0
-			return @id;
+		
+		select @id as id;
 
 /********************* Consultar Propositos ****************************************/
 
@@ -770,23 +766,103 @@ CREATE PROCEDURE crearCierreBancario
 
 		declare @idTranssacion int,
 		@TipoTranssacion nvarchar(100),
-		@MontoTransferido int
+		@MontoTransferido int,
+		@FechaTrans datetime
 
 		select @idTranssacion = min(idTranssacion) from TranssacionesVuelo
 
 		while @idTranssacion is not null
 		begin
-			select @NumeroCuenta= NumeroCuenta, @TipoTranssacion= TipoTranssacion, @MontoTransferido= MontoTransferido from TranssacionesVuelo  where idTranssacion=@idTranssacion
+			select @NumeroCuenta= NumeroCuenta, @TipoTranssacion= TipoTranssacion, @MontoTransferido= MontoTransferido, @FechaTrans=Fecha from TranssacionesVuelo  where idTranssacion=@idTranssacion
 
-			insert into Historico (NumeroCuenta, TipoTranssacion, MontoTransferido) values (@NumeroCuenta,@TipoTranssacion,@MontoTransferido)
+			insert into Historico (NumeroCuenta, TipoTranssacion, MontoTransferido, Fecha) values (@NumeroCuenta,@TipoTranssacion,@MontoTransferido,@FechaTrans)
 
 			delete from TranssacionesVuelo where idTranssacion=@idTranssacion
 
 			select @idTranssacion = min( idTranssacion ) from TranssacionesVuelo where idTranssacion > @idTranssacion
+
 		end
 
-	
+		/************Guarda el cierre bancario ********************/
+		insert into Cierres (FechaFinal) values (GETDATE ())
+
+/*********************** Consultar Cierres Bancarios ************************/
+
 GO
+CREATE PROCEDURE consultarCierresBancarios
+	as
+		select top 100 idCierre , FechaFinal from Cierres 
+
+/*********************Obtener cantidad Clientes Fisicos ********************/
+GO
+CREATE PROCEDURE cantidadClientesFisicos
+	as
+		select count(*) as id from ClienteFisico
+
+/*********************Obtener cantidad Clientes Juridicos ********************/
+GO
+CREATE PROCEDURE cantidadClientesJuridico
+	as
+		select count(*) as id from ClienteJuridico
+
+/******************** Consultar Transsacciones para un cliente ***************/
+Go
+CREATE PROCEDURE consultarTranssaccionesCliente
+	@CIF int
+	as
+		(select TransVuelo.NumeroCuenta, TipoTranssacion, MontoTransferido, TransVuelo.Fecha from TranssacionesVuelo as TransVuelo
+		inner join CuentaDebito on TransVuelo.NumeroCuenta= CuentaDebito.NumeroCuenta 
+		where TransVuelo.NumeroCuenta in (select numeroCuenta from CuentaDebito where CuentaDebito.idCliente=@CIF)
+union
+
+select H.NumeroCuenta, H.TipoTranssacion, H.MontoTransferido, H.Fecha from Historico as H
+		inner join CuentaDebito on H.NumeroCuenta= CuentaDebito.NumeroCuenta
+		where  H.NumeroCuenta in (select numeroCuenta from CuentaDebito where CuentaDebito.idCliente=@CIF)
+		)
+		
+ order by Fecha
+
+ /**************** Consultar Cuentas Debito Cliente *************************************/
+GO
+CREATE PROCEDURE consultarCuentaDebitoCliente
+	@CIF int 
+	as
+		select numeroCuenta from CuentaDebito where CuentaDebito.idCliente=@CIF
+
+
+ /**************** Consultar Cuentas Ahorro Cliente *************************************/
+GO
+CREATE PROCEDURE consultarCuentaAhorroCliente
+	@CIF int 
+	as
+		select numeroCuenta from CuentaAhorro where CuentaAhorro.CIF=@CIF
+
+/*************** Realizar Pago con cuenta Dispositovo ************************************/
+GO
+CREATE PROCEDURE realizarPagoDispositivo
+	@idDispositivo bigint,
+	@NumeroCuentaDestino int,
+	@MontoPago int
+	as
+			declare @idNumeroCuentaDebito int,
+			@numeroCuentaDebito int
+
+			select @idNumeroCuentaDebito = NumeroCuentaDebito from MetodoPago where idDispositivo = @idDispositivo
+			select @numeroCuentaDebito = numeroCuenta from CuentaDebito where idCuentaDebito= @idNumeroCuentaDebito
+
+			EXEC realizarPago @NumeroCuentaDebito = @numeroCuentaDebito, @NumeroCuentaDestino =@NumeroCuentaDestino , @MontoPago =@MontoPago
+
+
+/**************** Agregar un metodo de Pago **********************************************/
+GO
+CREATE PROCEDURE agregarMetodoPago
+	@idDispositivo bigint,
+	@idNumeroCuentaDebito int
+	as
+		insert into MetodoPago (NumeroCuentaDebito,idDispositivo,estado) values (@idNumeroCuentaDebito,@idDispositivo,1)
+
+	
+
 SET IDENTITY_INSERT [dbo].[Cliente] ON 
 
 INSERT [dbo].[Cliente] ([CIF], [idTipoCliente]) VALUES (1000000000, 0)
@@ -824,11 +900,4 @@ SET IDENTITY_INSERT [dbo].[CuentaAhorro] ON
 INSERT [dbo].[CuentaAhorro] ([idCuentaAhorro], [CIF], [NumeroCuentaDebito], [idProposito], [Periodicidad], [FechaInicio], [DuracionAhorro], [FechaFinal], [MontoAhorro], [idTipoMoneda], [MontoAhorroActual], [MontoAhorroDeseado], [FechaProximoPago], [terminoAhorro], [dominioPeriodicidad]) VALUES (2, 1000000000, 100000000, 1, 20, CAST(N'2014-01-01 00:00:00.000' AS DateTime), 30, CAST(N'2013-01-01 00:00:00.000' AS DateTime), 1000.0000, 1, 5000.0000, 8000.0000, CAST(N'2014-01-01 00:01:40.000' AS DateTime), 1, N'segundos')
 INSERT [dbo].[CuentaAhorro] ([idCuentaAhorro], [CIF], [NumeroCuentaDebito], [idProposito], [Periodicidad], [FechaInicio], [DuracionAhorro], [FechaFinal], [MontoAhorro], [idTipoMoneda], [MontoAhorroActual], [MontoAhorroDeseado], [FechaProximoPago], [terminoAhorro], [dominioPeriodicidad]) VALUES (5, 1000000000, 100000001, 1, 2, CAST(N'2014-01-01 00:00:00.000' AS DateTime), 30, CAST(N'2014-12-12 00:00:00.000' AS DateTime), 555.0000, 1, 6105.0000, 5588.0000, CAST(N'2014-01-01 00:22:00.000' AS DateTime), 1, N'minutos')
 SET IDENTITY_INSERT [dbo].[CuentaAhorro] OFF
-
-
-
-
-
-
-
 
