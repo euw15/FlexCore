@@ -422,26 +422,100 @@ CREATE PROCEDURE crearCierreBancario
 
 		declare @idTranssacion int,
 		@TipoTranssacion nvarchar(100),
-		@MontoTransferido int
+		@MontoTransferido int,
+		@FechaTrans datetime
 
 		select @idTranssacion = min(idTranssacion) from TranssacionesVuelo
 
 		while @idTranssacion is not null
 		begin
-			select @NumeroCuenta= NumeroCuenta, @TipoTranssacion= TipoTranssacion, @MontoTransferido= MontoTransferido from TranssacionesVuelo  where idTranssacion=@idTranssacion
+			select @NumeroCuenta= NumeroCuenta, @TipoTranssacion= TipoTranssacion, @MontoTransferido= MontoTransferido, @FechaTrans=Fecha from TranssacionesVuelo  where idTranssacion=@idTranssacion
 
-			insert into Historico (NumeroCuenta, TipoTranssacion, MontoTransferido) values (@NumeroCuenta,@TipoTranssacion,@MontoTransferido)
+			insert into Historico (NumeroCuenta, TipoTranssacion, MontoTransferido, Fecha) values (@NumeroCuenta,@TipoTranssacion,@MontoTransferido,@FechaTrans)
 
 			delete from TranssacionesVuelo where idTranssacion=@idTranssacion
 
 			select @idTranssacion = min( idTranssacion ) from TranssacionesVuelo where idTranssacion > @idTranssacion
 
+		end
+
 		/************Guarda el cierre bancario ********************/
 		insert into Cierres (FechaFinal) values (GETDATE ())
 
-		end
+/*********************** Consultar Cierres Bancarios ************************/
 
-	
+GO
+CREATE PROCEDURE consultarCierresBancarios
+	as
+		select top 100 idCierre , FechaFinal from Cierres 
+
+/*********************Obtener cantidad Clientes Fisicos ********************/
+GO
+CREATE PROCEDURE cantidadClientesFisicos
+	as
+		select count(*) as id from ClienteFisico
+
+/*********************Obtener cantidad Clientes Juridicos ********************/
+GO
+CREATE PROCEDURE cantidadClientesJuridico
+	as
+		select count(*) as id from ClienteJuridico
+
+/******************** Consultar Transsacciones para un cliente ***************/
+Go
+CREATE PROCEDURE consultarTranssaccionesCliente
+	@CIF int
+	as
+		(select TransVuelo.NumeroCuenta, TipoTranssacion, MontoTransferido, TransVuelo.Fecha from TranssacionesVuelo as TransVuelo
+		inner join CuentaDebito on TransVuelo.NumeroCuenta= CuentaDebito.NumeroCuenta 
+		where TransVuelo.NumeroCuenta in (select numeroCuenta from CuentaDebito where CuentaDebito.idCliente=@CIF)
+union
+
+select H.NumeroCuenta, H.TipoTranssacion, H.MontoTransferido, H.Fecha from Historico as H
+		inner join CuentaDebito on H.NumeroCuenta= CuentaDebito.NumeroCuenta
+		where  H.NumeroCuenta in (select numeroCuenta from CuentaDebito where CuentaDebito.idCliente=@CIF)
+		)
+		
+ order by Fecha
+
+ /**************** Consultar Cuentas Debito Cliente *************************************/
+GO
+CREATE PROCEDURE consultarCuentaDebitoCliente
+	@CIF int 
+	as
+		select numeroCuenta from CuentaDebito where CuentaDebito.idCliente=@CIF
+
+
+ /**************** Consultar Cuentas Ahorro Cliente *************************************/
+GO
+CREATE PROCEDURE consultarCuentaAhorroCliente
+	@CIF int 
+	as
+		select numeroCuenta from CuentaAhorro where CuentaAhorro.CIF=@CIF
+
+/*************** Realizar Pago con cuenta Dispositovo ************************************/
+GO
+CREATE PROCEDURE realizarPagoDispositivo
+	@idDispositivo bigint,
+	@NumeroCuentaDestino int,
+	@MontoPago int
+	as
+			declare @idNumeroCuentaDebito int,
+			@numeroCuentaDebito int
+
+			select @idNumeroCuentaDebito = NumeroCuentaDebito from MetodoPago where idDispositivo = @idDispositivo
+			select @numeroCuentaDebito = numeroCuenta from CuentaDebito where idCuentaDebito= @idNumeroCuentaDebito
+
+			EXEC realizarPago @NumeroCuentaDebito = @numeroCuentaDebito, @NumeroCuentaDestino =@NumeroCuentaDestino , @MontoPago =@MontoPago
+
+
+/**************** Agregar un metodo de Pago **********************************************/
+GO
+CREATE PROCEDURE agregarMetodoPago
+	@idDispositivo bigint,
+	@idNumeroCuentaDebito int
+	as
+		insert into MetodoPago (NumeroCuentaDebito,idDispositivo,estado) values (@idNumeroCuentaDebito,@idDispositivo,1)
 
 	
 

@@ -203,7 +203,11 @@ EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'realizar
 			delete from TranssacionesVuelo where idTranssacion=@idTranssacion
 
 			select @idTranssacion = min( idTranssacion ) from TranssacionesVuelo where idTranssacion > @idTranssacion
-		end', 
+		end
+
+		/************Guarda el cierre bancario ********************/
+			insert into Cierres (FechaFinal) values (GETDATE ())
+		', 
 		@database_name=N'master', 
 		@flags=0
 IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback

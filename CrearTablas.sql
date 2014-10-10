@@ -11,7 +11,8 @@ GO
 
 CREATE TABLE [Cliente](
 	[CIF] [int] Identity(1000000000,1) constraint pk_CIF_Cliente primary key,
-	[idTipoCliente] [int] NOT NULL
+	[idTipoCliente] [int] NOT NULL,
+	[Estado] [bit]
 )
 
 /*******************************************************************/
@@ -116,7 +117,7 @@ GO
 CREATE TABLE [MetodoPago](
 	[idMetodoPago] [int] Identity(1,1) constraint pk_PKMetogoPago_MetodoPago primary key,
 	[NumeroCuentaDebito] [int] NOT NULL,
-	[idDispositivo] [int] NOT NULL,
+	[idDispositivo] [bigint] NOT NULL,
 	[estado] [bit] NOT NULL
 	)
 
@@ -154,7 +155,8 @@ CREATE TABLE [TranssacionesVuelo](
 	[idTranssacion] [int] Identity(1,1) constraint pk_idTranssacion_TranssacionesVuelo primary key,
 	[NumeroCuenta] [int] NOT NULL,
 	[TipoTranssacion] [nvarchar](100) NOT NULL,
-	[MontoTransferido] [int]
+	[MontoTransferido] [int],
+	[Fecha] [datetime] DEFAULT GETDATE()
 	)
 
 /********************************************************************/
@@ -163,7 +165,8 @@ CREATE TABLE [Historico](
 	[idTranssacion] [int] Identity(1,1) constraint pk_idTranssacion_Historico primary key,
 	[NumeroCuenta] [int] NOT NULL,
 	[TipoTranssacion] [nvarchar](100) NOT NULL,
-	[MontoTransferido] [int]
+	[MontoTransferido] [int],
+	[Fecha] [datetime]
 	)
 
 /********************************************************************/
