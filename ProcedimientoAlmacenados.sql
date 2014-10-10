@@ -453,13 +453,13 @@ CREATE PROCEDURE consultarCierresBancarios
 GO
 CREATE PROCEDURE cantidadClientesFisicos
 	as
-		select count(*) as id from ClienteFisico
+		select count(*) as cantClientes from ClienteFisico
 
 /*********************Obtener cantidad Clientes Juridicos ********************/
 GO
 CREATE PROCEDURE cantidadClientesJuridico
 	as
-		select count(*) as id from ClienteJuridico
+		select count(*) as cantClientes from ClienteJuridico
 
 /******************** Consultar Transsacciones para un cliente ***************/
 Go
@@ -493,7 +493,7 @@ CREATE PROCEDURE consultarCuentaAhorroCliente
 	as
 		select numeroCuenta from CuentaAhorro where CuentaAhorro.CIF=@CIF
 
-/*************** Realizar Pago con cuenta Dispositovo ************************************/
+/*********************** Realizar Pago con cuenta Dispositovo ************************************/
 GO
 CREATE PROCEDURE realizarPagoDispositivo
 	@idDispositivo bigint,
@@ -508,8 +508,8 @@ CREATE PROCEDURE realizarPagoDispositivo
 
 			EXEC realizarPago @NumeroCuentaDebito = @numeroCuentaDebito, @NumeroCuentaDestino =@NumeroCuentaDestino , @MontoPago =@MontoPago
 
-
-/**************** Agregar un metodo de Pago **********************************************/
+			
+/************************ Agregar un metodo de Pago **********************************************/
 GO
 CREATE PROCEDURE agregarMetodoPago
 	@idDispositivo bigint,
