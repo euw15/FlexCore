@@ -70,11 +70,11 @@ namespace RESTfulFlexCore.Services
                                           "database=FlexCoreDataBase; " +
                                           "connection timeout=30");
              */
-            SqlConnection connection = new SqlConnection("Data Source=localhost;Network Library=DBMSSOCN; user id=BASELOGIN;" +
-                                       "password=mjgv12;server=MELVIN;" +
-                                       "Trusted_Connection=no;" +
-                                       "database=FlexCoreDataBase; " +
-                                       "connection timeout=30");
+            SqlConnection connection = new SqlConnection("Data Source=localhost;Network Library=DBMSSOCN; user id=daniel;" +
+                                        "password=dcanessa;server=ENVY15-3040NR;" +
+                                        "Trusted_Connection=no;" +
+                                        "database=FlexCoreDataBase; " +
+                                        "connection timeout=30");
             SqlTransaction transaccion = null;
             SqlCommand command = null;
             try
@@ -117,11 +117,11 @@ namespace RESTfulFlexCore.Services
              */
 
 
-            SqlConnection connection = new SqlConnection("Data Source=localhost;Network Library=DBMSSOCN; user id=BASELOGIN;" +
-                                       "password=mjgv12;server=MELVIN;" +
-                                       "Trusted_Connection=no;" +
-                                       "database=FlexCoreDataBase; " +
-                                       "connection timeout=30");
+            SqlConnection connection = new SqlConnection("Data Source=localhost;Network Library=DBMSSOCN; user id=daniel;" +
+                                        "password=dcanessa;server=ENVY15-3040NR;" +
+                                        "Trusted_Connection=no;" +
+                                        "database=FlexCoreDataBase; " +
+                                        "connection timeout=30");
 
             DataTable table = new DataTable();
             SqlTransaction transaccion = null;

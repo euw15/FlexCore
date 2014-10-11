@@ -20,7 +20,7 @@ namespace RESTfulFlexCore.Services
             string postData = inputStream.ReadToEnd();           
             if (!postData.Equals(""))
             {
-                CBConnectionMSQL.UpdateDeleteMSQL(" EXEC agregarImagenClient e@imagen = '" + postData + "', @CIF ='" + clientAccount + "'");
+                CBConnectionMSQL.UpdateDeleteMSQL(" EXEC agregarImagenCliente @imagen = '" + postData + "', @CIF ='" + clientAccount + "'");
                 return "sucess";
             }
             else
