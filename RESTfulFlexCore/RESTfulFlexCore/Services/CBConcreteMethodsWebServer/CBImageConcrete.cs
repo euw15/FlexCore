@@ -48,7 +48,7 @@ namespace RESTfulFlexCore.Services
 
             foreach (DataRow row in table.Rows)
             {               
-                if (row["byteArray"] != DBNull.Value) { string64Image = row["byteArray"].ToString(); }
+                if (row["imagen"] != DBNull.Value) { string64Image = row["imagen"].ToString(); }
                 listImage.Add(new Image
                 {                    
                     string64Image = string64Image
