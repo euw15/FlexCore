@@ -39,7 +39,8 @@ public class showCustomers extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    private String[] ColumName = {"Cedula", "Nombre", "Apellido"};
+    private String[] ColumName  = {"Cedula", "Nombre", "Apellido"};
+
 
     Object data2[][] = {{"503890620", "Jason", "Salazar"},
     {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
@@ -88,9 +89,11 @@ public class showCustomers extends javax.swing.JDialog {
         upDateCostumers();
 
         //****************
-        setNumeroDePaginas(25);
+        //setNumeroDePaginas(25);
         initPaginacion();
         //*****************
+        
+        calculoPaginacion();
 
     }
 
@@ -1024,5 +1027,12 @@ public class showCustomers extends javax.swing.JDialog {
      */
     public void setAccionActual(int accionActual) {
         this.accionActual = accionActual;
+    }
+
+    private void calculoPaginacion() {
+    
+    //calcular numero paginas
+    
+    
     }
 }

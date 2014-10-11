@@ -5,6 +5,7 @@
  */
 package com.flexdesktop.user.GraphicInterface;
 
+import com.flexdesktop.connections.restfulConnection;
 import java.util.ArrayList;
 
 /**
@@ -400,15 +401,27 @@ public class Frame extends javax.swing.JFrame {
             getInfoPanel.SetTittle("Consultar Cliente");
 
         } else if (selection == OPCION2) {
-            System.out.println("ahirxd");
+            
             showCustomers sC = new showCustomers(null, true);
             sC.ocultarBotones("VerListadoAcciones");
             String[] columsNames = {"CIF", "Cédula", "Nombre", "Apellido",
                 "Teléfono", "DirecciónPrincipal"};
+            
+            
+             ArrayList<String> columnas_tabla = new ArrayList<>();
+            columnas_tabla.add("cantClientes");
+           
+            ArrayList<ArrayList<String>> cCF = restfulConnection.
+                    getRESTful("http://localhost:52003/api/cbclient/cantidadClientesFisicos",
+                            columnas_tabla);
+            System.out.println("este: "+cCF.get(0).get(0)+"esti");
+            
+            
             sC.setAccionActual(0);
             sC.setPaginalActual(1);
             sC.setNumeroDePaginas(1);
             sC.setColumName(columsNames);
+           
             sC.showDialog();
 
         } else if (selection == OPCION3) {
@@ -432,12 +445,12 @@ public class Frame extends javax.swing.JFrame {
         int selection = jTable2.getSelectedRow();
         CreateAccount CreateNewAccount = new CreateAccount(null, true);
         if (selection == 1) {//Abrir cuenta ahorro a la vista
-
+//casi listo
             CreateNewAccount.showDialog("CuentaAhorro");
 
         }
         if (selection == 3) {//Abrir cuenta por objetivo
-
+//casi listo
             CreateNewAccount.showDialog("CuentaPorObjetivo");
         }
     }//GEN-LAST:event_jLabelSelectRowCuentaMouseClicked
