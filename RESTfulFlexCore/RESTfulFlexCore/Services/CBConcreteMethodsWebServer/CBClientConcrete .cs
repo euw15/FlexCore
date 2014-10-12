@@ -217,7 +217,7 @@ namespace RESTfulFlexCore.Services
                 if (table.Columns.Contains("Telefono") && row["Telefono"] != DBNull.Value) { telefono = row["Telefono"].ToString(); }
                 if (table.Columns.Contains("Direccion") && row["Direccion"] != DBNull.Value) { direccion = row["Direccion"].ToString(); }
                 if (table.Columns.Contains("Apellido") && row["Apellido"] != DBNull.Value) { apellido = row["Apellido"].ToString(); }
-                if (table.Columns.Contains("cantClientes") && row["cantClientes"] != DBNull.Value) { cantClientes = Convert.ToInt32(row["cantClientes"]); }
+                if (table.Columns.Contains("id") && row["id"] != DBNull.Value) { cantClientes = Convert.ToInt32(row["id"]); }
                 listClient.Add(new Client
                 {
                     CIF = CIF,
