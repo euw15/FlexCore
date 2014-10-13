@@ -44,14 +44,7 @@ namespace RESTfulFlexCore.Controllers
             //api/cbcuenta/realizarPago?cuentaPago=1000000006&cuentaDestino=524513241&monto=1000
             return instanceCuentaAbstract.realizarPago(cuentaPago, cuentaDestino, monto);
         }
-
-        [HttpPost]
-        [ActionName("crearCierreBancario")]
-        public String crearCierreBancario()
-        {
-            //api/cbcuenta/crearCierreBancario
-            return instanceCuentaAbstract.crearCierreBancario();
-        }
+       
 
         [HttpPost]
         [ActionName("agregarMetodoPago")]

@@ -54,6 +54,11 @@ namespace RESTfulFlexCore.Services
         {
             return new CBTranssacionesVueloConcrete();
         }
+        public override CBCierresAbstract CreateCBCierresAbstract()
+        {
+            return new CBCierresConcrete();
+        }
+   
      
         
     }

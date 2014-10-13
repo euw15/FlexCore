@@ -60,20 +60,7 @@ namespace RESTfulFlexCore.Services
                 return "fail";
             }
         }
-
-        //POST
-        public override String crearCierreBancario()
-        {
-            try
-            {
-                return CBConnectionMSQL.UpdateDeleteMSQL("EXEC crearCierreBancario;");
-            }
-            catch
-            {
-                return "fail";
-            }
-
-        }
+       
 
         //POST
         public override String agregarMetodoPago(int idDispositivo, int idNumeroCuentaDebito )

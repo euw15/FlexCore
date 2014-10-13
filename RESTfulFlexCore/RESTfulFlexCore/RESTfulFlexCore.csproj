@@ -123,6 +123,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CBBeneficiarioController.cs" />
+    <Compile Include="Controllers\CBCierresController.cs" />
     <Compile Include="Controllers\CBClientController.cs" />
     <Compile Include="Controllers\CBCuentaController.cs" />
     <Compile Include="Controllers\CBDocumentosController.cs" />
@@ -134,6 +135,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Beneficiarios.cs" />
+    <Compile Include="Models\Cierres.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Cuenta.cs" />
     <Compile Include="Models\Documentos.cs" />
@@ -149,8 +151,10 @@
     <Compile Include="Services\CBAbstractMethodsWebServer\CBImageAbstract.cs" />
     <Compile Include="Services\CBAbstractMethodsWebServer\CBMetodoPagoAbstract.cs" />
     <Compile Include="Services\CBAbstractMethodsWebServer\CBTranssacionesVueloAbstract.cs" />
+    <Compile Include="Services\CBAbstractMethodsWebServer\CBCierresAbstract.cs" />
     <Compile Include="Services\CBConcreteFactoryWebServer .cs" />
     <Compile Include="Services\CBConcreteMethodsWebServer\CBBeneficiarioConcrete.cs" />
+    <Compile Include="Services\CBConcreteMethodsWebServer\CBCierresConcrete.cs" />
     <Compile Include="Services\CBConcreteMethodsWebServer\CBClientConcrete .cs" />
     <Compile Include="Services\CBConcreteMethodsWebServer\CBCuentaConcrete.cs" />
     <Compile Include="Services\CBConcreteMethodsWebServer\CBDocumentosConcrete.cs" />

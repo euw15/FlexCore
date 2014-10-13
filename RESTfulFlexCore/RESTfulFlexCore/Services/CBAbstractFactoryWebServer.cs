@@ -20,6 +20,8 @@ namespace RESTfulFlexCore.Services
         public abstract CBMetodoPagoAbstract CreateCBMetodoPagoAbstract();
 
         public abstract CBTranssacionesVueloAbstract CreateCBTransaccionesVueloAbstract();
+
+        public abstract CBCierresAbstract CreateCBCierresAbstract();
       
 
     }
