@@ -801,13 +801,13 @@ CREATE PROCEDURE consultarCierresBancarios
 GO
 CREATE PROCEDURE cantidadClientesFisicos
 	as
-		select count(*) as cantClientes from ClienteFisico
+		select count(*) as id from ClienteFisico
 
 /*********************Obtener cantidad Clientes Juridicos ********************/
 GO
 CREATE PROCEDURE cantidadClientesJuridico
 	as
-		select count(*) as cantClientes from ClienteJuridico
+		select count(*) as id from ClienteJuridico
 
 /******************** Consultar Transsacciones para un cliente ***************/
 Go
