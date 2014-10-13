@@ -117,6 +117,20 @@ namespace RESTfulFlexCore.Services
             }
         }
 
+        //POST
+        public override String agregarTelefonoCliente(int CIF,int telefono)
+        {
+            try
+            {
+                return CBConnectionMSQL.UpdateDeleteMSQL("EXEC agregarTelefonoCliente @telefono = " + telefono + ",@CIF =" + CIF + " ");
+
+            }
+            catch
+            {
+                return "fail";
+            }
+        }
+
         //GET
         public override Client[] cantidadClientesJuridico()
         {
