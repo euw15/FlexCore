@@ -182,3 +182,5 @@ CREATE TABLE [Imagen] (
 	[imagen] varchar(max)
 	)
 
+
+

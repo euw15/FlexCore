@@ -138,6 +138,10 @@ AS
 		select CIF,Nombre,Cedula, Telefono, Direccion
 		from ClientesFisicos 
 		where ClientesFisicos.CIF = @Dato;
+	IF @Concepto = 'Apellido'
+		select CIF,Nombre,Cedula, Telefono, Direccion
+		from ClientesFisicos 
+		where ClientesFisicos.Apellido = @Dato;
 
 /*********************** ver Clientes   Fisico ******************************/
 
@@ -518,5 +522,27 @@ CREATE PROCEDURE agregarMetodoPago
 		insert into MetodoPago (NumeroCuentaDebito,idDispositivo,estado) values (@idNumeroCuentaDebito,@idDispositivo,1)
 
 	
+
+/************************  Agregar Telefonos a CLientes ****************************************/
+GO
+CREATE PROCEDURE agregarTelefonoCliente 
+	@telefono nvarchar(30),
+	@CIF int
+	as
+		insert into Telefono (Telefono) values (@telefono)
+		insert into TelefonoxCliente (CIF,idTelefono) values (@CIF,IDENT_CURRENT('Telefono'))
+	
+
+
+
+
+
+
+
+
+
+
+
+
 
 
