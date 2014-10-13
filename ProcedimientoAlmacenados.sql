@@ -90,24 +90,24 @@ AS
 	/*Dependiendo del Concepto por el cual se quiera realizar la consulta se busca */
 	IF @Concepto = 'Nombre'
 		select CIF,Nombre,Cedula, Telefono, Direccion
-		from ClientesJuridicos 
-		where ClientesJuridicos.Nombre = @Dato
+		from ClientesJuridicosView 
+		where ClientesJuridicosView.Nombre = @Dato
 	IF @Concepto = 'Cedula'
 		select CIF,Nombre,Cedula, Telefono, Direccion
-		from ClientesJuridicos 
-		where ClientesJuridicos.Cedula = @Dato
+		from ClientesJuridicosView 
+		where ClientesJuridicosView.Cedula = @Dato
 	IF @Concepto = 'Direccion'
 		select CIF,Nombre,Cedula, Telefono, Direccion
-		from ClientesJuridicos 
-		where ClientesJuridicos.Direccion = @Dato
+		from ClientesJuridicosView 
+		where ClientesJuridicosView.Direccion = @Dato
 	IF @Concepto = 'Telefono'
 		select CIF,Nombre,Cedula, Telefono, Direccion
-		from ClientesJuridicos 
-		where ClientesJuridicos.Telefono = @Dato
+		from ClientesJuridicosView 
+		where ClientesJuridicosView.Telefono = @Dato
 	IF @Concepto = 'CIF'
 		select CIF,Nombre,Cedula, Telefono, Direccion
-		from ClientesJuridicos 
-		where ClientesJuridicos.CIF = @Dato;
+		from ClientesJuridicosView 
+		where ClientesJuridicosView.CIF = @Dato;
 
 /*******************Consultar CLientes Fisicos por concepto******************************/
 
@@ -120,28 +120,28 @@ AS
 	/*Dependiendo del Concepto por el cual se quiera realizar la consulta se busca */
 	IF @Concepto = 'Nombre'
 		select CIF,Nombre,Cedula, Telefono, Direccion
-		from ClientesFisicos 
-		where ClientesFisicos.Nombre = @Dato
+		from ClientesFisicosView 
+		where ClientesFisicosView.Nombre = @Dato
 	IF @Concepto = 'Cedula'
 		select CIF,Nombre,Cedula, Telefono, Direccion
-		from ClientesFisicos 
-		where ClientesFisicos.Cedula = @Dato
+		from ClientesFisicosView 
+		where ClientesFisicosView.Cedula = @Dato
 	IF @Concepto = 'Direccion'
 		select CIF,Nombre,Cedula, Telefono, Direccion
-		from ClientesFisicos 
-		where ClientesFisicos.Direccion = @Dato
+		from ClientesFisicosView 
+		where ClientesFisicosView.Direccion = @Dato
 	IF @Concepto = 'Telefono'
 		select CIF,Nombre,Cedula, Telefono, Direccion
-		from ClientesFisicos 
-		where ClientesFisicos.Telefono = @Dato
+		from ClientesFisicosView 
+		where ClientesFisicosView.Telefono = @Dato
 	IF @Concepto = 'CIF'
 		select CIF,Nombre,Cedula, Telefono, Direccion
-		from ClientesFisicos 
-		where ClientesFisicos.CIF = @Dato;
+		from ClientesFisicosView 
+		where ClientesFisicosView.CIF = @Dato;
 	IF @Concepto = 'Apellido'
 		select CIF,Nombre,Cedula, Telefono, Direccion
-		from ClientesFisicos 
-		where ClientesFisicos.Apellido = @Dato;
+		from ClientesFisicosView 
+		where ClientesFisicosView.Apellido = @Dato;
 
 /*********************** ver Clientes   Fisico ******************************/
 
@@ -153,7 +153,7 @@ CREATE PROCEDURE consultarClientesFisicos
 AS
 	/*Consulta los clientes fisico en el rago deseado */
 	SELECT CIF,Nombre,Apellido,Cedula, Telefono, Direccion FROM ( 
-	  SELECT *, ROW_NUMBER() OVER (ORDER BY CIF) as row FROM ClientesFisico
+	  SELECT *, ROW_NUMBER() OVER (ORDER BY CIF) as row FROM ClientesFisicosView
 	 ) a WHERE a.row > @Inicio and a.row <= @Inicio+@Cantidad
 
 

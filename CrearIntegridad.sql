@@ -7,9 +7,6 @@
 
 USE FlexCoreDataBase;
 
-ALTER DATABASE FlexCoreDataBase
-    SET FILESTREAM ( NON_TRANSACTED_ACCESS = FULL, DIRECTORY_NAME = N'documentos' )
-
 /****************Crea funcion para numeroCuentas *******************/
 /* Verifica el tipo de moneda en la insercion y le agrega el digito correspondiente */
 go

@@ -183,6 +183,7 @@ CREATE TABLE [Imagen] (
 	)
 
 
+
 /*******************************************************************/
 /*******************************************************************/
 /**********************  Crear Llaves Primarias ********************/
@@ -328,21 +329,20 @@ ALTER TABLE ClienteFisico
 USE FlexCoreDataBase;
 
 go
-CREATE VIEW ClientesFisicos
-AS select Cliente.CIF,ClienteFisico.Nombre,ClienteFisico.Cedula, Telefono.Telefono, Direccion.Direccion
-	from ClienteFisico 
+CREATE VIEW ClientesFisicosView
+AS select Cliente.CIF,ClienteFisico.Nombre,ClienteFisico.Apellido,ClienteFisico.Cedula, Telefono.Telefono, Direccion.Direccion
+	from ClienteFisico
 		INNER JOIN Cliente   on Cliente.CIF = ClienteFisico.CIF
 		INNER JOIN Telefono  on Telefono.idTelefono = ClienteFisico.idTelefonoPrincipal
 		INNER JOIN Direccion on Direccion.idDireccion = ClienteFisico.idDireccionPrincipal
 
 go
-CREATE VIEW ClientesJuridicos
+CREATE VIEW ClientesJuridicosView
 AS select Cliente.CIF,ClienteJuridico.Nombre,ClienteJuridico.Cedula, Telefono.Telefono, Direccion.Direccion
 	from ClienteJuridico 
 		INNER JOIN Cliente   on Cliente.CIF = ClienteJuridico.CIF
 		INNER JOIN Telefono  on Telefono.idTelefono = ClienteJuridico.idTelefonoPrincipal
 		INNER JOIN Direccion on Direccion.idDireccion = ClienteJuridico.idDireccionPrincipal
-
 
 /*******************************************************************/
 /*******************************************************************/
@@ -434,24 +434,24 @@ AS
 	/*Dependiendo del Concepto por el cual se quiera realizar la consulta se busca */
 	IF @Concepto = 'Nombre'
 		select CIF,Nombre,Cedula, Telefono, Direccion
-		from ClientesJuridicos 
-		where ClientesJuridicos.Nombre = @Dato
+		from ClientesJuridicosView 
+		where ClientesJuridicosView.Nombre = @Dato
 	IF @Concepto = 'Cedula'
 		select CIF,Nombre,Cedula, Telefono, Direccion
-		from ClientesJuridicos 
-		where ClientesJuridicos.Cedula = @Dato
+		from ClientesJuridicosView 
+		where ClientesJuridicosView.Cedula = @Dato
 	IF @Concepto = 'Direccion'
 		select CIF,Nombre,Cedula, Telefono, Direccion
-		from ClientesJuridicos 
-		where ClientesJuridicos.Direccion = @Dato
+		from ClientesJuridicosView 
+		where ClientesJuridicosView.Direccion = @Dato
 	IF @Concepto = 'Telefono'
 		select CIF,Nombre,Cedula, Telefono, Direccion
-		from ClientesJuridicos 
-		where ClientesJuridicos.Telefono = @Dato
+		from ClientesJuridicosView 
+		where ClientesJuridicosView.Telefono = @Dato
 	IF @Concepto = 'CIF'
 		select CIF,Nombre,Cedula, Telefono, Direccion
-		from ClientesJuridicos 
-		where ClientesJuridicos.CIF = @Dato;
+		from ClientesJuridicosView 
+		where ClientesJuridicosView.CIF = @Dato;
 
 /*******************Consultar CLientes Fisicos por concepto******************************/
 
@@ -464,24 +464,28 @@ AS
 	/*Dependiendo del Concepto por el cual se quiera realizar la consulta se busca */
 	IF @Concepto = 'Nombre'
 		select CIF,Nombre,Cedula, Telefono, Direccion
-		from ClientesFisicos 
-		where ClientesFisicos.Nombre = @Dato
+		from ClientesFisicosView 
+		where ClientesFisicosView.Nombre = @Dato
 	IF @Concepto = 'Cedula'
 		select CIF,Nombre,Cedula, Telefono, Direccion
-		from ClientesFisicos 
-		where ClientesFisicos.Cedula = @Dato
+		from ClientesFisicosView 
+		where ClientesFisicosView.Cedula = @Dato
 	IF @Concepto = 'Direccion'
 		select CIF,Nombre,Cedula, Telefono, Direccion
-		from ClientesFisicos 
-		where ClientesFisicos.Direccion = @Dato
+		from ClientesFisicosView 
+		where ClientesFisicosView.Direccion = @Dato
 	IF @Concepto = 'Telefono'
 		select CIF,Nombre,Cedula, Telefono, Direccion
-		from ClientesFisicos 
-		where ClientesFisicos.Telefono = @Dato
+		from ClientesFisicosView 
+		where ClientesFisicosView.Telefono = @Dato
 	IF @Concepto = 'CIF'
 		select CIF,Nombre,Cedula, Telefono, Direccion
-		from ClientesFisicos 
-		where ClientesFisicos.CIF = @Dato;
+		from ClientesFisicosView 
+		where ClientesFisicosView.CIF = @Dato;
+	IF @Concepto = 'Apellido'
+		select CIF,Nombre,Cedula, Telefono, Direccion
+		from ClientesFisicosView 
+		where ClientesFisicosView.Apellido = @Dato;
 
 /*********************** ver Clientes   Fisico ******************************/
 
@@ -493,7 +497,7 @@ CREATE PROCEDURE consultarClientesFisicos
 AS
 	/*Consulta los clientes fisico en el rago deseado */
 	SELECT CIF,Nombre,Apellido,Cedula, Telefono, Direccion FROM ( 
-	  SELECT *, ROW_NUMBER() OVER (ORDER BY CIF) as row FROM ClientesFisico
+	  SELECT *, ROW_NUMBER() OVER (ORDER BY CIF) as row FROM ClientesFisicosView
 	 ) a WHERE a.row > @Inicio and a.row <= @Inicio+@Cantidad
 
 
@@ -797,13 +801,13 @@ CREATE PROCEDURE consultarCierresBancarios
 GO
 CREATE PROCEDURE cantidadClientesFisicos
 	as
-		select count(*) as id from ClienteFisico
+		select count(*) as cantClientes from ClienteFisico
 
 /*********************Obtener cantidad Clientes Juridicos ********************/
 GO
 CREATE PROCEDURE cantidadClientesJuridico
 	as
-		select count(*) as id from ClienteJuridico
+		select count(*) as cantClientes from ClienteJuridico
 
 /******************** Consultar Transsacciones para un cliente ***************/
 Go
@@ -837,7 +841,7 @@ CREATE PROCEDURE consultarCuentaAhorroCliente
 	as
 		select numeroCuenta from CuentaAhorro where CuentaAhorro.CIF=@CIF
 
-/*************** Realizar Pago con cuenta Dispositovo ************************************/
+/*********************** Realizar Pago con cuenta Dispositovo ************************************/
 GO
 CREATE PROCEDURE realizarPagoDispositivo
 	@idDispositivo bigint,
@@ -852,8 +856,8 @@ CREATE PROCEDURE realizarPagoDispositivo
 
 			EXEC realizarPago @NumeroCuentaDebito = @numeroCuentaDebito, @NumeroCuentaDestino =@NumeroCuentaDestino , @MontoPago =@MontoPago
 
-
-/**************** Agregar un metodo de Pago **********************************************/
+			
+/************************ Agregar un metodo de Pago **********************************************/
 GO
 CREATE PROCEDURE agregarMetodoPago
 	@idDispositivo bigint,
@@ -863,6 +867,18 @@ CREATE PROCEDURE agregarMetodoPago
 
 	
 
+/************************  Agregar Telefonos a CLientes ****************************************/
+GO
+CREATE PROCEDURE agregarTelefonoCliente 
+	@telefono nvarchar(30),
+	@CIF int
+	as
+		insert into Telefono (Telefono) values (@telefono)
+		insert into TelefonoxCliente (CIF,idTelefono) values (@CIF,IDENT_CURRENT('Telefono'))
+	
+
+
+GO
 SET IDENTITY_INSERT [dbo].[Cliente] ON 
 
 INSERT [dbo].[Cliente] ([CIF], [idTipoCliente]) VALUES (1000000000, 0)
@@ -900,4 +916,3 @@ SET IDENTITY_INSERT [dbo].[CuentaAhorro] ON
 INSERT [dbo].[CuentaAhorro] ([idCuentaAhorro], [CIF], [NumeroCuentaDebito], [idProposito], [Periodicidad], [FechaInicio], [DuracionAhorro], [FechaFinal], [MontoAhorro], [idTipoMoneda], [MontoAhorroActual], [MontoAhorroDeseado], [FechaProximoPago], [terminoAhorro], [dominioPeriodicidad]) VALUES (2, 1000000000, 100000000, 1, 20, CAST(N'2014-01-01 00:00:00.000' AS DateTime), 30, CAST(N'2013-01-01 00:00:00.000' AS DateTime), 1000.0000, 1, 5000.0000, 8000.0000, CAST(N'2014-01-01 00:01:40.000' AS DateTime), 1, N'segundos')
 INSERT [dbo].[CuentaAhorro] ([idCuentaAhorro], [CIF], [NumeroCuentaDebito], [idProposito], [Periodicidad], [FechaInicio], [DuracionAhorro], [FechaFinal], [MontoAhorro], [idTipoMoneda], [MontoAhorroActual], [MontoAhorroDeseado], [FechaProximoPago], [terminoAhorro], [dominioPeriodicidad]) VALUES (5, 1000000000, 100000001, 1, 2, CAST(N'2014-01-01 00:00:00.000' AS DateTime), 30, CAST(N'2014-12-12 00:00:00.000' AS DateTime), 555.0000, 1, 6105.0000, 5588.0000, CAST(N'2014-01-01 00:22:00.000' AS DateTime), 1, N'minutos')
 SET IDENTITY_INSERT [dbo].[CuentaAhorro] OFF
-
