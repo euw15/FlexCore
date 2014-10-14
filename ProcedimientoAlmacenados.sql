@@ -91,23 +91,23 @@ AS
 	IF @Concepto = 'Nombre'
 		select CIF,Nombre,Cedula, Telefono, Direccion
 		from ClientesJuridicosView 
-		where ClientesJuridicosView.Nombre = @Dato
+		where ClientesJuridicosView.Nombre = @Dato and ClientesJuridicosView.Estado=1
 	IF @Concepto = 'Cedula'
 		select CIF,Nombre,Cedula, Telefono, Direccion
 		from ClientesJuridicosView 
-		where ClientesJuridicosView.Cedula = @Dato
+		where ClientesJuridicosView.Cedula = @Dato and ClientesJuridicosView.Estado=1
 	IF @Concepto = 'Direccion'
 		select CIF,Nombre,Cedula, Telefono, Direccion
 		from ClientesJuridicosView 
-		where ClientesJuridicosView.Direccion = @Dato
+		where ClientesJuridicosView.Direccion = @Dato and ClientesJuridicosView.Estado=1
 	IF @Concepto = 'Telefono'
 		select CIF,Nombre,Cedula, Telefono, Direccion
 		from ClientesJuridicosView 
-		where ClientesJuridicosView.Telefono = @Dato
+		where ClientesJuridicosView.Telefono = @Dato and ClientesJuridicosView.Estado=1
 	IF @Concepto = 'CIF'
 		select CIF,Nombre,Cedula, Telefono, Direccion
 		from ClientesJuridicosView 
-		where ClientesJuridicosView.CIF = @Dato;
+		where ClientesJuridicosView.CIF = @Dato and ClientesJuridicosView.Estado=1
 
 /*******************Consultar CLientes Fisicos por concepto******************************/
 
@@ -195,7 +195,6 @@ CREATE PROCEDURE crearCuentaAhorro
 	@idProposito int,
 	@Periodicidad int,
 	@FechaInicio nvarchar(11),
-	@FechaFinal nvarchar(11),
 	@TiempoAhorro int,
 	@MontoAhorroPeriodico int,
 	@NumeroCuentaOrigen int,
@@ -204,7 +203,16 @@ CREATE PROCEDURE crearCuentaAhorro
 	@MontoAhorroDeseado int
 AS
 	
-	declare @idNumeroCuentaDebito int
+	declare @idNumeroCuentaDebito int,
+			@FechaFinal datetime
+
+	if @TiempoAhorro > 365
+	begin
+		set @FechaFinal = DATEADD(day,@TiempoAhorro,@FechaInicio)
+	end
+	else
+		set @FechaFinal = DATEADD(year,@TiempoAhorro/365,@FechaInicio)
+	
 
 	select @idNumeroCuentaDebito=idCuentaDebito from CuentaDebito where numeroCuenta= @NumeroCuentaOrigen
 	/*Inserta la informacion de la cuenta de Ahorro */
@@ -264,7 +272,7 @@ AS
 GO
 CREATE PROCEDURE consultarPropositos
 	AS
-		SELECT TOP 100 P.Proposito, P.TasaInteres from Proposito AS P
+		SELECT TOP 100 P.idProposito,P.Proposito, P.TasaInteres from Proposito AS P
 
 /********************* Agregar Imagenes USuario ***********************************/
 GO 
@@ -519,7 +527,10 @@ CREATE PROCEDURE agregarMetodoPago
 	@idDispositivo bigint,
 	@idNumeroCuentaDebito int
 	as
-		insert into MetodoPago (NumeroCuentaDebito,idDispositivo,estado) values (@idNumeroCuentaDebito,@idDispositivo,1)
+		declare @idnumeroCuenta int
+
+		select @idnumeroCuenta=idCuentaDebito from CuentaDebito where numeroCuenta=@idNumeroCuentaDebito
+		insert into MetodoPago (NumeroCuentaDebito,idDispositivo,estado) values (@idnumeroCuenta,@idDispositivo,1)
 
 	
 
@@ -532,14 +543,55 @@ CREATE PROCEDURE agregarTelefonoCliente
 		insert into Telefono (Telefono) values (@telefono)
 		insert into TelefonoxCliente (CIF,idTelefono) values (@CIF,IDENT_CURRENT('Telefono'))
 	
+/*********************** Actualizar Cliente Fisico ************************************************/
+GO
+CREATE PROCEDURE actualizarClienteFisico
+	@Nombre nvarchar(30), 
+    @Cedula nvarchar(30),
+    @Telefono nvarchar(30),
+    @Direccion nvarchar(300),
+    @Apellido nvarchar(200),
+    @CIF int
+    as
+    	update ClienteFisico set Nombre= @Nombre ,Apellido=@Apellido , Cedula=@Cedula where CIF=@CIF
+
+    	declare @idDireccion int,
+    			@idTelefono int 
+
+    	select @idDireccion=idDireccionPrincipal , @idTelefono=idTelefonoPrincipal from ClienteFisico where CIF=@CIF
+
+    	update Direccion set Direccion=@Direccion where idDireccion=@idDireccion
+
+    	update Telefono set Telefono=@Telefono where idTelefono=@idTelefono
+
+/*********************** Actualizar Cliente Fisico ************************************************/
+GO
+CREATE PROCEDURE actualizarClienteJuridico
+	@Nombre nvarchar(30), 
+    @Cedula nvarchar(30),
+    @Telefono nvarchar(30),
+    @Direccion nvarchar(300),
+    @CIF int
+    as
+    	update ClienteJuridico set Nombre= @Nombre , Cedula=@Cedula where CIF=@CIF
+
+    	declare @idDireccion int,
+    			@idTelefono int 
+
+    	select @idDireccion=idDireccionPrincipal , @idTelefono=idTelefonoPrincipal from ClienteJuridico where CIF=@CIF
+
+    	update Direccion set Direccion=@Direccion where idDireccion=@idDireccion
+
+    	update Telefono set Telefono=@Telefono where idTelefono=@idTelefono
 
 
+/********************** Eliminar Cliente Fisico *********************************************************/
 
-
-
-
-
-
+GO
+CREATE PROCEDURE eliminarCliente
+	@CIF int
+	as
+		update Cliente set Estado=0 where CIF=@CIF
 
 
 

@@ -12,7 +12,7 @@ GO
 CREATE TABLE [Cliente](
 	[CIF] [int] Identity(1000000000,1) constraint pk_CIF_Cliente primary key,
 	[idTipoCliente] [int] NOT NULL,
-	[Estado] [bit]
+	[Estado] [bit] DEFAULT 1
 )
 
 /*******************************************************************/
