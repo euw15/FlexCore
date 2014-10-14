@@ -38,9 +38,9 @@ namespace RESTfulFlexCore.Services
 
         public abstract String eliminarClienteJuridico(int CIF);
 
-        public abstract String actualizarClienteJuridico(int CIF);
+        public abstract String actualizarClienteJuridico(String nombre, String cedula, String telefono, String direccion, int CIF);
 
-        public abstract String actualizarClienteFisico(int CIF);
+        public abstract String actualizarClienteFisico(String nombre, String cedula, String telefono, String direccion, String apellido, int CIF);
 
         public abstract String agregarDireccionCliente(int CIF, String direccion);
 

@@ -75,11 +75,11 @@ namespace RESTfulFlexCore.Services
         }
 
         //POST
-        public override String actualizarClienteJuridico(int CIF)
+        public override String actualizarClienteJuridico(String nombre, String cedula, String telefono, String direccion, int CIF)
         {
             try
             {
-                return CBConnectionMSQL.UpdateDeleteMSQL("");
+                return CBConnectionMSQL.UpdateDeleteMSQL("EXEC actualizarClienteJuridico @Nombre = '" + nombre + "',  @Cedula = '" + cedula + "', @Telefono = '" + telefono + "', @Direccion = '" + direccion + "', @CIF = " + CIF + "");
                 
             }
             catch
@@ -90,11 +90,11 @@ namespace RESTfulFlexCore.Services
 
        
         //POST
-        public override String actualizarClienteFisico(int CIF)
+        public override String actualizarClienteFisico(String nombre, String cedula, String telefono, String direccion, String apellido, int CIF)
         {
             try
             {
-                return CBConnectionMSQL.UpdateDeleteMSQL("");
+                return CBConnectionMSQL.UpdateDeleteMSQL("EXEC actualizarClienteFisico @Nombre = '" + nombre + "',  @Cedula = '" + cedula + "', @Telefono = '" + telefono + "', @Direccion = '" + direccion + "', @Apellido = '" + apellido + "', @CIF = " + CIF + "");
                  
             }
             catch

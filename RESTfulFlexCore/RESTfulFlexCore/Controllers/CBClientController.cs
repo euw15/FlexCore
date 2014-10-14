@@ -117,18 +117,18 @@ namespace RESTfulFlexCore.Controllers
         
         [HttpPost]
         [ActionName("actualizarClienteFisico")]
-        public String actualizarClienteFisico(int CIF)
+        public String actualizarClienteFisico(String nombre, String cedula, String telefono, String direccion, String apellido, int CIF)
         {
-            //api/cbclient/actualizarClienteFisico?CIF=54652345
-            return instanceClientAbstract.actualizarClienteFisico(CIF);
+            //api/cbclient/actualizarClienteFisico?nombre= & cedula =  & telefono= & direccion= & apellido= & CIF=
+            return instanceClientAbstract.actualizarClienteFisico(nombre, cedula, telefono, direccion, apellido, CIF);
         }
 
         [HttpPost]
         [ActionName("actualizarClienteJuridico")]
-        public String actualizarClienteJuridico(int CIF)
+        public String actualizarClienteJuridico(String nombre, String cedula, String telefono, String direccion, int CIF)
         {
-            //api/cbclient/actualizarClienteJuridico?CIF=54652345
-            return instanceClientAbstract.actualizarClienteJuridico(CIF);
+            //api/cbclient/actualizarClienteJuridico?nombre= & cedula =  & telefono= & direccion= & CIF=
+            return instanceClientAbstract.actualizarClienteJuridico(nombre, cedula, telefono, direccion, CIF);
         }
 
         [HttpPost]
