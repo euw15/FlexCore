@@ -594,6 +594,19 @@ CREATE PROCEDURE eliminarCliente
 		update Cliente set Estado=0 where CIF=@CIF
 
 
+/******************Agregar beneficiarios a cuenta de debito ********************************************/
+GO
+CREATE PROCEDURE agregarBeneficiarosCuentaDebito
+	@CIF int,
+	@numeroCuentaDebito int
+	as
+		declare @idnumeroCuenta int
+
+		select @idnumeroCuenta=idCuentaDebito from CuentaDebito where numeroCuenta=@numeroCuentaDebito
+		insert into Beneficiarios (idCliente,NumeroCuentaDebito) values (@CIF,@idnumeroCuenta)
+
+
+
 
 
 
