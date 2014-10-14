@@ -46,26 +46,13 @@ namespace RESTfulFlexCore.Services
             }
         }
 
+    
         //POST
-        public override String eliminarClienteFisico(int CIF)
+        public override String eliminarCliente(int CIF)
         {
             try
             {
-                return CBConnectionMSQL.UpdateDeleteMSQL("");
-                
-            }
-            catch
-            {
-                return "fail";
-            }
-        }
-
-        //POST
-        public override String eliminarClienteJuridico(int CIF)
-        {
-            try
-            {
-                return CBConnectionMSQL.UpdateDeleteMSQL("");
+                return CBConnectionMSQL.UpdateDeleteMSQL("EXEC eliminarCliente  @CIF = "+CIF+" ");
                  
             }
             catch

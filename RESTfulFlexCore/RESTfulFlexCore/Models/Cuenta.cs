@@ -37,6 +37,8 @@ namespace RESTfulFlexCore.Models
         public String FechaInicio { get; set; }
 
         public String FechaFinal { get; set; }
+
+        public int idProposito { get; set; }
 	
     }
 }

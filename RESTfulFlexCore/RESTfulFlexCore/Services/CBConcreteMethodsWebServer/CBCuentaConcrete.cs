@@ -135,6 +135,7 @@ namespace RESTfulFlexCore.Services
                 String Proposito = " ";
                 double SaldoReal = -1;
                 double SaldoFlotante = -1;
+                int idProposito = -1;
 
                 if (table.Columns.Contains("idCliente") && row["idCliente"] != DBNull.Value) { idCliente = Convert.ToInt32(row["idCliente"]); }
                 if (table.Columns.Contains("Estado") && row["Estado"] != DBNull.Value) { Estado = Convert.ToInt32(row["Estado"]); }
@@ -151,6 +152,7 @@ namespace RESTfulFlexCore.Services
                 if (table.Columns.Contains("Proposito") && row["Proposito"] != DBNull.Value) { Proposito = row["Proposito"].ToString(); }
                 if (table.Columns.Contains("SaldoReal") && row["SaldoReal"] != DBNull.Value) { SaldoReal = Convert.ToDouble(row["SaldoReal"]); }
                 if (table.Columns.Contains("SaldoFlotante") && row["SaldoFlotante"] != DBNull.Value) { SaldoFlotante = Convert.ToDouble(row["SaldoFlotante"]); }
+                if (table.Columns.Contains("idProposito") && row["idProposito"] != DBNull.Value) { idProposito = Convert.ToInt32(row["idProposito"]); }
 
                 listCuenta.Add(new Cuenta
                 {
@@ -168,7 +170,8 @@ namespace RESTfulFlexCore.Services
                     Moneda = Moneda,
                     Proposito = Proposito,
                     SaldoReal = SaldoReal,
-                    SaldoFlotante = SaldoFlotante
+                    SaldoFlotante = SaldoFlotante,
+                    idProposito = idProposito
                 });
             }
             return listCuenta;
