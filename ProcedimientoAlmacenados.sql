@@ -23,7 +23,7 @@ AS
 	INSERT INTO Cliente (idTipoCliente) values (1)
 	SET @id = IDENT_CURRENT('Cliente')
 
-	/*Inserta la direccion */
+	/*Inserta la direccion */x
 	INSERT INTO Direccion (Direccion) values (@Direccion)
 	SET @idDireccionGenerado = IDENT_CURRENT('Direccion')
 
@@ -91,23 +91,23 @@ AS
 	IF @Concepto = 'Nombre'
 		select CIF,Nombre,Cedula, Telefono, Direccion
 		from ClientesJuridicosView 
-		where ClientesJuridicosView.Nombre = @Dato and ClientesJuridicosView.Estado=1
+		where ClientesJuridicosView.Nombre = @Dato
 	IF @Concepto = 'Cedula'
 		select CIF,Nombre,Cedula, Telefono, Direccion
 		from ClientesJuridicosView 
-		where ClientesJuridicosView.Cedula = @Dato and ClientesJuridicosView.Estado=1
+		where ClientesJuridicosView.Cedula = @Dato
 	IF @Concepto = 'Direccion'
 		select CIF,Nombre,Cedula, Telefono, Direccion
 		from ClientesJuridicosView 
-		where ClientesJuridicosView.Direccion = @Dato and ClientesJuridicosView.Estado=1
+		where ClientesJuridicosView.Direccion = @Dato
 	IF @Concepto = 'Telefono'
 		select CIF,Nombre,Cedula, Telefono, Direccion
 		from ClientesJuridicosView 
-		where ClientesJuridicosView.Telefono = @Dato and ClientesJuridicosView.Estado=1
+		where ClientesJuridicosView.Telefono = @Dato
 	IF @Concepto = 'CIF'
 		select CIF,Nombre,Cedula, Telefono, Direccion
 		from ClientesJuridicosView 
-		where ClientesJuridicosView.CIF = @Dato and ClientesJuridicosView.Estado=1
+		where ClientesJuridicosView.CIF = @Dato 
 
 /*******************Consultar CLientes Fisicos por concepto******************************/
 

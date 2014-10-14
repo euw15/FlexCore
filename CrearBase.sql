@@ -12,7 +12,7 @@ GO
 CREATE TABLE [Cliente](
 	[CIF] [int] Identity(1000000000,1) constraint pk_CIF_Cliente primary key,
 	[idTipoCliente] [int] NOT NULL,
-	[Estado] [bit]
+	[Estado] [bit] DEFAULT 1
 )
 
 /*******************************************************************/
@@ -326,23 +326,25 @@ ALTER TABLE ClienteFisico
 
 
 /********************Crea vistas *******************************************************/
-USE FlexCoreDataBase;
 
 go
 CREATE VIEW ClientesFisicosView
-AS select Cliente.CIF,ClienteFisico.Nombre,ClienteFisico.Apellido,ClienteFisico.Cedula, Telefono.Telefono, Direccion.Direccion
+AS select Cliente.CIF,Cliente.Estado,ClienteFisico.Nombre,ClienteFisico.Apellido,ClienteFisico.Cedula, Telefono.Telefono, Direccion.Direccion
 	from ClienteFisico
 		INNER JOIN Cliente   on Cliente.CIF = ClienteFisico.CIF
 		INNER JOIN Telefono  on Telefono.idTelefono = ClienteFisico.idTelefonoPrincipal
 		INNER JOIN Direccion on Direccion.idDireccion = ClienteFisico.idDireccionPrincipal
+		where Cliente.Estado = 1
 
 go
 CREATE VIEW ClientesJuridicosView
-AS select Cliente.CIF,ClienteJuridico.Nombre,ClienteJuridico.Cedula, Telefono.Telefono, Direccion.Direccion
+AS select Cliente.CIF,Cliente.Estado,ClienteJuridico.Nombre,ClienteJuridico.Cedula, Telefono.Telefono, Direccion.Direccion
 	from ClienteJuridico 
 		INNER JOIN Cliente   on Cliente.CIF = ClienteJuridico.CIF
 		INNER JOIN Telefono  on Telefono.idTelefono = ClienteJuridico.idTelefonoPrincipal
 		INNER JOIN Direccion on Direccion.idDireccion = ClienteJuridico.idDireccionPrincipal
+		where Cliente.Estado = 1
+
 
 /*******************************************************************/
 /*******************************************************************/
@@ -451,7 +453,7 @@ AS
 	IF @Concepto = 'CIF'
 		select CIF,Nombre,Cedula, Telefono, Direccion
 		from ClientesJuridicosView 
-		where ClientesJuridicosView.CIF = @Dato;
+		where ClientesJuridicosView.CIF = @Dato 
 
 /*******************Consultar CLientes Fisicos por concepto******************************/
 
@@ -539,7 +541,6 @@ CREATE PROCEDURE crearCuentaAhorro
 	@idProposito int,
 	@Periodicidad int,
 	@FechaInicio nvarchar(11),
-	@FechaFinal nvarchar(11),
 	@TiempoAhorro int,
 	@MontoAhorroPeriodico int,
 	@NumeroCuentaOrigen int,
@@ -548,7 +549,16 @@ CREATE PROCEDURE crearCuentaAhorro
 	@MontoAhorroDeseado int
 AS
 	
-	declare @idNumeroCuentaDebito int
+	declare @idNumeroCuentaDebito int,
+			@FechaFinal datetime
+
+	if @TiempoAhorro > 365
+	begin
+		set @FechaFinal = DATEADD(day,@TiempoAhorro,@FechaInicio)
+	end
+	else
+		set @FechaFinal = DATEADD(year,@TiempoAhorro/365,@FechaInicio)
+	
 
 	select @idNumeroCuentaDebito=idCuentaDebito from CuentaDebito where numeroCuenta= @NumeroCuentaOrigen
 	/*Inserta la informacion de la cuenta de Ahorro */
@@ -608,7 +618,7 @@ AS
 GO
 CREATE PROCEDURE consultarPropositos
 	AS
-		SELECT TOP 100 P.Proposito, P.TasaInteres from Proposito AS P
+		SELECT TOP 100 P.idProposito,P.Proposito, P.TasaInteres from Proposito AS P
 
 /********************* Agregar Imagenes USuario ***********************************/
 GO 
@@ -863,7 +873,10 @@ CREATE PROCEDURE agregarMetodoPago
 	@idDispositivo bigint,
 	@idNumeroCuentaDebito int
 	as
-		insert into MetodoPago (NumeroCuentaDebito,idDispositivo,estado) values (@idNumeroCuentaDebito,@idDispositivo,1)
+		declare @idnumeroCuenta int
+
+		select @idnumeroCuenta=idCuentaDebito from CuentaDebito where numeroCuenta=@idNumeroCuentaDebito
+		insert into MetodoPago (NumeroCuentaDebito,idDispositivo,estado) values (@idnumeroCuenta,@idDispositivo,1)
 
 	
 
@@ -876,6 +889,55 @@ CREATE PROCEDURE agregarTelefonoCliente
 		insert into Telefono (Telefono) values (@telefono)
 		insert into TelefonoxCliente (CIF,idTelefono) values (@CIF,IDENT_CURRENT('Telefono'))
 	
+/*********************** Actualizar Cliente Fisico ************************************************/
+GO
+CREATE PROCEDURE actualizarClienteFisico
+	@Nombre nvarchar(30), 
+    @Cedula nvarchar(30),
+    @Telefono nvarchar(30),
+    @Direccion nvarchar(300),
+    @Apellido nvarchar(200),
+    @CIF int
+    as
+    	update ClienteFisico set Nombre= @Nombre ,Apellido=@Apellido , Cedula=@Cedula where CIF=@CIF
+
+    	declare @idDireccion int,
+    			@idTelefono int 
+
+    	select @idDireccion=idDireccionPrincipal , @idTelefono=idTelefonoPrincipal from ClienteFisico where CIF=@CIF
+
+    	update Direccion set Direccion=@Direccion where idDireccion=@idDireccion
+
+    	update Telefono set Telefono=@Telefono where idTelefono=@idTelefono
+
+/*********************** Actualizar Cliente Fisico ************************************************/
+GO
+CREATE PROCEDURE actualizarClienteJuridico
+	@Nombre nvarchar(30), 
+    @Cedula nvarchar(30),
+    @Telefono nvarchar(30),
+    @Direccion nvarchar(300),
+    @CIF int
+    as
+    	update ClienteJuridico set Nombre= @Nombre , Cedula=@Cedula where CIF=@CIF
+
+    	declare @idDireccion int,
+    			@idTelefono int 
+
+    	select @idDireccion=idDireccionPrincipal , @idTelefono=idTelefonoPrincipal from ClienteJuridico where CIF=@CIF
+
+    	update Direccion set Direccion=@Direccion where idDireccion=@idDireccion
+
+    	update Telefono set Telefono=@Telefono where idTelefono=@idTelefono
+
+
+/********************** Eliminar Cliente Fisico *********************************************************/
+
+GO
+CREATE PROCEDURE eliminarCliente
+	@CIF int
+	as
+		update Cliente set Estado=0 where CIF=@CIF
 
 
 GO
@@ -916,3 +978,6 @@ SET IDENTITY_INSERT [dbo].[CuentaAhorro] ON
 INSERT [dbo].[CuentaAhorro] ([idCuentaAhorro], [CIF], [NumeroCuentaDebito], [idProposito], [Periodicidad], [FechaInicio], [DuracionAhorro], [FechaFinal], [MontoAhorro], [idTipoMoneda], [MontoAhorroActual], [MontoAhorroDeseado], [FechaProximoPago], [terminoAhorro], [dominioPeriodicidad]) VALUES (2, 1000000000, 100000000, 1, 20, CAST(N'2014-01-01 00:00:00.000' AS DateTime), 30, CAST(N'2013-01-01 00:00:00.000' AS DateTime), 1000.0000, 1, 5000.0000, 8000.0000, CAST(N'2014-01-01 00:01:40.000' AS DateTime), 1, N'segundos')
 INSERT [dbo].[CuentaAhorro] ([idCuentaAhorro], [CIF], [NumeroCuentaDebito], [idProposito], [Periodicidad], [FechaInicio], [DuracionAhorro], [FechaFinal], [MontoAhorro], [idTipoMoneda], [MontoAhorroActual], [MontoAhorroDeseado], [FechaProximoPago], [terminoAhorro], [dominioPeriodicidad]) VALUES (5, 1000000000, 100000001, 1, 2, CAST(N'2014-01-01 00:00:00.000' AS DateTime), 30, CAST(N'2014-12-12 00:00:00.000' AS DateTime), 555.0000, 1, 6105.0000, 5588.0000, CAST(N'2014-01-01 00:22:00.000' AS DateTime), 1, N'minutos')
 SET IDENTITY_INSERT [dbo].[CuentaAhorro] OFF
+
+
+
