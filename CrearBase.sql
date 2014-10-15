@@ -182,7 +182,14 @@ CREATE TABLE [Imagen] (
 	[imagen] varchar(max)
 	)
 
-
+/************************************************************************/
+GO
+CREATE TABLE [InteresesObtenenidos](
+	[idInteresesObtenidos] [int] Identity(1,1) constraint pk_InteresesObtenidos primary key,
+	[interesCobrado] [int] not null,
+	[montoCobrado] [int] not null,
+	[idCuentaAhorro] [int] not null
+	)
 
 /*******************************************************************/
 /*******************************************************************/
@@ -324,6 +331,14 @@ ALTER TABLE ClienteFisico
 		REFERENCES Imagen (idImagen)
 
 
+/***********************Integridad Para Interesses **************************/
+
+GO
+ALTER TABLE InteresesObtenenidos
+	ADD CONSTRAINT FK_InteresesObtenido_NumeroCuenta FOREIGN KEY (idCuentaAhorro)
+		REFERENCES CuentaAhorro (idCuentaAhorro)
+
+
 
 /********************Crea vistas *******************************************************/
 
@@ -344,7 +359,6 @@ AS select Cliente.CIF,Cliente.Estado,ClienteJuridico.Nombre,ClienteJuridico.Cedu
 		INNER JOIN Telefono  on Telefono.idTelefono = ClienteJuridico.idTelefonoPrincipal
 		INNER JOIN Direccion on Direccion.idDireccion = ClienteJuridico.idDireccionPrincipal
 		where Cliente.Estado = 1
-
 
 /*******************************************************************/
 /*******************************************************************/
@@ -940,7 +954,32 @@ CREATE PROCEDURE eliminarCliente
 		update Cliente set Estado=0 where CIF=@CIF
 
 
+/******************Agregar beneficiarios a cuenta de debito ********************************************/
 GO
+CREATE PROCEDURE agregarBeneficiarosCuentaDebito
+	@CIF int,
+	@numeroCuentaDebito int
+	as
+		declare @idnumeroCuenta int
+
+		select @idnumeroCuenta=idCuentaDebito from CuentaDebito where numeroCuenta=@numeroCuentaDebito
+		insert into Beneficiarios (idCliente,NumeroCuentaDebito) values (@CIF,@idnumeroCuenta)
+
+/*************** Obtener todos los clientes *************************************************************/
+GO
+CREATE PROCEDURE obtenerTodosLosClientes
+	/*Paramatros de entrada*/
+	@Cantidad int,
+	@Inicio int
+	AS
+		/*Consulta los clientes fisico en el rago deseado */
+		SELECT CIF,Nombre,Cedula, Telefono, Direccion FROM ( 
+	  	SELECT CIF,Nombre,Cedula, Telefono, Direccion, ROW_NUMBER() OVER (ORDER BY CIF) as row FROM ClientesFisicosView
+	  	union 
+	 	 SELECT CIF,Nombre,Cedula, Telefono, Direccion, ROW_NUMBER() OVER (ORDER BY CIF) as row FROM ClientesJuridicosView
+	 ) a WHERE a.row > @Inicio and a.row <= @Inicio+@Cantidad
+
+
 SET IDENTITY_INSERT [dbo].[Cliente] ON 
 
 INSERT [dbo].[Cliente] ([CIF], [idTipoCliente]) VALUES (1000000000, 0)
@@ -978,6 +1017,7 @@ SET IDENTITY_INSERT [dbo].[CuentaAhorro] ON
 INSERT [dbo].[CuentaAhorro] ([idCuentaAhorro], [CIF], [NumeroCuentaDebito], [idProposito], [Periodicidad], [FechaInicio], [DuracionAhorro], [FechaFinal], [MontoAhorro], [idTipoMoneda], [MontoAhorroActual], [MontoAhorroDeseado], [FechaProximoPago], [terminoAhorro], [dominioPeriodicidad]) VALUES (2, 1000000000, 100000000, 1, 20, CAST(N'2014-01-01 00:00:00.000' AS DateTime), 30, CAST(N'2013-01-01 00:00:00.000' AS DateTime), 1000.0000, 1, 5000.0000, 8000.0000, CAST(N'2014-01-01 00:01:40.000' AS DateTime), 1, N'segundos')
 INSERT [dbo].[CuentaAhorro] ([idCuentaAhorro], [CIF], [NumeroCuentaDebito], [idProposito], [Periodicidad], [FechaInicio], [DuracionAhorro], [FechaFinal], [MontoAhorro], [idTipoMoneda], [MontoAhorroActual], [MontoAhorroDeseado], [FechaProximoPago], [terminoAhorro], [dominioPeriodicidad]) VALUES (5, 1000000000, 100000001, 1, 2, CAST(N'2014-01-01 00:00:00.000' AS DateTime), 30, CAST(N'2014-12-12 00:00:00.000' AS DateTime), 555.0000, 1, 6105.0000, 5588.0000, CAST(N'2014-01-01 00:22:00.000' AS DateTime), 1, N'minutos')
 SET IDENTITY_INSERT [dbo].[CuentaAhorro] OFF
+
 
 
 

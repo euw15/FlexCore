@@ -605,6 +605,20 @@ CREATE PROCEDURE agregarBeneficiarosCuentaDebito
 		select @idnumeroCuenta=idCuentaDebito from CuentaDebito where numeroCuenta=@numeroCuentaDebito
 		insert into Beneficiarios (idCliente,NumeroCuentaDebito) values (@CIF,@idnumeroCuenta)
 
+/*************** Obtener todos los clientes *************************************************************/
+GO
+CREATE PROCEDURE obtenerTodosLosClientes
+	/*Paramatros de entrada*/
+	@Cantidad int,
+	@Inicio int
+	AS
+		/*Consulta los clientes fisico en el rago deseado */
+		SELECT CIF,Nombre,Cedula, Telefono, Direccion FROM ( 
+	  	SELECT CIF,Nombre,Cedula, Telefono, Direccion, ROW_NUMBER() OVER (ORDER BY CIF) as row FROM ClientesFisicosView
+	  	union 
+	 	 SELECT CIF,Nombre,Cedula, Telefono, Direccion, ROW_NUMBER() OVER (ORDER BY CIF) as row FROM ClientesJuridicosView
+	 ) a WHERE a.row > @Inicio and a.row <= @Inicio+@Cantidad
+
 
 
 

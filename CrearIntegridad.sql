@@ -141,4 +141,12 @@ ALTER TABLE ClienteFisico
 		REFERENCES Imagen (idImagen)
 
 
+/***********************Integridad Para Interesses **************************/
+
+GO
+ALTER TABLE InteresesObtenenidos
+	ADD CONSTRAINT FK_InteresesObtenido_NumeroCuenta FOREIGN KEY (idCuentaAhorro)
+		REFERENCES CuentaAhorro (idCuentaAhorro)
+
+
 

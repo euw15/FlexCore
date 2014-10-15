@@ -182,5 +182,12 @@ CREATE TABLE [Imagen] (
 	[imagen] varchar(max)
 	)
 
-
+/************************************************************************/
+GO
+CREATE TABLE [InteresesObtenenidos](
+	[idInteresesObtenidos] [int] Identity(1,1) constraint pk_InteresesObtenidos primary key,
+	[interesCobrado] [int] not null,
+	[montoCobrado] [int] not null,
+	[idCuentaAhorro] [int] not null
+	)
 
