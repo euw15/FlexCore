@@ -198,6 +198,16 @@ namespace RESTfulFlexCore.Services
             return loadCache(clientSelected);
         }
 
+        //GET
+        public override Client[] obtenerTodosLosClientes(int cantidad, int inicio)
+        {
+            DataTable table = CBConnectionMSQL.retrieveMSQL("EXEC obtenerTodosLosClientes @Cantidad = "+cantidad+", @Inicio = "+inicio+"");
+            List<Client> clientSelected = getTableGetCliente(table);
+            return loadCache(clientSelected);
+        }
+
+        
+
         public List<Client> getTableGetCliente(DataTable table)
         {
 

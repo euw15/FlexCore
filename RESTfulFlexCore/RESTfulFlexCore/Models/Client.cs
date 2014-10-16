@@ -23,6 +23,7 @@ namespace RESTfulFlexCore.Models
 
         public int cantClientes { get; set; }      
 
+
        
     }
 }

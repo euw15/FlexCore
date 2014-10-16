@@ -18,5 +18,13 @@ namespace RESTfulFlexCore.Controllers
             CBConcreteFactoryWebServer instanceConcreteFactory = CBConcreteFactoryWebServer.initInstanceCBConcreteFactoryWebServer;
             instanceBeneficiarioAbstract = instanceConcreteFactory.CreateCBBeneficiarioAbstract();
         }
+
+        [HttpPost]
+        [ActionName("agregarBeneficiarosCuentaDebito")]
+        public String agregarBeneficiarosCuentaDebito(int CIF, int numCuenta)
+        {
+            //api/CBBeneficiario/agregarBeneficiarosCuentaDebito?CIF=1000000000&numCuenta=900000000
+            return instanceBeneficiarioAbstract.agregarBeneficiarosCuentaDebito(CIF, numCuenta);
+        }
     }
 }

@@ -26,6 +26,9 @@ namespace RESTfulFlexCore.Services
 
         public abstract Cuenta[] consultarCuentaAhorroCliente(int CIF);
 
+        public abstract String pagosAutomaticos();
+
+
 
     }
 }

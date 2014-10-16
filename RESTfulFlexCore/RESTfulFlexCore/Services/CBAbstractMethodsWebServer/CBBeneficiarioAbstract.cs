@@ -7,5 +7,6 @@ namespace RESTfulFlexCore.Services
 {
     public abstract class CBBeneficiarioAbstract
     {
+        public abstract String agregarBeneficiarosCuentaDebito(int CIF, int numCuenta);
     }
 }

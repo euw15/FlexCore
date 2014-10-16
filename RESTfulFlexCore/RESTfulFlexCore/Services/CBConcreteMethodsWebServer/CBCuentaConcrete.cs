@@ -77,6 +77,21 @@ namespace RESTfulFlexCore.Services
         }
 
         //POST
+        public override String pagosAutomaticos()
+        {
+            try
+            {
+                return CBConnectionMSQL.UpdateDeleteMSQL("EXEC pagosAutomaticos");
+            }
+            catch
+            {
+                return "fail";
+            }
+
+        }
+
+
+        //POST
         public override String realizarPagoDispositivo(int idDispositivo, int NumeroCuentaDestino, int MontoPago)
         {
             try

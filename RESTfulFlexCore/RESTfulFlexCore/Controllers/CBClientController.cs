@@ -97,7 +97,15 @@ namespace RESTfulFlexCore.Controllers
         {
             //api/cbclient/cantidadClientesJuridico 
             return instanceClientAbstract.cantidadClientesJuridico();
-        }     
+        }
+
+        [HttpGet]
+        [ActionName("obtenerTodosLosClientes")]
+        public Client[] obtenerTodosLosClientes(int cantidad, int inicio)
+        {
+            //api/cbclient/obtenerTodosLosClientes?cantidad=10&inicio=0
+            return instanceClientAbstract.obtenerTodosLosClientes(cantidad,inicio);
+        }   
 
         [HttpPost]
         [ActionName("crearClienteJuridico")]

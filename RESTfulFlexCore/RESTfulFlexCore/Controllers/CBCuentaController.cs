@@ -44,7 +44,14 @@ namespace RESTfulFlexCore.Controllers
             //api/cbcuenta/realizarPago?cuentaPago=1000000006&cuentaDestino=524513241&monto=1000
             return instanceCuentaAbstract.realizarPago(cuentaPago, cuentaDestino, monto);
         }
-       
+
+        [HttpPost]
+        [ActionName("pagosAutomaticos")]
+        public String pagosAutomaticos()
+        {
+            //api/cbcuenta/pagosAutomaticos
+            return instanceCuentaAbstract.pagosAutomaticos();
+        }
 
         [HttpPost]
         [ActionName("agregarMetodoPago")]
