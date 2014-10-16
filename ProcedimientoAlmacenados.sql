@@ -206,14 +206,14 @@ AS
 	declare @idNumeroCuentaDebito int,
 			@FechaFinal datetime
 
-	if @TiempoAhorro > 365
+	if @TiempoAhorro < 365
 	begin
 		set @FechaFinal = DATEADD(day,@TiempoAhorro,@FechaInicio)
+		PRINT @FechaFinal
 	end
 	else
-		set @FechaFinal = DATEADD(year,@TiempoAhorro/365,@FechaInicio)
+		set @FechaFinal = DATEADD(year,CAST(@TiempoAhorro/365 AS INT),@FechaInicio)
 	
-
 	select @idNumeroCuentaDebito=idCuentaDebito from CuentaDebito where numeroCuenta= @NumeroCuentaOrigen
 	/*Inserta la informacion de la cuenta de Ahorro */
 	insert into CuentaAhorro (CIF, NumeroCuentaDebito,idProposito,Periodicidad,FechaInicio,FechaFinal,FechaProximoPago,DuracionAhorro,
