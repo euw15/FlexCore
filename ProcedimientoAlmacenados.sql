@@ -23,7 +23,7 @@ AS
 	INSERT INTO Cliente (idTipoCliente) values (1)
 	SET @id = IDENT_CURRENT('Cliente')
 
-	/*Inserta la direccion */x
+	/*Inserta la direccion */
 	INSERT INTO Direccion (Direccion) values (@Direccion)
 	SET @idDireccionGenerado = IDENT_CURRENT('Direccion')
 
@@ -260,10 +260,16 @@ AS
 							set @id=1
 					end
 				else
-					set @id=0
+					begin
+						set @id=0
+						insert into BitacoraErrores (Mensaje,numeroError) values ('No tiene fondos suficientes', 2)
+					end
 			end
 		else
-			set @id=0
+			begin
+				set @id=0
+				insert into BitacoraErrores (Mensaje,numeroError) values ('Alguna de las cuentas esta inactiva', 1)
+			end
 		
 		select @id as id;
 
@@ -297,14 +303,17 @@ as
 			@TerminoAhorro bit,
 			@NumeroCuentaDebito int,
 			@FechaFinal dateTime,
-			@dominioPeriodicidad [nvarchar](100)
+			@dominioPeriodicidad [nvarchar](100),
+			@porcentajeInteres int,
+			@montoInteresGanado float,
+			@idCuentaAhorro int
 
 	select @numeroCuenta = min(numeroCuenta) from CuentaAhorro
 
 	while @numeroCuenta is not null
 	begin
 		/*Selecciona todas las variables de la cuenta actual */
-	    select @dominioPeriodicidad= dominioPeriodicidad , @FechaFinal=FechaFinal, @NumeroCuentaDebito=NumeroCuentaDebito , @FechaProximaPago=FechaProximoPago , @MontoAhorro=MontoAhorro ,@Periodicidad=Periodicidad , @MontoAhorroActual=MontoAhorroActual, @MontoAhorroDeseado=MontoAhorroDeseado, @TerminoAhorro=terminoAhorro
+	    select @idCuentaAhorro= idCuentaAhorro, @dominioPeriodicidad= dominioPeriodicidad , @FechaFinal=FechaFinal, @NumeroCuentaDebito=NumeroCuentaDebito , @FechaProximaPago=FechaProximoPago , @MontoAhorro=MontoAhorro ,@Periodicidad=Periodicidad , @MontoAhorroActual=MontoAhorroActual, @MontoAhorroDeseado=MontoAhorroDeseado, @TerminoAhorro=terminoAhorro
 	    		 from CuentaAhorro where numeroCuenta = @numeroCuenta
 	    
 	    /*Pregunta si ya debe hacer el pago y que la cuenta no haya finalizado su tiempo*/
@@ -317,6 +326,18 @@ as
 	    				begin
 	    					update CuentaAhorro set MontoAhorroActual= @MontoAhorroActual+@MontoAhorro where numeroCuenta = @numeroCuenta
 	    					update CuentaDebito set SaldoFlotante = @fondosCuentaDebito-@MontoAhorro where idCuentaDebito = @NumeroCuentaDebito
+
+	    					/******* Se calcula el interes cobrado **********/
+	    					select @porcentajeInteres = TasaInteres from Proposito 
+	    						inner join CuentaAhorro on CuentaAhorro.idProposito = Proposito.idProposito
+	    						where  numeroCuenta=@NumeroCuenta
+
+	    					set @montoInteresGanado = (@porcentajeInteres*@MontoAhorro)/100
+
+	    					PRINT @porcentajeInteres*@MontoAhorro
+	    					PRINT @montoInteresGanado
+	    					INSERT INTO InteresesObtenenidos (interesCobrado, montoCobrado, idCuentaAhorro) VALUES (@porcentajeInteres,@montoInteresGanado,@idCuentaAhorro)
+
 	    					if(@dominioPeriodicidad = 'segundos')
 	    						update CuentaAhorro set FechaProximoPago= DATEADD(second,@Periodicidad,@FechaProximaPago) where numeroCuenta = @numeroCuenta
 	    					if(@dominioPeriodicidad = 'minutos')
@@ -619,9 +640,18 @@ CREATE PROCEDURE obtenerTodosLosClientes
 	 	 SELECT CIF,Nombre,Cedula, Telefono, Direccion, ROW_NUMBER() OVER (ORDER BY CIF) as row FROM ClientesJuridicosView
 	 ) a WHERE a.row > @Inicio and a.row <= @Inicio+@Cantidad
 
+/************* Obtener Intereses Obtenenidos *************************************************************/
+GO
+CREATE PROCEDURE obtenerInteresesObtenenidos
+	as
+		select interesCobrado,montoCobrado,idCuentaAhorro,Fecha from InteresesObtenenidos
 
 
-
+/***********Obtiene la bitacora de errores **************************************************************/
+GO
+CREATE PROCEDURE obtenerBitacoraErrores
+	as
+		select Mensaje,numeroError,Fecha from BitacoraErrores
 
 
 

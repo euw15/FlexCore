@@ -187,15 +187,19 @@ GO
 CREATE TABLE [InteresesObtenenidos](
 	[idInteresesObtenidos] [int] Identity(1,1) constraint pk_InteresesObtenidos primary key,
 	[interesCobrado] [int] not null,
-	[montoCobrado] [int] not null,
-	[idCuentaAhorro] [int] not null
+	[montoCobrado] [float] not null,
+	[idCuentaAhorro] [int] not null,
+	[Fecha] [datetime] DEFAULT GETDATE()
 	)
 
-/*******************************************************************/
-/*******************************************************************/
-/**********************  Crear Llaves Primarias ********************/
-/*******************************************************************/
-/*******************************************************************/
+/**********************************************************************************/
+GO
+CREATE TABLE [BitacoraErrores](
+	[idBitacora] [int] Identity(1,1) constraint pk_BitacoraErrores primary key,
+	[Mensaje] [nvarchar](300),
+	[numeroError] [int] not null,
+	[Fecha] [datetime] DEFAULT GETDATE()
+	)
 
 /****************Crea funcion para numeroCuentas *******************/
 /* Verifica el tipo de moneda en la insercion y le agrega el digito correspondiente */
@@ -339,9 +343,7 @@ ALTER TABLE InteresesObtenenidos
 		REFERENCES CuentaAhorro (idCuentaAhorro)
 
 
-
 /********************Crea vistas *******************************************************/
-
 go
 CREATE VIEW ClientesFisicosView
 AS select Cliente.CIF,Cliente.Estado,ClienteFisico.Nombre,ClienteFisico.Apellido,ClienteFisico.Cedula, Telefono.Telefono, Direccion.Direccion
@@ -365,6 +367,8 @@ AS select Cliente.CIF,Cliente.Estado,ClienteJuridico.Nombre,ClienteJuridico.Cedu
 /************* Crear Procedimientos  Almacenados********************/
 /*******************************************************************/
 /*******************************************************************/
+GO
+USE FlexCoreDataBase;
 
 /**********************Crea un Empleado Juridico *******************/
 GO
@@ -566,14 +570,14 @@ AS
 	declare @idNumeroCuentaDebito int,
 			@FechaFinal datetime
 
-	if @TiempoAhorro > 365
+	if @TiempoAhorro < 365
 	begin
 		set @FechaFinal = DATEADD(day,@TiempoAhorro,@FechaInicio)
+		PRINT @FechaFinal
 	end
 	else
-		set @FechaFinal = DATEADD(year,@TiempoAhorro/365,@FechaInicio)
+		set @FechaFinal = DATEADD(year,CAST(@TiempoAhorro/365 AS INT),@FechaInicio)
 	
-
 	select @idNumeroCuentaDebito=idCuentaDebito from CuentaDebito where numeroCuenta= @NumeroCuentaOrigen
 	/*Inserta la informacion de la cuenta de Ahorro */
 	insert into CuentaAhorro (CIF, NumeroCuentaDebito,idProposito,Periodicidad,FechaInicio,FechaFinal,FechaProximoPago,DuracionAhorro,
@@ -620,10 +624,16 @@ AS
 							set @id=1
 					end
 				else
-					set @id=0
+					begin
+						set @id=0
+						insert into BitacoraErrores (Mensaje,numeroError) values ('No tiene fondos suficientes', 2)
+					end
 			end
 		else
-			set @id=0
+			begin
+				set @id=0
+				insert into BitacoraErrores (Mensaje,numeroError) values ('Alguna de las cuentas esta inactiva', 1)
+			end
 		
 		select @id as id;
 
@@ -657,14 +667,17 @@ as
 			@TerminoAhorro bit,
 			@NumeroCuentaDebito int,
 			@FechaFinal dateTime,
-			@dominioPeriodicidad [nvarchar](100)
+			@dominioPeriodicidad [nvarchar](100),
+			@porcentajeInteres int,
+			@montoInteresGanado float,
+			@idCuentaAhorro int
 
 	select @numeroCuenta = min(numeroCuenta) from CuentaAhorro
 
 	while @numeroCuenta is not null
 	begin
 		/*Selecciona todas las variables de la cuenta actual */
-	    select @dominioPeriodicidad= dominioPeriodicidad , @FechaFinal=FechaFinal, @NumeroCuentaDebito=NumeroCuentaDebito , @FechaProximaPago=FechaProximoPago , @MontoAhorro=MontoAhorro ,@Periodicidad=Periodicidad , @MontoAhorroActual=MontoAhorroActual, @MontoAhorroDeseado=MontoAhorroDeseado, @TerminoAhorro=terminoAhorro
+	    select @idCuentaAhorro= idCuentaAhorro, @dominioPeriodicidad= dominioPeriodicidad , @FechaFinal=FechaFinal, @NumeroCuentaDebito=NumeroCuentaDebito , @FechaProximaPago=FechaProximoPago , @MontoAhorro=MontoAhorro ,@Periodicidad=Periodicidad , @MontoAhorroActual=MontoAhorroActual, @MontoAhorroDeseado=MontoAhorroDeseado, @TerminoAhorro=terminoAhorro
 	    		 from CuentaAhorro where numeroCuenta = @numeroCuenta
 	    
 	    /*Pregunta si ya debe hacer el pago y que la cuenta no haya finalizado su tiempo*/
@@ -677,6 +690,18 @@ as
 	    				begin
 	    					update CuentaAhorro set MontoAhorroActual= @MontoAhorroActual+@MontoAhorro where numeroCuenta = @numeroCuenta
 	    					update CuentaDebito set SaldoFlotante = @fondosCuentaDebito-@MontoAhorro where idCuentaDebito = @NumeroCuentaDebito
+
+	    					/******* Se calcula el interes cobrado **********/
+	    					select @porcentajeInteres = TasaInteres from Proposito 
+	    						inner join CuentaAhorro on CuentaAhorro.idProposito = Proposito.idProposito
+	    						where  numeroCuenta=@NumeroCuenta
+
+	    					set @montoInteresGanado = (@porcentajeInteres*@MontoAhorro)/100
+
+	    					PRINT @porcentajeInteres*@MontoAhorro
+	    					PRINT @montoInteresGanado
+	    					INSERT INTO InteresesObtenenidos (interesCobrado, montoCobrado, idCuentaAhorro) VALUES (@porcentajeInteres,@montoInteresGanado,@idCuentaAhorro)
+
 	    					if(@dominioPeriodicidad = 'segundos')
 	    						update CuentaAhorro set FechaProximoPago= DATEADD(second,@Periodicidad,@FechaProximaPago) where numeroCuenta = @numeroCuenta
 	    					if(@dominioPeriodicidad = 'minutos')
@@ -979,7 +1004,21 @@ CREATE PROCEDURE obtenerTodosLosClientes
 	 	 SELECT CIF,Nombre,Cedula, Telefono, Direccion, ROW_NUMBER() OVER (ORDER BY CIF) as row FROM ClientesJuridicosView
 	 ) a WHERE a.row > @Inicio and a.row <= @Inicio+@Cantidad
 
+/************* Obtener Intereses Obtenenidos *************************************************************/
+GO
+CREATE PROCEDURE obtenerInteresesObtenenidos
+	as
+		select interesCobrado,montoCobrado,idCuentaAhorro,Fecha from InteresesObtenenidos
 
+
+/***********Obtiene la bitacora de errores **************************************************************/
+GO
+CREATE PROCEDURE obtenerBitacoraErrores
+	as
+		select Mensaje,numeroError,Fecha from BitacoraErrores
+
+
+GO
 SET IDENTITY_INSERT [dbo].[Cliente] ON 
 
 INSERT [dbo].[Cliente] ([CIF], [idTipoCliente]) VALUES (1000000000, 0)
@@ -1017,7 +1056,4 @@ SET IDENTITY_INSERT [dbo].[CuentaAhorro] ON
 INSERT [dbo].[CuentaAhorro] ([idCuentaAhorro], [CIF], [NumeroCuentaDebito], [idProposito], [Periodicidad], [FechaInicio], [DuracionAhorro], [FechaFinal], [MontoAhorro], [idTipoMoneda], [MontoAhorroActual], [MontoAhorroDeseado], [FechaProximoPago], [terminoAhorro], [dominioPeriodicidad]) VALUES (2, 1000000000, 100000000, 1, 20, CAST(N'2014-01-01 00:00:00.000' AS DateTime), 30, CAST(N'2013-01-01 00:00:00.000' AS DateTime), 1000.0000, 1, 5000.0000, 8000.0000, CAST(N'2014-01-01 00:01:40.000' AS DateTime), 1, N'segundos')
 INSERT [dbo].[CuentaAhorro] ([idCuentaAhorro], [CIF], [NumeroCuentaDebito], [idProposito], [Periodicidad], [FechaInicio], [DuracionAhorro], [FechaFinal], [MontoAhorro], [idTipoMoneda], [MontoAhorroActual], [MontoAhorroDeseado], [FechaProximoPago], [terminoAhorro], [dominioPeriodicidad]) VALUES (5, 1000000000, 100000001, 1, 2, CAST(N'2014-01-01 00:00:00.000' AS DateTime), 30, CAST(N'2014-12-12 00:00:00.000' AS DateTime), 555.0000, 1, 6105.0000, 5588.0000, CAST(N'2014-01-01 00:22:00.000' AS DateTime), 1, N'minutos')
 SET IDENTITY_INSERT [dbo].[CuentaAhorro] OFF
-
-
-
 

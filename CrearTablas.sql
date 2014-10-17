@@ -187,7 +187,17 @@ GO
 CREATE TABLE [InteresesObtenenidos](
 	[idInteresesObtenidos] [int] Identity(1,1) constraint pk_InteresesObtenidos primary key,
 	[interesCobrado] [int] not null,
-	[montoCobrado] [int] not null,
-	[idCuentaAhorro] [int] not null
+	[montoCobrado] [float] not null,
+	[idCuentaAhorro] [int] not null,
+	[Fecha] [datetime] DEFAULT GETDATE()
+	)
+
+/**********************************************************************************/
+GO
+CREATE TABLE [BitacoraErrores](
+	[idBitacora] [int] Identity(1,1) constraint pk_BitacoraErrores primary key,
+	[Mensaje] [nvarchar](300),
+	[numeroError] [int] not null,
+	[Fecha] [datetime] DEFAULT GETDATE()
 	)
 
