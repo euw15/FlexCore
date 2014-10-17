@@ -127,6 +127,7 @@
     <Compile Include="Controllers\CBClientController.cs" />
     <Compile Include="Controllers\CBCuentaController.cs" />
     <Compile Include="Controllers\CBDocumentosController.cs" />
+    <Compile Include="Controllers\CBHistoricoController.cs" />
     <Compile Include="Controllers\CBImageController.cs" />
     <Compile Include="Controllers\CBMetodoPagoController.cs" />
     <Compile Include="Controllers\CBTranssacionesVueloController.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Cuenta.cs" />
     <Compile Include="Models\Documentos.cs" />
+    <Compile Include="Models\Historico.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\MetodoPago.cs" />
     <Compile Include="Models\TranssacionesVuelo.cs" />
@@ -148,6 +150,7 @@
     <Compile Include="Services\CBAbstractMethodsWebServer\CBClientAbstract.cs" />
     <Compile Include="Services\CBAbstractMethodsWebServer\CBCuentaAbstract.cs" />
     <Compile Include="Services\CBAbstractMethodsWebServer\CBDocumentosAbstract.cs" />
+    <Compile Include="Services\CBAbstractMethodsWebServer\CBHistoricoAbstract.cs" />
     <Compile Include="Services\CBAbstractMethodsWebServer\CBImageAbstract.cs" />
     <Compile Include="Services\CBAbstractMethodsWebServer\CBMetodoPagoAbstract.cs" />
     <Compile Include="Services\CBAbstractMethodsWebServer\CBTranssacionesVueloAbstract.cs" />
@@ -158,6 +161,7 @@
     <Compile Include="Services\CBConcreteMethodsWebServer\CBClientConcrete .cs" />
     <Compile Include="Services\CBConcreteMethodsWebServer\CBCuentaConcrete.cs" />
     <Compile Include="Services\CBConcreteMethodsWebServer\CBDocumentosConcrete.cs" />
+    <Compile Include="Services\CBConcreteMethodsWebServer\CBHistoricoConcrete.cs" />
     <Compile Include="Services\CBConcreteMethodsWebServer\CBImageConcrete.cs" />
     <Compile Include="Services\CBConcreteMethodsWebServer\CBMetodoPagoConcrete.cs" />
     <Compile Include="Services\CBConcreteMethodsWebServer\CBTranssacionesVueloConcrete.cs" />

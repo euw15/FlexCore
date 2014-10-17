@@ -58,6 +58,10 @@ namespace RESTfulFlexCore.Services
         {
             return new CBCierresConcrete();
         }
+        public override CBHistoricoAbstract CreateCBHistoricoAbstract()
+        {
+            return new CBHistoricoConcrete();
+        }
    
      
         
