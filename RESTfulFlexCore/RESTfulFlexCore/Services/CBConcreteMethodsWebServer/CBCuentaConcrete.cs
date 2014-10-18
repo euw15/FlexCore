@@ -131,6 +131,22 @@ namespace RESTfulFlexCore.Services
             return loadCache(cuentaSelected);
         }
 
+        //GET
+        public override Cuenta[] obtenerCuentasDebito()
+        {
+            DataTable table = CBConnectionMSQL.retrieveMSQL("EXEC obtenerCuentasDebito");
+            List<Cuenta> cuentaSelected = getTableGetCuenta(table);
+            return loadCache(cuentaSelected);
+        }
+
+        //GET
+        public override Cuenta[] obtenerCuentasAhorro()
+        {
+            DataTable table = CBConnectionMSQL.retrieveMSQL("EXEC obtenerCuentasAhorro");
+            List<Cuenta> cuentaSelected = getTableGetCuenta(table);
+            return loadCache(cuentaSelected);
+        }
+
        
         public List<Cuenta> getTableGetCuenta(DataTable table)
         {
@@ -153,6 +169,16 @@ namespace RESTfulFlexCore.Services
                 double SaldoReal = -1;
                 double SaldoFlotante = -1;
                 int idProposito = -1;
+                int idCuentaDebito = -1;
+                int idTipoMoneda = -1;
+                int idCuentaAhorro = -1;
+                int NumeroCuentaDebito = -1;
+                int MontoAhorroActual = -1;
+                int MontoAhorroDeseado = -1;
+                String FechaProximoPago = " ";
+                int terminoAhorro = -1;
+                int dominioPeriodicidad = -1;               
+               
 
                 if (table.Columns.Contains("idCliente") && row["idCliente"] != DBNull.Value) { idCliente = Convert.ToInt32(row["idCliente"]); }
                 if (table.Columns.Contains("Estado") && row["Estado"] != DBNull.Value) { Estado = Convert.ToInt32(row["Estado"]); }
@@ -170,6 +196,16 @@ namespace RESTfulFlexCore.Services
                 if (table.Columns.Contains("SaldoReal") && row["SaldoReal"] != DBNull.Value) { SaldoReal = Convert.ToDouble(row["SaldoReal"]); }
                 if (table.Columns.Contains("SaldoFlotante") && row["SaldoFlotante"] != DBNull.Value) { SaldoFlotante = Convert.ToDouble(row["SaldoFlotante"]); }
                 if (table.Columns.Contains("idProposito") && row["idProposito"] != DBNull.Value) { idProposito = Convert.ToInt32(row["idProposito"]); }
+                if (table.Columns.Contains("idCuentaDebito") && row["idCuentaDebito"] != DBNull.Value) { idCuentaDebito = Convert.ToInt32(row["idCuentaDebito"]); }
+                if (table.Columns.Contains("idTipoMoneda") && row["idTipoMoneda"] != DBNull.Value) { idTipoMoneda = Convert.ToInt32(row["idTipoMoneda"]); }
+
+                if (table.Columns.Contains("idCuentaAhorro") && row["idCuentaAhorro"] != DBNull.Value) { idCuentaAhorro = Convert.ToInt32(row["idCuentaAhorro"]); }
+                if (table.Columns.Contains("NumeroCuentaDebito") && row["NumeroCuentaDebito"] != DBNull.Value) { NumeroCuentaDebito = Convert.ToInt32(row["NumeroCuentaDebito"]); }
+                if (table.Columns.Contains("MontoAhorroActual") && row["MontoAhorroActual"] != DBNull.Value) { MontoAhorroActual = Convert.ToInt32(row["MontoAhorroActual"]); }
+                if (table.Columns.Contains("MontoAhorroDeseado") && row["MontoAhorroDeseado"] != DBNull.Value) { MontoAhorroDeseado = Convert.ToInt32(row["MontoAhorroDeseado"]); }
+                if (table.Columns.Contains("terminoAhorro") && row["terminoAhorro"] != DBNull.Value) { terminoAhorro = Convert.ToInt32(row["terminoAhorro"]); }
+                if (table.Columns.Contains("dominioPeriodicidad") && row["dominioPeriodicidad"] != DBNull.Value) { dominioPeriodicidad = Convert.ToInt32(row["dominioPeriodicidad"]); }
+                if (table.Columns.Contains("FechaProximoPago") && row["FechaProximoPago"] != DBNull.Value) { FechaProximoPago = row["FechaProximoPago"].ToString(); }
 
                 listCuenta.Add(new Cuenta
                 {
@@ -188,7 +224,10 @@ namespace RESTfulFlexCore.Services
                     Proposito = Proposito,
                     SaldoReal = SaldoReal,
                     SaldoFlotante = SaldoFlotante,
-                    idProposito = idProposito
+                    idProposito = idProposito,
+                    idCuentaDebito = idCuentaDebito,
+                    idTipoMoneda = idTipoMoneda
+
                 });
             }
             return listCuenta;

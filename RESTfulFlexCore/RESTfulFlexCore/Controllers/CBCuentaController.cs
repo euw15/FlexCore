@@ -78,6 +78,23 @@ namespace RESTfulFlexCore.Controllers
         }
 
         [HttpGet]
+        [ActionName("obtenerCuentasDebito")]
+        public Cuenta[] obtenerCuentasDebito()
+        {
+            //api/cbcuenta/obtenerCuentasDebito
+            return instanceCuentaAbstract.obtenerCuentasDebito();
+        }
+
+        [HttpGet]
+        [ActionName("obtenerCuentasAhorro")]
+        public Cuenta[] obtenerCuentasAhorro()
+        {
+            //api/cbcuenta/obtenerCuentasAhorro
+            return instanceCuentaAbstract.obtenerCuentasAhorro();
+        }
+    
+
+        [HttpGet]
         [ActionName("consultarCuentaAhorroCliente")]
         public Cuenta[] consultarCuentaAhorroCliente(int CIF)
         {

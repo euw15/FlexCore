@@ -28,6 +28,10 @@ namespace RESTfulFlexCore.Services
 
         public abstract String pagosAutomaticos();
 
+        public abstract Cuenta[] obtenerCuentasDebito();
+
+        public abstract Cuenta[] obtenerCuentasAhorro();
+
 
 
     }

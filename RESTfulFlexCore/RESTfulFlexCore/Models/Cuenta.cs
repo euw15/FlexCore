@@ -39,6 +39,24 @@ namespace RESTfulFlexCore.Models
         public String FechaFinal { get; set; }
 
         public int idProposito { get; set; }
+
+        public int idCuentaDebito { get; set; }
+
+        public int idTipoMoneda { get; set; }
+
+        public int idCuentaAhorro { get; set; }
+
+        public int NumeroCuentaDebito { get; set; }
+
+        public int MontoAhorroActual { get; set; }
+
+        public int MontoAhorroDeseado { get; set; }
+
+        public String FechaProximoPago { get; set; }
+
+        public int terminoAhorro { get; set; }
+
+        public int dominioPeriodicidad { get; set; }
 	
     }
 }
