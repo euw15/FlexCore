@@ -653,5 +653,19 @@ CREATE PROCEDURE obtenerBitacoraErrores
 	as
 		select Mensaje,numeroError,Fecha from BitacoraErrores
 
+/***********Buscar cuentas DEbito********************************************************************/
 
+GO
+CREATE PROCEDURE obtenerCuentasDebito
+	as
+		SELECT TOP 100 idCuentaDebito,idCliente,Desripcion,idTipoMoneda,Estado,SaldoReal,SaldoFlotante,numeroCuenta
+  			FROM CuentaDebito
 
+ /********Buscar Cuenta Ahorro **********************************************/
+
+ GO
+ CREATE PROCEDURE obtenerCuentaAhorro
+ 	as
+ 		SELECT TOP 100 [idCuentaAhorro],[CIF],[NumeroCuentaDebito],[idProposito],[Periodicidad],[FechaInicio],[DuracionAhorro],[FechaFinal],[MontoAhorro],[idTipoMoneda],[MontoAhorroActual]
+      ,[MontoAhorroDeseado],[FechaProximoPago],[terminoAhorro],[dominioPeriodicidad],[numeroCuenta]
+  FROM [CuentaAhorro]

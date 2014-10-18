@@ -1017,6 +1017,22 @@ CREATE PROCEDURE obtenerBitacoraErrores
 	as
 		select Mensaje,numeroError,Fecha from BitacoraErrores
 
+/***********Buscar cuentas DEbito********************************************************************/
+
+GO
+CREATE PROCEDURE obtenerCuentasDebito
+	as
+		SELECT TOP 100 idCuentaDebito,idCliente,Desripcion,idTipoMoneda,Estado,SaldoReal,SaldoFlotante,numeroCuenta
+  			FROM CuentaDebito
+
+ /********Buscar Cuenta Ahorro **********************************************/
+
+ GO
+ CREATE PROCEDURE obtenerCuentaAhorro
+ 	as
+ 		SELECT TOP 100 [idCuentaAhorro],[CIF],[NumeroCuentaDebito],[idProposito],[Periodicidad],[FechaInicio],[DuracionAhorro],[FechaFinal],[MontoAhorro],[idTipoMoneda],[MontoAhorroActual]
+      ,[MontoAhorroDeseado],[FechaProximoPago],[terminoAhorro],[dominioPeriodicidad],[numeroCuenta]
+  FROM [CuentaAhorro]
 
 GO
 SET IDENTITY_INSERT [dbo].[Cliente] ON 
@@ -1025,7 +1041,7 @@ INSERT [dbo].[Cliente] ([CIF], [idTipoCliente]) VALUES (1000000000, 0)
 SET IDENTITY_INSERT [dbo].[Cliente] OFF
 SET IDENTITY_INSERT [dbo].[Direccion] ON 
 
-INSERT [dbo].[Direccion] ([idDireccion], [Direccion]) VALUES (1, N'200 metros este')
+INSERT [dbo].[Direccion] ([idDireccion], [Direccio	n]) VALUES (1, N'200 metros este')
 SET IDENTITY_INSERT [dbo].[Direccion] OFF
 INSERT [dbo].[DireccionXCliente] ([idDireccion], [CIF]) VALUES (1, 1000000000)
 SET IDENTITY_INSERT [dbo].[Telefono] ON 
