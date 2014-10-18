@@ -62,6 +62,10 @@ namespace RESTfulFlexCore.Services
         {
             return new CBHistoricoConcrete();
         }
+        public override CBInteresObtenidosAbstract CreateCBInteresesObtenidosAbstract()
+        {
+            return new CBInteresesObtenidosConcrete();
+        }
    
      
         

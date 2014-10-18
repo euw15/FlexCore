@@ -24,6 +24,8 @@ namespace RESTfulFlexCore.Services
         public abstract CBCierresAbstract CreateCBCierresAbstract();
 
         public abstract CBHistoricoAbstract CreateCBHistoricoAbstract();
+
+        public abstract CBInteresObtenidosAbstract CreateCBInteresesObtenidosAbstract();
       
 
     }

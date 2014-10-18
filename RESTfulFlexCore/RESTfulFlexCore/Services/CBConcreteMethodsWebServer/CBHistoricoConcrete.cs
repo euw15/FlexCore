@@ -36,7 +36,7 @@ namespace RESTfulFlexCore.Services
                 if (table.Columns.Contains("idBitacora") && row["idBitacora"] != DBNull.Value) { idBitacora = Convert.ToInt32(row["idBitacora"]); }
                 if (table.Columns.Contains("numeroError") && row["numeroError"] != DBNull.Value) { numeroError = Convert.ToInt32(row["numeroError"]); }
                 if (table.Columns.Contains("Mensaje") && row["Mensaje"] != DBNull.Value) { Mensaje = row["Mensaje"].ToString(); }
-                if (table.Columns.Contains("numeroError") && row["numeroError"] != DBNull.Value) { Fecha = row["numeroError"].ToString(); }
+                if (table.Columns.Contains("Fecha") && row["Fecha"] != DBNull.Value) { Fecha = row["Fecha"].ToString(); }
               
       
                 listHistorico.Add(new Historico
