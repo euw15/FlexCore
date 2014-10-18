@@ -142,7 +142,7 @@ namespace RESTfulFlexCore.Services
         //GET
         public override Cuenta[] obtenerCuentasAhorro()
         {
-            DataTable table = CBConnectionMSQL.retrieveMSQL("EXEC obtenerCuentasAhorro");
+            DataTable table = CBConnectionMSQL.retrieveMSQL("EXEC obtenerCuentaAhorro");
             List<Cuenta> cuentaSelected = getTableGetCuenta(table);
             return loadCache(cuentaSelected);
         }
@@ -177,7 +177,7 @@ namespace RESTfulFlexCore.Services
                 int MontoAhorroDeseado = -1;
                 String FechaProximoPago = " ";
                 int terminoAhorro = -1;
-                int dominioPeriodicidad = -1;               
+                String dominioPeriodicidad = " ";               
                
 
                 if (table.Columns.Contains("idCliente") && row["idCliente"] != DBNull.Value) { idCliente = Convert.ToInt32(row["idCliente"]); }
@@ -204,7 +204,7 @@ namespace RESTfulFlexCore.Services
                 if (table.Columns.Contains("MontoAhorroActual") && row["MontoAhorroActual"] != DBNull.Value) { MontoAhorroActual = Convert.ToInt32(row["MontoAhorroActual"]); }
                 if (table.Columns.Contains("MontoAhorroDeseado") && row["MontoAhorroDeseado"] != DBNull.Value) { MontoAhorroDeseado = Convert.ToInt32(row["MontoAhorroDeseado"]); }
                 if (table.Columns.Contains("terminoAhorro") && row["terminoAhorro"] != DBNull.Value) { terminoAhorro = Convert.ToInt32(row["terminoAhorro"]); }
-                if (table.Columns.Contains("dominioPeriodicidad") && row["dominioPeriodicidad"] != DBNull.Value) { dominioPeriodicidad = Convert.ToInt32(row["dominioPeriodicidad"]); }
+                if (table.Columns.Contains("dominioPeriodicidad") && row["dominioPeriodicidad"] != DBNull.Value) { dominioPeriodicidad = row["dominioPeriodicidad"].ToString(); }
                 if (table.Columns.Contains("FechaProximoPago") && row["FechaProximoPago"] != DBNull.Value) { FechaProximoPago = row["FechaProximoPago"].ToString(); }
 
                 listCuenta.Add(new Cuenta
