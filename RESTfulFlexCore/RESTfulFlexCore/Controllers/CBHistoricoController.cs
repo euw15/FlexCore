@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using RESTfulFlexCore.Services;
+using RESTfulFlexCore.Models;
 
 namespace RESTfulFlexCore.Controllers
 {
@@ -12,12 +13,20 @@ namespace RESTfulFlexCore.Controllers
     {
     
         
-        private CBHistoricoAbstract instanceClientAbstract;
+        private CBHistoricoAbstract instanceHistoricoAbstract;
 
         public CBHistoricoController()
         {
             CBConcreteFactoryWebServer instanceConcreteFactory = CBConcreteFactoryWebServer.initInstanceCBConcreteFactoryWebServer;
-            instanceClientAbstract = instanceConcreteFactory.CreateCBHistoricoAbstract();
+            instanceHistoricoAbstract = instanceConcreteFactory.CreateCBHistoricoAbstract();
+        }
+
+        [HttpGet]
+        [ActionName("obtenerBitacoraErrores")]
+        public Historico[] obtenerBitacoraErrores()
+        {
+            //api/cbhistorico/obtenerBitacoraErrores
+            return instanceHistoricoAbstract.obtenerBitacoraErrores();
         }
     
     }
