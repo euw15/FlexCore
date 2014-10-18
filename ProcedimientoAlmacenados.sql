@@ -669,3 +669,15 @@ CREATE PROCEDURE obtenerCuentasDebito
  		SELECT TOP 100 [idCuentaAhorro],[CIF],[NumeroCuentaDebito],[idProposito],[Periodicidad],[FechaInicio],[DuracionAhorro],[FechaFinal],[MontoAhorro],[idTipoMoneda],[MontoAhorroActual]
       ,[MontoAhorroDeseado],[FechaProximoPago],[terminoAhorro],[dominioPeriodicidad],[numeroCuenta]
   FROM [CuentaAhorro]
+
+
+
+  go
+  CREATE PROCEDURE verTransEnVuelo
+  	as
+  		select * from TranssacionesVuelo 
+
+  go
+  	CREATE PROCEDURE verHistorico
+  	as
+  		select * from Historico
