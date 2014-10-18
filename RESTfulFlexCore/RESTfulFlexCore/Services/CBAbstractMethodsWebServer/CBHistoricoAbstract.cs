@@ -9,5 +9,7 @@ namespace RESTfulFlexCore.Services
     public abstract class CBHistoricoAbstract
     {
         public abstract Historico[] obtenerBitacoraErrores();
+
+        public abstract Historico[] verHistorico();
     }
 }

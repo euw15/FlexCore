@@ -27,6 +27,14 @@ namespace RESTfulFlexCore.Controllers
             return instanceTranssacionesVueloAbstract.consultarCuentaAhorroCliente(CIF);
         }
 
+        [HttpGet]
+        [ActionName("consultarTransaccionesVuelo")]
+        public TranssacionesVuelo[] consultarTransaccionesVuelo()
+        {
+            //api/cbtranssacionesvuelo/consultarTransaccionesVuelo  
+            return instanceTranssacionesVueloAbstract.consultarTransaccionesVuelo();
+        }
+
 
     }
 }

@@ -14,6 +14,15 @@ namespace RESTfulFlexCore.Models
         public int numeroError { get; set; }
 
         public String Fecha { get; set; }
-  
+
+        public int idTranssacion { get; set; }
+
+        public int NumeroCuenta { get; set; }
+
+        public String TipoTranssacion { get; set; }
+        public int MontoTransferido { get; set; }
+
+     
+
     }
 }

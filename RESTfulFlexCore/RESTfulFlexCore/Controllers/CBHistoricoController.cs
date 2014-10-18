@@ -28,6 +28,14 @@ namespace RESTfulFlexCore.Controllers
             //api/cbhistorico/obtenerBitacoraErrores
             return instanceHistoricoAbstract.obtenerBitacoraErrores();
         }
+
+        [HttpGet]
+        [ActionName("verHistorico")]
+        public Historico[] verHistorico()
+        {
+            //api/cbhistorico/verHistorico
+            return instanceHistoricoAbstract.verHistorico();
+        }
     
     }
 

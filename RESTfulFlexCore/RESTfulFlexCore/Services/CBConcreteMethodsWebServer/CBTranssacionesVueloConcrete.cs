@@ -23,6 +23,13 @@ namespace RESTfulFlexCore.Services
             return loadCache(cuentaSelected);
         }
 
+        public override TranssacionesVuelo[] consultarTransaccionesVuelo()
+        {
+            DataTable table = CBConnectionMSQL.retrieveMSQL("EXEC verTransEnVuelo");
+            List<TranssacionesVuelo> cuentaSelected = getTableGetTranssacionesVuelo(table);
+            return loadCache(cuentaSelected);
+        }
+
 
         public List<TranssacionesVuelo> getTableGetTranssacionesVuelo(DataTable table)
         {
