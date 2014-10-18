@@ -48,15 +48,15 @@ namespace RESTfulFlexCore.Models
 
         public int NumeroCuentaDebito { get; set; }
 
-        public int MontoAhorroActual { get; set; }
+        public double MontoAhorroActual { get; set; }
 
-        public int MontoAhorroDeseado { get; set; }
+        public double MontoAhorroDeseado { get; set; }
 
         public String FechaProximoPago { get; set; }
 
         public int terminoAhorro { get; set; }
 
-        public int dominioPeriodicidad { get; set; }
+        public String dominioPeriodicidad { get; set; }
 	
     }
 }

@@ -173,8 +173,8 @@ namespace RESTfulFlexCore.Services
                 int idTipoMoneda = -1;
                 int idCuentaAhorro = -1;
                 int NumeroCuentaDebito = -1;
-                int MontoAhorroActual = -1;
-                int MontoAhorroDeseado = -1;
+                double MontoAhorroActual = -1;
+                double MontoAhorroDeseado = -1;
                 String FechaProximoPago = " ";
                 int terminoAhorro = -1;
                 String dominioPeriodicidad = " ";               
@@ -201,8 +201,8 @@ namespace RESTfulFlexCore.Services
 
                 if (table.Columns.Contains("idCuentaAhorro") && row["idCuentaAhorro"] != DBNull.Value) { idCuentaAhorro = Convert.ToInt32(row["idCuentaAhorro"]); }
                 if (table.Columns.Contains("NumeroCuentaDebito") && row["NumeroCuentaDebito"] != DBNull.Value) { NumeroCuentaDebito = Convert.ToInt32(row["NumeroCuentaDebito"]); }
-                if (table.Columns.Contains("MontoAhorroActual") && row["MontoAhorroActual"] != DBNull.Value) { MontoAhorroActual = Convert.ToInt32(row["MontoAhorroActual"]); }
-                if (table.Columns.Contains("MontoAhorroDeseado") && row["MontoAhorroDeseado"] != DBNull.Value) { MontoAhorroDeseado = Convert.ToInt32(row["MontoAhorroDeseado"]); }
+                if (table.Columns.Contains("MontoAhorroActual") && row["MontoAhorroActual"] != DBNull.Value) { MontoAhorroActual = Convert.ToDouble(row["MontoAhorroActual"]); }
+                if (table.Columns.Contains("MontoAhorroDeseado") && row["MontoAhorroDeseado"] != DBNull.Value) { MontoAhorroDeseado = Convert.ToDouble(row["MontoAhorroDeseado"]); }
                 if (table.Columns.Contains("terminoAhorro") && row["terminoAhorro"] != DBNull.Value) { terminoAhorro = Convert.ToInt32(row["terminoAhorro"]); }
                 if (table.Columns.Contains("dominioPeriodicidad") && row["dominioPeriodicidad"] != DBNull.Value) { dominioPeriodicidad = row["dominioPeriodicidad"].ToString(); }
                 if (table.Columns.Contains("FechaProximoPago") && row["FechaProximoPago"] != DBNull.Value) { FechaProximoPago = row["FechaProximoPago"].ToString(); }
@@ -226,7 +226,14 @@ namespace RESTfulFlexCore.Services
                     SaldoFlotante = SaldoFlotante,
                     idProposito = idProposito,
                     idCuentaDebito = idCuentaDebito,
-                    idTipoMoneda = idTipoMoneda
+                    idTipoMoneda = idTipoMoneda,
+                    idCuentaAhorro = idCuentaAhorro,
+                    NumeroCuentaDebito = NumeroCuentaDebito,
+                    MontoAhorroActual = MontoAhorroActual,
+                    MontoAhorroDeseado = MontoAhorroDeseado,
+                    FechaProximoPago = FechaProximoPago,
+                    terminoAhorro = terminoAhorro,
+                    dominioPeriodicidad = dominioPeriodicidad   
 
                 });
             }
