@@ -126,6 +126,7 @@
     <Compile Include="Controllers\CBCierresController.cs" />
     <Compile Include="Controllers\CBClientController.cs" />
     <Compile Include="Controllers\CBCuentaController.cs" />
+    <Compile Include="Controllers\CBDiccionarioDatosController.cs" />
     <Compile Include="Controllers\CBDocumentosController.cs" />
     <Compile Include="Controllers\CBHistoricoController.cs" />
     <Compile Include="Controllers\CBImageController.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="Models\Cierres.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Cuenta.cs" />
+    <Compile Include="Models\DiccionarioDatos.cs" />
     <Compile Include="Models\Documentos.cs" />
     <Compile Include="Models\Historico.cs" />
     <Compile Include="Models\Image.cs" />
@@ -151,6 +153,7 @@
     <Compile Include="Services\CBAbstractMethodsWebServer\CBBeneficiarioAbstract.cs" />
     <Compile Include="Services\CBAbstractMethodsWebServer\CBClientAbstract.cs" />
     <Compile Include="Services\CBAbstractMethodsWebServer\CBCuentaAbstract.cs" />
+    <Compile Include="Services\CBAbstractMethodsWebServer\CBDiccionarioDatosAbstract.cs" />
     <Compile Include="Services\CBAbstractMethodsWebServer\CBDocumentosAbstract.cs" />
     <Compile Include="Services\CBAbstractMethodsWebServer\CBHistoricoAbstract.cs" />
     <Compile Include="Services\CBAbstractMethodsWebServer\CBImageAbstract.cs" />
@@ -163,6 +166,7 @@
     <Compile Include="Services\CBConcreteMethodsWebServer\CBCierresConcrete.cs" />
     <Compile Include="Services\CBConcreteMethodsWebServer\CBClientConcrete .cs" />
     <Compile Include="Services\CBConcreteMethodsWebServer\CBCuentaConcrete.cs" />
+    <Compile Include="Services\CBConcreteMethodsWebServer\CBDiccionarioDatosConcrete.cs" />
     <Compile Include="Services\CBConcreteMethodsWebServer\CBDocumentosConcrete.cs" />
     <Compile Include="Services\CBConcreteMethodsWebServer\CBHistoricoConcrete.cs" />
     <Compile Include="Services\CBConcreteMethodsWebServer\CBImageConcrete.cs" />

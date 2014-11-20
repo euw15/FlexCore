@@ -66,6 +66,10 @@ namespace RESTfulFlexCore.Services
         {
             return new CBInteresesObtenidosConcrete();
         }
+        public override CBDiccionarioDatosAbstract CreateCBDiccionarioDatosAbstract()
+        {
+            return new CBDiccionarioDatosConcrete();
+        }
    
      
         
