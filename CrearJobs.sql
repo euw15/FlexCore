@@ -38,63 +38,48 @@ EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'consulta
 		@command=N'GO
 USE FlexCoreDataBase
 
-go
-declare @numeroCuenta int,
-			@FechaProximaPago datetime,
-			@MontoAhorro money,
-			@Periodicidad int,
-			@MontoAhorroActual money,
-			@MontoAhorroDeseado money,
-			@TerminoAhorro bit,
-			@NumeroCuentaDebito int,
-			@FechaFinal dateTime,
-			@dominioPeriodicidad [nvarchar](100)
+@NumeroCuentaDebito int,
+	@NumeroCuentaDestino int,
+	@MontoPago money
+AS
+		declare
+			@id int,
+			@EstadoCuentaDebito bit,
+			@EstadoCuentaDestino bit,
+			@SaldoActualCuentaDebito money,
+			@SaldoActualCuentaDestino money
 
-	select @numeroCuenta = min(numeroCuenta) from CuentaAhorro
+		/*Pregunta por el estado de las cuentas */
+		SELECT @EstadoCuentaDebito=Estado from CuentaDebito  where numeroCuenta= @NumeroCuentaDebito;
+		SELECT @EstadoCuentaDestino=Estado from CuentaDebito  where numeroCuenta= @NumeroCuentaDestino;
 
-	while @numeroCuenta is not null
-	begin
-		/*Selecciona todas las variables de la cuenta actual */
-	    select @dominioPeriodicidad= dominioPeriodicidad , @FechaFinal=FechaFinal, @NumeroCuentaDebito=NumeroCuentaDebito , @FechaProximaPago=FechaProximoPago , @MontoAhorro=MontoAhorro ,@Periodicidad=Periodicidad , @MontoAhorroActual=MontoAhorroActual, @MontoAhorroDeseado=MontoAhorroDeseado, @TerminoAhorro=terminoAhorro
-	    		 from CuentaAhorro where numeroCuenta = @numeroCuenta
-	    
-	    /*Pregunta si ya debe hacer el pago y que la cuenta no haya finalizado su tiempo*/
-	    IF(GETDATE()>=@FechaProximaPago and @TerminoAhorro=0)
-	    	begin
-	    		declare @fondosCuentaDebito int
-	    		select @fondosCuentaDebito=SaldoFlotante from CuentaDebito where idCuentaDebito = @NumeroCuentaDebito
-	    			/*Si tiene fondos suficientes */
-	    			if(@fondosCuentaDebito>=@MontoAhorro)
-	    				begin
-	    					update CuentaAhorro set MontoAhorroActual= @MontoAhorroActual+@MontoAhorro where numeroCuenta = @numeroCuenta
-	    					update CuentaDebito set SaldoFlotante = @fondosCuentaDebito-@MontoAhorro where idCuentaDebito = @NumeroCuentaDebito
-	    					if(@dominioPeriodicidad = ''segundos'')
-	    						update CuentaAhorro set FechaProximoPago= DATEADD(second,@Periodicidad,@FechaProximaPago) where numeroCuenta = @numeroCuenta
-	    					if(@dominioPeriodicidad = ''minutos'')
-	    						update CuentaAhorro set FechaProximoPago= DATEADD(minute,@Periodicidad,@FechaProximaPago) where numeroCuenta = @numeroCuenta
-	    					if(@dominioPeriodicidad = ''horas'')
-	    						update CuentaAhorro set FechaProximoPago= DATEADD(hour,@Periodicidad,@FechaProximaPago) where numeroCuenta = @numeroCuenta
-	    					if(@dominioPeriodicidad = ''dias'')
-	    						update CuentaAhorro set FechaProximoPago= DATEADD(day,@Periodicidad,@FechaProximaPago) where numeroCuenta = @numeroCuenta
-	    					if(@dominioPeriodicidad = ''meses'')
-	    						update CuentaAhorro set FechaProximoPago= DATEADD(month,@Periodicidad,@FechaProximaPago) where numeroCuenta = @numeroCuenta
-	    				end
-
-	    			/***Verifica si ya termino ya sea por fecha y por que alcanzo objetivo *******/
-	    			if(GETDATE()>@FechaFinal or (@MontoAhorroActual+@MontoAhorro)>=@MontoAhorroDeseado)
-	    				begin
-	    					update CuentaAhorro set terminoAhorro= 1 where numeroCuenta = @numeroCuenta;
-	    				end
-
-				select @numeroCuenta = min( numeroCuenta ) from CuentaAhorro where numeroCuenta > @numeroCuenta
-	    	end
-	    else
-	    	begin
-	    		select @numeroCuenta = min( numeroCuenta ) from CuentaAhorro where numeroCuenta > @numeroCuenta
-	    	end
-	    
-
-	end', 
+		/*Si ambas cuentas estan activas realiza la operacion */
+		IF (@EstadoCuentaDebito=1 and @EstadoCuentaDestino=1)
+			begin
+				select  @SaldoActualCuentaDebito=SaldoFlotante from CuentaDebito where numeroCuenta=@NumeroCuentaDebito
+				select  @SaldoActualCuentaDestino=SaldoFlotante from CuentaDebito where numeroCuenta=@NumeroCuentaDestino
+				/*Si tiene fondos suficientes realiza el pago*/
+				IF(@SaldoActualCuentaDebito >= @MontoPago)
+					begin
+							update CuentaDebito set SaldoFlotante=@SaldoActualCuentaDebito-@MontoPago from CuentaDebito where numeroCuenta=@NumeroCuentaDebito
+							update CuentaDebito set SaldoFlotante=@SaldoActualCuentaDestino+@MontoPago from CuentaDebito where numeroCuenta=@NumeroCuentaDestino
+							insert into TranssacionesVuelo (NumeroCuenta,TipoTranssacion,MontoTransferido) values (@NumeroCuentaDebito,'Debito',@MontoPago)
+							insert into TranssacionesVuelo (NumeroCuenta,TipoTranssacion,MontoTransferido) values (@NumeroCuentaDestino,'Credito',@MontoPago)
+							set @id=1
+					end
+				else
+					begin
+						set @id=0
+						insert into BitacoraErrores (Mensaje,numeroError) values ("No tiene fondos suficientes", 2)
+					end
+			end
+		else
+			begin
+				set @id=0
+				insert into BitacoraErrores (Mensaje,numeroError) values ("Alguna de las cuentas esta inactiva", 1)
+			end
+		
+		select @id as id;', 
 		@database_name=N'master', 
 		@flags=0
 IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback

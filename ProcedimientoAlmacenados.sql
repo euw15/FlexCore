@@ -681,3 +681,80 @@ CREATE PROCEDURE obtenerCuentasDebito
   	CREATE PROCEDURE verHistorico
   	as
   		select * from Historico
+
+
+
+GO
+CREATE PROCEDURE crearClienteCuentaAhorroCuentaAutomatica
+  	/*Parametros de entrada */
+    @Nombre nvarchar(30), 
+    @Cedula nvarchar(30),
+    @Telefono nvarchar(30),
+    @Direccion nvarchar(300),
+    @Apellidos nvarchar(200),
+    /*para la cuenta*/
+    @Descripcion nvarchar(200),
+	@Moneda nvarchar(10),
+	/*para cuenta de ahorro */
+	@idProposito int,
+	@Periodicidad int,
+	@FechaInicio nvarchar(11),
+	@TiempoAhorro int,
+	@MontoAhorroPeriodico int,
+	@dominioPeriodicidad nvarchar(11),
+	@MontoAhorroDeseado int
+AS 
+	declare @ClienteCIF [int] ,  		    /*Contiene CIF Generado */
+	        @idDireccionGenerado [int],		/*Contiene id Direccion Generado */
+		    @idTelefonoGenerado [int]		/*Contiene id Telefono generado */
+
+	/*Inserta el clienteGenerico y obtiene el CIF*/
+	INSERT INTO Cliente (idTipoCliente) values (0)
+	SET @ClienteCIF = IDENT_CURRENT('Cliente')
+
+	/*Inserta la direccion */
+	/*INSERT INTO Direccion (Direccion) values (@Direccion)*/
+	SET @idDireccionGenerado = 1
+
+	/*Inserta el Telefono */
+	/*INSERT INTO Telefono (Telefono) VALUES (@Telefono)*/
+	SET @idTelefonoGenerado = 1
+
+	/*Relaciona la Direccion con El Cliente */
+	INSERT INTO DireccionXCliente (idDireccion,CIF) values (@idDireccionGenerado,@ClienteCIF)
+
+	/*Relaciona el telefono con el cliente*/
+	INSERT INTO TelefonoxCliente (idTelefono,CIF) values (@idTelefonoGenerado,@ClienteCIF)
+
+	/*inserta en cliente juridico */
+	INSERT INTO ClienteFisico (CIF, Nombre,Apellido,Cedula,idDireccionPrincipal,idTelefonoPrincipal) values (@ClienteCIF,@Nombre,@Apellidos,@Cedula,@idDireccionGenerado,@idTelefonoGenerado);
+
+
+	/* Parte de cuenta debito */
+
+	/*Inserta la nueva cuenta de debito*/
+	INSERT INTO CuentaDebito (idCliente,Desripcion,idTipoMoneda,Estado,SaldoReal,SaldoFlotante) values (@ClienteCIF,@Descripcion,@Moneda,1,0,0)
+
+	DECLARE @NumeroCuentaOrigen [int]
+
+	SET @NumeroCuentaOrigen = IDENT_CURRENT('CuentaDebito')
+
+	
+	declare @idNumeroCuentaDebito int,
+			@FechaFinal datetime
+
+	if @TiempoAhorro < 365
+	begin
+		set @FechaFinal = DATEADD(day,@TiempoAhorro,@FechaInicio)
+	end
+	else
+		set @FechaFinal = DATEADD(year,CAST(@TiempoAhorro/365 AS INT),@FechaInicio)
+	
+	/*select @idNumeroCuentaDebito=idCuentaDebito from CuentaDebito where numeroCuenta= @NumeroCuentaOrigen*/
+	/*Inserta la informacion de la cuenta de Ahorro */
+	insert into CuentaAhorro (CIF, NumeroCuentaDebito,idProposito,Periodicidad,FechaInicio,FechaFinal,FechaProximoPago,DuracionAhorro,
+		MontoAhorro,idTipoMoneda,MontoAhorroActual,dominioPeriodicidad,terminoAhorro,MontoAhorroDeseado)
+		values (@ClienteCIF,@NumeroCuentaOrigen,@idProposito,@Periodicidad,@FechaInicio,@FechaFinal,@FechaInicio,@TiempoAhorro,
+			@MontoAhorroPeriodico,@Moneda,0,@dominioPeriodicidad,0,@MontoAhorroDeseado)
+
+
