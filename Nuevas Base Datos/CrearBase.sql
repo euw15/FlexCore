@@ -1,5 +1,369 @@
 /*******************************************************************/
 /*******************************************************************/
+/**********************  Crear Tablas y PK**************************/
+/*******************************************************************/
+/*******************************************************************/
+/* Crear la base primero con el mismo nombre                        */
+/*******************************************************************/
+USE FlexCoreDataBase;
+
+GO
+
+CREATE TABLE [Cliente](
+	[CIF] [int] Identity(1000000000,1) constraint pk_CIF_Cliente primary key,
+	[idTipoCliente] [int] NOT NULL,
+	[Estado] [bit] DEFAULT 1
+)
+
+/*******************************************************************/
+GO
+CREATE TABLE [Telefono](
+	[idTelefono] [int] Identity(1,1) constraint pk_idTelefono_Telefono primary key,
+	[Telefono] [nvarchar](15) NOT NULL,
+)
+
+/*******************************************************************/
+GO
+CREATE TABLE [TipoCliente](
+	[idTipoCliente] [int] Identity(1,1) constraint pk_idTipoCliente_TipoCliente primary key,	
+	[Nombre] [nvarchar](200)
+)
+
+/*******************************************************************/
+GO
+CREATE TABLE [TelefonoxCliente](
+	[CIF] [int] not null,
+	[idTelefono] [int] not null,
+	CONSTRAINT pk_TelefonoXCliente PRIMARY KEY (CIF,idTelefono)
+	)
+
+/********************************************************************/
+GO
+CREATE TABLE [ClienteFisico](
+	[idCLienteFisico] [int] Identity(1,2) constraint pk_idCliente_ClienteFisico primary key,
+	[CIF] [int] NOT NULL,
+	[Nombre] [nvarchar](30) NOT NULL,
+	[Apellido] [nvarchar](30) NOT NULL,
+	[idImagenCliente] [int],
+	[Cedula] [nvarchar](30) NOT NULL,
+	[idDireccionPrincipal] [int] NOT NULL,
+	[idTelefonoPrincipal]  [int] NOT NULL
+	)
+
+/********************************************************************/
+GO
+CREATE TABLE [ClienteJuridico](
+	[idCLienteJuridico] [int] Identity(0,2) constraint pk_idCliente_ClienteJuridico primary key,
+	[CIF] [int] NOT NULL,
+	[Nombre] [nvarchar](30) NOT NULL,
+	[Cedula] [nvarchar](30) NOT NULL,
+	[idDireccionPrincipal] [int] NOT NULL,
+	[idTelefonoPrincipal]  [int] NOT NULL
+	)
+
+
+/*******************************************************************/
+GO
+CREATE TABLE [Direccion](
+	[idDireccion] [int] Identity(1,1) constraint pk_idDireccion_Direccion primary key,
+	[Direccion] [nvarchar] (400) 
+	)
+
+/*******************************************************************/
+GO
+CREATE TABLE [DireccionXCliente](
+	[idDireccion] [int] not null,
+	[CIF] [int] not null,
+	CONSTRAINT pk_DireccionXCliente PRIMARY KEY (idDireccion,CIF)
+	)
+
+
+/********************************************************************/
+GO
+CREATE TABLE [DocumentoxCliente](
+	[CIF] [int] not null,
+	[idDocumento] [int] not null,
+	CONSTRAINT pk_DocumentosxCliente PRIMARY KEY (CIF,idDocumento)
+	)
+
+GO
+CREATE TABLE [TipoMoneda](
+	[idTipoMoneda] [int] Identity(1,1) constraint pk_idTipoMoneda_TipoMoneda primary key,
+	[Moneda] [nvarchar](30) NOT NULL
+	)
+
+/********************************************************************/
+GO
+CREATE TABLE [CuentaDebito](
+	[idCuentaDebito] [int] Identity(100000000,1) constraint pk_idCuentaDebito_CuentaDebito primary key,
+	[idCliente] [int] NOT NULL,
+	[Desripcion] [nvarchar](300) NOT NULL,
+	[idTipoMoneda] [int] NOT NULL,
+	[Estado] [bit] NOT NULL,
+	[SaldoReal] [money] NOT NULL,
+	[SaldoFlotante] [money] NOT NULL
+	)
+
+/********************************************************************/
+GO
+CREATE TABLE [Beneficiarios](
+	[idCliente] [int] not null,
+	[NumeroCuentaDebito] [int] NOT NULL,
+	CONSTRAINT pk_Beneficiarios PRIMARY KEY (idCliente,NumeroCuentaDebito)
+	)
+
+/********************************************************************/
+GO
+CREATE TABLE [MetodoPago](
+	[idMetodoPago] [int] Identity(1,1) constraint pk_PKMetogoPago_MetodoPago primary key,
+	[NumeroCuentaDebito] [int] NOT NULL,
+	[idDispositivo] [bigint] NOT NULL,
+	[estado] [bit] NOT NULL
+	)
+
+/********************************************************************/
+GO
+CREATE TABLE [Proposito](
+	[idProposito] [int] Identity(1,1) constraint pk_idProposito_Proposito primary key,
+	[Proposito] [nvarchar](200) NOT NULL,
+	[TasaInteres] [int]
+	)
+
+/********************************************************************/
+GO
+CREATE TABLE [CuentaAhorro](
+	[idCuentaAhorro] [int] Identity(1,1) constraint pk_idCuentaAhorro_CuentaAhorro primary key,
+	[CIF] [int] NOT NULL,
+	[NumeroCuentaDebito] [int] NOT NULL,
+	[idProposito] [int] NOT NULL,
+	[Periodicidad] [int] NOT NULL,
+	[FechaInicio] [datetime] NOT NULL,
+	[DuracionAhorro] [int] NOT NULL,
+	[FechaFinal] [datetime] NOT NULL,
+	[MontoAhorro] [money] NOT NULL,
+	[idTipoMoneda] [int] NOT NULL,
+	[MontoAhorroActual] [money] NOT NULL,
+	[MontoAhorroDeseado] [money] NOT NULL,
+	[FechaProximoPago] [datetime] NOT NULL,
+	[terminoAhorro] [bit] NOT NULL,
+	[dominioPeriodicidad] [nvarchar](20)
+	)
+
+/********************************************************************/
+GO
+CREATE TABLE [TranssacionesVuelo](
+	[idTranssacion] [int] Identity(1,1) constraint pk_idTranssacion_TranssacionesVuelo primary key,
+	[NumeroCuenta] [int] NOT NULL,
+	[TipoTranssacion] [nvarchar](100) NOT NULL,
+	[MontoTransferido] [int],
+	[Fecha] [datetime] DEFAULT GETDATE()
+	)
+
+/********************************************************************/
+GO
+CREATE TABLE [Historico](
+	[idTranssacion] [int] Identity(1,1) constraint pk_idTranssacion_Historico primary key,
+	[NumeroCuenta] [int] NOT NULL,
+	[TipoTranssacion] [nvarchar](100) NOT NULL,
+	[MontoTransferido] [int],
+	[Fecha] [datetime]
+	)
+
+/********************************************************************/
+GO
+CREATE TABLE [Cierres](
+	[idCierre] [int] Identity(1,1) constraint pk_idCierre_Cierres primary key,
+	[FechaFinal] [datetime] NOT NULL
+	)
+/*********************************************************************/
+GO
+CREATE TABLE [Imagen] (
+	[idImagen] [int] Identity(1,1) constraint pk_Imagen_idImagen primary key,
+	[imagen] varchar(max)
+	)
+
+/************************************************************************/
+GO
+CREATE TABLE [InteresesObtenenidos](
+	[idInteresesObtenidos] [int] Identity(1,1) constraint pk_InteresesObtenidos primary key,
+	[interesCobrado] [int] not null,
+	[montoCobrado] [float] not null,
+	[idCuentaAhorro] [int] not null,
+	[Fecha] [datetime] DEFAULT GETDATE()
+	)
+
+/**********************************************************************************/
+GO
+CREATE TABLE [BitacoraErrores](
+	[idBitacora] [int] Identity(1,1) constraint pk_BitacoraErrores primary key,
+	[Mensaje] [nvarchar](300),
+	[numeroError] [int] not null,
+	[Fecha] [datetime] DEFAULT GETDATE()
+	)
+
+/****************Crea funcion para numeroCuentas *******************/
+/* Verifica el tipo de moneda en la insercion y le agrega el digito correspondiente */
+go
+create function GeneradorNumeroCuenta (@id int, @tipoMoneda int) 
+returns int
+	as begin 
+		if @tipoMoneda = 2
+			 return cast('8' + right('00000000' + convert(varchar(10), @id), 8) as int) 
+		else
+			 return cast('9' + right('00000000' + convert(varchar(10), @id), 8) as int)
+	return 0;
+	end
+
+/* Agrega la funcion a numeroCuenta */
+go
+alter table CuentaDebito add numeroCuenta as dbo.GeneradorNumeroCuenta(idCuentaDebito,idTipoMoneda) 
+
+/*Agrega la funcion a numeroCuenta */
+go
+alter table CuentaAhorro add numeroCuenta as dbo.GeneradorNumeroCuenta(idCuentaAhorro,idTipoMoneda) 
+
+
+/********************Llaves Foraneas y demas ***********************/
+
+/****Para Telefonos x Cliente *********/
+GO
+ALTER TABLE TelefonoxCliente 
+ADD CONSTRAINT FK_TelefonoXCliente_idTelefono FOREIGN KEY (idTelefono) 
+    REFERENCES Telefono (idTelefono) 
+
+ ALTER TABLE TelefonoxCliente 
+ADD CONSTRAINT FK_TelefonoXCLiente_CIF FOREIGN KEY (CIF) 
+    REFERENCES Cliente (CIF) 
+
+
+/******Para CLientes Juridicos ********************************/
+GO
+ALTER TABLE ClienteJuridico 
+ADD CONSTRAINT FK_ClienteJuridico_CIF FOREIGN KEY (CIF) 
+    REFERENCES Cliente (CIF) 
+
+ALTER TABLE ClienteJuridico 
+ADD CONSTRAINT FK_ClienteJuridico_DireccionPrincipal FOREIGN KEY (idDireccionPrincipal) 
+    REFERENCES Direccion (idDireccion) 
+
+ALTER TABLE ClienteJuridico 
+ADD CONSTRAINT FK_ClienteJuridico_TelefonoPrincipal FOREIGN KEY (idTelefonoPrincipal) 
+    REFERENCES Telefono (idTelefono) 
+
+
+/******Para CLientes Fisico ********************************/
+ALTER TABLE ClienteFisico 
+ADD CONSTRAINT FK_ClienteFisico_DireccionPrincipal FOREIGN KEY (idDireccionPrincipal) 
+    REFERENCES Direccion (idDireccion) 
+
+ALTER TABLE ClienteFisico 
+ADD CONSTRAINT FK_ClienteFisico_TelefonoPrincipal FOREIGN KEY (idTelefonoPrincipal) 
+    REFERENCES Telefono (idTelefono) 
+
+ ALTER TABLE ClienteFisico 
+ADD CONSTRAINT FK_ClienteFisico_CIF FOREIGN KEY (CIF) 
+    REFERENCES Cliente (CIF) 
+
+
+
+
+/*******FK Para Cuenta de Debito ***********************************/
+
+GO
+ALTER TABLE CuentaDebito
+ADD CONSTRAINT FK_CuentaDebito_idTipoMoneda FOREIGN KEY (idTipoMoneda) 
+    REFERENCES TipoMoneda (idTipoMoneda) 
+
+
+ALTER TABLE CuentaDebito
+ADD CONSTRAINT FK_CuentaDebito_idCliente FOREIGN KEY (idCliente) 
+    REFERENCES Cliente (CIF) 
+
+/*******FK Beneficiarios ********************************************/
+
+GO
+ALTER TABLE Beneficiarios
+ADD CONSTRAINT FK_Beneficiarios_idCliente FOREIGN KEY (idCliente) 
+    REFERENCES Cliente (CIF) 
+
+
+ALTER TABLE Beneficiarios
+ADD CONSTRAINT FK_Beneficiarios_NumeroCuentaDebito FOREIGN KEY (NumeroCuentaDebito) 
+    REFERENCES CuentaDebito (idCuentaDebito) 
+
+/***********************FK Metodo de Pago *******************************/
+
+GO
+ALTER TABLE MetodoPago
+ADD CONSTRAINT FK_MetodoPago_NumeroCuenta FOREIGN KEY (NumeroCuentaDebito)
+	REFERENCES CuentaDebito (idCuentaDebito)
+
+
+/***********************Cuenta de Ahorro *******************************/
+
+GO
+ALTER TABLE CuentaAhorro
+ADD CONSTRAINT FK_CuentaAhorro_Proposito FOREIGN KEY (idProposito)
+	REFERENCES Proposito (idProposito)
+
+
+ALTER TABLE CuentaAhorro
+ADD CONSTRAINT FK_CuentaAhorro_idCliente FOREIGN KEY (CIF)
+	REFERENCES Cliente (CIF)
+
+
+ALTER TABLE CuentaAhorro
+ADD CONSTRAINT FK_CuentaAhorro_NumeroCuentaDebito FOREIGN KEY (NumeroCuentaDebito)
+	REFERENCES CuentaDebito (idCuentaDebito)
+
+/***********************Direccion por Cliente ******************************/
+
+GO
+ALTER TABLE DireccionXCliente
+ADD CONSTRAINT FK_DireccionXCliente_CIF FOREIGN KEY (CIF)
+	REFERENCES Cliente (CIF)
+
+ALTER TABLE DireccionXCliente
+ADD CONSTRAINT FK_DireccionXCliente_idDireccion FOREIGN KEY (idDireccion)
+	REFERENCES Direccion (idDireccion)
+
+/**********************Imagenes por Cliente ********************************/
+
+GO
+ALTER TABLE ClienteFisico
+	ADD CONSTRAINT FK_IdImagen_ClienteFisico FOREIGN KEY (idImagenCliente)
+		REFERENCES Imagen (idImagen)
+
+
+/***********************Integridad Para Interesses **************************/
+
+GO
+ALTER TABLE InteresesObtenenidos
+	ADD CONSTRAINT FK_InteresesObtenido_NumeroCuenta FOREIGN KEY (idCuentaAhorro)
+		REFERENCES CuentaAhorro (idCuentaAhorro)
+
+
+/********************Crea vistas *******************************************************/
+go
+CREATE VIEW ClientesFisicosView
+AS select Cliente.CIF,Cliente.Estado,ClienteFisico.Nombre,ClienteFisico.Apellido,ClienteFisico.Cedula, Telefono.Telefono, Direccion.Direccion
+	from ClienteFisico
+		INNER JOIN Cliente   on Cliente.CIF = ClienteFisico.CIF
+		INNER JOIN Telefono  on Telefono.idTelefono = ClienteFisico.idTelefonoPrincipal
+		INNER JOIN Direccion on Direccion.idDireccion = ClienteFisico.idDireccionPrincipal
+		where Cliente.Estado = 1
+
+go
+CREATE VIEW ClientesJuridicosView
+AS select Cliente.CIF,Cliente.Estado,ClienteJuridico.Nombre,ClienteJuridico.Cedula, Telefono.Telefono, Direccion.Direccion
+	from ClienteJuridico 
+		INNER JOIN Cliente   on Cliente.CIF = ClienteJuridico.CIF
+		INNER JOIN Telefono  on Telefono.idTelefono = ClienteJuridico.idTelefonoPrincipal
+		INNER JOIN Direccion on Direccion.idDireccion = ClienteJuridico.idDireccionPrincipal
+		where Cliente.Estado = 1
+
+/*******************************************************************/
+/*******************************************************************/
 /************* Crear Procedimientos  Almacenados********************/
 /*******************************************************************/
 /*******************************************************************/
@@ -670,134 +1034,42 @@ CREATE PROCEDURE obtenerCuentasDebito
       ,[MontoAhorroDeseado],[FechaProximoPago],[terminoAhorro],[dominioPeriodicidad],[numeroCuenta]
   FROM [CuentaAhorro]
 
-
-
-  go
-  CREATE PROCEDURE verTransEnVuelo
-  	as
-  		select * from TranssacionesVuelo 
-
-  go
-  	CREATE PROCEDURE verHistorico
-  	as
-  		select * from Historico
-
-
-
 GO
-CREATE PROCEDURE crearClienteCuentaAhorroCuentaAutomatica
-  	/*Parametros de entrada */
-    @Nombre nvarchar(30), 
-    @Cedula nvarchar(30),
-    @Telefono nvarchar(30),
-    @Direccion nvarchar(300),
-    @Apellidos nvarchar(200),
-    /*para la cuenta*/
-    @Descripcion nvarchar(200),
-	@Moneda nvarchar(10),
-	/*para cuenta de ahorro */
-	@idProposito int,
-	@Periodicidad int,
-	@FechaInicio nvarchar(11),
-	@TiempoAhorro int,
-	@MontoAhorroPeriodico int,
-	@dominioPeriodicidad nvarchar(11),
-	@MontoAhorroDeseado int
-AS 
-	declare @ClienteCIF [int] ,  		    /*Contiene CIF Generado */
-	        @idDireccionGenerado [int],		/*Contiene id Direccion Generado */
-		    @idTelefonoGenerado [int]		/*Contiene id Telefono generado */
+SET IDENTITY_INSERT [dbo].[Cliente] ON 
 
-	/*Inserta el clienteGenerico y obtiene el CIF*/
-	INSERT INTO Cliente (idTipoCliente) values (0)
-	SET @ClienteCIF = IDENT_CURRENT('Cliente')
+INSERT [dbo].[Cliente] ([CIF], [idTipoCliente]) VALUES (1000000000, 0)
+SET IDENTITY_INSERT [dbo].[Cliente] OFF
+SET IDENTITY_INSERT [dbo].[Direccion] ON 
 
-	/*Inserta la direccion */
-	/*INSERT INTO Direccion (Direccion) values (@Direccion)*/
-	SET @idDireccionGenerado = 1
+INSERT [dbo].[Direccion] ([idDireccion], [Direccio	n]) VALUES (1, N'200 metros este')
+SET IDENTITY_INSERT [dbo].[Direccion] OFF
+INSERT [dbo].[DireccionXCliente] ([idDireccion], [CIF]) VALUES (1, 1000000000)
+SET IDENTITY_INSERT [dbo].[Telefono] ON 
 
-	/*Inserta el Telefono */
-	/*INSERT INTO Telefono (Telefono) VALUES (@Telefono)*/
-	SET @idTelefonoGenerado = 1
+INSERT [dbo].[Telefono] ([idTelefono], [Telefono]) VALUES (1, N'456575')
+SET IDENTITY_INSERT [dbo].[Telefono] OFF
+INSERT [dbo].[TelefonoxCliente] ([CIF], [idTelefono]) VALUES (1000000000, 1)
+SET IDENTITY_INSERT [dbo].[ClienteFisico] ON 
 
-	/*Relaciona la Direccion con El Cliente */
-	INSERT INTO DireccionXCliente (idDireccion,CIF) values (@idDireccionGenerado,@ClienteCIF)
+INSERT [dbo].[ClienteFisico] ([idCLienteFisico], [CIF], [Nombre], [Apellido], [idImagenCliente], [Cedula], [idDireccionPrincipal], [idTelefonoPrincipal]) VALUES (1, 1000000000, N'Edward', N'umana', NULL, N'115260530', 1, 1)
+SET IDENTITY_INSERT [dbo].[ClienteFisico] OFF
+SET IDENTITY_INSERT [dbo].[TipoMoneda] ON 
 
-	/*Relaciona el telefono con el cliente*/
-	INSERT INTO TelefonoxCliente (idTelefono,CIF) values (@idTelefonoGenerado,@ClienteCIF)
+INSERT [dbo].[TipoMoneda] ([idTipoMoneda], [Moneda]) VALUES (1, N'Colones')
+INSERT [dbo].[TipoMoneda] ([idTipoMoneda], [Moneda]) VALUES (2, N'Dolares')
+SET IDENTITY_INSERT [dbo].[TipoMoneda] OFF
+SET IDENTITY_INSERT [dbo].[CuentaDebito] ON 
 
-	/*inserta en cliente juridico */
-	INSERT INTO ClienteFisico (CIF, Nombre,Apellido,Cedula,idDireccionPrincipal,idTelefonoPrincipal) values (@ClienteCIF,@Nombre,@Apellidos,@Cedula,@idDireccionGenerado,@idTelefonoGenerado);
+INSERT [dbo].[CuentaDebito] ([idCuentaDebito], [idCliente], [Desripcion], [idTipoMoneda], [Estado], [SaldoReal], [SaldoFlotante]) VALUES (100000000, 1000000000, N'Lavado dinero', 1, 1, 40000.0000, 36000.0000)
+INSERT [dbo].[CuentaDebito] ([idCuentaDebito], [idCliente], [Desripcion], [idTipoMoneda], [Estado], [SaldoReal], [SaldoFlotante]) VALUES (100000001, 1000000000, N'prestamos', 1, 1, 80000.0000, 73895.0000)
+SET IDENTITY_INSERT [dbo].[CuentaDebito] OFF
+SET IDENTITY_INSERT [dbo].[Proposito] ON 
 
+INSERT [dbo].[Proposito] ([idProposito], [Proposito], [TasaInteres]) VALUES (1, N'MAtrimonio', 0)
+SET IDENTITY_INSERT [dbo].[Proposito] OFF
+SET IDENTITY_INSERT [dbo].[CuentaAhorro] ON 
 
-	/* Parte de cuenta debito */
-
-	/*Inserta la nueva cuenta de debito*/
-	INSERT INTO CuentaDebito (idCliente,Desripcion,idTipoMoneda,Estado,SaldoReal,SaldoFlotante) values (@ClienteCIF,@Descripcion,@Moneda,1,0,0)
-
-	DECLARE @NumeroCuentaOrigen [int]
-
-	SET @NumeroCuentaOrigen = IDENT_CURRENT('CuentaDebito')
-
-	
-	declare @idNumeroCuentaDebito int,
-			@FechaFinal datetime
-
-	if @TiempoAhorro < 365
-	begin
-		set @FechaFinal = DATEADD(day,@TiempoAhorro,@FechaInicio)
-	end
-	else
-		set @FechaFinal = DATEADD(year,CAST(@TiempoAhorro/365 AS INT),@FechaInicio)
-	
-	/*select @idNumeroCuentaDebito=idCuentaDebito from CuentaDebito where numeroCuenta= @NumeroCuentaOrigen*/
-	/*Inserta la informacion de la cuenta de Ahorro */
-	insert into CuentaAhorro (CIF, NumeroCuentaDebito,idProposito,Periodicidad,FechaInicio,FechaFinal,FechaProximoPago,DuracionAhorro,
-		MontoAhorro,idTipoMoneda,MontoAhorroActual,dominioPeriodicidad,terminoAhorro,MontoAhorroDeseado)
-		values (@ClienteCIF,@NumeroCuentaOrigen,@idProposito,@Periodicidad,@FechaInicio,@FechaFinal,@FechaInicio,@TiempoAhorro,
-			@MontoAhorroPeriodico,@Moneda,0,@dominioPeriodicidad,0,@MontoAhorroDeseado)
-
-
-GO
-CREATE PROCEDURE diccionaroDeDatos
-	select 
-	d.object_id,
-	a.name [table], 
-	--schema_name(a.schema_id) schema_name, 
-	--a.create_date,
-	b.name [column], 
-	c.name [type], 
-	CASE	
-		WHEN c.name = 'numeric' OR  c.name = 'decimal' OR c.name = 'float'  THEN b.precision
-		ELSE null
-	END [Precision], 
-	b.max_length, 
-	CASE 
-		WHEN b.is_nullable = 0 THEN 'NO'
-		ELSE 'SI'
-	END [PermiteNulls],
-	CASE 
-		WHEN b.is_identity = 0 THEN 'NO'
-		ELSE 'SI'
-	END [EsAutonumerico],	
-	ep.value [Descripcion],
-	f.ForeignKey,
-	f.ReferenceTableName,
-	f.ReferenceColumnName
-from sys.tables a 
-	inner join sys.columns b on a.object_id= b.object_id 
-	inner join sys.systypes c on b.system_type_id= c.xtype 
-	inner join sys.objects d on a.object_id= d.object_id 
-	LEFT JOIN sys.extended_properties ep ON d.object_id = ep.major_id AND b.column_Id = ep.minor_id
-	LEFT JOIN (SELECT 
-				f.name AS ForeignKey,
-				OBJECT_NAME(f.parent_object_id) AS TableName,
-				COL_NAME(fc.parent_object_id,fc.parent_column_id) AS ColumnName,
-				OBJECT_NAME (f.referenced_object_id) AS ReferenceTableName,
-				COL_NAME(fc.referenced_object_id,fc.referenced_column_id) AS ReferenceColumnName
-				FROM sys.foreign_keys AS f
-				INNER JOIN sys.foreign_key_columns AS fc ON f.OBJECT_ID = fc.constraint_object_id) 	f ON f.TableName =a.name AND f.ColumnName =b.name
-WHERE a.name <> 'sysdiagrams' 
-ORDER BY a.name,b.column_Id
-
+INSERT [dbo].[CuentaAhorro] ([idCuentaAhorro], [CIF], [NumeroCuentaDebito], [idProposito], [Periodicidad], [FechaInicio], [DuracionAhorro], [FechaFinal], [MontoAhorro], [idTipoMoneda], [MontoAhorroActual], [MontoAhorroDeseado], [FechaProximoPago], [terminoAhorro], [dominioPeriodicidad]) VALUES (2, 1000000000, 100000000, 1, 20, CAST(N'2014-01-01 00:00:00.000' AS DateTime), 30, CAST(N'2013-01-01 00:00:00.000' AS DateTime), 1000.0000, 1, 5000.0000, 8000.0000, CAST(N'2014-01-01 00:01:40.000' AS DateTime), 1, N'segundos')
+INSERT [dbo].[CuentaAhorro] ([idCuentaAhorro], [CIF], [NumeroCuentaDebito], [idProposito], [Periodicidad], [FechaInicio], [DuracionAhorro], [FechaFinal], [MontoAhorro], [idTipoMoneda], [MontoAhorroActual], [MontoAhorroDeseado], [FechaProximoPago], [terminoAhorro], [dominioPeriodicidad]) VALUES (5, 1000000000, 100000001, 1, 2, CAST(N'2014-01-01 00:00:00.000' AS DateTime), 30, CAST(N'2014-12-12 00:00:00.000' AS DateTime), 555.0000, 1, 6105.0000, 5588.0000, CAST(N'2014-01-01 00:22:00.000' AS DateTime), 1, N'minutos')
+SET IDENTITY_INSERT [dbo].[CuentaAhorro] OFF
 
