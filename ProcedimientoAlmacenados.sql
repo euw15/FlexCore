@@ -42,6 +42,14 @@ AS
 
 	select @id as id;
 
+	declare @tiempo int 
+	  
+	SELECT @tiempo = last_elapsed_time
+	FROM sys.dm_exec_procedure_stats ;
+
+	INSERT INTO TranssacionesVuelo(TipoTranssacion,Duracion)
+	VALUES('crearEmpleadoJuridico',@tiempo)
+
 /**********************Crea un Empleado Fisico *******************/
 
 GO
@@ -80,6 +88,14 @@ AS
 
 	select @id as id;
 
+	declare @tiempo int 
+	  
+	SELECT @tiempo = last_elapsed_time
+	FROM sys.dm_exec_procedure_stats;
+
+	INSERT INTO TranssacionesVuelo(TipoTranssacion,Duracion)
+	VALUES('crearEmpleadoFisico',@tiempo)
+
 /*******************Consultar CLientes Juridicos por concepto******************************/
 go
 CREATE PROCEDURE consultarClienteJuridicoPorConcepto
@@ -108,6 +124,14 @@ AS
 		select CIF,Nombre,Cedula, Telefono, Direccion
 		from ClientesJuridicosView 
 		where ClientesJuridicosView.CIF = @Dato 
+
+	declare @tiempo int 
+	  
+	SELECT @tiempo = last_elapsed_time
+	FROM sys.dm_exec_procedure_stats;
+
+	INSERT INTO TranssacionesVuelo(TipoTranssacion,Duracion)
+	VALUES('consultarClienteJuridicoPorConcepto',@tiempo)
 
 /*******************Consultar CLientes Fisicos por concepto******************************/
 
@@ -142,6 +166,13 @@ AS
 		select CIF,Nombre,Cedula, Telefono, Direccion
 		from ClientesFisicosView 
 		where ClientesFisicosView.Apellido = @Dato;
+	declare @tiempo int 
+	  
+	SELECT @tiempo = last_elapsed_time
+	FROM sys.dm_exec_procedure_stats;
+
+	INSERT INTO TranssacionesVuelo(TipoTranssacion,Duracion)
+	VALUES('consultarClienteFisicosPorConcepto',@tiempo)
 
 /*********************** ver Clientes   Fisico ******************************/
 
@@ -156,6 +187,13 @@ AS
 	  SELECT *, ROW_NUMBER() OVER (ORDER BY CIF) as row FROM ClientesFisicosView
 	 ) a WHERE a.row > @Inicio and a.row <= @Inicio+@Cantidad
 
+declare @tiempo int 
+	  
+SELECT @tiempo = last_elapsed_time
+FROM sys.dm_exec_procedure_stats;
+
+INSERT INTO TranssacionesVuelo(TipoTranssacion,Duracion)
+VALUES('consultarClientesFisicos',@tiempo)
 
 /*********************** ver Clientes   Juridico ******************************/
 go
@@ -169,6 +207,13 @@ AS
 	  SELECT *, ROW_NUMBER() OVER (ORDER BY CIF) as row FROM ClientesJuridicosView
 	 ) a WHERE a.row > @Inicio and a.row <= @Inicio+@Cantidad
 
+declare @tiempo int 
+	  
+SELECT @tiempo = last_elapsed_time
+FROM sys.dm_exec_procedure_stats;
+
+INSERT INTO TranssacionesVuelo(TipoTranssacion,Duracion)
+VALUES('consultarClientesJuridicos',@tiempo)
 	
 /********************* Crear Cuenta Debito ****************************************/
 go
@@ -185,6 +230,13 @@ AS
 
 	select numeroCuenta as id from CuentaDebito where idCuentaDebito = IDENT_CURRENT('CuentaDebito')
 
+declare @tiempo int 
+	  
+SELECT @tiempo = last_elapsed_time
+FROM sys.dm_exec_procedure_stats;
+
+INSERT INTO TranssacionesVuelo(TipoTranssacion,Duracion)
+VALUES('crearCuentaDebito',@tiempo)
 
 /********************* Crear Cuenta Ahorro ****************************************/
 
@@ -224,6 +276,14 @@ AS
 	declare @id int
 
 	select numeroCuenta as id from CuentaAhorro where idCuentaAhorro = IDENT_CURRENT('CuentaAhorro')
+
+declare @tiempo int 
+	  
+SELECT @tiempo = last_elapsed_time
+FROM sys.dm_exec_procedure_stats;
+
+INSERT INTO TranssacionesVuelo(TipoTranssacion,Duracion)
+VALUES('crearCuentaAhorro',@tiempo)
 
 
 /********************* Realizar Pago ****************************************/
@@ -272,6 +332,15 @@ AS
 			end
 		
 		select @id as id;
+
+
+	declare @tiempo int 
+	  
+	SELECT @tiempo = last_elapsed_time
+	FROM sys.dm_exec_procedure_stats;
+
+	INSERT INTO TranssacionesVuelo(TipoTranssacion,Duracion)
+	VALUES('realizarPago',@tiempo)
 
 /********************* Consultar Propositos ****************************************/
 
@@ -362,7 +431,18 @@ as
 	    	begin
 	    		select @numeroCuenta = min( numeroCuenta ) from CuentaAhorro where numeroCuenta > @numeroCuenta
 	    	end
-	    
+	
+	declare @tiempo int 
+	  
+	SELECT @tiempo = last_elapsed_time
+	FROM sys.dm_exec_procedure_stats;
+
+	INSERT INTO TranssacionesVuelo
+	SET TipoTranssacion ='pagosAutomaticos',
+	    Duracion = tiempo
+
+	;
+
 
 	end
 
@@ -449,6 +529,14 @@ CREATE PROCEDURE crearCierreBancario
 
 			/*Cambia la tabla de de varas en vuelo y lo mete en el historial en el historial */
 			select @numeroCuenta = min( numeroCuenta ) from CuentaDebito where numeroCuenta > @numeroCuenta
+
+	declare @tiempo int 
+	  
+    SELECT @tiempo = last_elapsed_time
+	FROM sys.dm_exec_procedure_stats;
+
+	INSERT INTO TranssacionesVuelo(TipoTranssacion,Duracion)
+	VALUES('crearCierreBancario',@tiempo)
 		end
 
 		/**************Hace las transsacciones en vuelo ****************************************/
@@ -541,7 +629,15 @@ CREATE PROCEDURE realizarPagoDispositivo
 
 			EXEC realizarPago @NumeroCuentaDebito = @numeroCuentaDebito, @NumeroCuentaDestino =@NumeroCuentaDestino , @MontoPago =@MontoPago
 
-			
+
+
+	declare @tiempo int 
+	  
+    SELECT @tiempo = last_elapsed_time
+	FROM sys.dm_exec_procedure_stats;
+
+	INSERT INTO TranssacionesVuelo(TipoTranssacion,Duracion)
+	VALUES('realizarPagoDispositivo',@tiempo)		
 /************************ Agregar un metodo de Pago **********************************************/
 GO
 CREATE PROCEDURE agregarMetodoPago
@@ -756,6 +852,16 @@ AS
 		MontoAhorro,idTipoMoneda,MontoAhorroActual,dominioPeriodicidad,terminoAhorro,MontoAhorroDeseado)
 		values (@ClienteCIF,@NumeroCuentaOrigen,@idProposito,@Periodicidad,@FechaInicio,@FechaFinal,@FechaInicio,@TiempoAhorro,
 			@MontoAhorroPeriodico,@Moneda,0,@dominioPeriodicidad,0,@MontoAhorroDeseado)
+
+	declare @tiempo int 
+	  
+    SELECT @tiempo = last_elapsed_time
+	FROM sys.dm_exec_procedure_stats;
+
+	INSERT INTO TranssacionesVuelo(TipoTranssacion,Duracion)
+	VALUES('crearClienteCuentaAhorroCuentaAutomatica',@tiempo)
+
+
 
 
 GO

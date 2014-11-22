@@ -156,6 +156,7 @@ CREATE TABLE [TranssacionesVuelo](
 	[NumeroCuenta] [int] NOT NULL,
 	[TipoTranssacion] [nvarchar](100) NOT NULL,
 	[MontoTransferido] [int],
+	[Duracion] [int],
 	[Fecha] [datetime] DEFAULT GETDATE()
 	)
 
@@ -163,7 +164,7 @@ CREATE TABLE [TranssacionesVuelo](
 GO
 CREATE TABLE [Historico](
 	[idTranssacion] [int] Identity(1,1) constraint pk_idTranssacion_Historico primary key,
-	[NumeroCuenta] [int] NOT NULL,
+	[NumeroCuenta] [int],
 	[TipoTranssacion] [nvarchar](100) NOT NULL,
 	[MontoTransferido] [int],
 	[Fecha] [datetime]

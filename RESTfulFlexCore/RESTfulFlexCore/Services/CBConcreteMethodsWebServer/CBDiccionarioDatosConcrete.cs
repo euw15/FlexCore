@@ -45,7 +45,7 @@ namespace RESTfulFlexCore.Services
                 String ReferenceColumnName = "";
 
                 if (table.Columns.Contains("object_id") && row["object_id"] != DBNull.Value) { object_id = Convert.ToInt32(row["object_id"]); }
-                if (table.Columns.Contains("max_lenght") && row["max_lenght"] != DBNull.Value) { object_id = Convert.ToInt32(row["max_lenght"]); }
+                if (table.Columns.Contains("max_length") && row["max_length"] != DBNull.Value) { max_lenght = Convert.ToInt32(row["max_length"]); }
                 if (table.Columns.Contains("Table") && row["Table"] != DBNull.Value) { tableBase = row["Table"].ToString(); }
                 if (table.Columns.Contains("column") && row["column"] != DBNull.Value) { column = row["column"].ToString(); }
                 if (table.Columns.Contains("type") && row["type"] != DBNull.Value) { type = row["type"].ToString(); }

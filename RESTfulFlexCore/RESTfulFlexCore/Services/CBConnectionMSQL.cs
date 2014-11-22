@@ -16,18 +16,18 @@ namespace RESTfulFlexCore.Services
 
         public static String insertMSQL(string query)
         {
-            SqlConnection connection = new SqlConnection("Data Source=localhost;Network Library=DBMSSOCN; user id=daniel;" +
+            /*SqlConnection connection = new SqlConnection("Data Source=localhost;Network Library=DBMSSOCN; user id=daniel;" +
                                         "password=dcanessa;server=ENVY15-3040NR;" +
                                         "Trusted_Connection=no;" +
                                         "database=FlexCoreDataBase; " +
-                                        "connection timeout=30");
+                                        "connection timeout=30");*/
 
-          /*  SqlConnection connection = new SqlConnection("Data Source=localhost;Network Library=DBMSSOCN; user id=json;" +
-                                        "password=123456;server=JASON04;" +
+            SqlConnection connection = new SqlConnection("Data Source=localhost;Network Library=DBMSSOCN; user id=json;" +
+                                        "password=asdf;server=JASON04;" +
                                         "Trusted_Connection=no;" +
                                         "database=FlexCoreDataBase; " +
                                         "connection timeout=30");
-           */
+           
 
             DataTable table = new DataTable();
             SqlTransaction transaccion = null;
@@ -64,17 +64,17 @@ namespace RESTfulFlexCore.Services
 
         public static String UpdateDeleteMSQL(string query)
         {
-               /* SqlConnection connection = new SqlConnection("Data Source=localhost;Network Library=DBMSSOCN; user id=json;" +
-                                          "password=123456;server=JASON04;" +
+                SqlConnection connection = new SqlConnection("Data Source=localhost;Network Library=DBMSSOCN; user id=json;" +
+                                          "password=asdf;server=JASON04;" +
                                           "Trusted_Connection=no;" +
                                           "database=FlexCoreDataBase; " +
-                                          "connection timeout=30");*/
+                                          "connection timeout=30");
 
-                SqlConnection connection = new SqlConnection("Data Source=localhost;Network Library=DBMSSOCN; user id=daniel;" +
+                /*SqlConnection connection = new SqlConnection("Data Source=localhost;Network Library=DBMSSOCN; user id=daniel;" +
                                             "password=dcanessa;server=ENVY15-3040NR;" +
                                             "Trusted_Connection=no;" +
                                             "database=FlexCoreDataBase; " +
-                                            "connection timeout=30"); 
+                                            "connection timeout=30"); */
                 SqlTransaction transaccion = null;
             SqlCommand command = null;
             try
@@ -109,21 +109,21 @@ namespace RESTfulFlexCore.Services
         public static DataTable retrieveMSQL(string query)
         {
 
-              /*SqlConnection connection = new SqlConnection("Data Source=localhost;Network Library=DBMSSOCN; user id=json;" +
-                                      "password=123456;server=JASON04;" +
-                                      "Trusted_Connection=no;" +
-                                      "database=FlexCoreDataBase; " +
-                                      "connection timeout=30");*/
+            SqlConnection connection = new SqlConnection("Data Source=localhost;Network Library=DBMSSOCN; user id=json;" +
+                                    "password=asdf;server=JASON04;" +
+                                    "Trusted_Connection=no;" +
+                                    "database=FlexCoreDataBase; " +
+                                    "connection timeout=30");
 
 
 
-              SqlConnection connection = new SqlConnection("Data Source=localhost;Network Library=DBMSSOCN; user id=daniel;" +
-                                         "password=dcanessa;server=ENVY15-3040NR;" +
-                                         "Trusted_Connection=no;" +
-                                         "database=FlexCoreDataBase; " +
-                                         "connection timeout=30");
+            /* SqlConnection connection = new SqlConnection("Data Source=localhost;Network Library=DBMSSOCN; user id=daniel;" +
+                                        "password=dcanessa;server=ENVY15-3040NR;" +
+                                        "Trusted_Connection=no;" +
+                                        "database=FlexCoreDataBase; " +
+                                        "connection timeout=30");*/
 
-              DataTable table = new DataTable();
+            DataTable table = new DataTable();
             SqlTransaction transaccion = null;
             SqlCommand command = null;
             try
