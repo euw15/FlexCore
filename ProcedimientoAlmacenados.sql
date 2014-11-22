@@ -760,6 +760,7 @@ AS
 
 GO
 CREATE PROCEDURE diccionaroDeDatos
+	as
 	select 
 	d.object_id,
 	a.name [table], 

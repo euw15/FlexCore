@@ -9,30 +9,36 @@ USE FlexCoreDataBase2;
 
 
 --Tipo de dato NumeroCuenta:
-EXEC sp_addtype NumeroCuenta, 'int(10)', 'NULL'
+GO
+EXEC sp_addtype NumeroCuenta, 'int', 'NULL'
 
 --Tipo de dato telefono:
+GO
 EXEC sp_addtype telephone, 'nvarchar(15)', 'NULL'
 
 --Tipo de dato Mensaje:
+GO
 EXEC sp_addtype Mensaje, 'nvarchar(300)', 'NULL'
 
 --Tipo de dato Cedula: 
+GO
 EXEC sp_addtype Cedula, 'nvarchar(30)', 'NULL' 
 
 --Tipo de dato Direccion: 
+GO
 EXEC sp_addtype Direccion, 'nvarchar(400)', 'NULL' 
 
 --Tipo de dato TipoTranssacion:
+GO
 EXEC sp_addtype TipoTranssacion, 'nvarchar(100)', 'NULL' 
 
---Tipo de dato Imagen:
-EXEC sp_addtype Image, 'varchar(MAX)', 'NULL' 
 
 --Tipo de dato Proposito:
+GO
 EXEC sp_addtype Proposito, 'nvarchar(200)', 'NULL'
 
 --Tipo de dato Moneda:
+GO
 EXEC sp_addtype Moneda, 'nvarchar(30)', 'NULl'
 
 

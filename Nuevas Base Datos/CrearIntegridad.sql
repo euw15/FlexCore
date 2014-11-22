@@ -5,7 +5,7 @@
 /*******************************************************************/
 
 
-USE FlexCoreDataBase;
+USE FlexCoreDataBase2;
 
 /****************Crea funcion para numeroCuentas *******************/
 /* Verifica el tipo de moneda en la insercion y le agrega el digito correspondiente */

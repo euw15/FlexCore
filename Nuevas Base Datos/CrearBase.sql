@@ -157,6 +157,7 @@ CREATE TABLE [TranssacionesVuelo](
 	[TipoTranssacion] [nvarchar](100) NOT NULL,
 	[MontoTransferido] [int],
 	[Fecha] [datetime] DEFAULT GETDATE()
+	
 	)
 
 /********************************************************************/
